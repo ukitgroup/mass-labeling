@@ -1,10 +1,5 @@
 # Logs
-logs
-*.log
 npm-debug.log*
-
-# Compiled binary addons (http://nodejs.org/api/addons.html)
-build/Release
 
 # Dependency directories
 node_modules/
@@ -15,19 +10,10 @@ node_modules/
 # Optional eslint cache
 .eslintcache
 
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
-
-# dotenv environment variables file
-.env
-
 # JetBrains IDE
 .idea/
 
-# Project
+# Project rules
 /conf/app.env
 /conf/app.js
 /conf/pm2.json

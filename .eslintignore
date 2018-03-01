@@ -1,5 +1,5 @@
-# Compiled binary addons (http://nodejs.org/api/addons.html)
-build/Release
+# Logs
+npm-debug.log*
 
 # Dependency directories
 node_modules/
@@ -10,22 +10,13 @@ node_modules/
 # Optional eslint cache
 .eslintcache
 
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
-
-# dotenv environment variables file
-.env
-
-# WebStorm IDE
+# JetBrains IDE
 .idea/
 
-# VSCode folder
-.vscode/
+# Docker
+/docker-compose.override.yml
 
-# Project
+# Project rules
 /bin/www
 /log/
 /tmp/
