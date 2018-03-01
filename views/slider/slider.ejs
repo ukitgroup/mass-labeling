@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/slider.css?v=<%= version() %>">
+
+
+<div id="app" class="_sl-app">
+	<div class="_sl-nav _sl-nav-prev" @click="prev">
+		<span class="glyphicon glyphicon-chevron-left"></span>
+	</div>
+
+	<div class="_sl-nav _sl-nav-next" @click="next">
+		<span class="glyphicon glyphicon-chevron-right"></span>
+	</div>
+
+
+	<div class="_sl-root">
+		<div class="_sl-image">
+			<img :src="screenshot">
+		</div>
+		<div class="_sl-info">
+			<p><span>Сайт:</span> <span><a :href="item.url" id="url" target="_blank">{{item.url}}</a></span></p>
+			<p><span>Оценка модели:</span> <span>{{modelScoreStr}}</span></p>
+			<p><span>Средняя оценка ассессоров:</span> <span>{{meanAssessorsScoreStr}}</span></p>
+			<p><span>Ошибка:</span> <span>{{errorStr}}</span></p>
+			<p><span>Оценки ассессоров:</span> <span>{{assessorsScoreStr}}</span></p>
+		</div>
+	</div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+<script>
+	window.items = <%- JSON.stringify(items) %>;
+</script>
+<script src="/js/slider.js?v=<%= version() %>"></script>

@@ -1,0 +1,33 @@
+<h1>Статистика по аномальным оценкам - оценка сайтов (одиночная)</h1>
+
+<p>Допустимое отклонение:</p>
+<div class="form-group">
+	<div class="btn-group">
+		<% diffs.forEach(curDiff => { %>
+			<a href="/stat/abnormal/markup3/<%= curDiff %>" class="btn <%= curDiff === diff ? 'btn-primary' : 'btn-default' %>"><%= curDiff %></a>
+		<% }) %>
+	</div>
+</div>
+
+<% if (diff) { %>
+	<div class="row">
+		<div class="col-xs-6">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>E-mail</th>
+						<th>Количество аномалий</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% users.forEach(curUser => { %>
+						<tr>
+							<td><%= curUser.email %></td>
+							<td><%= curUser.abnormalCount %></td>
+						</tr>
+					<% }) %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+<% } %>

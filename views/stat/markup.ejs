@@ -1,0 +1,17 @@
+<h1>Статистика по разметке</h1>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>E-mail</th>
+			<th>Оценка сайтов (одиночная)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% users.forEach(curUser => { %>
+			<tr>
+				<td><%= curUser.email %></td>
+				<td><%= curUser.markup3Count %></td>
+			</tr>
+		<% }) %>
+	</tbody>
+</table>

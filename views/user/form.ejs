@@ -1,0 +1,38 @@
+<h1><%= curUser ? 'Изменение' : 'Добавление' %> пользователя</h1>
+
+<div class="row">
+	<div class="col-xs-6">
+		<form id="user" autocomplete="off" data-id="<%= curUser ? curUser.id : '' %>">
+			<div class="form-group">
+				<label for="email">E-mail</label>
+				<input type="email" id="email" class="form-control" value="<%= curUser ? curUser.email : '' %>">
+			</div>
+			<div class="form-group">
+				<label for="pass">Пароль</label>
+				<input type="password" id="pass" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="status">Статус</label>
+				<select id="status" class="form-control">
+					<% Object.keys(statuses).forEach(key => { %>
+						<option value="<%= key %>" <%= curUser && curUser.status === key ? 'selected' : '' %>><%= statuses[key] %></option>
+					<% }) %>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="role">Роль</label>
+				<select id="role" class="form-control">
+					<% Object.keys(roles).forEach(key => { %>
+						<option value="<%= key %>" <%= curUser && curUser.role === key ? 'selected' : '' %>><%= roles[key] %></option>
+					<% }) %>
+				</select>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Сохранить</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<script src="/js/user/form.js?v=<%= version() %>"></script>

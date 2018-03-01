@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<title>ATG design</title>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/markup.css?v=<%= version() %>">
+
+
+<div class="navbar navbar-inverse navbar-static-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a href="/" class="navbar-brand">ATG design</a>
+		</div>
+
+		<div class="navbar-right">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="#" class="btn-help" data-toggle="modal" data-target="#help">
+						<i class="fa fa-question-circle"></i>
+					</a>
+				</li>
+			</ul>
+
+			<p class="navbar-text" title="оценено / лимит">
+				Оценено:
+				<span id="markup-count"><%= count %></span>
+				/
+				<%= conf.markup3.limit || '∞' %>
+			</p>
+
+			<p class="navbar-text"><%= user.email %></p>
+
+			<ul class="nav navbar-nav">
+				<li><a href="#" id="logout">Выход</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="navbar navbar-inverse navbar-static-top">
+	<div class="container-fluid">
+		<p id="answer" class="answer navbar-text"></p>
+	</div>
+</div>
+
+<div id="root" class="root-3">
+	<img id="image">
+</div>
+
+<div id="help" class="modal fade">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Справка</h4>
+			</div>
+			<div class="modal-body">
+				<h4>Управление</h4>
+				<p>Управление с клавиатуры:</p>
+				<table class="table">
+					<tr>
+						<td>1-9</td>
+						<td>Поставить оценку от 1 до 9</td>
+					</tr>
+					<tr>
+						<td>0</td>
+						<td>Поставить оценку 10</td>
+					</tr>
+					<tr>
+						<td>X</td>
+						<td>Пометить сайт сломанным</td>
+					</tr>
+					<tr>
+						<td>Enter</td>
+						<td>Сохранить ответ</td>
+					</tr>
+					<tr>
+						<td>Backspace</td>
+						<td>Отменить последний выбор</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="overdose" class="overdose container">
+	<div class="jumbotron">
+		<h1>Достигнут лимит оценивания</h1>
+	</div>
+</div>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+	window.markupCount = <%= count %>;
+	window.markupLimit = <%= conf.markup3.limit || 0 %>;
+</script>
+<script src="/js/request.js?v=<%= version() %>"></script>
+<script src="/js/markup3.js?v=<%= version() %>"></script>

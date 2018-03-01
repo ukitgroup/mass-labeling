@@ -1,0 +1,77 @@
+{
+	"root": true,
+	"extends": "airbnb-base",
+	"plugins": [
+		"json"
+	],
+	"parserOptions": {
+		"ecmaVersion": 2017,
+		"sourceType": "script",
+		"allowImportExportEverywhere": false,
+		"codeFrame": false
+	},
+	"rules": {
+		"brace-style": [
+			"error",
+			"1tbs"
+		],
+		"class-methods-use-this": "off",
+		"func-names": "off",
+		"indent": [
+			"error",
+			"tab",
+			{
+				"SwitchCase": 1
+			}
+		],
+		"max-len": [
+			"error",
+			160
+		],
+		"no-await-in-loop": "off",
+		"no-continue": "off",
+		"no-else-return": "off",
+		"no-empty": [
+			"error",
+			{
+				"allowEmptyCatch": true
+			}
+		],
+		"no-loop-func": "off",
+		"no-nested-ternary": "off",
+		"no-new": "off",
+		"no-param-reassign": "off",
+		"no-plusplus": "off",
+		"no-shadow": "off",
+		"no-tabs": "off",
+		"prefer-destructuring": [
+			"error",
+			{
+				"AssignmentExpression": {
+					"array": true,
+					"object": false
+				},
+				"VariableDeclarator": {
+					"array": true,
+					"object": true
+				}
+			},
+			{
+				"enforceForRenamedProperties": false
+			}
+		],
+		"space-unary-ops": [
+			"error",
+			{
+				"overrides": {
+					"!": true,
+					"!!": true
+				}
+			}
+		],
+		"strict": [
+			"error",
+			"never"
+		]
+	}
+}
