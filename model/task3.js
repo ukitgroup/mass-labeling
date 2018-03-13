@@ -37,7 +37,7 @@ Task3Schema.statics = {
 		const tasksFilter = { userId };
 		if (allowed) {
 			tasksFilter.siteId = {
-				$in: await Site.getAll(Site.filter.allowedCategories),
+				$in: await Site.find(Site.filter.allowedCategories).exec(),
 			};
 		}
 
@@ -64,12 +64,12 @@ Task3Schema.statics = {
 	},
 
 	async getBrokenSites() {
-		return Site.getAll({
+		return Site.find({
 			_id: {
 				$in: await this.distinct('siteId', { answer: 0 }),
 			},
 			status: 'active',
-		});
+		}).exec();
 	},
 };
 

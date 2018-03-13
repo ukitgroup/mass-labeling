@@ -106,7 +106,7 @@ UserModel.methods = {
 		const siteIds = await Task3.distinct('siteId', {
 			userId,
 			siteId: {
-				$in: await Site.getAll(Site.filter.allowedCategories),
+				$in: await Site.find(Site.filter.allowedCategories).exec(),
 			},
 		});
 

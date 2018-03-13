@@ -39,10 +39,6 @@ SiteSchema.statics = {
 	},
 
 
-	async getAll(filter = {}) {
-		return this.find(filter).exec();
-	},
-
 	async getRandomSize(size = 2) {
 		const siteIds = await this.distinct('_id', {
 			...this.filter.allowedStatuses,

@@ -7,7 +7,6 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "archiver": "^2.0.0",
     "bluebird": "^3.5.1",
     "body-parser": "^1.17.2",
     "bunyan": "^1.8.12",
@@ -28,7 +27,6 @@
     "mongoose": "^4.10.2",
     "morgan": "^1.8.2",
     "passport": "^0.4.0",
-    "progress": "^2.0.0",
     "stats-lite": "^2.1.0"
   },
   "devDependencies": {

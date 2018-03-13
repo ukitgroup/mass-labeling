@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+require('../boot/dotenv')();
+require('../boot/mongo')();
+
+
+const program = require('commander');
+
+
+program.constructor.prototype.requireOption = function (name) {
+	if (this.opts()[name] == null) {
+		const { flags } = this.options.find(option => option.name() === name);
+		process.stdout.write(`\n  error: option \`${flags}' missing\n\n`);
+		process.exit(1);
+	}
+};
+
+
+require('../commands/index')(program);
+
+
+program.action(function () {
+	this.help();
+});
+
+program.parse(process.argv);

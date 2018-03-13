@@ -1,4 +1,1 @@
-const conf = require('./app');
-
-
-module.exports = conf;
+module.exports = require('./app');
