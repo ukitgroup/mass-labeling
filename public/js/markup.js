@@ -81,7 +81,7 @@ class Design {
 			$('#overdose').show();
 		}
 
-		window.Request.post('/markup3/create')
+		window.Request.post('/markup/create')
 			.then((task) => {
 				this.task = task;
 				this.show();
@@ -93,7 +93,7 @@ class Design {
 
 	// Сохранение выбора пользователя
 	save() {
-		window.Request.post('/markup3/answer', {
+		window.Request.post('/markup/answer', {
 			data: {
 				siteId: this.task.siteId,
 				answer: this.answer,
@@ -113,7 +113,7 @@ class Design {
 			return;
 		}
 
-		window.Request.post(`/markup3/${this.prev.id}/undo`)
+		window.Request.post(`/markup/${this.prev.id}/undo`)
 			.then(() => {
 				this.markupCount--;
 				this.task = this.prev;

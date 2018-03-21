@@ -1,5 +1,7 @@
+const { ForbiddenError } = require('../../lib/http-errors');
+
 const Site = require('../../model/site');
-const Task3 = require('../../model/task3');
+const Task = require('../../model/task');
 
 const logger = require('../../lib/logger');
 
@@ -11,12 +13,12 @@ const router = require('express').Router();
 
 router.post('/create', async (req, res, next) => {
 	try {
-		const [site] = await Site.getRandomSize(1);
+		const site = await Site.getRandom();
 
-		logger.info('createTask', {
+		logger.info({
 			siteId: site.id,
 			userId: req.user.id,
-		});
+		}, 'createTask');
 
 		res.api.response({
 			siteId: site.id,
@@ -29,35 +31,40 @@ router.post('/create', async (req, res, next) => {
 
 router.post('/answer', async (req, res, next) => {
 	try {
-		const task = await Task3.getNew({
+		const task = await Task.getNew({
 			siteId: req.body.siteId,
 			answer: Number(req.body.answer),
 			userId: req.user.id,
 		});
 
-		logger.info('answerTask', {
+		logger.info({
 			taskId: task.id,
 			siteId: task.siteId,
 			answer: task.answer,
 			userId: task.userId,
-		});
+		}, 'answerTask');
 
 		res.api.response(task.id);
 	} catch (err) {
+		if (err && ['Markup overdose', 'Bad markup request'].includes(err.message)) {
+			next(ForbiddenError.from(err));
+			return;
+		}
+
 		next(err);
 	}
 });
 
-router.post('/:taskId/undo', bridges.task.id3, bridges.task.owner, async (req, res, next) => {
+router.post('/:taskId/undo', bridges.task.id, bridges.task.owner, async (req, res, next) => {
 	try {
 		await req.task.remove();
 
-		logger.info('undoTask', {
+		logger.info({
 			taskId: req.task.id,
 			siteId: req.task.siteId,
 			answer: req.task.answer,
 			userId: req.task.userId,
-		});
+		}, 'undoTask');
 
 		res.api.response();
 	} catch (err) {

@@ -1,4 +1,4 @@
-const Task3 = require('../../model/task3');
+const Task = require('../../model/task');
 
 
 const router = require('express').Router();
@@ -6,7 +6,7 @@ const router = require('express').Router();
 
 router.get('/', async (req, res, next) => {
 	try {
-		const sites = await Task3.getBrokenSites();
+		const sites = await Task.getBrokenSites();
 
 		res.render('broken', { sites });
 	} catch (err) {

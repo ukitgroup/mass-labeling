@@ -1,4 +1,4 @@
-const Task3 = require('../../model/task3');
+const Task = require('../../model/task');
 
 
 const router = require('express').Router();
@@ -6,9 +6,9 @@ const router = require('express').Router();
 
 router.get('/', async (req, res, next) => {
 	try {
-		res.render('markup3', {
+		res.render('markup', {
 			layout: false,
-			count: await Task3.countByUserId(req.user.id, true),
+			count: await Task.countByUserId(req.user.id, true),
 		});
 	} catch (err) {
 		next(err);

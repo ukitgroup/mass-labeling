@@ -1,8 +1,8 @@
-const json = require('json-helper');
+const fs = require('fs-extra');
 const _ = require('lodash');
 
 const Site = require('../../model/site');
-const Task3 = require('../../model/task3');
+const Task = require('../../model/task');
 const User = require('../../model/user');
 
 const logger = require('../../lib/logger');
@@ -31,14 +31,14 @@ module.exports = (program) => {
 			// Получаем сайты
 			const sites = await Site.find({
 				...Site.filter.allowedStatuses,
-				category: args.dataset,
+				dataset: args.dataset,
 			}).exec();
 
 			logger.info('Sites done');
 
 
 			// Получаем ответы для всех сайтов
-			const tasks = await Task3.find({
+			const tasks = await Task.find({
 				siteId: { $in: sites.map(site => site.id) },
 				answer: { $ne: 0 },
 			}).exec();
@@ -59,7 +59,7 @@ module.exports = (program) => {
 
 
 			// Сохраняем набор ответов
-			await json.writeAsync(args.out, answers);
+			await fs.writeJson(args.out, answers);
 
 			logger.info('JSON done');
 		} catch (err) {

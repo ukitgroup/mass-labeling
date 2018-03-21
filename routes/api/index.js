@@ -4,7 +4,7 @@ const auth = require('./auth');
 const site = require('./site');
 const validation = require('./validation');
 const user = require('./user');
-const markup3 = require('./markup3');
+const markup = require('./markup');
 const broken = require('./broken');
 
 const router = require('express').Router();
@@ -18,9 +18,9 @@ router.use(
 
 // Разметка
 router.use(
-	'/markup3',
+	'/markup',
 	bridges.auth.user,
-	markup3,
+	markup,
 );
 
 // Сайт

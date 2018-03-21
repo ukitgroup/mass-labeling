@@ -1,18 +1,16 @@
 const mongoose = require('mongoose');
 
-const { ForbiddenError } = require('../lib/http-errors');
-
 const Site = require('./site');
 
 const conf = require('../conf');
 
 
-const Task3Schema = new mongoose.Schema({
+const TaskSchema = new mongoose.Schema({
 	siteId: {
 		type: mongoose.Schema.ObjectId,
-		ref: 'Site',
 		required: true,
 	},
+
 	answer: {
 		type: Number,
 		min: 0,
@@ -21,57 +19,50 @@ const Task3Schema = new mongoose.Schema({
 	},
 	userId: {
 		type: mongoose.Schema.ObjectId,
-		ref: 'User',
 		required: true,
 	},
+
 	status: {
 		type: String,
 		enum: ['active', 'disabled'],
 		default: 'active',
+		required: true,
 	},
 });
 
 
-Task3Schema.statics = {
+TaskSchema.statics = {
 	async countByUserId(userId, allowed = false) {
-		const tasksFilter = { userId };
+		const filter = { userId };
+
 		if (allowed) {
-			tasksFilter.siteId = {
-				$in: await Site.find(Site.filter.allowedCategories).exec(),
-			};
+			const siteIds = await Site.distinct('_id', Site.filter.allowedDatasets);
+			filter.siteId = { $in: siteIds };
 		}
 
-		return this.count(tasksFilter);
+		return this.count(filter);
 	},
 
 	async getNew({ siteId, answer, userId }) {
 		const count = await this.countByUserId(userId, true);
-
-		if (conf.markup3.limit && count >= conf.markup3.limit) {
-			throw new ForbiddenError('Markup overdose');
-		}
+		if (conf.markup.limit && count >= conf.markup.limit) throw new Error('Markup overdose');
 
 		const site = await Site.findById(siteId);
-
-		if (
-			site.status === 'disabled' ||
-			(site.status === 'approved' && answer === 0)
-		) {
-			throw new ForbiddenError('Bad markup request');
-		}
+		if (site.status === 'disabled') throw new Error('Bad markup request');
+		if (site.status === 'approved' && answer === 0) throw new Error('Bad markup request');
 
 		return this.create({ siteId, answer, userId });
 	},
 
 	async getBrokenSites() {
+		const siteIds = await this.distinct('siteId', { answer: 0 });
+
 		return Site.find({
-			_id: {
-				$in: await this.distinct('siteId', { answer: 0 }),
-			},
+			_id: { $in: siteIds },
 			status: 'active',
 		}).exec();
 	},
 };
 
 
-module.exports = mongoose.model('Task3', Task3Schema);
+module.exports = mongoose.model('Task', TaskSchema);

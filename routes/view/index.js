@@ -6,7 +6,7 @@ const slider = require('./slider');
 const validation = require('./validation');
 const broken = require('./broken');
 const dashboard = require('./dashboard');
-const markup3 = require('./markup3');
+const markup = require('./markup');
 
 const router = require('express').Router();
 
@@ -29,9 +29,9 @@ router.use(
 
 // Разметка
 router.use(
-	'/markup3',
+	'/markup',
 	bridges.auth.user,
-	markup3,
+	markup,
 );
 
 // Пользователи

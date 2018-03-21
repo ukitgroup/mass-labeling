@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 
-const Site = require('./site');
-
 
 const ValidationSchema = new mongoose.Schema({
 	siteId: {
 		type: mongoose.Schema.ObjectId,
-		ref: 'Site',
 		required: true,
 	},
+
 	answer: {
 		type: String,
 		enum: ['new', 'ok', 'broken'],
+		default: 'new',
+		required: true,
 	},
 });
 
@@ -19,11 +19,7 @@ const ValidationSchema = new mongoose.Schema({
 ValidationSchema.statics = {
 	async getNext() {
 		const task = await this.findOne({ answer: 'new' });
-		if (! task) {
-			throw new Error('Task not found');
-		}
-
-		task.site = await Site.findById(task.siteId);
+		if (! task) throw new Error('Task not found');
 
 		return task;
 	},
@@ -39,7 +35,7 @@ ValidationSchema.methods = {
 	serialize() {
 		return {
 			id: this.id,
-			siteId: this.site.id,
+			siteId: this.siteId,
 		};
 	},
 };

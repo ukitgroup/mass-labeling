@@ -1,4 +1,3 @@
-const Promise = require('bluebird');
 const mongoose = require('mongoose');
 const _ = require('lodash');
 
@@ -10,14 +9,16 @@ const SiteSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	dataset: {
+		type: String,
+		required: true,
+	},
+
 	screenshot: {
 		type: String,
 		required: true,
 	},
-	category: {
-		type: String,
-		default: '',
-	},
+
 	status: {
 		type: String,
 		enum: ['active', 'disabled', 'approved'],
@@ -33,25 +34,24 @@ SiteSchema.statics = {
 			status: { $in: ['active', 'approved'] },
 		},
 
-		allowedCategories: conf.sites.allowedCategories ? {
-			category: { $in: conf.sites.allowedCategories },
+		allowedDatasets: conf.sites.allowedDatasets ? {
+			dataset: { $in: conf.sites.allowedDatasets },
 		} : {},
 	},
 
 
-	async getRandomSize(size = 2) {
+	async getRandom() {
 		const siteIds = await this.distinct('_id', {
 			...this.filter.allowedStatuses,
-			...this.filter.allowedCategories,
+			...this.filter.allowedDatasets,
 		});
-		return Promise.map(_.sampleSize(siteIds, size), async siteId => this.findById(siteId));
+
+		return this.findById(_.sample(siteIds));
 	},
 
 	async getById(id) {
 		const site = await this.findById(id);
-		if (! site) {
-			throw new Error('Site not found');
-		}
+		if (! site) throw new Error('Site not found');
 
 		return site;
 	},

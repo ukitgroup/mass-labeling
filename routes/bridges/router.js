@@ -19,7 +19,7 @@ module.exports = {
 	error(err, req, res, next) {
 		logger.error(err);
 
-		// res.status(err.status || 500);
+		res.status(err.status || 500);
 		res.render('error', {
 			status: err.status || 'n/a',
 			error: err.message || 'n/a',

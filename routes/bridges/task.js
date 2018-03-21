@@ -1,15 +1,13 @@
 const { ForbiddenError, NotFoundError } = require('../../lib/http-errors');
 
-const Task3 = require('../../model/task3');
+const Task = require('../../model/task');
 
 
 module.exports = {
-	async id3(req, res, next) {
+	async id(req, res, next) {
 		try {
-			req.task = await Task3.findById(req.params.taskId);
-			if (! req.task) {
-				throw new NotFoundError();
-			}
+			req.task = await Task.findById(req.params.taskId);
+			if (! req.task) throw new NotFoundError();
 
 			next();
 		} catch (err) {
@@ -19,9 +17,7 @@ module.exports = {
 
 	async owner(req, res, next) {
 		try {
-			if (! req.task.userId.equals(req.user.id)) {
-				throw new ForbiddenError();
-			}
+			if (! req.task.userId.equals(req.user.id)) throw new ForbiddenError();
 
 			next();
 		} catch (err) {

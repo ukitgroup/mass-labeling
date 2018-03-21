@@ -1,23 +1,16 @@
-const childProcess = require('child_process');
+const hashFiles = require('hash-files');
 const expressLayouts = require('express-ejs-layouts');
 
-const logger = require('../lib/logger');
 const conf = require('../conf');
-
-
-let version = 'unknown';
-
-try {
-	[, version] = childProcess.execSync('git log -1').toString().match(/^commit\s*([\w\d]+)/m);
-} catch (err) {
-	logger.error('Can not get version from git:', err.message.trim());
-}
 
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
 
 module.exports = (app) => {
+	const version = hashFiles.sync({ files: 'public/**' });
+
+
 	app.use((req, res, next) => {
 		// Доступ к конфигу из шаблона
 		res.locals.conf = conf;
@@ -30,6 +23,7 @@ module.exports = (app) => {
 
 		next();
 	});
+
 
 	app.set('views', conf.server.viewsPath);
 	app.set('view engine', 'ejs');

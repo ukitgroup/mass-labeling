@@ -10,9 +10,9 @@ const SliderSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+
 	siteId: {
 		type: mongoose.Schema.ObjectId,
-		ref: 'Site',
 		required: true,
 	},
 

@@ -1,3 +1,5 @@
+const { ForbiddenError } = require('../../lib/http-errors');
+
 const User = require('../../model/user');
 
 
@@ -16,6 +18,11 @@ router.post('/login', async (req, res, next) => {
 
 		res.api.response();
 	} catch (err) {
+		if (err && ['Bad email', 'Bad password', 'User disabled'].includes(err.message)) {
+			next(ForbiddenError.from(err));
+			return;
+		}
+
 		next(err);
 	}
 });

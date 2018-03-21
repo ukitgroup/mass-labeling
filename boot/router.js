@@ -9,7 +9,7 @@ module.exports = (app) => {
 			},
 
 			error(err) {
-				res.json([err ? err.message : 'Unknown Error']);
+				res.json([err ? err.message : 'Unknown error']);
 			},
 		};
 

@@ -26,7 +26,7 @@
 				Оценено:
 				<span id="markup-count"><%= count %></span>
 				/
-				<%= conf.markup3.limit || '∞' %>
+				<%= conf.markup.limit || '∞' %>
 			</p>
 
 			<p class="navbar-text"><%= user.email %></p>
@@ -44,7 +44,7 @@
 	</div>
 </div>
 
-<div id="root" class="root-3">
+<div id="root" class="root">
 	<img id="image">
 </div>
 
@@ -96,7 +96,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	window.markupCount = <%= count %>;
-	window.markupLimit = <%= conf.markup3.limit || 0 %>;
+	window.markupLimit = <%= conf.markup.limit || 0 %>;
 </script>
 <script src="/js/request.js?v=<%= version() %>"></script>
-<script src="/js/markup3.js?v=<%= version() %>"></script>
+<script src="/js/markup.js?v=<%= version() %>"></script>

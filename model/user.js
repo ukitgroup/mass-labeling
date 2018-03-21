@@ -2,11 +2,9 @@ const mongoose = require('mongoose');
 const crypto = require('crypto');
 const stats = require('stats-lite');
 
-const { ForbiddenError } = require('../lib/http-errors');
-
 const Site = require('./site');
 const Slider = require('./slider');
-const Task3 = require('./task3');
+const Task = require('./task');
 
 
 const UserModel = new mongoose.Schema({
@@ -19,15 +17,19 @@ const UserModel = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	status: {
-		type: String,
-		enum: ['active', 'disabled'],
-		default: 'active',
-	},
+
 	role: {
 		type: String,
 		enum: ['admin', 'user'],
 		default: 'user',
+		required: true,
+	},
+
+	status: {
+		type: String,
+		enum: ['active', 'disabled'],
+		default: 'active',
+		required: true,
 	},
 });
 
@@ -39,38 +41,23 @@ UserModel.statics = {
 
 	async getById(id) {
 		const user = await this.findById(id);
-
-		if (! user) {
-			throw new ForbiddenError('Bad userId');
-		}
-
-		if (user.status !== 'active') {
-			throw new ForbiddenError('User disabled');
-		}
+		if (! user) throw new Error('Bad userId');
+		if (user.status !== 'active') throw new Error('User disabled');
 
 		return user;
 	},
 
 	async getByEmail(email) {
 		const user = await this.findOne({ email });
-
-		if (! user) {
-			throw new Error('Bad email');
-		}
+		if (! user) throw new Error('Bad email');
 
 		return user;
 	},
 
 	async getByEmailPassword(email, password) {
 		const user = await this.getByEmail(email);
-
-		if (user.password !== this.hash(password)) {
-			throw new Error('Bad password');
-		}
-
-		if (user.status !== 'active') {
-			throw new Error('User disabled');
-		}
+		if (user.password !== this.hash(password)) throw new Error('Bad password');
+		if (user.status !== 'active') throw new Error('User disabled');
 
 		return user;
 	},
@@ -102,19 +89,16 @@ UserModel.methods = {
 		const name = this.email;
 		const userId = this.id;
 
-		// Получаем Id сайтов, которые размечал пользователь
-		const siteIds = await Task3.distinct('siteId', {
+		// Получаем id сайтов, которые размечал пользователь
+		let siteIds = await Site.distinct('_id', Site.filter.allowedDatasets);
+		siteIds = await Task.distinct('siteId', {
 			userId,
-			siteId: {
-				$in: await Site.find(Site.filter.allowedCategories).exec(),
-			},
+			siteId: { $in: siteIds },
 		});
 
 		// Получаем ответы для сайтов
-		const answers = await Task3.find({
-			siteId: {
-				$in: siteIds,
-			},
+		const answers = await Task.find({
+			siteId: { $in: siteIds },
 		});
 
 		// Собираем оценки для слайдера

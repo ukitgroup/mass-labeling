@@ -1,6 +1,6 @@
 const Site = require('../../model/site');
 const User = require('../../model/user');
-const Task3 = require('../../model/task3');
+const Task = require('../../model/task');
 
 
 const diffs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -14,7 +14,7 @@ router.get('/markup', async (req, res, next) => {
 		const users = await User.find({}).exec();
 
 		await Promise.all(users.map(async (curUser) => {
-			curUser.markup3Count = await Task3.countByUserId(curUser.id, true);
+			curUser.markupCount = await Task.countByUserId(curUser.id, true);
 		}));
 
 		res.render('stat/markup', { users });
@@ -23,12 +23,12 @@ router.get('/markup', async (req, res, next) => {
 	}
 });
 
-router.get('/abnormal/markup3(/:diff)?', async (req, res, next) => {
+router.get('/abnormal/markup(/:diff)?', async (req, res, next) => {
 	try {
 		const diff = Number(req.params.diff);
 
 		if (! diff) {
-			res.render('stat/abnormal/markup3', { diffs, diff });
+			res.render('stat/abnormal/markup', { diffs, diff });
 			return;
 		}
 
@@ -43,7 +43,7 @@ router.get('/abnormal/markup3(/:diff)?', async (req, res, next) => {
 			return o;
 		}, {});
 
-		const answers = (await Task3.find({}).exec()).filter(item => item.answer);
+		const answers = (await Task.find({}).exec()).filter(item => item.answer);
 		answers.forEach((item) => {
 			item.siteId = String(item.siteId);
 			item.userId = String(item.userId);
@@ -56,7 +56,7 @@ router.get('/abnormal/markup3(/:diff)?', async (req, res, next) => {
 
 		const siteIds = (await Site.distinct('_id', {
 			...Site.filter.allowedStatuses,
-			...Site.filter.allowedCategories,
+			...Site.filter.allowedDatasets,
 		})).map(siteId => String(siteId));
 
 		siteIds.forEach((siteId) => {
@@ -72,18 +72,18 @@ router.get('/abnormal/markup3(/:diff)?', async (req, res, next) => {
 			});
 		});
 
-		res.render('stat/abnormal/markup3', { diffs, diff, users });
+		res.render('stat/abnormal/markup', { diffs, diff, users });
 	} catch (err) {
 		next(err);
 	}
 });
 
-router.get('/abnormal-local/markup3(/:diff)?', async (req, res, next) => {
+router.get('/abnormal-local/markup(/:diff)?', async (req, res, next) => {
 	try {
 		const diff = Number(req.params.diff);
 
 		if (! diff) {
-			res.render('stat/abnormal-local/markup3', { diffs, diff });
+			res.render('stat/abnormal-local/markup', { diffs, diff });
 			return;
 		}
 
@@ -93,7 +93,7 @@ router.get('/abnormal-local/markup3(/:diff)?', async (req, res, next) => {
 			curUser.abnormalCount = 0;
 		});
 
-		const answers = (await Task3.find({}).exec()).filter(item => item.answer);
+		const answers = (await Task.find({}).exec()).filter(item => item.answer);
 		answers.forEach((item) => {
 			item.siteId = String(item.siteId);
 			item.userId = String(item.userId);
@@ -107,7 +107,7 @@ router.get('/abnormal-local/markup3(/:diff)?', async (req, res, next) => {
 
 		const siteIds = (await Site.distinct('_id', {
 			...Site.filter.allowedStatuses,
-			...Site.filter.allowedCategories,
+			...Site.filter.allowedDatasets,
 		})).map(siteId => String(siteId));
 
 		siteIds.forEach((siteId) => {
@@ -125,7 +125,7 @@ router.get('/abnormal-local/markup3(/:diff)?', async (req, res, next) => {
 			});
 		});
 
-		res.render('stat/abnormal-local/markup3', { diffs, diff, users });
+		res.render('stat/abnormal-local/markup', { diffs, diff, users });
 	} catch (err) {
 		next(err);
 	}

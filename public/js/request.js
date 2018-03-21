@@ -4,16 +4,18 @@ class Request {
 		url,
 		params = {},
 		data,
+		process = Request.process,
+		rootUrl,
 	}) {
 		return (async () => {
-			url = Request.urlParams(url, params);
+			url = Request.urlParams(url, params, rootUrl);
 
 			let body = null;
 			if (data != null) {
 				body = JSON.stringify(data);
 			}
 
-			return Request.process(url, {
+			return process(url, {
 				method,
 				credentials: 'same-origin',
 				headers: {
@@ -27,32 +29,38 @@ class Request {
 
 	static async get(url, {
 		params,
-	} = {}) {
+		process,
+	} = {}, rootUrl) {
 		return new Request({
 			method: 'get',
 			url,
 			params,
+			process,
+			rootUrl,
 		});
 	}
 
 	static async post(url, {
 		params,
 		data,
-	} = {}) {
+		process,
+	} = {}, rootUrl) {
 		return new Request({
 			method: 'post',
 			url,
 			params,
 			data,
+			process,
+			rootUrl,
 		});
 	}
 
 
-	static urlParams(url, params) {
+	static urlParams(url, params, rootUrl = window.location) {
 		return Object.keys(params).reduce((url, key) => {
 			url.searchParams.append(key, params[key]);
 			return url;
-		}, new URL(url, window.location)).toString();
+		}, new URL(url, rootUrl)).toString();
 	}
 
 
@@ -60,9 +68,7 @@ class Request {
 		const response = await fetch(...args);
 
 		const [err, result] = await response.json();
-		if (err) {
-			throw new Error(err);
-		}
+		if (err) throw new Error(err);
 
 		return result;
 	}

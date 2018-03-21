@@ -1,7 +1,6 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const decompress = require('decompress');
-const json = require('json-helper');
 
 const Site = require('../../model/site');
 
@@ -34,7 +33,7 @@ module.exports = (program) => {
 			logger.info('Screenshots done');
 
 
-			const sitesRaw = await json.readListAsync(path.resolve(tmpPath, 'out.json'));
+			const sitesRaw = await fs.readJson(path.resolve(tmpPath, 'out.json'));
 
 			logger.info('JSON done');
 
@@ -43,7 +42,7 @@ module.exports = (program) => {
 			const sites = sitesRaw.map(site => ({
 				url: site.url,
 				screenshot: site.screenshot.replace(/^screenshots/, args.dataset),
-				category: args.dataset,
+				dataset: args.dataset,
 			}));
 			await Site.create(sites);
 

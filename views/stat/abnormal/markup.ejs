@@ -4,7 +4,7 @@
 <div class="form-group">
 	<div class="btn-group">
 		<% diffs.forEach(curDiff => { %>
-			<a href="/stat/abnormal/markup3/<%= curDiff %>" class="btn <%= curDiff === diff ? 'btn-primary' : 'btn-default' %>"><%= curDiff %></a>
+			<a href="/stat/abnormal/markup/<%= curDiff %>" class="btn <%= curDiff === diff ? 'btn-primary' : 'btn-default' %>"><%= curDiff %></a>
 		<% }) %>
 	</div>
 </div>
