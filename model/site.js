@@ -27,6 +27,13 @@ const SiteSchema = new mongoose.Schema({
 	},
 });
 
+SiteSchema.index({
+	url: 1,
+	dataset: 1,
+}, {
+	unique: true,
+});
+
 
 SiteSchema.statics = {
 	filter: {
