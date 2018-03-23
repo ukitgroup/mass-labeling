@@ -20,9 +20,9 @@
 					<td><%= statuses[curUser.status] %></td>
 					<td><%= roles[curUser.role] %></td>
 					<td>
-						<a href="/user/<%= curUser.id %>/edit" type="button" class="btn btn-warning">Изменить</a>
-						<button type="button" class="btn btn-primary create-slider" data-id="<%= curUser.id %>">Сгенерировать слайдер</button>
-						<a href="/slider/<%= curUser.email %>" type="button" class="btn btn-success">Открыть слайдер</a>
+						<a href="/user/<%= curUser.id %>/edit" type="button" class="btn btn-warning btn-xs">Изменить</a>
+						<button type="button" class="btn btn-primary btn-xs create-slider" data-id="<%= curUser.id %>">Сгенерировать слайдер</button>
+						<a href="/slider/<%= curUser.email %>" type="button" class="btn btn-success btn-xs">Открыть слайдер</a>
 					</td>
 				</tr>
 			<% }) %>
