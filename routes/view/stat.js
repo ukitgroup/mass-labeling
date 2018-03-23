@@ -23,12 +23,12 @@ router.get('/markup', async (req, res, next) => {
 	}
 });
 
-router.get('/abnormal/markup(/:diff)?', async (req, res, next) => {
+router.get('/abnormal(/:diff)?', async (req, res, next) => {
 	try {
 		const diff = Number(req.params.diff);
 
 		if (! diff) {
-			res.render('stat/abnormal/markup', { diffs, diff });
+			res.render('stat/abnormal', { diffs, diff });
 			return;
 		}
 
@@ -72,18 +72,18 @@ router.get('/abnormal/markup(/:diff)?', async (req, res, next) => {
 			});
 		});
 
-		res.render('stat/abnormal/markup', { diffs, diff, users });
+		res.render('stat/abnormal', { diffs, diff, users });
 	} catch (err) {
 		next(err);
 	}
 });
 
-router.get('/abnormal-local/markup(/:diff)?', async (req, res, next) => {
+router.get('/abnormal-local(/:diff)?', async (req, res, next) => {
 	try {
 		const diff = Number(req.params.diff);
 
 		if (! diff) {
-			res.render('stat/abnormal-local/markup', { diffs, diff });
+			res.render('stat/abnormal-local', { diffs, diff });
 			return;
 		}
 
@@ -125,7 +125,7 @@ router.get('/abnormal-local/markup(/:diff)?', async (req, res, next) => {
 			});
 		});
 
-		res.render('stat/abnormal-local/markup', { diffs, diff, users });
+		res.render('stat/abnormal-local', { diffs, diff, users });
 	} catch (err) {
 		next(err);
 	}
