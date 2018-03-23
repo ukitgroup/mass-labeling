@@ -8,24 +8,22 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 
 
 module.exports = (app) => {
-	const version = hashFiles.sync({ files: 'public/**' });
+	const publicHash = hashFiles.sync({ files: 'public/**' });
 
 
 	app.use((req, res, next) => {
-		// Доступ к конфигу из шаблона
+		// Подключение ресурсов в шаблон
+		res.locals.fromPublic = url => `${conf.www.publicUrl}${url}?${isDevelopment ? Date.now() : publicHash}`;
+
+		// Доступ к конфигурации и текущему пользователю из шаблона
 		res.locals.conf = conf;
-
-		// Доступ к пользователю из шаблона
 		res.locals.user = req.user;
-
-		// Версия проекта, для подключения ресурсов
-		res.locals.version = isDevelopment ? Date.now : () => version;
 
 		next();
 	});
 
 
-	app.set('views', conf.server.viewsPath);
+	app.set('views', conf.www.viewsPath);
 	app.set('view engine', 'ejs');
 	app.use(expressLayouts);
 	app.set('layout', 'layout');

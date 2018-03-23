@@ -9,5 +9,5 @@ module.exports = (app) => {
 	app.use(morgan('dev'));
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: false }));
-	app.use('/', express.static(conf.server.publicPath));
+	app.use('/', express.static(conf.www.publicPath));
 };

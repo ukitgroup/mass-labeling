@@ -9,10 +9,16 @@ module.exports = {
 		url: process.env.DB_URL,
 	},
 
-	server: {
+	www: {
 		publicPath: path.resolve(ROOT_PATH, 'public'),
-		viewsPath: path.join(ROOT_PATH, 'views'),
-		cookieMaxAge: 30 * 24 * 3600 * 1000, // 30 дней
+		viewsPath: path.resolve(ROOT_PATH, 'views'),
+
+		publicUrl: '/',
+	},
+
+	passport: {
+		maxAge: 30 * 24 * 3600 * 1000, // 30 дней
+		secret: process.env.COOKIE_SECRET,
 	},
 
 	sites: {

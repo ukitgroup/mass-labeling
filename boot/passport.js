@@ -15,8 +15,8 @@ module.exports = (app) => {
 	app.use(cookieParser());
 
 	app.use(session({
-		secret: process.env.COOKIE_SECRET,
-		cookie: { maxAge: conf.server.cookieMaxAge },
+		secret: conf.passport.secret,
+		cookie: { maxAge: conf.passport.maxAge },
 		resave: true,
 		saveUninitialized: true,
 		store: new MongoStore({ mongooseConnection: mongoose.connection }),

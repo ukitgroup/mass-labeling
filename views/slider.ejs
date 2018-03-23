@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/slider.css?v=<%= version() %>">
+<link rel="stylesheet" href="<%= fromPublic('css/slider.css') %>">
 
 
 <div id="app" class="_sl-app">
@@ -34,4 +34,4 @@
 <script>
 	window.items = <%- JSON.stringify(items) %>;
 </script>
-<script src="/js/slider.js?v=<%= version() %>"></script>
+<script src="<%= fromPublic('js/slider.js') %>"></script>

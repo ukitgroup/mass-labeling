@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/markup.css?v=<%= version() %>">
+<link rel="stylesheet" href="<%= fromPublic('css/markup.css') %>">
 
 
 <div class="navbar navbar-inverse navbar-static-top">
@@ -98,5 +98,5 @@
 	window.markupCount = <%= count %>;
 	window.markupLimit = <%= conf.markup.limit || 0 %>;
 </script>
-<script src="/js/request.js?v=<%= version() %>"></script>
-<script src="/js/markup.js?v=<%= version() %>"></script>
+<script src="<%= fromPublic('js/request.js') %>"></script>
+<script src="<%= fromPublic('js/markup.js') %>"></script>
