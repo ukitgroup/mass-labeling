@@ -7,11 +7,13 @@ const Slider = require('./slider');
 const Task = require('./task');
 
 
-const UserModel = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
 	email: {
 		type: String,
-		unique: true,
 		required: true,
+		index: {
+			unique: true,
+		},
 	},
 	password: {
 		type: String,
@@ -34,7 +36,7 @@ const UserModel = new mongoose.Schema({
 });
 
 
-UserModel.statics = {
+UserSchema.statics = {
 	hash(str) {
 		return crypto.createHash('sha256').update(str).digest('base64');
 	},
@@ -64,7 +66,7 @@ UserModel.statics = {
 };
 
 
-UserModel.methods = {
+UserSchema.methods = {
 	async setEmail(email) {
 		this.email = email;
 		await this.save();
@@ -136,4 +138,4 @@ UserModel.methods = {
 };
 
 
-module.exports = mongoose.model('User', UserModel);
+module.exports = mongoose.model('User', UserSchema);
