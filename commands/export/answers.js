@@ -22,7 +22,7 @@ module.exports = (program) => {
 
 		try {
 			// Получаем пользоватлей
-			const users = await User.find().exec();
+			const users = await User.find();
 			const usersMap = _.keyBy(users, 'id');
 
 			logger.info('Users done');
@@ -32,7 +32,7 @@ module.exports = (program) => {
 			const sites = await Site.find({
 				...Site.filter.allowedStatuses,
 				dataset: args.dataset,
-			}).exec();
+			});
 
 			logger.info('Sites done');
 
@@ -41,7 +41,7 @@ module.exports = (program) => {
 			const tasks = await Task.find({
 				siteId: { $in: sites.map(site => site.id) },
 				answer: { $ne: 0 },
-			}).exec();
+			});
 
 			logger.info('Tasks done');
 

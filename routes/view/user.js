@@ -19,7 +19,7 @@ const router = require('express').Router();
 
 router.get('/list', async (req, res, next) => {
 	try {
-		const users = await User.find({}).exec();
+		const users = await User.find();
 
 		res.render('user/list', { users, statuses, roles });
 	} catch (err) {

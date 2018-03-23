@@ -60,7 +60,7 @@ TaskSchema.statics = {
 		return Site.find({
 			_id: { $in: siteIds },
 			status: 'active',
-		}).exec();
+		});
 	},
 };
 

@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 				}),
 			},
 			status: 'active',
-		}).exec();
+		});
 
 		res.render('dashboard', {
 			brokenCount,

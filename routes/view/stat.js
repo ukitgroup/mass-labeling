@@ -11,7 +11,7 @@ const router = require('express').Router();
 
 router.get('/markup', async (req, res, next) => {
 	try {
-		const users = await User.find({}).exec();
+		const users = await User.find();
 
 		await Promise.all(users.map(async (curUser) => {
 			curUser.markupCount = await Task.countByUserId(curUser.id, true);
@@ -32,7 +32,7 @@ router.get('/abnormal(/:diff)?', async (req, res, next) => {
 			return;
 		}
 
-		const users = (await User.find({}).exec());
+		const users = await User.find();
 		users.forEach((curUser) => {
 			curUser.id = String(curUser.id);
 			curUser.abnormalCount = 0;
@@ -43,7 +43,9 @@ router.get('/abnormal(/:diff)?', async (req, res, next) => {
 			return o;
 		}, {});
 
-		const answers = (await Task.find({}).exec()).filter(item => item.answer);
+		const answers = await Task.find({
+			answer: { $ne: 0 },
+		});
 		answers.forEach((item) => {
 			item.siteId = String(item.siteId);
 			item.userId = String(item.userId);
@@ -87,13 +89,15 @@ router.get('/abnormal-local(/:diff)?', async (req, res, next) => {
 			return;
 		}
 
-		const users = (await User.find({}).exec());
+		const users = await User.find();
 		users.forEach((curUser) => {
 			curUser.id = String(curUser.id);
 			curUser.abnormalCount = 0;
 		});
 
-		const answers = (await Task.find({}).exec()).filter(item => item.answer);
+		const answers = await Task.find({
+			answer: { $ne: 0 },
+		});
 		answers.forEach((item) => {
 			item.siteId = String(item.siteId);
 			item.userId = String(item.userId);
