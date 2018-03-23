@@ -14,7 +14,7 @@ module.exports = (program) => {
 	program.description('Export answers');
 
 	program.option('--dataset <dataset>', 'Dataset name for export. For multiple use conf:cli/export/answers/datasets (default: all datasets)');
-	program.option('--out <out_path>', 'JSON path', conf.cli.export.attributesAnswers.out);
+	program.option('--out <out_path>', 'JSON path', conf.cli.export.answers.out);
 
 	// eslint-disable-next-line prefer-arrow-callback
 	program.action(async function (args) {
