@@ -40,6 +40,13 @@ SiteSchema.statics = {
 	},
 
 
+	async getById(id) {
+		const site = await this.findById(id);
+		if (! site) throw new Error('Site not found');
+
+		return site;
+	},
+
 	async getRandom() {
 		const siteIds = await this.distinct('_id', {
 			...this.filter.allowedStatuses,
@@ -47,13 +54,6 @@ SiteSchema.statics = {
 		});
 
 		return this.findById(_.sample(siteIds));
-	},
-
-	async getById(id) {
-		const site = await this.findById(id);
-		if (! site) throw new Error('Site not found');
-
-		return site;
 	},
 };
 

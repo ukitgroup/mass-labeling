@@ -19,6 +19,6 @@ node_modules/
 # Project rules
 /conf/app.env
 /conf/app.js
+/data/
 /log/
 /tmp/
-/screenshots/

@@ -23,7 +23,7 @@ module.exports = {
 
 	sites: {
 		allowedDatasets: null,
-		screenshotsPath: path.resolve(ROOT_PATH, 'screenshots'),
+		screenshotsPath: path.resolve(ROOT_PATH, 'data/screenshots'),
 	},
 
 	markup: {

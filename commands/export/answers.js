@@ -1,4 +1,5 @@
 const fs = require('fs-extra');
+const path = require('path');
 const _ = require('lodash');
 
 const Site = require('../../model/site');
@@ -62,6 +63,7 @@ module.exports = (program) => {
 
 
 			// Сохраняем набор ответов
+			await fs.mkdirp(path.dirname(args.out));
 			await fs.writeJson(args.out, answers);
 
 			logger.info('JSON done');
