@@ -37,5 +37,11 @@ module.exports = {
 				out: 'data/export/answers.json',
 			},
 		},
+
+		import: {
+			dataset: {
+				in: 'data/import/dataset.zip',
+			},
+		},
 	},
 };
