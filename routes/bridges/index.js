@@ -3,7 +3,6 @@ const auth = require('./auth');
 const user = require('./user');
 const site = require('./site');
 const task = require('./task');
-const validation = require('./validation');
 
 
 module.exports = {
@@ -12,5 +11,4 @@ module.exports = {
 	user,
 	site,
 	task,
-	validation,
 };

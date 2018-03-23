@@ -1,5 +1,3 @@
-const { ForbiddenError } = require('../../lib/http-errors');
-
 const Site = require('../../model/site');
 const Task = require('../../model/task');
 
@@ -46,11 +44,6 @@ router.post('/answer', async (req, res, next) => {
 
 		res.api.response(task.id);
 	} catch (err) {
-		if (err && ['Markup overdose', 'Bad markup request'].includes(err.message)) {
-			next(ForbiddenError.from(err));
-			return;
-		}
-
 		next(err);
 	}
 });

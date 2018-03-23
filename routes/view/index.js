@@ -1,12 +1,11 @@
 const bridges = require('../bridges');
 
-const user = require('./user');
-const stat = require('./stat');
-const slider = require('./slider');
-const validation = require('./validation');
-const broken = require('./broken');
 const dashboard = require('./dashboard');
 const markup = require('./markup');
+const user = require('./user');
+const stat = require('./stat');
+const broken = require('./broken');
+const slider = require('./slider');
 
 const router = require('express').Router();
 
@@ -60,13 +59,6 @@ router.use(
 	'/slider',
 	bridges.auth.admin,
 	slider,
-);
-
-// Валидация
-router.use(
-	'/validation',
-	bridges.auth.admin,
-	validation,
 );
 
 
