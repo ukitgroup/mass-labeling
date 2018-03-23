@@ -8,10 +8,10 @@ const router = require('express').Router();
 
 
 router.use(
-	// '/api',
+	'/api',
 	bridges.router.noCache,
 	apiRoute,
-	// bridges.router.notFound,
+	bridges.router.notFound,
 	bridges.router.apiError,
 );
 

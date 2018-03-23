@@ -12,7 +12,7 @@ $('#user').submit((event) => {
 	const role = $('#role').val();
 
 	if (! id) {
-		window.Request.post('/user/add', {
+		window.Request.post('/api/user/add', {
 			data: {
 				email,
 				pass,
@@ -27,7 +27,7 @@ $('#user').submit((event) => {
 				alert('Ошибка добавления пользователя');
 			});
 	} else {
-		window.Request.post(`/user/${id}/update`, {
+		window.Request.post(`/api/user/${id}/update`, {
 			data: {
 				email,
 				pass,

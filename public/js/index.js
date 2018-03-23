@@ -7,7 +7,7 @@ $('#login').submit((event) => {
 	const email = $('#email').val();
 	const password = $('#password').val();
 
-	window.Request.post('/auth/login', {
+	window.Request.post('/api/auth/login', {
 		data: {
 			email,
 			password,

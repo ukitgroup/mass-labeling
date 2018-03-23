@@ -19,7 +19,7 @@ const app = new window.Vue({
 
 
 		screenshot() {
-			return `/site/${this.item.siteId}/screenshot`;
+			return `/api/site/${this.item.siteId}/screenshot`;
 		},
 
 

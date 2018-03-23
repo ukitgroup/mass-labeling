@@ -4,7 +4,7 @@
 $('#logout').click((event) => {
 	event.preventDefault();
 
-	window.Request.post('/auth/logout')
+	window.Request.post('/api/auth/logout')
 		.then(() => {
 			window.location = '/';
 		});

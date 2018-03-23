@@ -4,7 +4,7 @@
 $('#logout').click((event) => {
 	event.preventDefault();
 
-	window.Request.post('/auth/logout')
+	window.Request.post('/api/auth/logout')
 		.then(() => {
 			window.location = '/';
 		});
@@ -67,7 +67,7 @@ class Design {
 
 		$('#markup-count').text(this.markupCount);
 
-		$('#image').attr('src', `/site/${this.task.siteId}/screenshot`);
+		$('#image').attr('src', `/api/site/${this.task.siteId}/screenshot`);
 
 		this.answer = null;
 	}
@@ -81,7 +81,7 @@ class Design {
 			$('#overdose').show();
 		}
 
-		window.Request.post('/markup/create')
+		window.Request.post('/api/markup/create')
 			.then((task) => {
 				this.task = task;
 				this.show();
@@ -93,7 +93,7 @@ class Design {
 
 	// Сохранение выбора пользователя
 	save() {
-		window.Request.post('/markup/answer', {
+		window.Request.post('/api/markup/answer', {
 			data: {
 				siteId: this.task.siteId,
 				answer: this.answer,
@@ -113,7 +113,7 @@ class Design {
 			return;
 		}
 
-		window.Request.post(`/markup/${this.prev.id}/undo`)
+		window.Request.post(`/api/markup/${this.prev.id}/undo`)
 			.then(() => {
 				this.markupCount--;
 				this.task = this.prev;
