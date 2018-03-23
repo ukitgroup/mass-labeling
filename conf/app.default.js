@@ -29,4 +29,13 @@ module.exports = {
 	markup: {
 		limit: null,
 	},
+
+	cli: {
+		export: {
+			answers: {
+				datasets: null,
+				out: 'data/export/answers.json',
+			},
+		},
+	},
 };

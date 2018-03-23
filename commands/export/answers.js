@@ -6,17 +6,17 @@ const Task = require('../../model/task');
 const User = require('../../model/user');
 
 const logger = require('../../lib/logger');
+const conf = require('../../conf');
 
 
 module.exports = (program) => {
 	program.description('Export answers');
 
-	program.option('--dataset <dataset_name>', 'Dataset name for export');
-	program.option('--out <out_path>', 'JSON path');
+	program.option('--dataset <dataset>', 'Dataset name for export. For multiple use conf:cli/export/answers/datasets (default: all datasets)');
+	program.option('--out <out_path>', 'JSON path', conf.cli.export.attributesAnswers.out);
 
 	// eslint-disable-next-line prefer-arrow-callback
 	program.action(async function (args) {
-		this.requireOption('dataset');
 		this.requireOption('out');
 
 
@@ -29,10 +29,12 @@ module.exports = (program) => {
 
 
 			// Получаем сайты
-			const sites = await Site.find({
+			const sitesFilter = {
 				...Site.filter.allowedStatuses,
-				dataset: args.dataset,
-			});
+			};
+			if (conf.cli.export.answers.datasets) sitesFilter.dataset = { $in: conf.cli.export.answers.datasets };
+			if (args.dataset) sitesFilter.dataset = args.dataset;
+			const sites = await Site.find(sitesFilter);
 
 			logger.info('Sites done');
 
@@ -49,6 +51,7 @@ module.exports = (program) => {
 			// Формируем набор ответов
 			const answers = sites.map(site => ({
 				url: site.url,
+				dataset: site.dataset,
 				answers: tasks.filter(task => task.siteId.equals(site.id)).map(task => ({
 					answer: task.answer,
 					user: usersMap[task.userId].email,
