@@ -1,22 +1,9 @@
-# Logs
-npm-debug.log*
-
 # Dependency directories
 node_modules/
 
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# JetBrains IDE
-.idea/
-
-# Docker
-/docker-compose.override.yml
-
 # Project rules
 /bin/www
+/conf/app.js
+/data/
 /log/
 /tmp/
