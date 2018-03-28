@@ -1,21 +1,13 @@
-# EditorConfig helps developers define and maintain consistent
-# coding styles between different editors and IDEs
-# http://editorconfig.org
-
 root = true
 
 [*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
 indent_style = tab
+max_line_length = 160
 
 [package*.json]
 indent_style = space
 indent_size = 2
-
-# We recommend you to keep these unchanged
-end_of_line = lf
-charset = utf-8
-trim_trailing_whitespace = true
-insert_final_newline = true
-
-# editorconfig-tools is unable to ignore longs strings or urls
-max_line_length = 160
