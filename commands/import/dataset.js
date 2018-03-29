@@ -15,48 +15,42 @@ module.exports = (program) => {
 	program.option('--in <in_path>', 'Archive path', conf.cli.import.dataset.in);
 
 	// eslint-disable-next-line prefer-arrow-callback
-	program.action(async function (args) {
+	program.asyncAction(async function (args) {
 		this.requireOption('in');
 
 
-		try {
-			// Распаковываем архив, перемещаем скриншоты и читаем список сатов
-			const tmpPath = path.resolve('tmp/import/dataset');
-			await fs.mkdirp(path.dirname(tmpPath));
-			await decompress(args.in, tmpPath);
+		// Распаковываем архив, перемещаем скриншоты и читаем список сатов
+		const tmpPath = path.resolve('tmp/import/dataset');
+		await fs.mkdirp(path.dirname(tmpPath));
+		await decompress(args.in, tmpPath);
 
-			logger.info('Unzip done');
-
-
-			const sitesRaw = await fs.readJson(path.resolve(tmpPath, 'out.json'));
-
-			// Сохраняем сайты
-			const sites = sitesRaw.map((site) => {
-				const id = mongoose.Types.ObjectId();
-
-				const screenshotPath = path.join(conf.sites.screenshotsPath, site.dataset, `${id}.jpg`);
-				fs.mkdirp(path.dirname(screenshotPath));
-				fs.move(path.resolve(tmpPath, site.screenshot), screenshotPath, { overwrite: true });
-
-				return {
-					_id: id,
-					url: site.url,
-					dataset: site.dataset,
-					screenshot: path.relative(conf.sites.screenshotsPath, screenshotPath),
-				};
-			});
-			await Site.create(sites);
-
-			logger.info('Sites done');
+		logger.info('Unzip done');
 
 
-			await fs.remove(tmpPath);
+		const sitesRaw = await fs.readJson(path.resolve(tmpPath, 'out.json'));
 
-			logger.info('Cleanup done');
-		} catch (err) {
-			logger.error(err);
-		}
+		// Сохраняем сайты
+		const sites = sitesRaw.map((site) => {
+			const id = mongoose.Types.ObjectId();
 
-		process.exit(0);
+			const screenshotPath = path.join(conf.sites.screenshotsPath, site.dataset, `${id}.jpg`);
+			fs.mkdirp(path.dirname(screenshotPath));
+			fs.move(path.resolve(tmpPath, site.screenshot), screenshotPath, { overwrite: true });
+
+			return {
+				_id: id,
+				url: site.url,
+				dataset: site.dataset,
+				screenshot: path.relative(conf.sites.screenshotsPath, screenshotPath),
+			};
+		});
+		await Site.create(sites);
+
+		logger.info('Sites done');
+
+
+		await fs.remove(tmpPath);
+
+		logger.info('Cleanup done');
 	});
 };

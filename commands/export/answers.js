@@ -17,60 +17,54 @@ module.exports = (program) => {
 	program.option('--out <out_path>', 'JSON path', conf.cli.export.answers.out);
 
 	// eslint-disable-next-line prefer-arrow-callback
-	program.action(async function (args) {
+	program.asyncAction(async function (args) {
 		this.requireOption('out');
 
 
-		try {
-			// Получаем пользоватлей
-			const users = await User.find();
-			const usersMap = _.keyBy(users, 'id');
+		// Получаем пользоватлей
+		const users = await User.find();
+		const usersMap = _.keyBy(users, 'id');
 
-			logger.info('Users done');
-
-
-			// Получаем сайты
-			const sitesFilter = {
-				...Site.filter.allowedStatuses,
-			};
-			if (conf.cli.export.answers.datasets) sitesFilter.dataset = { $in: conf.cli.export.answers.datasets };
-			if (args.dataset) sitesFilter.dataset = args.dataset;
-			const sites = await Site.find(sitesFilter);
-
-			logger.info('Sites done');
+		logger.info('Users done');
 
 
-			// Получаем ответы для всех сайтов
-			const tasks = await Task.find({
-				siteId: { $in: sites.map(site => site.id) },
-				answer: { $ne: 0 },
-			});
+		// Получаем сайты
+		const sitesFilter = {
+			...Site.filter.allowedStatuses,
+		};
+		if (conf.cli.export.answers.datasets) sitesFilter.dataset = { $in: conf.cli.export.answers.datasets };
+		if (args.dataset) sitesFilter.dataset = args.dataset;
+		const sites = await Site.find(sitesFilter);
 
-			logger.info('Tasks done');
-
-
-			// Формируем набор ответов
-			const answers = sites.map(site => ({
-				url: site.url,
-				dataset: site.dataset,
-				answers: tasks.filter(task => task.siteId.equals(site.id)).map(task => ({
-					answer: task.answer,
-					user: usersMap[task.userId].email,
-				})),
-			}));
-
-			logger.info('Answers done');
+		logger.info('Sites done');
 
 
-			// Сохраняем набор ответов
-			await fs.mkdirp(path.dirname(args.out));
-			await fs.writeJson(args.out, answers);
+		// Получаем ответы для всех сайтов
+		const tasks = await Task.find({
+			siteId: { $in: sites.map(site => site.id) },
+			answer: { $ne: 0 },
+		});
 
-			logger.info('JSON done');
-		} catch (err) {
-			logger.error(err);
-		}
+		logger.info('Tasks done');
 
-		process.exit(0);
+
+		// Формируем набор ответов
+		const answers = sites.map(site => ({
+			url: site.url,
+			dataset: site.dataset,
+			answers: tasks.filter(task => task.siteId.equals(site.id)).map(task => ({
+				answer: task.answer,
+				user: usersMap[task.userId].email,
+			})),
+		}));
+
+		logger.info('Answers done');
+
+
+		// Сохраняем набор ответов
+		await fs.mkdirp(path.dirname(args.out));
+		await fs.writeJson(args.out, answers);
+
+		logger.info('JSON done');
 	});
 };

@@ -6,13 +6,28 @@ require('../boot/mongo')();
 
 const program = require('commander');
 
+const logger = require('../lib/logger');
 
-program.constructor.prototype.requireOption = function (name) {
+
+program.Command.prototype.requireOption = function (name) {
 	if (this.opts()[name] == null) {
 		const { flags } = this.options.find(option => option.name() === name);
 		process.stdout.write(`\n  error: option \`${flags}' missing\n\n`);
 		process.exit(1);
 	}
+};
+
+program.Command.prototype.asyncAction = function (func) {
+	return this.action(async function (...args) {
+		try {
+			await func.call(this, ...args);
+		} catch (err) {
+			logger.error(err);
+			process.exit(1);
+		}
+
+		process.exit(0);
+	});
 };
 
 
