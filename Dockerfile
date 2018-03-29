@@ -1,13 +1,4 @@
-FROM node:8.9-slim
-
-RUN apt-get update && \
-	apt-get install -y --no-install-recommends \
-		build-essential \
-		git \
-		libfontconfig1 \
-		openssh-client \
-		python
-
+FROM node:9.10.0-alpine
 
 RUN mkdir -p /usr/bin/app
 COPY . /usr/bin/app/
@@ -15,5 +6,4 @@ WORKDIR /usr/bin/app
 
 RUN npm i --no-save
 
-
-CMD ["bash", "-c", "npm start >> log/app.log 2>&1"]
+CMD ["sh", "-c", "npm start >> log/app.log 2>&1"]

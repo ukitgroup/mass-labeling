@@ -1,11 +1,9 @@
 {
   "name": "mass-labeling",
   "version": "1.0.0",
-  "main": "app.js",
-  "engines": {
-    "npm": ">=5",
-    "node": ">=8.6.0"
-  },
+  "author": "uKit Group",
+  "license": "Apache-2.0",
+  "repository": "github:ukitgroup/mass-labeling",
   "dependencies": {
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
