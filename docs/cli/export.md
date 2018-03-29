@@ -20,8 +20,8 @@
 
 ```
 cli/export/answers{
-	"datasets"  : [str],
-	"out"       : str,
+    "datasets"  : [str],
+    "out"       : str,
 }
 ```
 
@@ -31,13 +31,13 @@ cli/export/answers{
 
 ```
 item{
-	"url"       : str,
-	"dataset"   : str,
-	"answers"   : [answer],
+    "url"       : str,
+    "dataset"   : str,
+    "answers"   : [answer],
 }
 
 answer{
-	"answer"    : int,
-	"user"      : str,
+    "answer"    : int,
+    "user"      : str,
 }
 ```

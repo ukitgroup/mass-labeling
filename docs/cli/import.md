@@ -19,7 +19,7 @@
 
 ```
 cli/import/dataset{
-	"in"        : str,
+    "in"        : str,
 }
 ```
 
@@ -28,8 +28,8 @@ cli/import/dataset{
 Файл является `zip` архивом. Структура:
 
 * `screenshots`
-	* `0123456789abcdef01234567.jpg`
-	* ...
+    * `0123456789abcdef01234567.jpg`
+    * ...
 * `out.json`
 
 #### out.json
@@ -38,8 +38,8 @@ cli/import/dataset{
 
 ```
 item{
-	"url"           : str,      // "http://site.com"
-	"dataset"       : str,      // "my_dataset"
-	"screenshot"    : str,      // "screenshots/0123456789abcdef01234567.jpg"
+    "url"           : str,      // "http://site.com"
+    "dataset"       : str,      // "my_dataset"
+    "screenshot"    : str,      // "screenshots/0123456789abcdef01234567.jpg"
 }
 ```
