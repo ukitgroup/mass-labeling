@@ -44,6 +44,7 @@ module.exports = (program) => {
 			siteId: { $in: sites.map(site => site.id) },
 			answer: { $ne: 0 },
 		}).lean();
+		const tasksMap = _.groupBy(tasks, 'siteId');
 
 		logger.info('Tasks done');
 
@@ -52,7 +53,7 @@ module.exports = (program) => {
 		const answers = sites.map(site => ({
 			url: site.url,
 			dataset: site.dataset,
-			answers: tasks.filter(task => task.siteId.equals(site.id)).map(task => ({
+			answers: tasksMap[site.id].map(task => ({
 				answer: task.answer,
 				user: usersMap[task.userId].email,
 			})),
