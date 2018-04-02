@@ -43,7 +43,7 @@ module.exports = (program) => {
 		const tasks = await Task.find({
 			siteId: { $in: sites.map(site => site.id) },
 			answer: { $ne: 0 },
-		});
+		}).lean();
 
 		logger.info('Tasks done');
 
