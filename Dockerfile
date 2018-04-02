@@ -5,8 +5,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	python
 
 RUN mkdir -p /usr/bin/app
-COPY . /usr/bin/app/
 WORKDIR /usr/bin/app
+COPY . /usr/bin/app/
 
 RUN npm i --no-save
 
