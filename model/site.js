@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const _ = require('lodash');
 
-const conf = require('../conf');
+const config = require('../config');
 
 
 const SiteSchema = new mongoose.Schema({
@@ -41,8 +41,8 @@ SiteSchema.statics = {
 			status: { $in: ['active', 'approved'] },
 		},
 
-		allowedDatasets: conf.sites.allowedDatasets ? {
-			dataset: { $in: conf.sites.allowedDatasets },
+		allowedDatasets: config.sites.allowedDatasets ? {
+			dataset: { $in: config.sites.allowedDatasets },
 		} : {},
 	},
 

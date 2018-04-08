@@ -2,5 +2,5 @@ const dotenv = require('dotenv');
 
 
 module.exports = () => {
-	dotenv.config({ path: 'conf/app.env' });
+	dotenv.config({ path: 'config/app.env' });
 };

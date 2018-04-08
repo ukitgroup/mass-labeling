@@ -1,13 +1,13 @@
 const Promise = require('bluebird');
 const mongoose = require('mongoose');
 
-const conf = require('../conf');
+const config = require('../config');
 const logger = require('../lib/logger');
 
 
 module.exports = () => {
 	mongoose.Promise = Promise;
-	mongoose.connect(conf.mongo.url, (err) => {
+	mongoose.connect(config.mongo.url, (err) => {
 		if (err) {
 			logger.error(err);
 			process.exit(1);

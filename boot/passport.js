@@ -8,15 +8,15 @@ const MongoStore = require('connect-mongo')(session);
 
 const User = require('../model/user');
 
-const conf = require('../conf');
+const config = require('../config');
 
 
 module.exports = (app) => {
 	app.use(cookieParser());
 
 	app.use(session({
-		secret: conf.passport.secret,
-		cookie: { maxAge: conf.passport.maxAge },
+		secret: config.passport.secret,
+		cookie: { maxAge: config.passport.maxAge },
 		resave: true,
 		saveUninitialized: true,
 		store: new MongoStore({ mongooseConnection: mongoose.connection }),

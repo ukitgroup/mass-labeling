@@ -1,7 +1,7 @@
 const hashFiles = require('hash-files');
 const expressLayouts = require('express-ejs-layouts');
 
-const conf = require('../conf');
+const config = require('../config');
 
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
@@ -13,17 +13,17 @@ module.exports = (app) => {
 
 	app.use((req, res, next) => {
 		// Подключение ресурсов в шаблон
-		res.locals.fromPublic = url => `${conf.www.publicUrl}${url}?${isDevelopment ? Date.now() : publicHash}`;
+		res.locals.fromPublic = url => `${config.www.publicUrl}${url}?${isDevelopment ? Date.now() : publicHash}`;
 
 		// Доступ к конфигурации и текущему пользователю из шаблона
-		res.locals.conf = conf;
+		res.locals.config = config;
 		res.locals.user = req.user;
 
 		next();
 	});
 
 
-	app.set('views', conf.www.viewsPath);
+	app.set('views', config.www.viewsPath);
 	app.set('view engine', 'ejs');
 	app.use(expressLayouts);
 	app.set('layout', 'layout');

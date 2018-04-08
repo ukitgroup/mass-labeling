@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Site = require('./site');
 
-const conf = require('../conf');
+const config = require('../config');
 
 
 const TaskSchema = new mongoose.Schema({
@@ -45,7 +45,7 @@ TaskSchema.statics = {
 
 	async getNew({ siteId, answer, userId }) {
 		const count = await this.countByUserId(userId, true);
-		if (conf.markup.limit && count >= conf.markup.limit) throw new Error('Markup overdose');
+		if (config.markup.limit && count >= config.markup.limit) throw new Error('Markup overdose');
 
 		const site = await Site.findById(siteId);
 		if (site.status === 'disabled') throw new Error('Bad markup request');

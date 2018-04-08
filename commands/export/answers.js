@@ -7,14 +7,14 @@ const Task = require('../../model/task');
 const User = require('../../model/user');
 
 const logger = require('../../lib/logger');
-const conf = require('../../conf');
+const config = require('../../config');
 
 
 module.exports = (program) => {
 	program.description('Export answers');
 
-	program.option('--dataset <dataset>', 'Dataset name for export. For multiple use conf:cli/export/answers/datasets (default: all datasets)');
-	program.option('--out <out_path>', 'JSON path', conf.cli.export.answers.out);
+	program.option('--dataset <dataset>', 'Dataset name for export. For multiple use config:cli/export/answers/datasets (default: all datasets)');
+	program.option('--out <out_path>', 'JSON path', config.cli.export.answers.out);
 
 	// eslint-disable-next-line prefer-arrow-callback
 	program.asyncAction(async function (args) {
@@ -32,7 +32,7 @@ module.exports = (program) => {
 		const sitesFilter = {
 			...Site.filter.allowedStatuses,
 		};
-		if (conf.cli.export.answers.datasets) sitesFilter.dataset = { $in: conf.cli.export.answers.datasets };
+		if (config.cli.export.answers.datasets) sitesFilter.dataset = { $in: config.cli.export.answers.datasets };
 		if (args.dataset) sitesFilter.dataset = args.dataset;
 		const sites = await Site.find(sitesFilter);
 

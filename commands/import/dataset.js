@@ -6,13 +6,13 @@ const mongoose = require('mongoose');
 const Site = require('../../model/site');
 
 const logger = require('../../lib/logger');
-const conf = require('../../conf');
+const config = require('../../config');
 
 
 module.exports = (program) => {
 	program.description('Import dataset');
 
-	program.option('--in <in_path>', 'Archive path', conf.cli.import.dataset.in);
+	program.option('--in <in_path>', 'Archive path', config.cli.import.dataset.in);
 
 	// eslint-disable-next-line prefer-arrow-callback
 	program.asyncAction(async function (args) {
@@ -33,7 +33,7 @@ module.exports = (program) => {
 		const sites = sitesRaw.map((site) => {
 			const id = mongoose.Types.ObjectId();
 
-			const screenshotPath = path.join(conf.sites.screenshotsPath, site.dataset, `${id}.jpg`);
+			const screenshotPath = path.join(config.sites.screenshotsPath, site.dataset, `${id}.jpg`);
 			fs.mkdirp(path.dirname(screenshotPath));
 			fs.move(path.resolve(tmpPath, site.screenshot), screenshotPath, { overwrite: true });
 
@@ -41,7 +41,7 @@ module.exports = (program) => {
 				_id: id,
 				url: site.url,
 				dataset: site.dataset,
-				screenshot: path.relative(conf.sites.screenshotsPath, screenshotPath),
+				screenshot: path.relative(config.sites.screenshotsPath, screenshotPath),
 			};
 		});
 		await Site.create(sites);

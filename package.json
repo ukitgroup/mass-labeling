@@ -38,7 +38,7 @@
   },
   "scripts": {
     "start": "node bin/www",
-    "dev": "supervisor -n -e node,js,json -w app.js,boot,conf,lib,model,routes bin/www",
+    "dev": "supervisor -n -e node,js,json -w app.js,boot,config,lib,model,routes bin/www",
     "dev:log": "npm run dev | bunyan",
     "lint": "eslint --ext js,json .",
     "lint:fix": "eslint --ext js,json --fix .",

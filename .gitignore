@@ -17,8 +17,8 @@ node_modules/
 docker-compose*.yml
 
 # Project rules
-/conf/app.env
-/conf/app.js
+/config/app.env
+/config/app.js
 /data/
 /log/
 /tmp/
