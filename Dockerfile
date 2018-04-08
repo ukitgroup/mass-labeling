@@ -6,8 +6,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN mkdir -p /usr/bin/app
 WORKDIR /usr/bin/app
+
+COPY package*.json /usr/bin/app/
+RUN npm i --no-save
+
 COPY . /usr/bin/app/
 
 RUN npm i --no-save
 
-CMD ["sh", "-c", "npm start"]
+CMD ["npm", "start"]
