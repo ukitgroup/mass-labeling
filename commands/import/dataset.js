@@ -3,7 +3,7 @@ const path = require('path');
 const decompress = require('decompress');
 const mongoose = require('mongoose');
 
-const Site = require('../../model/site');
+const Site = require('../../models/site');
 
 const logger = require('../../libs/logger');
 const config = require('../../config');

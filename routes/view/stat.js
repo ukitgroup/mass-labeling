@@ -1,6 +1,6 @@
-const Site = require('../../model/site');
-const User = require('../../model/user');
-const Task = require('../../model/task');
+const Site = require('../../models/site');
+const User = require('../../models/user');
+const Task = require('../../models/task');
 
 
 const diffs = [1, 2, 3, 4, 5, 6, 7, 8, 9];

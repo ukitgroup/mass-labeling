@@ -2,9 +2,9 @@ const fs = require('fs-extra');
 const path = require('path');
 const _ = require('lodash');
 
-const Site = require('../../model/site');
-const Task = require('../../model/task');
-const User = require('../../model/user');
+const Site = require('../../models/site');
+const Task = require('../../models/task');
+const User = require('../../models/user');
 
 const logger = require('../../libs/logger');
 const config = require('../../config');

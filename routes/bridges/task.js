@@ -1,6 +1,6 @@
 const { ForbiddenError, NotFoundError } = require('../../libs/http-errors');
 
-const Task = require('../../model/task');
+const Task = require('../../models/task');
 
 
 module.exports = {

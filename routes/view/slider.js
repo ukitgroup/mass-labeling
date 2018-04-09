@@ -1,4 +1,4 @@
-const Slider = require('../../model/slider');
+const Slider = require('../../models/slider');
 
 
 const router = require('express').Router();

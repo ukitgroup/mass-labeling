@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 const MongoStore = require('connect-mongo')(session);
 
-const User = require('../model/user');
+const User = require('../models/user');
 
 const config = require('../config');
 

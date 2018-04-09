@@ -1,4 +1,4 @@
-const Task = require('../../model/task');
+const Task = require('../../models/task');
 
 const config = require('../../config');
 

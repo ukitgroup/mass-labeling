@@ -1,6 +1,6 @@
 const { NotFoundError } = require('../../libs/http-errors');
 
-const Site = require('../../model/site');
+const Site = require('../../models/site');
 
 
 module.exports = {
