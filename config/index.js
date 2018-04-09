@@ -1,5 +1,13 @@
 const convict = require('convict');
 const dotenv = require('dotenv');
+const yaml = require('js-yaml');
+
+
+// Включаем поддержку yaml файлов для конфигурации
+convict.addParser({
+	extension: 'yml',
+	parse: yaml.safeLoad,
+});
 
 
 // Валидатор для списка датасетов
@@ -89,7 +97,7 @@ const config = convict({
 
 // Загружаем файлы конфигурации
 dotenv.config({ path: './config/app.env' });
-config.loadFile('./config/app.json');
+config.loadFile('./config/app.yml');
 config.validate({ allowed: 'strict' });
 
 
