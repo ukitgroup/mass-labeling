@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-require('../boot/dotenv')();
 require('../boot/mongo')();
 
 

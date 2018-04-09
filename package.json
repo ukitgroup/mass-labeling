@@ -10,6 +10,7 @@
     "bunyan": "^1.8.12",
     "commander": "^2.15.1",
     "connect-mongo": "^2.0.1",
+    "convict": "^4.2.0",
     "cookie-parser": "^1.4.3",
     "debug": "^3.1.0",
     "decompress": "^4.2.0",

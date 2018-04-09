@@ -10,7 +10,7 @@ const router = require('express').Router();
 
 router.get('/:siteId/screenshot', bridges.site.id, async (req, res, next) => {
 	try {
-		res.sendFile(path.resolve(config.sites.screenshotsPath, req.site.screenshot));
+		res.sendFile(path.resolve(config.get('sites.screenshotsPath'), req.site.screenshot));
 	} catch (err) {
 		next(err);
 	}

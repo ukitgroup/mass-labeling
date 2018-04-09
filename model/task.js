@@ -44,8 +44,9 @@ TaskSchema.statics = {
 	},
 
 	async getNew({ siteId, answer, userId }) {
+		const limit = config.get('markup.limit');
 		const count = await this.countByUserId(userId, true);
-		if (config.markup.limit && count >= config.markup.limit) throw new Error('Markup overdose');
+		if (limit && count >= limit) throw new Error('Markup overdose');
 
 		const site = await Site.findById(siteId);
 		if (site.status === 'disabled') throw new Error('Bad markup request');

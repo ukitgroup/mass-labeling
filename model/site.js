@@ -41,8 +41,8 @@ SiteSchema.statics = {
 			status: { $in: ['active', 'approved'] },
 		},
 
-		allowedDatasets: config.sites.allowedDatasets ? {
-			dataset: { $in: config.sites.allowedDatasets },
+		allowedDatasets: config.get('sites.allowedDatasets').length ? {
+			dataset: { $in: config.get('sites.allowedDatasets') },
 		} : {},
 	},
 
