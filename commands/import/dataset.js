@@ -1,3 +1,4 @@
+const Promise = require('bluebird');
 const fs = require('fs-extra');
 const path = require('path');
 const decompress = require('decompress');
@@ -30,12 +31,12 @@ module.exports = (program) => {
 		const sitesRaw = await fs.readJson(path.resolve(tmpPath, 'out.json'));
 
 		// Сохраняем сайты
-		const sites = sitesRaw.map((site) => {
+		const sites = await Promise.mapSeries(sitesRaw, async (site) => {
 			const id = mongoose.Types.ObjectId();
 
 			const screenshotPath = path.join(config.get('sites.screenshotsPath'), site.dataset, `${id}.jpg`);
-			fs.mkdirp(path.dirname(screenshotPath));
-			fs.move(path.resolve(tmpPath, site.screenshot), screenshotPath, { overwrite: true });
+			await fs.mkdirp(path.dirname(screenshotPath));
+			await fs.move(path.resolve(tmpPath, site.screenshot), screenshotPath, { overwrite: true });
 
 			return {
 				_id: id,
