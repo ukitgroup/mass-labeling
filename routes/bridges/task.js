@@ -1,4 +1,4 @@
-const { ForbiddenError, NotFoundError } = require('../../lib/http-errors');
+const { ForbiddenError, NotFoundError } = require('../../libs/http-errors');
 
 const Task = require('../../model/task');
 

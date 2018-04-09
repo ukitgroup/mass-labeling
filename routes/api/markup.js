@@ -1,7 +1,7 @@
 const Site = require('../../model/site');
 const Task = require('../../model/task');
 
-const logger = require('../../lib/logger');
+const logger = require('../../libs/logger');
 
 
 const bridges = require('../bridges');

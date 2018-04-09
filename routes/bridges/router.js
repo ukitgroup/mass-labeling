@@ -1,6 +1,6 @@
-const { NotFoundError } = require('../../lib/http-errors');
+const { NotFoundError } = require('../../libs/http-errors');
 
-const logger = require('../../lib/logger');
+const logger = require('../../libs/logger');
 
 
 module.exports = {

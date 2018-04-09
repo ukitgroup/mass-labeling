@@ -1,4 +1,4 @@
-const { NotFoundError } = require('../../lib/http-errors');
+const { NotFoundError } = require('../../libs/http-errors');
 
 const User = require('../../model/user');
 

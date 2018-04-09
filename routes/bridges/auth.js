@@ -1,4 +1,4 @@
-const { ForbiddenError } = require('../../lib/http-errors');
+const { ForbiddenError } = require('../../libs/http-errors');
 
 
 module.exports = {

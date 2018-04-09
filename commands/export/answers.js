@@ -6,7 +6,7 @@ const Site = require('../../model/site');
 const Task = require('../../model/task');
 const User = require('../../model/user');
 
-const logger = require('../../lib/logger');
+const logger = require('../../libs/logger');
 const config = require('../../config');
 
 

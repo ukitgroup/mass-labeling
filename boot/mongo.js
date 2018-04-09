@@ -2,7 +2,7 @@ const Promise = require('bluebird');
 const mongoose = require('mongoose');
 
 const config = require('../config');
-const logger = require('../lib/logger');
+const logger = require('../libs/logger');
 
 
 module.exports = () => {

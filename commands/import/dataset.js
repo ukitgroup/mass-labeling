@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const Site = require('../../model/site');
 
-const logger = require('../../lib/logger');
+const logger = require('../../libs/logger');
 const config = require('../../config');
 
 
