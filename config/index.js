@@ -22,6 +22,19 @@ function datasetsFormat(value) {
 
 // Схема конфигурации
 const config = convict({
+	logger: {
+		name: {
+			doc: 'Logger name',
+			format: String,
+			default: 'app',
+		},
+		level: {
+			doc: 'Logger verbosity level',
+			format: ['fatal', 'error', 'warn', 'info', 'debug', 'trace'],
+			default: 'info',
+		},
+	},
+
 	mongo: {
 		url: {
 			doc: 'MongoDB URL',

@@ -1,11 +1,11 @@
 const bunyan = require('bunyan');
 
+const config = require('../config');
 
-const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = bunyan.createLogger({
-	name: 'app',
+	name: config.get('logger.name'),
 	stream: process.stdout,
-	level: isDevelopment ? 'debug' : 'info',
+	level: config.get('logger.level'),
 	serializers: bunyan.stdSerializers,
 });
