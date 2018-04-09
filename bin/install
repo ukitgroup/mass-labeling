@@ -1,0 +1,70 @@
+#!/usr/bin/env sh
+
+
+env_path=config/app.env
+yml_path=config/app.yml
+
+docker_compose_prod_path=deploy/docker-compose.prod.yml
+docker_compose_path=docker-compose.yml
+
+
+if [ -f ${env_path} ]; then
+  echo "Backup ${env_path} to ${env_path}.bak"
+  mv ${env_path} ${env_path}.bak
+fi
+
+if [ -f ${yml_path} ]; then
+  echo "Backup ${yml_path} to ${yml_path}.bak"
+  mv ${yml_path} ${yml_path}.bak
+fi
+
+
+echo "Create empty ${env_path}"
+touch ${env_path}
+
+echo "Create empty ${yml_path}"
+touch ${yml_path}
+
+
+echo ""
+echo "Choose installation type:"
+echo "  1. Using Docker"
+echo "  2. Locally"
+echo ""
+read -p "> " installation_type
+echo ""
+
+case $installation_type in
+  1)
+    read -p "Enter cookie secret: " cookie_secret
+    echo ""
+
+    echo "Save ${docker_compose_path}"
+    cp ${docker_compose_prod_path} ${docker_compose_path}
+
+    echo "Save ${env_path}"
+    echo "COOKIE_SECRET=${cookie_secret}" >> ${env_path}
+
+    echo "Save ${yml_path}"
+    echo "{}" >> ${yml_path}
+    ;;
+
+  2)
+    read -p "Enter MongoDB URL: " db_url
+    read -p "Enter server port: " port
+    read -p "Enter cookie secret: " cookie_secret
+    echo ""
+
+    echo "Save ${env_path}"
+    echo "DB_URL=${db_url}" >> ${env_path}
+    echo "PORT=${port}" >> ${env_path}
+    echo "COOKIE_SECRET=${cookie_secret}" >> ${env_path}
+
+    echo "Save ${yml_path}"
+    echo "{}" >> ${yml_path}
+    ;;
+
+  *)
+    echo "Bad installation type"
+    ;;
+esac
