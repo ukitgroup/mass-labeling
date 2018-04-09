@@ -1,15 +1,18 @@
 class HTTPError extends Error {
 	constructor(message = 'Unknown Error', status = 500) {
 		super(message);
+		this.name = this.constructor.name;
 		this.status = status;
 	}
 
-	static factory(defaultMessage, status) {
-		return class extends this {
-			constructor(message = defaultMessage) {
-				super(message, status);
-			}
-		};
+	static factory(className, defaultMessage, status) {
+		return {
+			[className]: class extends this {
+				constructor(message = defaultMessage) {
+					super(message, status);
+				}
+			},
+		}[className];
 	}
 
 	static from(src = {}) {
@@ -25,6 +28,6 @@ class HTTPError extends Error {
 
 module.exports = {
 	HTTPError,
-	ForbiddenError: HTTPError.factory('Forbidden', 403),
-	NotFoundError: HTTPError.factory('Not Found', 404),
+	ForbiddenError: HTTPError.factory('ForbiddenError', 'Forbidden', 403),
+	NotFoundError: HTTPError.factory('NotFoundError', 'Not Found', 404),
 };
