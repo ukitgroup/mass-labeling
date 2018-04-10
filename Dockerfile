@@ -12,6 +12,4 @@ RUN npm i --no-save
 
 COPY . /usr/bin/app/
 
-RUN npm i --no-save
-
 CMD ["npm", "start"]

@@ -21,7 +21,6 @@ docker-compose*.yml
 
 # Project rules
 /config/app.*
-/config/default/
 /data/
 /log/
 /tmp/
