@@ -28,7 +28,7 @@ module.exports = (program) => {
 		logger.info('Unzip done');
 
 
-		const sitesRaw = await fs.readJson(path.resolve(tmpPath, 'out.json'));
+		const sitesRaw = await fs.readJson(path.join(tmpPath, 'out.json'));
 
 		// Сохраняем сайты
 		const sites = await Promise.mapSeries(sitesRaw, async (site) => {
@@ -36,7 +36,7 @@ module.exports = (program) => {
 
 			const screenshotPath = path.join(config.get('sites.screenshotsPath'), site.dataset, `${id}.jpg`);
 			await fs.mkdirp(path.dirname(screenshotPath));
-			await fs.move(path.resolve(tmpPath, site.screenshot), screenshotPath, { overwrite: true });
+			await fs.move(path.join(tmpPath, 'screenshots', site.screenshot), screenshotPath, { overwrite: true });
 
 			return {
 				_id: id,
