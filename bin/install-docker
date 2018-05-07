@@ -21,10 +21,8 @@ if [ -f ${env_path} ]; then
   mv ${env_path} ${env_path}.bak
 fi
 
-echo "Create empty ${env_path}"
-touch ${env_path}
-
 echo "Save ${env_path}"
+touch ${env_path}
 echo "COOKIE_SECRET=${cookie_secret}" >> ${env_path}
 
 
@@ -33,8 +31,6 @@ if [ -f ${yml_path} ]; then
   mv ${yml_path} ${yml_path}.bak
 fi
 
-echo "Create empty ${yml_path}"
-touch ${yml_path}
-
 echo "Save ${yml_path}"
+touch ${yml_path}
 echo "{}" >> ${yml_path}
