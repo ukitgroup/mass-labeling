@@ -23,21 +23,11 @@ echo "Save $docker_compose_path"
 cat "$docker_compose_prod_path" | sed -e "s/\__PORT__/$port/" > "$docker_compose_path"
 
 
-if [ -f "$env_path" ]; then
-  echo "Backup $env_path to $env_path.bak"
-  mv "$env_path" "$env_path.bak"
-fi
-
 echo "Save $env_path"
-touch "$env_path"
+: > "$env_path"
 echo "COOKIE_SECRET=$cookie_secret" >> "$env_path"
 
 
-if [ -f "$yml_path" ]; then
-  echo "Backup $yml_path to $yml_path.bak"
-  mv "$yml_path" "$yml_path.bak"
-fi
-
 echo "Save $yml_path"
-touch "$yml_path"
+: > "$yml_path"
 echo "{}" >> "$yml_path"
