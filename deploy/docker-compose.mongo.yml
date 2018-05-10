@@ -1,6 +1,0 @@
-  mongo:
-    container_name: mass-labeling-mongo
-    image: mongo:3.6
-    volumes:
-    - ./data/mongo:/data/db
-    restart: always
