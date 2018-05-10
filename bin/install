@@ -19,5 +19,6 @@ case "$installation_type" in
 
   *)
     echo "Bad installation type"
+    exit
     ;;
 esac

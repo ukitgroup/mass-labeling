@@ -13,12 +13,9 @@ default_port=80
 
 
 read -p "Enter server port ($default_port): " port
+port="${port:-$default_port}"
 read -p "Enter cookie secret: " cookie_secret
 echo ""
-
-if [ -z "$port" ]; then
-  port="$default_port"
-fi
 
 
 echo "Save $docker_compose_path"

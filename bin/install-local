@@ -9,17 +9,11 @@ default_port=80
 
 
 read -p "Enter MongoDB URL ($default_db_url): " db_url
+db_url="${db_url:-$default_db_url}"
 read -p "Enter server port ($default_port): " port
+port="${port:-$default_port}"
 read -p "Enter cookie secret: " cookie_secret
 echo ""
-
-if [ -z "$db_url" ]; then
-  db_url="$default_db_url"
-fi
-
-if [ -z "$port" ]; then
-  port="$default_port"
-fi
 
 
 echo "Save $env_path"
