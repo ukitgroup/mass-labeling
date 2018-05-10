@@ -8,12 +8,12 @@ read -p "> " installation_type
 echo ""
 
 
-case $installation_type in
-  1)
+case "$installation_type" in
+  "1")
     bin/install-docker
     ;;
 
-  2)
+  "2")
     bin/install-local
     ;;
 
