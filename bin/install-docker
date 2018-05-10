@@ -24,11 +24,7 @@ cat "$docker_compose_mass_labeling_prod_path" | sed -e "s/\__PORT__/$port/" >> "
 cat "$docker_compose_mongo_path" >> "$docker_compose_path"
 
 
-echo "Save $env_path"
-: > "$env_path"
-echo "COOKIE_SECRET=$cookie_secret" >> "$env_path"
-
-
 echo "Save $yml_path"
 : > "$yml_path"
-echo "{}" >> "$yml_path"
+echo "passport:"                >> "$yml_path"
+echo "  secret: $cookie_secret" >> "$yml_path"

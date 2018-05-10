@@ -1,8 +1,6 @@
   mass-labeling:
     container_name: mass-labeling
     build: .
-    env_file:
-    - ./config/app.env
     environment:
       NODE_ENV: production
       DB_URL: mongodb://mongo:27017/mass-labeling
