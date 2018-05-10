@@ -4,11 +4,22 @@
 env_path=config/app.env
 yml_path=config/app.yml
 
+default_db_url="mongodb://localhost:27017/mass-labeling"
+default_port=80
 
-read -p "Enter MongoDB URL: " db_url
-read -p "Enter server port: " port
+
+read -p "Enter MongoDB URL ($default_db_url): " db_url
+read -p "Enter server port ($default_port): " port
 read -p "Enter cookie secret: " cookie_secret
 echo ""
+
+if [ -z "$db_url" ]; then
+  db_url="$default_db_url"
+fi
+
+if [ -z "$port" ]; then
+  port="$default_port"
+fi
 
 
 if [ -f "$env_path" ]; then
