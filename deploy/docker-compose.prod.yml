@@ -14,7 +14,7 @@ services:
     - ./config/app.yml:/usr/bin/app/config/app.yml
     - ./data:/usr/bin/app/data
     ports:
-    - 80:80
+    - __PORT__:80
     depends_on:
     - mongo
     restart: always
