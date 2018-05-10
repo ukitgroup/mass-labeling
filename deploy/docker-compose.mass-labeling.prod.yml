@@ -1,6 +1,3 @@
-version: '2'
-
-services:
   mass-labeling:
     container_name: mass-labeling
     build: .
@@ -17,11 +14,4 @@ services:
     - __PORT__:80
     depends_on:
     - mongo
-    restart: always
-
-  mongo:
-    container_name: mass-labeling-mongo
-    image: mongo:3.6
-    volumes:
-    - ./data/mongo:/data/db
     restart: always

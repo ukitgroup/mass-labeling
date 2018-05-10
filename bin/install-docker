@@ -4,7 +4,9 @@
 env_path=config/app.env
 yml_path=config/app.yml
 
-docker_compose_prod_path=deploy/docker-compose.prod.yml
+docker_compose_base_path=deploy/docker-compose.base.yml
+docker_compose_mass_labeling_prod_path=deploy/docker-compose.mass-labeling.prod.yml
+docker_compose_mongo_path=deploy/docker-compose.mongo.yml
 docker_compose_path=docker-compose.yml
 
 default_port=80
@@ -20,7 +22,9 @@ fi
 
 
 echo "Save $docker_compose_path"
-cat "$docker_compose_prod_path" | sed -e "s/\__PORT__/$port/" > "$docker_compose_path"
+cp "$docker_compose_base_path" "$docker_compose_path"
+cat "$docker_compose_mass_labeling_prod_path" | sed -e "s/\__PORT__/$port/" >> "$docker_compose_path"
+cat "$docker_compose_mongo_path" >> "$docker_compose_path"
 
 
 echo "Save $env_path"
