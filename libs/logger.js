@@ -2,8 +2,7 @@ const bunyan = require('bunyan');
 const { spawn } = require('child_process');
 const through = require('through');
 
-
-const isDevelopment = process.env.NODE_ENV !== 'production';
+const config = require('../config');
 
 
 function createPrettyStream() {
@@ -19,8 +18,8 @@ function createPrettyStream() {
 
 
 module.exports = bunyan.createLogger({
-	name: 'app',
+	name: config.get('logger.name'),
 	stream: process.stdout.isTTY ? createPrettyStream() : process.stdout,
-	level: isDevelopment ? 'debug' : 'info',
+	level: config.get('logger.level'),
 	serializers: bunyan.stdSerializers,
 });
