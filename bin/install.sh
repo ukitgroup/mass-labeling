@@ -10,11 +10,11 @@ echo ""
 
 case "$installation_type" in
   "1")
-    bin/install-docker
+    bin/install-docker.sh
     ;;
 
   "2")
-    bin/install-local
+    bin/install-local.sh
     ;;
 
   *)
