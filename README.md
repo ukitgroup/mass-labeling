@@ -7,9 +7,10 @@
 
 ## Description
 
-__Mass Labeling__ is an open source project for data assessment. 
+__Mass Labeling__ is an open source project for data assessment. It maybe used for assess data for 
+classification tasks. 
 
-#### Advantages
+### Advantages
 The main advantages of this project are
 - easy to deploy,
 - easy to manage,
@@ -18,13 +19,13 @@ The main advantages of this project are
  
 Last two advantages are worth describing in details. 
 
-##### Case "private data".
+#### Case "private data".
 If one decided to use any proprietary online data 
 assessment service, then he should transfer his data to a server belonging to the service. Sometimes it 
 is not comfortable, but sometimes it is impossible due to the privacy of the data. In this case, you need 
 to host assessment tool on your own server.
     
-##### Case "offline tool".
+#### Case "offline tool".
 If one decided to use offline data assessment tool, then he should distribute data between assessors. So, 
 each of them gets full dataset, which is valuable for you or your company. Also, after assessment job is 
 done the new problem will occur. You will need to collect all the labels and merge them into one dataset.
@@ -33,7 +34,7 @@ So, if you wish to hold all the data and labels on your server all together, the
 right choice for you. 
 
  
-#### Technogical stack
+## Technogical stack
 
 - node.js
 - mongodb
