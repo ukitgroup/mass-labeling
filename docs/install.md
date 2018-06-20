@@ -83,6 +83,11 @@ To run __Mass Labeling__ server application use the following command:
 npm start
 ```
 
+## Post install
+
+After installation system requires to have first administrator created. Read the [user guide](user_guide) about this 
+obligatory step.
+
 ## FAQ
 
 Q: What OS-s are supported?  
