@@ -1,19 +1,17 @@
 # Import CLI
 
 
-## import:dataset
+## Dataset import
 
-Импорт датасета.
+### Run command
 
-### Запуск
+`bin/cli import:dataset <arguments> | npx bunyan`
 
-`bin/cli import:dataset <аргументы> | npx bunyan`
+#### Arguments
 
-#### Аргументы
+* `--in` - path to the zipped dataset file. Default: `data/import/dataset.zip`.
 
-* `--in` - путь к файлу датасета. По умолчанию: `data/import/dataset.zip`.
-
-#### Файл конфигурации
+#### Configuration file
 
 `conf/app.js`
 
@@ -23,18 +21,17 @@ cli/import/dataset{
 }
 ```
 
-#### Файл датасета
+#### Input file
 
-Файл является `zip` архивом. Структура:
+Input file is a `zip` archive file, which contains the following:
 
 * `screenshots`
     * `0123456789abcdef01234567.jpg`
     * ...
 * `out.json`
 
-#### out.json
-
-Файл `out.json` состоит из массива элементов `item`. Структура:
+`screenshots` folder contains JPEG-images which are going to be shown to assessors. `out.json` file
+consists of array of `item`. Each of each satisfies the following format:
 
 ```
 item{

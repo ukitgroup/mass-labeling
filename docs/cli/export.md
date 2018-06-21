@@ -1,20 +1,18 @@
 # Export CLI
 
 
-## export:answers
+## Rate export.
 
-Экспорт оценок.
+### Run command
 
-### Запуск
+`bin/cli export:answers <arguments> | npx bunyan`
 
-`bin/cli export:answers <аргументы> | npx bunyan`
+#### Arguments
 
-#### Аргументы
+* `--dataset` - dataset name. If not specified all datasets will be exported.
+* `--out` - file to export data. Default: `data/export/answers.json`.
 
-* `--dataset` - название датасета. По умолчанию: все датасеты.
-* `--out` - путь к файлу с оценками. По умолчанию: `data/export/answers.json`.
-
-#### Файл конфигурации
+#### Configuration file
 
 `conf/app.js`
 
@@ -25,9 +23,9 @@ cli/export/answers{
 }
 ```
 
-#### Файл с оценками
+#### Output file description
 
-Файл в формате `json` состоит из массива элементов `item`. Структура:
+The output json-file consists of array of `item`. Each of each satisfies the following format:
 
 ```
 item{

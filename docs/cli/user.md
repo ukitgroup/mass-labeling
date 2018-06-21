@@ -1,16 +1,14 @@
 # User CLI
 
 
-## user:create
+## Create user
 
-Создание пользователя.
+### Run command
 
-### Запуск
+`bin/cli user:create <arguments> | npx bunyan`
 
-`bin/cli user:create <аргументы> | npx bunyan`
+#### Arguments
 
-#### Аргументы
-
-* `--email` - E-mail пользователя.
-* `--password` - пароль пользователя.
-* `--role` - роль пользователя. Допустимые значения: `admin`, `user`.
+* `--email` - user's e-mail.
+* `--password` - password.
+* `--role` - role. Allowed values: `admin`, `user`.
