@@ -85,8 +85,8 @@ npm start
 
 ## Post install
 
-After installation system requires to have first administrator created. Read the [user guide](user_guide) about this 
-obligatory step.
+After installation system requires to have first administrator created. This step is this obligatory. 
+Read the [cli user guide](cli/user) on how to do it.
 
 ## FAQ
 
