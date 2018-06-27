@@ -30,8 +30,8 @@ Input file is a `zip` archive file, which contains the following:
     * ...
 * `out.json`
 
-`screenshots` folder contains JPEG-images which are going to be shown to assessors. `out.json` file
-consists of array of `item`. Each of each satisfies the following format:
+`screenshots` folder contains JPEG-images which are going to be shown to the assessors. `out.json` file
+consists of the `item` array. Each satisfies the following format:
 
 ```
 item{

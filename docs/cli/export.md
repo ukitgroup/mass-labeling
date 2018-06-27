@@ -1,7 +1,7 @@
 # Export CLI
 
 
-## Rate export.
+## Rate export
 
 ### Run command
 
@@ -25,7 +25,7 @@ cli/export/answers{
 
 #### Output file description
 
-The output json-file consists of array of `item`. Each of each satisfies the following format:
+The output json-file contains the array of items. Each item satisfies the following format:
 
 ```
 item{

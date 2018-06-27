@@ -2,102 +2,100 @@
 
 ## Introduction
 
-This guide has to show possibiliies of the __Mass Labeling__ tool and clarify usage of some features.
-While this guide is written in English, unfortunately, application interface is written in Russian and 
-not translated into English yet.   
+This guide shows the possibilities of the __Mass Labeling__ tool and clarifies the usage of some features.
+Although this guide is written in English, unfortunately, the application interface has Russian texts and is not available in English yet.   
 
 ## Main function
 
-The main function of the __Mass Labeling__ tool is to provide a service to label data placed on the data owner server 
-by a group of assessors. It also has an interface to control the progress and an interface to export the results.
-
+The main function of the __Mass Labeling__ tool is to offer a service for labeling the data placed on the data owner's server 
+by a group of assessors. It also has an web-interface to control the progress and a CLI to export the results.
 
 ## Functions by roles 
 
-There are two roles in the __Mass Labeling__. They are an administrator and an assessor. The main objectives for the 
-administrator is to create labeling tasks and manage them. The main objective for assessor is to label images in the 
-given tasks. Let's consider this roles.
+There are two roles in the __Mass Labeling__ tool — an administrator and an assessor. The main objectives of the 
+administrator is to create labeling tasks and manage them. The main objective of the assessor is to label images in the 
+given tasks. Let's have a closer look at these roles.
 
 ### Administrator role
 
-Administrator can manage users and tasks, control the labelling progress and manipulate data.  
+An administrator can manage users and tasks, control the labelling progress and manipulate data.  
 
 #### Start new assessment task
 
-There is still no entity like _assessment task_ in the __Mass Labeling__. But administrator can manage access and 
-manage visibility of datasets. It gives the oportuninty to manage tasks sequentily, but there is no possibility to 
-manage concurrent assessment tasks. The steps to start a new task a the following:     
+There is still no entity like _assessment task_ in the __Mass Labeling__ tool. But an administrator can manage access and 
+manage visibility of datasets. It makes it possible to manage tasks one by one, but there is no option to 
+manage concurrent assessment tasks. The steps to start a new task are as follows:     
 
 1. [Provide data](provide_data) for assessment.
-1. [Manage datasets](manage_datasets) accessibility.
-1. [Manage users access](manage_users).
+1. [Manage datasets'](manage_datasets) accessibility.
+1. [Manage users' access](manage_users).
 
-After setting up a new task assessors can start labeling process and administrator can 
+After setting up a new task, assessors can start labeling the process and an administrator can 
 [monitor](monitor_labelling_progress) their progress. 
 
 #### Provide data
 
-As for now, importing datasets is possible only using `cli`. Read the corresponding section in 
-the [cli import guide](cli/import). After dataset was imported into __Mass Labeling__ it is registered 
-in DB and can't be removed using application. But administrator can exclude it from active datasets list.
+At the moment, importing datasets is possible only by using CLI. For more info, please read the corresponding section in 
+the [CLI import guide](cli/import). After the dataset was imported into the __Mass Labeling__ tool, it is registered 
+in the DB and can't be removed using the application. But an administrator can exclude it from the list of active datasets.
 
 #### Manage datasets
 
-Administrator can select which datasets are active. All images belonging to datasets from active datasets 
-list are shown to the assessors. And vice a versa images from datasets not included into this list are not shown 
+An administrator can mark the datasets that are active. All images belonging to datasets from the active datasets 
+list are shown to the assessors. And vice versa, images from datasets not included into this list are not shown 
 to the assessors.
 
-To manage the list of active datasets administrator should change `config.sites.allowedDatasets.default`
-variable in `config/index.js` file. The empty list means all imported datasets are active.
+To manage the list of active datasets, an administrator should change the `config.sites.allowedDatasets.default`
+variable in the `config/index.js` file. The empty list means that all imported datasets are active.
 
 #### Manage users
 
-It is possible to manage users using `cli`. To create the first administrator it is the only option and
-thats why this step is obligatory to start using the __Mass Labeling__ application. Read the corresponding section in 
-the [cli user guide](cli/user) on how to create users. 
+It is possible to manage users using CLI. The CLI is the only option creating the first administrator, 
+that's why step is obligatory to start using the __Mass Labeling__ application. For more information on how to
+create users, please read the corresponding section in the [CLI user guide](cli/user). 
 
-The other way to add users into __Mass Labeling__ is to use administrator interface in the running application. 
-Choose `Users` in the upper menu to manage access of users. The following list shows administrator's actions 
+Another way to add users into __Mass Labeling__ is to use the administrator interface in the running application. 
+Choose `Users` in the top menu to manage access of users. The following list shows administrator's actions 
 in the `Users` section.
 * Add user by clicking on the `Add user` button.
 * Change user's login (e-mail), password, status and role by clicking on the `Change` button in the `Actions` column.
-Particularly, this interface allows administrator to manage users access by changing their status.
-* Look throw the data labeled by certain user by clicking on the `Generate slider` and `Open slider` buttons 
+Particularly, this interface allows an administrator to manage users access by changing their statuses.
+* Look through the data labeled by a certain user by clicking on the `Generate slider` and `Open slider` buttons 
 in the `Actions` column.
 
-#### Monitor labelling progress
+#### Monitor the labelling progress
 
-Administrator can press 'Statistics' menu item and select one of three options: 'Progress', 
-'Outliers' and 'Local outliers'. Pick 'Progress' to look how much labels each assessor made. 
-Pick 'Outliers' to verify how much outliers produced each assessor. Pick 'Outliers' to 
-verify how much outliers produced each assessor.
+An administrator can click the 'Statistics' menu item and select one of the three options: 'Progress', 
+'Outliers' and 'Local outliers'. Click 'Progress' to see how many labels each assessor put. 
+Click 'Outliers' to check how many outliers were done by each assessor.
 
-After assessors completed the labelling task administrator can [receive the results](receive_results). 
+After assessors have completed the labelling task, an administrator can [obtain the results](obtain_results). 
 
-#### Receive results
+#### Obtain results
 
-As for now, this operation could be done only using `cli`. Read the corresponding section in 
-the [cli export guide](cli/export).
+As for now, this operation could be done only using CLI. Read the corresponding section in 
+the [CLI export guide](cli/export).
  
 ### Assessor role
 
-Assessor can label the given images and monitor his own progress. 
+Assessors can label images provided to them and monitor their own progress. 
 
 #### Controls
 
-__Mass Labeling__ application has built-in instructions page. It also describes controls.
-The following list describes keys which can assessor can use during his work: 
- * 1-10: sets label for the image viewed.
- * Enter: confirms label and requests the next image.
- * Backspace: returns to the previous image, which allows assessor to change label. This button could be pressed 
- multiple times, which leads to cancellations of all labels for the last images.
+The __Mass Labeling__ application has a built-in instructions page. It also provides descriptions of controls.
+The following list describes the keys which assessors can use during their work: 
+ * 1-10: sets the label for the image viewed;
+ * Enter: confirms the label and requests the next image;
+ * Backspace: returns to the previous image, which allows an assessor to change the label. This button could be pressed 
+ multiple times, which leads to the cancellations of all labels for the last images.
  
 ## FAQ
 
-Q: When application interface will support multiple languages including English?  
-A: We hope soon :)
+Q: When will your application interface support multiple languages including English?  
+A: Other languages including English are coming soon :)
 
-Q: How can I start new assessment task with different dataset?
-A: Now it is possible to select datasets which are active for labeling process. Let's assume assessors have 
-labeled all images from dataset `A`. Administrator can import new dataset `B` and set only this dataset active. It 
-means that dataset `A` images will not be shown to assessors.
+Q: How can I start the new assessment task with a different dataset?
+A: Now it is possible to select datasets which are active for the labeling process. Let's assume assessors have 
+labeled all images from the dataset `A`. An administrator can import the new dataset `B` and set only this dataset as active. It 
+means that the dataset `A` 's images will not be shown to assessors. Please read the corresponding section 
+[manage datasets](manage_datasets) for more info.

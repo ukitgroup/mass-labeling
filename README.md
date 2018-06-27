@@ -7,33 +7,33 @@
 
 ## Description
 
-__Mass Labeling__ is an open source project for data assessment. It maybe used for assess data for 
+__Mass Labeling__ is an open source project for data assessment. It may be used to assess data for 
 classification tasks. 
 
 ### Advantages
 
-The main advantages of this project are
+The main advantages of this project are:
 - easy to deploy,
 - easy to manage,
 - data is not distributed,
 - no need to collect results.
  
-Last two advantages are worth describing in details. 
+The last two advantages are worth describing in detail. 
 
-#### Case "private data".
+#### "Private data" case
 
-If one decided to use any proprietary online data 
-assessment service, then he should transfer his data to a server belonging to the service. Sometimes it 
-is not comfortable, but sometimes it is impossible due to the privacy of the data. In this case, you need 
-to host assessment tool on your own server.
+If you decide to use any proprietary online data 
+assessment service, then you should transfer your data to a server belonging to the service. Sometimes it 
+is not comfortable, and sometimes it is not even possible due to the privacy rights to the data. In this case, you need 
+to host an assessment tool on your own server.
     
-#### Case "offline tool".
+#### "Offline tool" case
 
-If one decided to use offline data assessment tool, then he should distribute data between assessors. So, 
-each of them gets full dataset, which is valuable for you or your company. Also, after assessment job is 
-done the new problem will occur. You will need to collect all the labels and merge them into one dataset.
+If you decide to use an offline data assessment tool, then you should distribute data between assessors. So, 
+each of them gets a whole dataset, which is valuable for you or your company. Also, after the assessment job is 
+done the new problem occurs. You will need to collect all the labels and merge them into one dataset.
 
-So, if you wish to hold all the data and labels on your server all together, then mass-labeling is the 
+So, if you wish to keep all the data and labels on your server together, then mass-labeling is the 
 right choice for you. 
 
 ## Technogical stack
@@ -47,12 +47,12 @@ Installation is described in this [guide](docs/install)
 
 ## User guide
 
-Look throw the [user guide](docs/user_guide) which describes basic user and administrator operations.
+See the [user guide](docs/user_guide) which describes the basic user and administrator operations.
   
 ## Contribution
 
-This project was separated from the family of internal projects. So, some variables in the code could confuse. 
-The refactoring is welcomed.  
+This project was separated from the family of internal projects. So, some variables in the code may be confusing. 
+The refactoring is welcome.  
 
 ## License
 
