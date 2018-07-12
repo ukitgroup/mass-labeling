@@ -27,6 +27,8 @@ router.get('/list', async (req, res, next) => {
 
 		res.render('user/list', { users, statuses, roles });
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
+		err.message = req.__(err.message);
 		next(err);
 	}
 });

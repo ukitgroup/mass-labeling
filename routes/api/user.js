@@ -17,6 +17,7 @@ router.post('/add', async (req, res, next) => {
 
 		res.api.response();
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
 		err.message = req.__(err.message);
 		next(err);
 	}
@@ -31,6 +32,7 @@ router.post('/:userId/update', bridges.user.id, async (req, res, next) => {
 
 		res.api.response();
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
 		err.message = req.__(err.message);
 		next(err);
 	}
@@ -42,6 +44,7 @@ router.post('/:userId/create-slider', bridges.user.id, async (req, res, next) =>
 
 		res.api.response();
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
 		err.message = req.__(err.message);
 		next(err);
 	}

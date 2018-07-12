@@ -23,6 +23,7 @@ router.post('/create', async (req, res, next) => {
 			siteStatus: site.status,
 		});
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
 		err.message = req.__(err.message);
 		next(err);
 	}
@@ -45,6 +46,7 @@ router.post('/answer', async (req, res, next) => {
 
 		res.api.response(task.id);
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
 		err.message = req.__(err.message);
 		next(err);
 	}
@@ -63,6 +65,7 @@ router.post('/:taskId/undo', bridges.task.id, bridges.task.owner, async (req, re
 
 		res.api.response();
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
 		err.message = req.__(err.message);
 		next(err);
 	}

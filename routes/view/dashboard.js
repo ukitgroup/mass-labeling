@@ -21,6 +21,7 @@ router.get('/', async (req, res, next) => {
 			markupCount: await Task.countByUserId(req.user.id, true),
 		});
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
 		err.message = req.__(err.message);
 		next(err);
 	}

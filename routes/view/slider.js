@@ -13,6 +13,7 @@ router.get('/:name', async (req, res, next) => {
 			items: await Slider.serializeAll(items),
 		});
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
 		err.message = req.__(err.message);
 		next(err);
 	}

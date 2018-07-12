@@ -8,6 +8,7 @@ module.exports = {
 
 			next();
 		} catch (err) {
+			// eslint-disable-next-line no-underscore-dangle
 			err.message = req.__(err.message);
 			next(err);
 		}
@@ -19,6 +20,7 @@ module.exports = {
 
 			next();
 		} catch (err) {
+			// eslint-disable-next-line no-underscore-dangle
 			err.message = req.__(err.message);
 			next(err);
 		}

@@ -18,6 +18,7 @@ module.exports = (app) => {
 
 		// Translate text to current user's locale
 		res.locals.getText = function (text) {
+			// eslint-disable-next-line no-underscore-dangle
 			return req.__.apply(this, [text]);
 		};
 

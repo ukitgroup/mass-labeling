@@ -51,6 +51,7 @@ router.use(async (req, res, next) => {
 
 		next();
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
 		err.message = req.__(err.message);
 		next(err);
 	}
@@ -88,6 +89,7 @@ router.get('/locale/:locale', async (req, res) => {
 		// Reload page to apply changes
 		res.redirect('back');
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
 		err.message = req.__(err.message);
 		res.redirect('back');
 	}
