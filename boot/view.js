@@ -16,6 +16,11 @@ module.exports = (app) => {
 		// Доступ к текущему пользователю из шаблона
 		res.locals.user = req.user;
 
+		// Translate text to current user's locale
+		res.locals.getText = function (text) {
+			return req.__.apply(this, [text]);
+		};
+
 		next();
 	});
 

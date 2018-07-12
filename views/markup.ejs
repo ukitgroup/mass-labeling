@@ -22,8 +22,8 @@
 				</li>
 			</ul>
 
-			<p class="navbar-text" title="оценено / лимит">
-				Оценено:
+			<p class="navbar-text" title="<%= getText('scored_limit') %>">
+        <%= getText('scored') %>:
 				<span id="markup-count"><%= count %></span>
 				/
 				<%= limit || '∞' %>
@@ -32,7 +32,7 @@
 			<p class="navbar-text"><%= user.email %></p>
 
 			<ul class="nav navbar-nav">
-				<li><a href="#" id="logout">Выход</a></li>
+				<li><a href="#" id="logout"><%= getText('logout') %></a></li>
 			</ul>
 		</div>
 	</div>
@@ -53,31 +53,31 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Справка</h4>
+				<h4 class="modal-title"><%= getText('info') %></h4>
 			</div>
 			<div class="modal-body">
-				<h4>Управление</h4>
-				<p>Управление с клавиатуры:</p>
+				<h4><%= getText('management') %></h4>
+				<p><%= getText('keyboard_management') %>:</p>
 				<table class="table">
 					<tr>
 						<td>1-9</td>
-						<td>Поставить оценку от 1 до 9</td>
+						<td><%= getText('set_score_1_9') %></td>
 					</tr>
 					<tr>
 						<td>0</td>
-						<td>Поставить оценку 10</td>
+						<td><%= getText('set_score_10') %></td>
 					</tr>
 					<tr>
 						<td>X</td>
-						<td>Пометить сайт сломанным</td>
+						<td><%= getText('mark_as_broken') %></td>
 					</tr>
 					<tr>
 						<td>Enter</td>
-						<td>Сохранить ответ</td>
+						<td><%= getText('save_score') %></td>
 					</tr>
 					<tr>
 						<td>Backspace</td>
-						<td>Отменить последний выбор</td>
+						<td><%= getText('undo_last_choice') %></td>
 					</tr>
 				</table>
 			</div>
@@ -87,7 +87,7 @@
 
 <div id="overdose" class="overdose container">
 	<div class="jumbotron">
-		<h1>Достигнут лимит оценивания</h1>
+		<h1><%= getText('limit_reached') %></h1>
 	</div>
 </div>
 
@@ -97,6 +97,12 @@
 <script>
 	window.markupCount = <%= count %>;
 	window.markupLimit = <%= limit %>;
+
+	window.signs = {
+	  site_approved: "<%= getText('site_approved') %>",
+    get_new_task_error: "<%= getText('get_new_task_error') %>",
+    no_mark_specified: "<%= getText('no_mark_specified') %>",
+  };
 </script>
 <script src="<%= fromPublic('js/request.js') %>"></script>
 <script src="<%= fromPublic('js/markup.js') %>"></script>

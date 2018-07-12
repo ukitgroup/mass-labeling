@@ -19,6 +19,7 @@ router.get('/markup', async (req, res, next) => {
 
 		res.render('stat/markup', { users });
 	} catch (err) {
+		err.message = req.__(err.message);
 		next(err);
 	}
 });
@@ -76,6 +77,7 @@ router.get('/abnormal(/:diff)?', async (req, res, next) => {
 
 		res.render('stat/abnormal', { diffs, diff, users });
 	} catch (err) {
+		err.message = req.__(err.message);
 		next(err);
 	}
 });
@@ -131,6 +133,7 @@ router.get('/abnormal-local(/:diff)?', async (req, res, next) => {
 
 		res.render('stat/abnormal-local', { diffs, diff, users });
 	} catch (err) {
+		err.message = req.__(err.message);
 		next(err);
 	}
 });

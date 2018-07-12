@@ -1,4 +1,4 @@
-<h1><%= curUser ? 'Изменение' : 'Добавление' %> пользователя</h1>
+<h1><%= curUser ? getText('user_edit') : getText('user_add') %></h1>
 
 <div class="row">
 	<div class="col-xs-6">
@@ -8,31 +8,43 @@
 				<input type="email" id="email" class="form-control" value="<%= curUser ? curUser.email : '' %>">
 			</div>
 			<div class="form-group">
-				<label for="pass">Пароль</label>
+				<label for="pass"><%= getText('password') %></label>
 				<input type="password" id="pass" class="form-control">
 			</div>
 			<div class="form-group">
-				<label for="status">Статус</label>
+				<label for="status"><%= getText('status') %></label>
 				<select id="status" class="form-control">
 					<% Object.keys(statuses).forEach(key => { %>
-						<option value="<%= key %>" <%= curUser && curUser.status === key ? 'selected' : '' %>><%= statuses[key] %></option>
+						<option value="<%= key %>" <%= curUser && curUser.status === key ? 'selected' : '' %>>
+              <%= getText(`user_statuses.${key}`) %>
+            </option>
 					<% }) %>
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="role">Роль</label>
+				<label for="role"><%= getText('role') %></label>
 				<select id="role" class="form-control">
 					<% Object.keys(roles).forEach(key => { %>
-						<option value="<%= key %>" <%= curUser && curUser.role === key ? 'selected' : '' %>><%= roles[key] %></option>
+						<option value="<%= key %>" <%= curUser && curUser.role === key ? 'selected' : '' %>>
+              <%= getText(`user_roles.${key}`) %>
+            </option>
 					<% }) %>
 				</select>
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Сохранить</button>
+				<button type="submit" class="btn btn-primary"><%= getText('submit') %></button>
 			</div>
 		</form>
 	</div>
 </div>
+
+
+<script>
+  window.signs = {
+    add_user_error: "<%= getText('add_user_error') %>",
+    edit_user_error: "<%= getText('edit_user_error') %>",
+  };
+</script>
 
 
 <script src="<%= fromPublic('js/user/form.js') %>"></script>

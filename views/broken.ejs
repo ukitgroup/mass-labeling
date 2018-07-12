@@ -1,24 +1,36 @@
-<h1>Пересмотр сломанных сайтов</h1>
+<h1><%= getText('show_broken') %></h1>
 <table class="table table-striped">
 	<thead>
 		<tr>
 			<th>URL</th>
-			<th>Скриншот</th>
-			<th>Результат проверки</th>
+			<th><%= getText('screenshot') %></th>
+			<th><%= getText('check_result') %></th>
 		</tr>
 	</thead>
 	<tbody>
 		<% sites.forEach(site => { %>
 			<tr>
 				<td><a href="<%= site.url %>" target="_blank"><%= site.url %></a></td>
-				<td><a href="/api/site/<%= site.id %>/screenshot" target="_blank">Скриншот</a></td>
+				<td><a href="/api/site/<%= site.id %>/screenshot" target="_blank"><%= getText('screenshot') %></a></td>
 				<td>
-					<button type="button" class="btn btn-success btn-xs approve" data-id="<%= site.id %>">Работает</button>
-					<button type="button" class="btn btn-danger btn-xs disable" data-id="<%= site.id %>">Сломан</button>
+					<button type="button" class="btn btn-success btn-xs approve" data-id="<%= site.id %>">
+            <%= getText('is_working') %>
+          </button>
+					<button type="button" class="btn btn-danger btn-xs disable" data-id="<%= site.id %>">
+            <%= getText('is_broken') %>
+          </button>
 				</td>
 			</tr>
 		<% }) %>
 	</tbody>
 </table>
+
+
+<script>
+  window.signs = {
+    error: "<%= getText('error') %>",
+  };
+</script>
+
 
 <script src="<%= fromPublic('js/broken.js') %>"></script>

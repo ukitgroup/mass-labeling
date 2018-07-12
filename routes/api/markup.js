@@ -23,6 +23,7 @@ router.post('/create', async (req, res, next) => {
 			siteStatus: site.status,
 		});
 	} catch (err) {
+		err.message = req.__(err.message);
 		next(err);
 	}
 });
@@ -44,6 +45,7 @@ router.post('/answer', async (req, res, next) => {
 
 		res.api.response(task.id);
 	} catch (err) {
+		err.message = req.__(err.message);
 		next(err);
 	}
 });
@@ -61,6 +63,7 @@ router.post('/:taskId/undo', bridges.task.id, bridges.task.owner, async (req, re
 
 		res.api.response();
 	} catch (err) {
+		err.message = req.__(err.message);
 		next(err);
 	}
 });

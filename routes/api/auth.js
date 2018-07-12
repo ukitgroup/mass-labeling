@@ -16,6 +16,7 @@ router.post('/login', async (req, res, next) => {
 
 		res.api.response();
 	} catch (err) {
+		err.message = req.__(err.message);
 		next(err);
 	}
 });

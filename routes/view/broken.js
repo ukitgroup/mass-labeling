@@ -10,6 +10,7 @@ router.get('/', async (req, res, next) => {
 
 		res.render('broken', { sites });
 	} catch (err) {
+		err.message = req.__(err.message);
 		next(err);
 	}
 });

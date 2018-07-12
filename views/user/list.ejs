@@ -1,6 +1,6 @@
-<h1>Пользователи</h1>
+<h1><%= getText('users') %></h1>
 <div class="form-group">
-	<a href="/user/add" type="button" class="btn btn-primary">Добавить пользователя</a>
+	<a href="/user/add" type="button" class="btn btn-primary"><%= getText('user_add') %></a>
 </div>
 
 <div class="row">
@@ -8,9 +8,9 @@
 		<thead>
 			<tr>
 				<th>E-mail</th>
-				<th>Статус</th>
-				<th>Роль</th>
-				<th>Действия</th>
+				<th><%= getText('status') %></th>
+				<th><%= getText('role') %></th>
+				<th><%= getText('actions') %></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -20,15 +20,29 @@
 					<td><%= statuses[curUser.status] %></td>
 					<td><%= roles[curUser.role] %></td>
 					<td>
-						<a href="/user/<%= curUser.id %>/edit" type="button" class="btn btn-warning btn-xs">Изменить</a>
-						<button type="button" class="btn btn-primary btn-xs create-slider" data-id="<%= curUser.id %>">Сгенерировать слайдер</button>
-						<a href="/slider/<%= curUser.email %>" type="button" class="btn btn-success btn-xs">Открыть слайдер</a>
+						<a href="/user/<%= curUser.id %>/edit" type="button" class="btn btn-warning btn-xs">
+              <%= getText('edit') %>
+            </a>
+						<button type="button" class="btn btn-primary btn-xs create-slider" data-id="<%= curUser.id %>">
+              <%= getText('gen_slider') %>
+            </button>
+						<a href="/slider/<%= curUser.email %>" type="button" class="btn btn-success btn-xs">
+              <%= getText('open_slider') %>
+            </a>
 					</td>
 				</tr>
 			<% }) %>
 		</tbody>
 	</table>
 </div>
+
+
+<script>
+  window.signs = {
+    slider_created: "<%= getText('slider_created') %>",
+    error: "<%= getText('error') %>",
+  };
+</script>
 
 
 <script src="<%= fromPublic('js/user/list.js') %>"></script>

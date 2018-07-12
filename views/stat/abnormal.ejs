@@ -1,10 +1,13 @@
-<h1>Статистика по аномальным оценкам</h1>
+<h1><%= getText('abnormal_stats') %></h1>
 
-<p>Допустимое отклонение:</p>
+<p><%= getText('permissible_variation') %>:</p>
 <div class="form-group">
 	<div class="btn-group">
 		<% diffs.forEach(curDiff => { %>
-			<a href="/stat/abnormal/<%= curDiff %>" class="btn <%= curDiff === diff ? 'btn-primary' : 'btn-default' %>"><%= curDiff %></a>
+			<a
+        href="/stat/abnormal/<%= curDiff %>"
+        class="btn <%= curDiff === diff ? 'btn-primary' : 'btn-default' %>"
+      ><%= curDiff %></a>
 		<% }) %>
 	</div>
 </div>
@@ -16,7 +19,7 @@
 				<thead>
 					<tr>
 						<th>E-mail</th>
-						<th>Количество аномалий</th>
+						<th><%= getText('anomalies_count') %></th>
 					</tr>
 				</thead>
 				<tbody>

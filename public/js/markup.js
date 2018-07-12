@@ -1,6 +1,10 @@
 'use strict';
 
 
+// Texts from back-end
+const { signs } = window;
+
+
 $('#logout').click((event) => {
 	event.preventDefault();
 
@@ -33,7 +37,7 @@ class Design {
 
 				if (keyCode === xKeyCode) {
 					if (this.task.siteStatus === 'approved') {
-						alert('Сайт одобрен разработчиками');
+						alert(signs.site_approved);
 						return;
 					}
 					this.answer = 0;
@@ -87,7 +91,7 @@ class Design {
 				this.show();
 			})
 			.catch(() => {
-				alert('Ошибка получения новой задачи');
+				alert(signs.get_new_task_error);
 			});
 	}
 
@@ -133,7 +137,7 @@ class Design {
 				if (this.answer != null) {
 					this.save();
 				} else {
-					alert('Вы не выставили отметку');
+					alert(signs.no_mark_specified);
 				}
 			}
 

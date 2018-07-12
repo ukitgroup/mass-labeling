@@ -1,6 +1,6 @@
-<h1>Статистика по локально-аномальным оценкам</h1>
+<h1><%= getText('local_abnormal_stats') %></h1>
 
-<p>Допустимое отклонение:</p>
+<p><%= getText('permissible_variation') %>:</p>
 <div class="form-group">
 	<div class="btn-group">
 		<% diffs.forEach(curDiff => { %>
@@ -16,7 +16,7 @@
 				<thead>
 					<tr>
 						<th>E-mail</th>
-						<th>Количество аномалий</th>
+						<th><%= getText('anomalies_count') %></th>
 					</tr>
 				</thead>
 				<tbody>

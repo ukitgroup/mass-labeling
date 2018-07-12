@@ -21,6 +21,7 @@ router.get('/', async (req, res, next) => {
 			markupCount: await Task.countByUserId(req.user.id, true),
 		});
 	} catch (err) {
+		err.message = req.__(err.message);
 		next(err);
 	}
 });

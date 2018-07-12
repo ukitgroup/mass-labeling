@@ -1,6 +1,10 @@
 'use strict';
 
 
+// Texts from back-end
+const { signs } = window;
+
+
 $('#user').submit((event) => {
 	event.preventDefault();
 
@@ -24,7 +28,7 @@ $('#user').submit((event) => {
 				window.location = '/user/list';
 			})
 			.catch(() => {
-				alert('Ошибка добавления пользователя');
+				alert(signs.add_user_error);
 			});
 	} else {
 		window.Request.post(`/api/user/${id}/update`, {
@@ -39,7 +43,7 @@ $('#user').submit((event) => {
 				window.location = '/user/list';
 			})
 			.catch(() => {
-				alert('Ошибка обновления пользователя');
+				alert(signs.edit_user_error);
 			});
 	}
 });

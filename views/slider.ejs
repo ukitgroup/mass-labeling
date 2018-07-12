@@ -19,11 +19,11 @@
 			<img :src="screenshot">
 		</div>
 		<div class="_sl-info">
-			<p><span>Сайт:</span> <span><a :href="item.url" id="url" target="_blank">{{item.url}}</a></span></p>
-			<p><span>Оценка модели:</span> <span>{{modelScoreStr}}</span></p>
-			<p><span>Средняя оценка ассессоров:</span> <span>{{meanAssessorsScoreStr}}</span></p>
-			<p><span>Ошибка:</span> <span>{{errorStr}}</span></p>
-			<p><span>Оценки ассессоров:</span> <span>{{assessorsScoreStr}}</span></p>
+			<p><span><%= getText('site') %>:</span> <span><a :href="item.url" id="url" target="_blank">{{item.url}}</a></span></p>
+			<p><span><%= getText('model_score') %>:</span> <span>{{modelScoreStr}}</span></p>
+			<p><span><%= getText('assessors_mean_score') %>:</span> <span>{{meanAssessorsScoreStr}}</span></p>
+			<p><span><%= getText('error') %>:</span> <span>{{errorStr}}</span></p>
+			<p><span><%= getText('assessors_scores') %>:</span> <span>{{assessorsScoreStr}}</span></p>
 		</div>
 	</div>
 </div>

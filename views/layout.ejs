@@ -19,19 +19,27 @@
 
 		<ul class="nav navbar-nav">
 			<% if (user && user.role === 'admin') { %>
-				<li><a href="/user/list">Пользователи</a></li>
+				<li><a href="/user/list"><%= getText('users') %></a></li>
 
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Статистика <span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= getText('stats') %> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/stat/markup">Разметка</a></li>
-						<li><a href="/stat/abnormal">Аномалии</a></li>
-						<li><a href="/stat/abnormal-local">Локальные аномалии</a></li>
+						<li><a href="/stat/markup"><%= getText('markup') %></a></li>
+						<li><a href="/stat/abnormal"><%= getText('anomalies') %></a></li>
+						<li><a href="/stat/abnormal-local"><%= getText('local_anomalies') %></a></li>
 					</ul>
 				</li>
 			<% } %>
 
-			<li><a href="/instruction.html" target="_blank">Инструкция</a></li>
+			<li><a href="/instruction.html" target="_blank"><%= getText('tutorial') %></a></li>
+
+      <li>
+        <a href="/locale/ru">RU</a>
+      </li>
+
+      <li>
+        <a href="/locale/en">EN</a>
+      </li>
 		</ul>
 
 		<div class="navbar-right">
@@ -39,7 +47,7 @@
 				<p class="navbar-text"><%= user.email %></p>
 
 				<ul class="nav navbar-nav">
-					<li><a href="#" id="logout">Выход</a></li>
+					<li><a href="#" id="logout"><%= getText('logout') %></a></li>
 				</ul>
 			<% } %>
 		</div>

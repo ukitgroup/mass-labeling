@@ -13,6 +13,7 @@ router.get('/:name', async (req, res, next) => {
 			items: await Slider.serializeAll(items),
 		});
 	} catch (err) {
+		err.message = req.__(err.message);
 		next(err);
 	}
 });

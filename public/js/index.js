@@ -1,6 +1,10 @@
 'use strict';
 
 
+// Texts from back-end
+const { signs } = window;
+
+
 $('#login').submit((event) => {
 	event.preventDefault();
 
@@ -17,6 +21,6 @@ $('#login').submit((event) => {
 			window.location = '/';
 		})
 		.catch((err) => {
-			alert(`Ошибка авторизации: "${err.message}"`);
+			alert(`${signs.auth_error}: "${err.message}"`);
 		});
 });

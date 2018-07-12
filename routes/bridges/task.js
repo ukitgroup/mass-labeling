@@ -11,6 +11,7 @@ module.exports = {
 
 			next();
 		} catch (err) {
+			err.message = req.__(err.message);
 			next(err);
 		}
 	},
@@ -21,6 +22,7 @@ module.exports = {
 
 			next();
 		} catch (err) {
+			err.message = req.__(err.message);
 			next(err);
 		}
 	},

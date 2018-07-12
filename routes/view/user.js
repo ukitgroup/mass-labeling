@@ -2,13 +2,17 @@ const User = require('../../models/user');
 
 
 const statuses = {
-	active: 'Активен',
-	disabled: 'Отключен',
+	// active: 'Активен',
+	active: '', // value moved to lang files
+	// disabled: 'Отключен',
+	disabled: '', // value moved to lang files
 };
 
 const roles = {
-	admin: 'Администратор',
-	user: 'Пользователь',
+	// admin: 'Администратор',
+	admin: '', // value moved to lang files
+	// user: 'Пользователь',
+	user: '', // value moved to lang files
 };
 
 

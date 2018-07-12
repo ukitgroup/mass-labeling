@@ -16,7 +16,7 @@ function datasetsFormat(value) {
 		typeof value !== 'object' ||
 		! (value instanceof Array) ||
 		value.some(item => typeof item !== 'string')
-	) throw new Error('must be array of strings');
+	) throw new Error('config_structure_error');
 }
 
 

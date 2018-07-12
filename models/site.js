@@ -49,7 +49,7 @@ SiteSchema.statics = {
 
 	async getById(id) {
 		const site = await this.findById(id);
-		if (! site) throw new Error('Site not found');
+		if (! site) throw new Error('site_errors.site_not_found');
 
 		return site;
 	},
