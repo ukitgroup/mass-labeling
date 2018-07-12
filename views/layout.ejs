@@ -32,17 +32,11 @@
 			<% } %>
 
 			<li><a href="/instruction.html" target="_blank"><%= getText('tutorial') %></a></li>
-
-      <li>
-        <a href="/locale/ru">RU</a>
-      </li>
-
-      <li>
-        <a href="/locale/en">EN</a>
-      </li>
 		</ul>
 
 		<div class="navbar-right">
+      <% include ./partials/lang-switcher %>
+
 			<% if (user) { %>
 				<p class="navbar-text"><%= user.email %></p>
 

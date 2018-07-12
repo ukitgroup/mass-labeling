@@ -1,0 +1,19 @@
+<ul class="nav navbar-nav">
+  <% if (currentLocale() == 'en') { %>
+    <li>
+      <a href="/locale/ru">
+        <div class="country-flag country-flag_ru-flag"></div>
+        <span>Русский</span>
+      </a>
+    </li>
+  <% } %>
+
+  <% if (currentLocale() == 'ru') { %>
+    <li>
+      <a href="/locale/en">
+        <div class="country-flag country-flag_en-flag"></div>
+        <span>English</span>
+      </a>
+    </li>
+  <% } %>
+</ul>

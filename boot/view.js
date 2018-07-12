@@ -22,6 +22,11 @@ module.exports = (app) => {
 			return req.__.apply(this, [text]);
 		};
 
+		// Get current user's locale
+		res.locals.currentLocale = function () {
+			return req.getLocale();
+		};
+
 		next();
 	});
 
