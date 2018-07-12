@@ -23,9 +23,16 @@ router.use(async (req, res, next) => {
 	try {
 		const localeCookie = req.cookies.locale;
 
+		// If locale cookie exists, but doesn't match to user's locale,
+		// set locale of user as current
+		if (localeCookie) {
+			if (req.user && req.user.locale && req.user.locale !== localeCookie) {
+				setLocale(req, res, req.user.locale);
+			}
+
 		// No locale specified yet:
 		// new browser, new user or prev cookie died
-		if (! localeCookie) {
+		} else {
 			let userLanguage = '';
 
 			// If user exists in session, read his selected locale
