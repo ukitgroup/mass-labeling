@@ -1,6 +1,8 @@
 const hashFiles = require('hash-files');
 const expressLayouts = require('express-ejs-layouts');
 
+const i18nConfig = require('../locales/i18n-config');
+
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -22,9 +24,15 @@ module.exports = (app) => {
 			return req.__.apply(this, [text]);
 		};
 
-		// Get current user's locale
-		res.locals.currentLocale = function () {
-			return req.getLocale();
+		// Get locale's readable name
+		res.locals.getLocaleReadableName = function (localeShortName) {
+			return i18nConfig.getLocaleReadableName(localeShortName);
+		};
+
+		// Get locales, user is able to switch
+		res.locals.localesAbleToSwitch = function () {
+			return i18nConfig.availableLocales
+				.filter(locale => locale !== req.getLocale());
 		};
 
 		next();

@@ -15,4 +15,12 @@ module.exports = {
 	availableLocales,
 	defaultLocale: 'en',
 	cookieMaxAge: 30 * 24 * 3600 * 1000, // 30 дней
+
+	getLocaleReadableName(localeShortName) {
+		switch (localeShortName) {
+			case 'en': return 'English';
+			case 'ru': return 'Русский';
+			default: return localeShortName;
+		}
+	},
 };
