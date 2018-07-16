@@ -49,34 +49,38 @@ function checkObject(originalTextsSet, anotherTextsSet, parentSignKey = '') {
 module.exports = (program) => {
 	program.description('Match language files');
 
-	const { defaultLocale, availableLocales } = i18nConfig;
+	// eslint-disable-next-line prefer-arrow-callback
+	program.asyncAction(async function () {
+		const { defaultLocale, availableLocales } = i18nConfig;
 
-	const localeJSONs = {};
-	const anotherTextsSet = [];
+		const localeJSONs = {};
+		const anotherTextsSet = [];
 
-	// Read all language files
-	availableLocales
-		.forEach((locale) => {
-			const textSet = require(`../../locales/${locale}.json`);
+		// Read all language files
+		availableLocales
+			.forEach((locale) => {
+				const textSet = require(`../../locales/${locale}.json`);
 
-			localeJSONs[locale] = textSet;
+				localeJSONs[locale] = textSet;
 
-			if (locale !== defaultLocale) {
-				anotherTextsSet.push({
-					locale,
-					textSet,
-				});
-			}
-		});
+				if (locale !== defaultLocale) {
+					anotherTextsSet.push({
+						locale,
+						textSet,
+					});
+				}
+			});
 
-	console.log(`\nDefault locale is: ${defaultLocale}\n`);
+		console.log(`\nDefault locale is: '${defaultLocale}'`);
+		console.log('Other locales are: ', anotherTextsSet.map(textSet => textSet.locale), '\n');
 
-	const defaultTextsSet = localeJSONs[defaultLocale];
-	let allMatches = true;
+		const defaultTextsSet = localeJSONs[defaultLocale];
+		let allMatches = true;
 
-	allMatches = checkObject(defaultTextsSet, anotherTextsSet) && allMatches;
+		allMatches = checkObject(defaultTextsSet, anotherTextsSet) && allMatches;
 
-	if (allMatches) {
-		console.log('Language files are consistent');
-	}
+		if (allMatches) {
+			console.log('Language files are consistent\n');
+		}
+	});
 };

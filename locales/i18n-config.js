@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 
-// Read all available locales from files in current directory
+// Read all available locales from .json files in current directory
 let availableLocales = ['en', 'ru'];
 
 try {
