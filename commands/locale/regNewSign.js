@@ -20,10 +20,28 @@ module.exports = (program) => {
 
 		try {
 			availableLocales.forEach((locale) => {
+				const signsStructure = newSignKey.split('.');
+
 				const filePath = `${__dirname}/../../locales/${locale}.json`;
 				const localeJSON = require(filePath);
 
-				localeJSON[newSignKey] = newSignKey;
+				let newSignContainer = localeJSON;
+
+				if (signsStructure.length > 1) {
+					const resultSignKey = signsStructure.pop();
+
+					signsStructure.forEach((signLevel) => {
+						if (! newSignContainer[signLevel]) {
+							newSignContainer[signLevel] = {};
+						}
+
+						newSignContainer = newSignContainer[signLevel];
+					});
+
+					newSignContainer[resultSignKey] = resultSignKey;
+				} else {
+					localeJSON[newSignKey] = newSignKey;
+				}
 
 				fs.writeFileSync(filePath, JSON.stringify(localeJSON, null, 2));
 				console.log(`Sign with key '${newSignKey}' was added to ${locale}.json`);
