@@ -84,5 +84,7 @@
     "markup_overdose": "En_Превышено количество разметок",
     "bad_markup_request": "En_Некорректный запрос"
   },
-  "config_structure_error": "En_Конфиг должен быть набором строк"
+  "config_structure_error": "En_Конфиг должен быть набором строк",
+  "edit_config": "edit_config",
+  "settings": "settings"
 }

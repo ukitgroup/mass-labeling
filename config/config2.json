@@ -1,0 +1,167 @@
+[
+  {
+    "id": "logger",
+    "name": "Logger",
+    "description": "Logger options",
+    "properties": [
+      {
+        "id": "name",
+        "name": "Logger name",
+        "default": "app",
+        "value": "app",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      },
+      {
+        "id": "level",
+        "name": "Logger verbosity level",
+        "default": "info",
+        "value": "info",
+        "format": "String",
+        "element": {
+          "type": "select",
+          "options": {
+            "fatal": "Fatal",
+            "error": "Error",
+            "warn": "Warn",
+            "info": "Info",
+            "debug": "Debug",
+            "trace": "Trace"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "mongo",
+    "name": "MongoDB",
+    "properties": [
+      {
+        "id": "url",
+        "name": "MongoDB URL",
+        "default": "null",
+        "value": "null",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      }
+    ]
+  },
+  {
+    "id": "passport",
+    "name": "Passport",
+    "description": "Logger options",
+    "properties": [
+      {
+        "id": "maxAge",
+        "name": "Cookie max age",
+        "default": 2592000000,
+        "value": 2592000000,
+        "format": "Number",
+        "element": {
+          "type": "number"
+        }
+      },
+      {
+        "id": "secret",
+        "name": "Cookie secret",
+        "default": "",
+        "value": "",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      }
+    ]
+  },
+  {
+    "id": "sites",
+    "name": "Sites",
+    "description": "Logger options",
+    "properties": [
+      {
+        "id": "allowedDatasets",
+        "name": "List of datasets that allowed for markup",
+        "default": "",
+        "value": "",
+        "format": "CUSTOM",
+        "element": {
+          "type": "text"
+        }
+      },
+      {
+        "id": "screenshotsPath",
+        "name": "Path to screenshots storage",
+        "default": "./data/screenshots",
+        "value": "./data/screenshots",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      }
+    ]
+  },
+  {
+    "id": "markup",
+    "name": "Markup",
+    "properties": [
+      {
+        "id": "limit",
+        "name": "Limit of markup tasks per user",
+        "default": 0,
+        "value": 0,
+        "format": "Number",
+        "element": {
+          "type": "number"
+        }
+      }
+    ]
+  },
+  {
+    "id": "cliImport",
+    "name": "Cli import",
+    "description": "Logger options",
+    "properties": [
+      {
+        "id": "in",
+        "name": "ZIP path",
+        "default": "data/import/dataset.zip",
+        "value": "data/import/dataset.zip",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      }
+    ]
+  },
+  {
+    "id": "cliExport",
+    "name": "Cli export",
+    "description": "Logger options",
+    "properties": [
+      {
+        "id": "datasets",
+        "name": "Datasets list",
+        "default": [],
+        "value": "",
+        "format": "CUSTOM",
+        "element": {
+          "type": "text"
+        }
+      },
+      {
+        "id": "out",
+        "name": "JSON path",
+        "default": "data/export/answers.json",
+        "value": "data/export/answers.json",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      }
+    ]
+  }
+]

@@ -5,6 +5,7 @@ const markup = require('./markup');
 const site = require('./site');
 const user = require('./user');
 const broken = require('./broken');
+const config = require('./config');
 
 const router = require('express').Router();
 
@@ -41,6 +42,13 @@ router.use(
 	'/broken',
 	bridges.auth.admin,
 	broken,
+);
+
+// App config
+router.use(
+	'/config',
+	bridges.auth.admin,
+	config,
 );
 
 

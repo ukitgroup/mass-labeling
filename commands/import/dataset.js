@@ -13,7 +13,7 @@ const config = require('../../config');
 module.exports = (program) => {
 	program.description('Import dataset');
 
-	program.option('--in <in_path>', 'Archive path', config.get('cli.import.dataset.in'));
+	program.option('--in <in_path>', 'Archive path', config.get('cliImport.in'));
 
 	// eslint-disable-next-line prefer-arrow-callback
 	program.asyncAction(async function (args) {

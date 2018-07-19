@@ -41,13 +41,17 @@
 				<p class="navbar-text"><%= user.email %></p>
 
 				<ul class="nav navbar-nav">
+          <% if (user && user.role === 'admin') { %>
+					  <li><a href="/config"><%= getText('settings') %></a></li>
+          <% } %>
+
 					<li><a href="#" id="logout"><%= getText('logout') %></a></li>
 				</ul>
 			<% } %>
 		</div>
 	</div>
 </div>
-<div class="container">
+<div class="container js-container">
 	<%- body %>
 </div>
 

@@ -1,0 +1,68 @@
+<h1><%= getText('edit_config') %></h1>
+
+<div class="row" v-show="!loading" style="display: none;">
+  <div class="col-xs-6">
+    <form id="user" autocomplete="off">
+
+      <div v-for="(fieldSet, fIndex) in config">
+        <h3>{{fieldSet.name}}</h3>
+
+        <div class="form-group" v-for="(property, pIndex) in fieldSet.properties">
+          <label :for="getFieldIndex(fIndex, pIndex)">
+            {{property.name}}
+          </label>
+
+          <input
+            min="0"
+            type="number"
+            class="form-control"
+            v-model="property.value"
+            v-if="property.element.type === 'number'"
+            :id="getFieldIndex(fIndex, pIndex)"
+          >
+
+          <input
+            type="text"
+            class="form-control"
+            v-model="property.value"
+            v-if="property.element.type === 'text'"
+            :id="getFieldIndex(fIndex, pIndex)"
+          >
+
+          <select
+            class="form-control"
+            v-model="property.value"
+            v-if="property.element.type === 'select'"
+            :id="getFieldIndex(fIndex, pIndex)"
+          >
+            <option v-for="(text, value) in property.element.options" :value="value">
+              {{text}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button @click.prevent="updateConfig()" type="submit" class="btn btn-primary">
+          <%= getText('submit') %>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script>
+  window.signs = {
+    add_user_error: "<%= getText('add_user_error') %>",
+    edit_user_error: "<%= getText('edit_user_error') %>",
+  };
+
+  window.config = <%- JSON.stringify(config) %>;
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+
+<script src="<%= fromPublic('js/index.js') %>"></script>

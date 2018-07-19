@@ -30,7 +30,9 @@
     "morgan": "^1.9.0",
     "passport": "^0.4.0",
     "stats-lite": "^2.1.1",
-    "through": "^2.3.8"
+    "through": "^2.3.8",
+    "xml2js": "^0.4.19",
+    "xml2js-parser": "^1.1.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",

@@ -42,7 +42,6 @@ port="${port:-$default_port}"
 read -p "Enter cookie secret: " cookie_secret
 echo ""
 
-
 echo "Save $docker_compose_path"
 : > "$docker_compose_path"
                         echo "version: '2'"                                       >> "$docker_compose_path"
@@ -72,8 +71,16 @@ echo "Save $docker_compose_path"
 "$docker_use_mongo" &&  echo "    - ./data/mongo:/data/db"                        >> "$docker_compose_path"
 "$docker_use_mongo" &&  echo "    restart: always"                                >> "$docker_compose_path"
 
-
 echo "Save $yml_path"
 : > "$yml_path"
 echo "passport:"                >> "$yml_path"
 echo "  secret: $cookie_secret" >> "$yml_path"
+
+dbURL=""
+
+if [ "$docker_use_mongo" = true ];
+  then dbURL="mongodb://mongo:27017/$db_table";
+  else dbURL="$db_url";
+fi
+
+node ./bin/updateConfig.js "$dbURL" "$cookie_secret"

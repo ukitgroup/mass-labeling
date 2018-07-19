@@ -2,7 +2,6 @@ const path = require('path');
 
 const config = require('../../config');
 
-
 const bridges = require('../bridges');
 
 const router = require('express').Router();

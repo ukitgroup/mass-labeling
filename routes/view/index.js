@@ -6,6 +6,7 @@ const user = require('./user');
 const stat = require('./stat');
 const broken = require('./broken');
 const slider = require('./slider');
+const config = require('./config');
 
 const router = require('express').Router();
 
@@ -143,6 +144,13 @@ router.use(
 	'/slider',
 	bridges.auth.admin,
 	slider,
+);
+
+// App config
+router.use(
+	'/config',
+	bridges.auth.admin,
+	config,
 );
 
 

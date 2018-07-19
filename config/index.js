@@ -1,117 +1,77 @@
-const convict = require('convict');
-const dotenv = require('dotenv');
-const yaml = require('js-yaml');
+/* eslint-disable global-require,import/no-dynamic-require,no-console */
+
+const fs = require('fs');
+const path = require('path');
 
 
-// Включаем поддержку yaml файлов для конфигурации
-convict.addParser({
-	extension: 'yml',
-	parse: yaml.safeLoad,
-});
+const configFilePath = path.resolve(__dirname, '../config/config.json');
 
 
-// Валидатор для списка датасетов
-function datasetsFormat(value) {
-	if (
-		typeof value !== 'object' ||
-		! (value instanceof Array) ||
-		value.some(item => typeof item !== 'string')
-	) throw new Error('config_structure_error');
+class Config {
+	constructor() {
+		try {
+			this.config = require(configFilePath);
+		} catch (error) {
+			console.error(error);
+			this.config = {};
+		}
+	}
+
+
+	getConfig() {
+		return this.config;
+	}
+
+
+	findPropertyObjectById(id) {
+		const [fieldSetId, propertyId] = id.split('.');
+
+		const fieldSet = this.config.filter(item => item.id === fieldSetId)[0];
+
+		if (! fieldSet) {
+			return null;
+		}
+
+		return (fieldSet.properties || [])
+			.filter(item => item.id === propertyId)[0];
+	}
+
+
+	updateConfig(newConfig) {
+		this.config = newConfig;
+		return this.updateFile();
+	}
+
+
+	get(key) {
+		const property = this.findPropertyObjectById(key);
+		return property ? property.value : null;
+	}
+
+
+	set(key, value) {
+		const property = this.findPropertyObjectById(key);
+
+		if (property) {
+			property.value = value;
+		}
+	}
+
+
+	updateFile() {
+		const { config } = this;
+
+		return new Promise((resolve, reject) => {
+			fs.writeFile(configFilePath, JSON.stringify(config, null, 2), (error) => {
+				if (error) {
+					reject();
+				} else {
+					resolve();
+				}
+			});
+		});
+	}
 }
 
 
-// Схема конфигурации
-const config = convict({
-	logger: {
-		name: {
-			doc: 'Logger name',
-			format: String,
-			default: 'app',
-		},
-		level: {
-			doc: 'Logger verbosity level',
-			format: ['fatal', 'error', 'warn', 'info', 'debug', 'trace'],
-			default: 'info',
-		},
-	},
-
-	mongo: {
-		url: {
-			doc: 'MongoDB URL',
-			format: String,
-			default: null,
-			env: 'DB_URL',
-		},
-	},
-
-	passport: {
-		maxAge: {
-			doc: 'Cookie max age',
-			format: 'int',
-			default: 30 * 24 * 3600 * 1000, // 30 дней
-		},
-		secret: {
-			doc: 'Cookie secret',
-			format: String,
-			default: null,
-			env: 'COOKIE_SECRET',
-		},
-	},
-
-	sites: {
-		allowedDatasets: {
-			doc: 'List of datasets that allowed for markup',
-			format: datasetsFormat,
-			default: [],
-		},
-		screenshotsPath: {
-			doc: 'Path to screenshots storage',
-			format: String,
-			default: './data/screenshots',
-		},
-	},
-
-	markup: {
-		limit: {
-			doc: 'Limit of markup tasks per user',
-			format: 'int',
-			default: 0,
-		},
-	},
-
-	cli: {
-		export: {
-			answers: {
-				datasets: {
-					doc: 'Datasets list',
-					format: datasetsFormat,
-					default: [],
-				},
-				out: {
-					doc: 'JSON path',
-					format: String,
-					default: 'data/export/answers.json',
-				},
-			},
-		},
-
-		import: {
-			dataset: {
-				in: {
-					doc: 'ZIP path',
-					format: String,
-					default: 'data/import/dataset.zip',
-				},
-			},
-		},
-	},
-});
-
-
-// Загружаем файлы конфигурации
-dotenv.config({ path: './config/app.env' });
-config.loadFile('./config/app.yml');
-config.validate({ allowed: 'strict' });
-
-
-module.exports = config;
+module.exports = new Config();
