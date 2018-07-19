@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+
 'use strict';
 
 window.app = new window.Vue({
@@ -16,7 +18,7 @@ window.app = new window.Vue({
 				data: this.config,
 			})
 				.then(() => alert('Config updated'))
-				.catch(() => console.log('Error'));
+				.catch(() => alert('Error'));
 
 			// console.log(JSON.stringify(this.config));
 		},
@@ -28,6 +30,6 @@ window.app = new window.Vue({
 
 	mounted() {
 		this.loading = false;
-		console.log('mounted', this.config/*, this.$el*/);
+		console.log('mounted', this.config);
 	},
 });

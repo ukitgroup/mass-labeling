@@ -8,7 +8,7 @@ module.exports = {
 	// 	try {
 	// 		req.curUser = await User.findById(req.params.userId);
 	// 		if (! req.curUser) throw new NotFoundError();
-    //
+	//
 	// 		next();
 	// 	} catch (err) {
 	// 		// eslint-disable-next-line no-underscore-dangle

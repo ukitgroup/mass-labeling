@@ -9,7 +9,7 @@ router.post('/update', async (req, res, next) => {
 
 		await Config.updateConfig(config);
 
-		console.log(req.body);
+		// console.log(req.body);
 
 		res.api.response();
 	} catch (err) {

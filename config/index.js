@@ -2,6 +2,10 @@
 
 const fs = require('fs');
 const path = require('path');
+const dotenv = require('dotenv');
+
+
+dotenv.config({ path: './config/app.env' });
 
 
 const configFilePath = path.resolve(__dirname, '../config/config.json');

@@ -8,7 +8,7 @@
         "id": "name",
         "name": "Logger name",
         "default": "app",
-        "value": "app",
+        "value": "app-logger23",
         "format": "String",
         "element": {
           "type": "text"
@@ -18,7 +18,7 @@
         "id": "level",
         "name": "Logger verbosity level",
         "default": "info",
-        "value": "info",
+        "value": "warn",
         "format": "String",
         "element": {
           "type": "select",
@@ -46,7 +46,8 @@
         "format": "String",
         "element": {
           "type": "text"
-        }
+        },
+        "disabled": true
       }
     ]
   },
