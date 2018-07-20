@@ -86,5 +86,34 @@
   },
   "config_structure_error": "En_Конфиг должен быть набором строк",
   "edit_config": "edit_config",
-  "settings": "settings"
+  "settings": "settings",
+  "config_props": {
+    "logger": "logger",
+    "logger_name": "logger_name",
+    "logger_level": "logger_level",
+    "db": "db",
+    "db_url": "db_url",
+    "passport": "passport",
+    "passport_cookie_age": "passport_cookie_age",
+    "": "",
+    "passport_cookie_secret": "passport_cookie_secret",
+    "sites": "sites",
+    "sites_datasets": "sites_datasets",
+    "sites_screenshots_path": "sites_screenshots_path",
+    "markup": "markup",
+    "markup_limit": "markup_limit",
+    "cliImport": "cliImport",
+    "cliImport_zip_path": "cliImport_zip_path",
+    "cliExport": "cliExport",
+    "cliExport_datasets": "cliExport_datasets",
+    "cliExport_json_path": "cliExport_json_path"
+  },
+  "logger_levels": {
+    "fatal": "fatal",
+    "error": "error",
+    "warn": "warn",
+    "info": "info",
+    "debug": "debug",
+    "trace": "trace"
+  }
 }

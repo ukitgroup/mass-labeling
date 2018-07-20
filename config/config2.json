@@ -1,12 +1,11 @@
 [
   {
     "id": "logger",
-    "name": "Logger",
-    "description": "Logger options",
+    "name": "config_props.logger",
     "properties": [
       {
         "id": "name",
-        "name": "Logger name",
+        "name": "config_props.logger_name",
         "default": "app",
         "value": "app",
         "format": "String",
@@ -16,19 +15,19 @@
       },
       {
         "id": "level",
-        "name": "Logger verbosity level",
+        "name": "config_props.logger_level",
         "default": "info",
         "value": "info",
         "format": "String",
         "element": {
           "type": "select",
           "options": {
-            "fatal": "Fatal",
-            "error": "Error",
-            "warn": "Warn",
-            "info": "Info",
-            "debug": "Debug",
-            "trace": "Trace"
+            "fatal": "logger_levels.fatal",
+            "error": "logger_levels.error",
+            "warn": "logger_levels.warn",
+            "info": "logger_levels.info",
+            "debug": "logger_levels.debug",
+            "trace": "logger_levels.trace"
           }
         }
       }
@@ -36,13 +35,13 @@
   },
   {
     "id": "mongo",
-    "name": "MongoDB",
+    "name": "config_props.db",
     "properties": [
       {
         "id": "url",
-        "name": "MongoDB URL",
-        "default": "null",
-        "value": "null",
+        "name": "config_props.db_url",
+        "default": "mongodb://localhost:27017/mass-labeling",
+        "value": "",
         "format": "String",
         "element": {
           "type": "text"
@@ -52,12 +51,11 @@
   },
   {
     "id": "passport",
-    "name": "Passport",
-    "description": "Logger options",
+    "name": "config_props.passport",
     "properties": [
       {
         "id": "maxAge",
-        "name": "Cookie max age",
+        "name": "config_props.passport_cookie_age",
         "default": 2592000000,
         "value": 2592000000,
         "format": "Number",
@@ -67,8 +65,8 @@
       },
       {
         "id": "secret",
-        "name": "Cookie secret",
-        "default": "",
+        "name": "config_props.passport_cookie_secret",
+        "default": "cs",
         "value": "",
         "format": "String",
         "element": {
@@ -79,14 +77,13 @@
   },
   {
     "id": "sites",
-    "name": "Sites",
-    "description": "Logger options",
+    "name": "config_props.sites",
     "properties": [
       {
         "id": "allowedDatasets",
-        "name": "List of datasets that allowed for markup",
-        "default": "",
-        "value": "",
+        "name": "config_props.sites_datasets",
+        "default": [],
+        "value": [],
         "format": "CUSTOM",
         "element": {
           "type": "text"
@@ -94,7 +91,7 @@
       },
       {
         "id": "screenshotsPath",
-        "name": "Path to screenshots storage",
+        "name": "config_props.sites_screenshots_path",
         "default": "./data/screenshots",
         "value": "./data/screenshots",
         "format": "String",
@@ -106,11 +103,11 @@
   },
   {
     "id": "markup",
-    "name": "Markup",
+    "name": "config_props.markup",
     "properties": [
       {
         "id": "limit",
-        "name": "Limit of markup tasks per user",
+        "name": "config_props.markup_limit",
         "default": 0,
         "value": 0,
         "format": "Number",
@@ -122,12 +119,11 @@
   },
   {
     "id": "cliImport",
-    "name": "Cli import",
-    "description": "Logger options",
+    "name": "config_props.cliImport",
     "properties": [
       {
         "id": "in",
-        "name": "ZIP path",
+        "name": "config_props.cliImport_zip_path",
         "default": "data/import/dataset.zip",
         "value": "data/import/dataset.zip",
         "format": "String",
@@ -139,14 +135,13 @@
   },
   {
     "id": "cliExport",
-    "name": "Cli export",
-    "description": "Logger options",
+    "name": "config_props.cliExport",
     "properties": [
       {
         "id": "datasets",
-        "name": "Datasets list",
+        "name": "config_props.cliExport_datasets",
         "default": [],
-        "value": "",
+        "value": [],
         "format": "CUSTOM",
         "element": {
           "type": "text"
@@ -154,7 +149,7 @@
       },
       {
         "id": "out",
-        "name": "JSON path",
+        "name": "config_props.cliExport_json_path",
         "default": "data/export/answers.json",
         "value": "data/export/answers.json",
         "format": "String",

@@ -5,11 +5,11 @@
     <form id="user" autocomplete="off">
 
       <div v-for="(fieldSet, fIndex) in config">
-        <h3>{{fieldSet.name}}</h3>
+        <h3>{{window.signs[fieldSet.name]}}</h3>
 
         <div class="form-group" v-for="(property, pIndex) in fieldSet.properties">
           <label :for="getFieldIndex(fIndex, pIndex)">
-            {{property.name}}
+            {{window.signs[property.name]}}
           </label>
 
           <input
@@ -36,7 +36,7 @@
             :id="getFieldIndex(fIndex, pIndex)"
           >
             <option v-for="(text, value) in property.element.options" :value="value">
-              {{text}}
+              {{window.signs[text]}}
             </option>
           </select>
         </div>
@@ -53,10 +53,41 @@
 
 
 <script>
-  window.signs = {
-    add_user_error: "<%= getText('add_user_error') %>",
-    edit_user_error: "<%= getText('edit_user_error') %>",
-  };
+  window.signs = {};
+
+  <% const signs = [
+    "config_props.logger",
+    "config_props.logger_name",
+    "config_props.logger_level",
+    "config_props.db",
+    "config_props.db_url",
+    "config_props.passport",
+    "config_props.passport_cookie_age",
+    "config_props.passport_cookie_secret",
+    "config_props.sites",
+    "config_props.sites_datasets",
+    "config_props.sites_screenshots_path",
+    "config_props.markup",
+    "config_props.markup_limit",
+    "config_props.cliImport",
+    "config_props.cliImport_zip_path",
+    "config_props.cliExport",
+    "config_props.cliExport_datasets",
+    "config_props.cliExport_json_path",
+    "logger_levels.fatal",
+    "logger_levels.error",
+    "logger_levels.warn",
+    "logger_levels.info",
+    "logger_levels.debug",
+    "logger_levels.trace",
+  ] %>
+
+  <%
+    const translations = {};
+    signs.forEach(signKey => translations[signKey] = getText(signKey));
+  %>
+
+  window.signs = <%- JSON.stringify(translations) %>;
 
   window.config = <%- JSON.stringify(config) %>;
 </script>
