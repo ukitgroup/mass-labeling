@@ -1,4 +1,4 @@
-/* eslint-disable global-require,import/no-dynamic-require,no-console */
+/* eslint-disable global-require,import/no-dynamic-require,no-console,no-restricted-globals */
 
 const fs = require('fs');
 const path = require('path');
@@ -42,8 +42,14 @@ class Config {
 
 
 	updateConfig(newConfig) {
-		this.config = newConfig;
-		return this.updateFile();
+		const errors = this.validateConfig(newConfig);
+
+		if (errors.length) {
+			throw new Error(errors[0]);
+		} else {
+			this.config = newConfig;
+			return this.updateFile();
+		}
 	}
 
 
@@ -74,6 +80,51 @@ class Config {
 				}
 			});
 		});
+	}
+
+
+	validateConfig(config) {
+		const errors = [];
+
+		config.forEach((fieldSet) => {
+			const properties = fieldSet.properties || [];
+
+			// Validate numeric properties
+			properties
+				.filter(property => property.format === 'Number')
+				.forEach((property) => {
+					try {
+						// Trying to parse string to number
+						property.value = parseInt(property.value, 10);
+
+						// If parsing failed, reset value to default
+						if (property.value < 0 || isNaN(property.value)) {
+							property.value = 0;
+						}
+					} catch (error) {
+						// If parsing failed, reset value to default
+						property.value = 0;
+					}
+				});
+
+			// Validate datasets
+			const invalidDataSets = properties
+				.filter(property => property.format === 'DataSet')
+				.filter(property => ! this.isValidDataSet(property.value));
+
+			if (invalidDataSets.length) {
+				errors.push('wrong_dataset_structure');
+			}
+		});
+
+		return errors;
+	}
+
+
+	isValidDataSet(dataSet) {
+		return ! (typeof dataSet !== 'object'
+			|| ! (dataSet instanceof Array)
+			|| dataSet.some(item => typeof item !== 'string'));
 	}
 }
 

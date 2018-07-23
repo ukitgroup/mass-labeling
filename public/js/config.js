@@ -35,7 +35,7 @@ window.app = new window.Vue({
 				data: this.config,
 			})
 				.then(() => alert('Config updated'))
-				.catch(() => alert('Error'));
+				.catch(error => alert(error));
 		},
 
 		getFieldIndex(fieldSetIndex, propertyIndex) {

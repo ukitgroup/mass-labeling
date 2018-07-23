@@ -118,5 +118,6 @@
   "config_categories": {
     "admin": "admin",
     "tech": "tech"
-  }
+  },
+  "wrong_dataset_structure": "wrong_dataset_structure"
 }

@@ -2,6 +2,7 @@
   {
     "id": "logger",
     "name": "config_props.logger",
+    "tab": "tech",
     "properties": [
       {
         "id": "name",
@@ -36,12 +37,13 @@
   {
     "id": "mongo",
     "name": "config_props.db",
+    "tab": "tech",
     "properties": [
       {
         "id": "url",
         "name": "config_props.db_url",
         "default": "mongodb://localhost:27017/mass-labeling",
-        "value": "",
+        "value": "mongodb://localhost:27017/mass-labeling",
         "format": "String",
         "element": {
           "type": "text"
@@ -52,6 +54,7 @@
   {
     "id": "passport",
     "name": "config_props.passport",
+    "tab": "tech",
     "properties": [
       {
         "id": "maxAge",
@@ -67,7 +70,7 @@
         "id": "secret",
         "name": "config_props.passport_cookie_secret",
         "default": "cs",
-        "value": "",
+        "value": "cs",
         "format": "String",
         "element": {
           "type": "text"
@@ -78,13 +81,14 @@
   {
     "id": "sites",
     "name": "config_props.sites",
+    "tab": "admin",
     "properties": [
       {
         "id": "allowedDatasets",
         "name": "config_props.sites_datasets",
         "default": [],
         "value": [],
-        "format": "CUSTOM",
+        "format": "DataSet",
         "element": {
           "type": "text"
         }
@@ -103,11 +107,12 @@
   },
   {
     "id": "markup",
-    "name": "config_props.markup",
+    "name": "config_props.assessment",
+    "tab": "admin",
     "properties": [
       {
         "id": "limit",
-        "name": "config_props.markup_limit",
+        "name": "config_props.assessment_limit",
         "default": 0,
         "value": 0,
         "format": "Number",
@@ -120,6 +125,8 @@
   {
     "id": "cliImport",
     "name": "config_props.cliImport",
+    "tab": "tech",
+    "visible": 0,
     "properties": [
       {
         "id": "in",
@@ -136,13 +143,15 @@
   {
     "id": "cliExport",
     "name": "config_props.cliExport",
+    "tab": "tech",
+    "visible": 0,
     "properties": [
       {
         "id": "datasets",
         "name": "config_props.cliExport_datasets",
         "default": [],
         "value": [],
-        "format": "CUSTOM",
+        "format": "DataSet",
         "element": {
           "type": "text"
         }

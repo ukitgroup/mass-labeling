@@ -8,7 +8,7 @@
         "id": "name",
         "name": "config_props.logger_name",
         "default": "app",
-        "value": "app2",
+        "value": "app",
         "format": "String",
         "element": {
           "type": "text"
@@ -88,7 +88,7 @@
         "name": "config_props.sites_datasets",
         "default": [],
         "value": [],
-        "format": "CUSTOM",
+        "format": "DataSet",
         "element": {
           "type": "text"
         }
@@ -114,7 +114,7 @@
         "id": "limit",
         "name": "config_props.assessment_limit",
         "default": 0,
-        "value": "0",
+        "value": 0,
         "format": "Number",
         "element": {
           "type": "number"
@@ -151,7 +151,7 @@
         "name": "config_props.cliExport_datasets",
         "default": [],
         "value": [],
-        "format": "CUSTOM",
+        "format": "DataSet",
         "element": {
           "type": "text"
         }
