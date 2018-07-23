@@ -2,9 +2,56 @@
 
 <div class="row" v-show="!loading" style="display: none;">
   <div class="col-xs-6">
+
+    <button type="button" @click="switchTab('admin')" :class="[getTabClass('admin')]" class="btn">
+      <%= getText('config_categories.admin') %>
+    </button>
+
+    <button type="button" @click="switchTab('tech')" :class="[getTabClass('tech')]" class="btn">
+      <%= getText('config_categories.tech') %>
+    </button>
+
     <form id="user" autocomplete="off">
 
-      <div v-for="(fieldSet, fIndex) in config">
+      <div v-for="(fieldSet, fIndex) in adminSettings" v-show="activeTab === 'admin'">
+        <h3>{{window.signs[fieldSet.name]}}</h3>
+
+        <div class="form-group" v-for="(property, pIndex) in fieldSet.properties">
+          <label :for="getFieldIndex(fIndex, pIndex)">
+            {{window.signs[property.name]}}
+          </label>
+
+          <input
+            min="0"
+            type="number"
+            class="form-control"
+            v-model="property.value"
+            v-if="property.element.type === 'number'"
+            :id="getFieldIndex(fIndex, pIndex)"
+          >
+
+          <input
+            type="text"
+            class="form-control"
+            v-model="property.value"
+            v-if="property.element.type === 'text'"
+            :id="getFieldIndex(fIndex, pIndex)"
+          >
+
+          <select
+            class="form-control"
+            v-model="property.value"
+            v-if="property.element.type === 'select'"
+            :id="getFieldIndex(fIndex, pIndex)"
+          >
+            <option v-for="(text, value) in property.element.options" :value="value">
+              {{window.signs[text]}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div v-for="(fieldSet, fIndex) in techSettings" v-show="activeTab === 'tech'" v-if="fieldSet.visible !== 0">
         <h3>{{window.signs[fieldSet.name]}}</h3>
 
         <div class="form-group" v-for="(property, pIndex) in fieldSet.properties">
@@ -67,8 +114,8 @@
     "config_props.sites",
     "config_props.sites_datasets",
     "config_props.sites_screenshots_path",
-    "config_props.markup",
-    "config_props.markup_limit",
+    "config_props.assessment",
+    "config_props.assessment_limit",
     "config_props.cliImport",
     "config_props.cliImport_zip_path",
     "config_props.cliExport",

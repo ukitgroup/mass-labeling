@@ -114,5 +114,9 @@
     "info": "info",
     "debug": "debug",
     "trace": "trace"
+  },
+  "config_categories": {
+    "admin": "admin",
+    "tech": "tech"
   }
 }

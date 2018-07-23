@@ -2,6 +2,12 @@
 
 'use strict';
 
+const tabs = {
+	ADMIN: 'admin',
+	TECH: 'tech',
+};
+
+
 window.app = new window.Vue({
 	el: '.js-container',
 
@@ -9,7 +15,18 @@ window.app = new window.Vue({
 		return {
 			config: window.config,
 			loading: true,
+			activeTab: tabs.ADMIN,
 		};
+	},
+
+	computed: {
+		techSettings() {
+			return this.config.filter(fieldSet => fieldSet.tab === tabs.TECH);
+		},
+
+		adminSettings() {
+			return this.config.filter(fieldSet => fieldSet.tab === tabs.ADMIN);
+		},
 	},
 
 	methods: {
@@ -19,17 +36,25 @@ window.app = new window.Vue({
 			})
 				.then(() => alert('Config updated'))
 				.catch(() => alert('Error'));
-
-			// console.log(JSON.stringify(this.config));
 		},
 
 		getFieldIndex(fieldSetIndex, propertyIndex) {
 			return `field-${fieldSetIndex}${propertyIndex}`;
 		},
+
+		switchTab(tab) {
+			this.activeTab = tab;
+		},
+
+		getTabClass(tab) {
+			return this.activeTab === tab
+				? 'btn-primary'
+				: 'btn-link';
+		},
 	},
 
 	mounted() {
 		this.loading = false;
-		console.log('mounted', this.config);
+		// console.log('mounted', this.config);
 	},
 });
