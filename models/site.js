@@ -25,6 +25,11 @@ const SiteSchema = new mongoose.Schema({
 		default: 'active',
 		required: true,
 	},
+
+	markedForExport: {
+		type: Boolean,
+		default: true,
+	},
 });
 
 SiteSchema.index({
@@ -62,6 +67,18 @@ SiteSchema.statics = {
 
 		return this.findById(_.sample(siteIds));
 	},
+
+	async getAvailableDataSets() {
+		return this.find({
+			status: {
+				$in: ['active', 'disabled'],
+			},
+		});
+	},
+
+	async getAllDataSets() {
+		return this.find();
+	},
 };
 
 SiteSchema.methods = {
@@ -72,6 +89,16 @@ SiteSchema.methods = {
 
 	async disable() {
 		this.status = 'disabled';
+		await this.save();
+	},
+
+	async setStatus(newStatus) {
+		this.status = newStatus;
+		await this.save();
+	},
+
+	async setMarkedForExportStatus(newStatus) {
+		this.markedForExport = newStatus;
 		await this.save();
 	},
 };

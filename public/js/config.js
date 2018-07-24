@@ -14,6 +14,8 @@ window.app = new window.Vue({
 	data() {
 		return {
 			config: window.config,
+			availableDataSets: window.availableDataSets,
+			cliExportDataSets: window.cliExportDataSets,
 			loading: true,
 			activeTab: tabs.ADMIN,
 		};
@@ -32,7 +34,11 @@ window.app = new window.Vue({
 	methods: {
 		updateConfig() {
 			window.Request.post('/api/config/update', {
-				data: this.config,
+				data: {
+					config: this.config,
+					availableDataSets: this.availableDataSets,
+					cliExportDataSets: this.cliExportDataSets,
+				},
 			})
 				.then(() => alert('Config updated'))
 				.catch(error => alert(error));
@@ -40,6 +46,10 @@ window.app = new window.Vue({
 
 		getFieldIndex(fieldSetIndex, propertyIndex) {
 			return `field-${fieldSetIndex}${propertyIndex}`;
+		},
+
+		getDataSetIndex(prefix, index) {
+			return `${prefix}-${index}`;
 		},
 
 		switchTab(tab) {
@@ -51,10 +61,19 @@ window.app = new window.Vue({
 				? 'btn-primary'
 				: 'btn-link';
 		},
+
+		setDataSetStatus(event, site) {
+			const checkbox = event.currentTarget;
+
+			if (checkbox.checked) {
+				site.status = 'active';
+			} else {
+				site.status = 'disabled';
+			}
+		},
 	},
 
 	mounted() {
 		this.loading = false;
-		// console.log('mounted', this.config);
 	},
 });

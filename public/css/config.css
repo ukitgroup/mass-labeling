@@ -1,0 +1,8 @@
+.datasets-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dataset-item {
+  flex-basis: 50%;
+}

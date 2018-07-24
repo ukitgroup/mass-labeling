@@ -32,8 +32,27 @@ module.exports = (program) => {
 		const sitesFilter = {
 			...Site.filter.allowedStatuses,
 		};
-		if (config.get('cliExport.datasets').length) sitesFilter.dataset = { $in: config.get('cliExport.datasets') };
-		if (args.dataset) sitesFilter.dataset = args.dataset;
+
+		// Get marked for export sites
+		const markedForExportDataSets = await Site.find({
+			markedForExport: {
+				$eq: true,
+			},
+		});
+
+		// Get marked for export sites' datasets
+		const dataSetsNames = markedForExportDataSets.map(dataSet => dataSet.dataset);
+
+		if (dataSetsNames.length) {
+			sitesFilter.dataset = {
+				$in: dataSetsNames,
+			};
+		}
+
+		if (args.dataset) {
+			sitesFilter.dataset = args.dataset;
+		}
+
 		const sites = await Site.find(sitesFilter);
 
 		logger.info('Sites done');

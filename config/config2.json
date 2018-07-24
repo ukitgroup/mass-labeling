@@ -90,7 +90,7 @@
         "value": [],
         "format": "DataSet",
         "element": {
-          "type": "text"
+          "type": "checkbox-group"
         }
       },
       {
@@ -126,7 +126,7 @@
     "id": "cliImport",
     "name": "config_props.cliImport",
     "tab": "tech",
-    "visible": 0,
+    "visible": 1,
     "properties": [
       {
         "id": "in",
@@ -144,7 +144,7 @@
     "id": "cliExport",
     "name": "config_props.cliExport",
     "tab": "tech",
-    "visible": 0,
+    "visible": 1,
     "properties": [
       {
         "id": "datasets",
@@ -153,7 +153,7 @@
         "value": [],
         "format": "DataSet",
         "element": {
-          "type": "text"
+          "type": "checkbox-group"
         }
       },
       {

@@ -42,14 +42,9 @@ class Config {
 
 
 	updateConfig(newConfig) {
-		const errors = this.validateConfig(newConfig);
-
-		if (errors.length) {
-			throw new Error(errors[0]);
-		} else {
-			this.config = newConfig;
-			return this.updateFile();
-		}
+		this.prepareConfig(newConfig);
+		this.config = newConfig;
+		return this.updateFile();
 	}
 
 
@@ -83,13 +78,11 @@ class Config {
 	}
 
 
-	validateConfig(config) {
-		const errors = [];
-
+	prepareConfig(config) {
 		config.forEach((fieldSet) => {
 			const properties = fieldSet.properties || [];
 
-			// Validate numeric properties
+			// Prepare numeric properties
 			properties
 				.filter(property => property.format === 'Number')
 				.forEach((property) => {
@@ -106,25 +99,7 @@ class Config {
 						property.value = 0;
 					}
 				});
-
-			// Validate datasets
-			const invalidDataSets = properties
-				.filter(property => property.format === 'DataSet')
-				.filter(property => ! this.isValidDataSet(property.value));
-
-			if (invalidDataSets.length) {
-				errors.push('wrong_dataset_structure');
-			}
 		});
-
-		return errors;
-	}
-
-
-	isValidDataSet(dataSet) {
-		return ! (typeof dataSet !== 'object'
-			|| ! (dataSet instanceof Array)
-			|| dataSet.some(item => typeof item !== 'string'));
 	}
 }
 

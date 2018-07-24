@@ -3,6 +3,7 @@
 <div class="row" v-show="!loading" style="display: none;">
   <div class="col-xs-6">
 
+
     <button type="button" @click="switchTab('admin')" :class="[getTabClass('admin')]" class="btn">
       <%= getText('config_categories.admin') %>
     </button>
@@ -10,6 +11,7 @@
     <button type="button" @click="switchTab('tech')" :class="[getTabClass('tech')]" class="btn">
       <%= getText('config_categories.tech') %>
     </button>
+
 
     <form id="user" autocomplete="off">
 
@@ -48,10 +50,26 @@
               {{window.signs[text]}}
             </option>
           </select>
+
+
+          <div v-if="property.id === 'allowedDatasets'" class="datasets-container">
+            <div class="form-check-label dataset-item" v-for="(dataset, index) in availableDataSets">
+              <input
+                :id="getDataSetIndex('dataset', index)"
+                class="form-check-input"
+                type="checkbox"
+                @change="setDataSetStatus(event, dataset)"
+                :checked="dataset.status === 'active'"
+              >
+
+              <label :for="getDataSetIndex('dataset', index)">{{dataset.dataset}}</label>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div v-for="(fieldSet, fIndex) in techSettings" v-show="activeTab === 'tech'" v-if="fieldSet.visible !== 0">
+      <div v-for="(fieldSet, fIndex) in techSettings" v-show="activeTab === 'tech'">
         <h3>{{window.signs[fieldSet.name]}}</h3>
 
         <div class="form-group" v-for="(property, pIndex) in fieldSet.properties">
@@ -86,6 +104,20 @@
               {{window.signs[text]}}
             </option>
           </select>
+
+
+          <div v-if="property.id === 'datasets'" class="datasets-container">
+            <div class="form-check-label dataset-item" v-for="(dataset, index) in cliExportDataSets">
+              <input
+                :id="getDataSetIndex('dataset2', index)"
+                class="form-check-input"
+                type="checkbox"
+                v-model="dataset.markedForExport"
+              >
+
+              <label :for="getDataSetIndex('dataset2', index)">{{dataset.dataset}}</label>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -137,6 +169,8 @@
   window.signs = <%- JSON.stringify(translations) %>;
 
   window.config = <%- JSON.stringify(config) %>;
+  window.availableDataSets = <%- JSON.stringify(availableDataSets) %>;
+  window.cliExportDataSets = <%- JSON.stringify(cliExportDataSets) %>;
 </script>
 
 

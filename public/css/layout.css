@@ -1,4 +1,5 @@
 @import "lang-switcher.css";
+@import "config.css";
 
 .container {
 	width: 1200px !important;

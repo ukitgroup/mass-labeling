@@ -1,4 +1,4 @@
-# User guide
+http://support.ucoz.ru/screenshot5/2018-07-23_15-48-43.png# User guide
 
 ## Introduction
 
