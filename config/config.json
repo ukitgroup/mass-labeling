@@ -126,7 +126,6 @@
     "id": "cliImport",
     "name": "config_props.cliImport",
     "tab": "tech",
-    "visible": 1,
     "properties": [
       {
         "id": "in",
@@ -144,7 +143,6 @@
     "id": "cliExport",
     "name": "config_props.cliExport",
     "tab": "tech",
-    "visible": 1,
     "properties": [
       {
         "id": "datasets",
