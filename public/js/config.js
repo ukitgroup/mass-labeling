@@ -37,7 +37,7 @@ window.app = new window.Vue({
 				data: {
 					config: this.config,
 					availableDataSets: this.availableDataSets,
-					cliExportDataSets: this.cliExportDataSets,
+					// cliExportDataSets: this.cliExportDataSets,
 				},
 			})
 				.then(() => alert('Config updated'))
@@ -70,6 +70,20 @@ window.app = new window.Vue({
 			} else {
 				site.status = 'disabled';
 			}
+		},
+
+		setDataSetsStatus(state) {
+			const status = state ? 'active' : 'disabled';
+
+			this.availableDataSets.forEach((dataSet) => {
+				dataSet.status = status;
+			});
+		},
+
+		setDataSetsExportStatus(state) {
+			this.cliExportDataSets.forEach((dataSet) => {
+				dataSet.markedForExport = state;
+			});
 		},
 	},
 

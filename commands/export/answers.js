@@ -33,19 +33,25 @@ module.exports = (program) => {
 			...Site.filter.allowedStatuses,
 		};
 
-		// Get marked for export sites
-		const markedForExportDataSets = await Site.find({
-			markedForExport: {
-				$eq: true,
-			},
-		});
+		// // Get marked for export sites
+		// const markedForExportDataSets = await Site.find({
+		// 	markedForExport: {
+		// 		$eq: true,
+		// 	},
+		// });
+		//
+		// // Get marked for export sites' datasets
+		// const dataSetsNames = markedForExportDataSets.map(dataSet => dataSet.dataset);
+		//
+		// if (dataSetsNames.length) {
+		// 	sitesFilter.dataset = {
+		// 		$in: dataSetsNames,
+		// 	};
+		// }
 
-		// Get marked for export sites' datasets
-		const dataSetsNames = markedForExportDataSets.map(dataSet => dataSet.dataset);
-
-		if (dataSetsNames.length) {
+		if (config.get('cliExport.datasets').length) {
 			sitesFilter.dataset = {
-				$in: dataSetsNames,
+				$in: config.get('cliExport.datasets'),
 			};
 		}
 

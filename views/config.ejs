@@ -15,7 +15,7 @@
 
     <form id="user" autocomplete="off">
 
-      <div v-for="(fieldSet, fIndex) in adminSettings" v-show="activeTab === 'admin'">
+      <div v-for="(fieldSet, fIndex) in adminSettings" v-show="activeTab === 'admin'" v-if="fieldSet.visible !== 0">
         <h3>{{window.signs[fieldSet.name]}}</h3>
 
         <div class="form-group" v-for="(property, pIndex) in fieldSet.properties">
@@ -64,12 +64,22 @@
 
               <label :for="getDataSetIndex('dataset', index)">{{dataset.dataset}}</label>
             </div>
+
+            <div class="actions-container">
+              <button type="button" @click="setDataSetsStatus(true)" class="btn btn-success">
+                <%= getText('check_all') %>
+              </button>
+
+              <button type="button" @click="setDataSetsStatus(false)" class="btn btn-success">
+                <%= getText('uncheck_all') %>
+              </button>
+            </div>
           </div>
 
         </div>
       </div>
 
-      <div v-for="(fieldSet, fIndex) in techSettings" v-show="activeTab === 'tech'">
+      <div v-for="(fieldSet, fIndex) in techSettings" v-show="activeTab === 'tech'" v-if="fieldSet.visible !== 0">
         <h3>{{window.signs[fieldSet.name]}}</h3>
 
         <div class="form-group" v-for="(property, pIndex) in fieldSet.properties">
@@ -116,6 +126,16 @@
               >
 
               <label :for="getDataSetIndex('dataset2', index)">{{dataset.dataset}}</label>
+            </div>
+
+            <div class="actions-container">
+              <button type="button" @click="setDataSetsExportStatus(true)" class="btn btn-success">
+                <%= getText('check_all') %>
+              </button>
+
+              <button type="button" @click="setDataSetsExportStatus(false)" class="btn btn-success">
+                <%= getText('uncheck_all') %>
+              </button>
             </div>
           </div>
         </div>

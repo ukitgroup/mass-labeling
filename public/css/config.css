@@ -6,3 +6,7 @@
 .dataset-item {
   flex-basis: 50%;
 }
+
+.actions-container {
+  flex-basis: 100%;
+}

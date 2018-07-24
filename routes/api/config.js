@@ -8,7 +8,7 @@ const Site = require('../../models/site');
 
 router.post('/update', async (req, res, next) => {
 	try {
-		const { config, availableDataSets, cliExportDataSets } = req.body;
+		const { config, availableDataSets /* , cliExportDataSets */ } = req.body;
 
 		await Config.updateConfig(config);
 
@@ -18,10 +18,10 @@ router.post('/update', async (req, res, next) => {
 		});
 
 		// Update DB field of field set
-		cliExportDataSets.forEach(async (dataSet) => {
-			const storedDataSet = await Site.getById(dataSet._id);
-			storedDataSet.setMarkedForExportStatus(dataSet.markedForExport);
-		});
+		// cliExportDataSets.forEach(async (dataSet) => {
+		// 	const storedDataSet = await Site.getById(dataSet._id);
+		// 	storedDataSet.setMarkedForExportStatus(dataSet.markedForExport);
+		// });
 
 		res.api.response();
 	} catch (err) {
