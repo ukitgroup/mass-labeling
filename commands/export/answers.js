@@ -78,7 +78,7 @@ module.exports = (program) => {
 		const answers = sites.map(site => ({
 			url: site.url,
 			dataset: site.dataset,
-			answers: tasksMap[site.id].map(task => ({
+			answers: (tasksMap[site.id] || []).map(task => ({
 				answer: task.answer,
 				user: usersMap[task.userId].email,
 			})),
