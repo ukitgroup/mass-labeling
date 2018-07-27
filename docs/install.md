@@ -88,6 +88,9 @@ npm start
 After the installation, the system necessary to create the first administrator. This step is obligatory. 
 Read the [cli user guide](cli/user) on how to do it.
 
+English is a default language for the system but __Mass Labeling__ has multilanguage support. If someone wishes to
+add one more language into web-interface then read the [multilanguage](multilanguage) on how to do it. 
+
 ## FAQ
 
 Q: What OS are supported?  
