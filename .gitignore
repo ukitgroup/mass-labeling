@@ -20,5 +20,4 @@ node_modules/
 /logs/
 /tmp/
 
-config/config.json
 public/instruction.html

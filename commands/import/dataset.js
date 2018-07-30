@@ -34,7 +34,7 @@ module.exports = (program) => {
 		const sites = await Promise.mapSeries(sitesRaw, async (site) => {
 			const id = mongoose.Types.ObjectId();
 
-			const screenshotPath = path.join(config.get('sites.screenshotsPath'), site.dataset, `${id}.jpg`);
+			const screenshotPath = path.join(config.get('mongo.screenshotsPath'), site.dataset, `${id}.jpg`);
 			await fs.mkdirp(path.dirname(screenshotPath));
 			await fs.move(path.join(tmpPath, 'screenshots', site.screenshot), screenshotPath, { overwrite: true });
 
@@ -42,7 +42,7 @@ module.exports = (program) => {
 				_id: id,
 				url: site.url,
 				dataset: site.dataset,
-				screenshot: path.relative(config.get('sites.screenshotsPath'), screenshotPath),
+				screenshot: path.relative(config.get('mongo.screenshotsPath'), screenshotPath),
 			};
 		});
 		await Site.create(sites);

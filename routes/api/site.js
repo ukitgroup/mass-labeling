@@ -9,7 +9,7 @@ const router = require('express').Router();
 
 router.get('/:siteId/screenshot', bridges.site.id, async (req, res, next) => {
 	try {
-		res.sendFile(path.resolve(config.get('sites.screenshotsPath'), req.site.screenshot));
+		res.sendFile(path.resolve(config.get('mongo.screenshotsPath'), req.site.screenshot));
 	} catch (err) {
 		// eslint-disable-next-line no-underscore-dangle
 		err.message = req.__(err.message);
