@@ -91,7 +91,7 @@
     "logger": "logger",
     "logger_name": "logger_name",
     "logger_level": "logger_level",
-    "db": "Database",
+    "data": "Data",
     "db_url": "URL",
     "passport": "Authentication",
     "passport_cookie_age": "Cookie expiration time",
