@@ -12,6 +12,10 @@
       <%= getText('config_categories.tech') %>
     </button>
 
+    <button type="button" @click="switchTab('assessment')" :class="[getTabClass('assessment')]" class="btn">
+      <%= getText('config_categories.assessment') %>
+    </button>
+
 
     <form id="user" autocomplete="off">
 
@@ -139,7 +143,28 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div v-show="activeTab === 'assessment'">
+
+        <div class="edit-instructions">
+          <button @click.prevent="openCodeMirror" v-show="!editorShown" class="btn btn-success">
+            <%= getText("edit_instruction_page_html") %>
+          </button>
+
+          <button @click.prevent="closeCodeMirror" v-show="editorShown" class="btn btn-success">
+            <%= getText("close_editor") %>
+          </button>
+
+          <button @click.prevent="updateInstructions" v-show="editorShown" class="btn btn-primary">
+            <%= getText("save_changes") %>
+          </button>
+
+          <div v-show="editorShown">
+            <textarea id="instructions" v-model="instructions"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" v-show="activeTab !== 'assessment'">
         <button @click.prevent="updateConfig()" type="submit" class="btn btn-primary">
           <%= getText('submit') %>
         </button>
@@ -177,6 +202,8 @@
     "logger_levels.info",
     "logger_levels.debug",
     "logger_levels.trace",
+    "config_updated",
+    "instructions_updated",
   ] %>
 
   <%
@@ -189,8 +216,15 @@
   window.config = <%- JSON.stringify(config) %>;
   window.availableDataSets = <%- JSON.stringify(availableDataSets) %>;
   window.cliExportDataSets = <%- JSON.stringify(cliExportDataSets) %>;
+  window.instructions = <%- JSON.stringify(instructionsPageHTML) %>
 </script>
 
+<link rel="stylesheet" href="<%= fromPublic('css/lib/codemirror/codemirror.css') %>">
+<link rel="stylesheet" href="<%= fromPublic('css/lib/codemirror/mdn-like.css') %>">
+
+<script src="<%= fromPublic('js/lib/codemirror/codemirror.js') %>"></script>
+<script src="<%= fromPublic('js/lib/codemirror/xml.js') %>"></script>
+<script src="<%= fromPublic('js/lib/codemirror/autorefresh.js') %>"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>

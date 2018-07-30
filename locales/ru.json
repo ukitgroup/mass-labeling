@@ -117,9 +117,15 @@
   },
   "config_categories": {
     "admin": "Настройки администратора",
-    "tech": "Технические настройки"
+    "tech": "Технические настройки",
+    "assessment": "Оценки"
   },
   "wrong_dataset_structure": "Неправильная структура наборов данных",
   "check_all": "Выбрать все",
-  "uncheck_all": "Снять все"
+  "uncheck_all": "Снять все",
+  "edit_instruction_page_html": "Редактировать страницу инструкций",
+  "close_editor": "Закрыть редактор",
+  "save_changes": "Сохранить изменения",
+  "config_updated": "Настройки сохранены",
+  "instructions_updated": "Инструкции сохранены"
 }

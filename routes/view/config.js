@@ -1,5 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 
+const fs = require('fs');
+const path = require('path');
+
 const router = require('express').Router();
 
 const config = require('../../config');
@@ -22,7 +25,12 @@ router.get('/', async (req, res, next) => {
 			// dataSet.markedForExport = dataSets.indexOf(dataSet._id) >= 0;
 		});
 
+		const instructionsPageHTML = fs
+			.readFileSync(path.resolve(__dirname, '../../public/instruction.html'), 'utf-8')
+			.trim();
+
 		res.render('config', {
+			instructionsPageHTML,
 			availableDataSets,
 			cliExportDataSets: [],
 			config: config.getConfig(),

@@ -117,9 +117,15 @@
   },
   "config_categories": {
     "admin": "admin",
-    "tech": "tech"
+    "tech": "tech",
+    "assessment": "assessment"
   },
   "wrong_dataset_structure": "wrong_dataset_structure",
   "check_all": "check_all",
-  "uncheck_all": "uncheck_all"
+  "uncheck_all": "uncheck_all",
+  "edit_instruction_page_html": "edit_instruction_page_html",
+  "close_editor": "close_editor",
+  "save_changes": "save_changes",
+  "config_updated": "config_updated",
+  "instructions_updated": "instructions_updated"
 }

@@ -5,6 +5,7 @@
 const tabs = {
 	ADMIN: 'admin',
 	TECH: 'tech',
+	ASSESSMENTS: 'assessment',
 };
 
 
@@ -16,8 +17,12 @@ window.app = new window.Vue({
 			config: window.config,
 			availableDataSets: window.availableDataSets,
 			cliExportDataSets: window.cliExportDataSets,
-			loading: true,
+			instructions: window.instructions,
+			loading: false,
+			signs: window.signs,
 			activeTab: tabs.ADMIN,
+
+			editorShown: false,
 		};
 	},
 
@@ -40,7 +45,7 @@ window.app = new window.Vue({
 					// cliExportDataSets: this.cliExportDataSets,
 				},
 			})
-				.then(() => alert('Config updated'))
+				.then(() => alert(this.signs.config_updated))
 				.catch(error => alert(error));
 		},
 
@@ -62,16 +67,6 @@ window.app = new window.Vue({
 				: 'btn-link';
 		},
 
-		setDataSetStatus(event, site) {
-			const checkbox = event.currentTarget;
-
-			if (checkbox.checked) {
-				site.status = 'active';
-			} else {
-				site.status = 'disabled';
-			}
-		},
-
 		setDataSetsStatus(state) {
 			this.availableDataSets.forEach((dataSet) => {
 				dataSet.isActive = state;
@@ -83,9 +78,44 @@ window.app = new window.Vue({
 				dataSet.markedForExport = state;
 			});
 		},
+
+		openCodeMirror() {
+			this.editorShown = true;
+		},
+
+		closeCodeMirror() {
+			this.editorShown = false;
+		},
+
+		updateInstructions() {
+			const instructionsTextArea = this.$el.querySelector('#instructions');
+
+			window.Request.post('/api/config/update-instructions', {
+				data: {
+					instructions: instructionsTextArea.value.trim(),
+				},
+			})
+				.then(() => alert(this.signs.instructions_updated))
+				.catch(error => alert(error));
+		},
 	},
 
 	mounted() {
 		this.loading = false;
+
+		const instructionsTextArea = this.$el.querySelector('#instructions');
+
+		// eslint-disable-next-line no-undef
+		this.cmInstance = CodeMirror.fromTextArea(instructionsTextArea, {
+			lineNumbers: true,
+			mode: 'xml',
+			theme: 'mdn-like',
+			lineWrapping: true,
+			autoRefresh: true,
+		});
+
+		this.cmInstance.on('change', () => {
+			this.instructions = this.cmInstance.getValue();
+		});
 	},
 });

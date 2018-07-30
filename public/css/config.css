@@ -10,3 +10,13 @@
 .actions-container {
   flex-basis: 100%;
 }
+
+.edit-instructions {
+  margin-top: 20px;
+}
+
+.CodeMirror {
+  width: 1200px;
+  min-height: 600px;
+  margin-top: 20px;
+}

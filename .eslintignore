@@ -7,3 +7,6 @@ node_modules/
 /data/
 /logs/
 /tmp/
+
+public/js/lib/
+public/css/lib/
