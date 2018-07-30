@@ -104,4 +104,13 @@ class Config {
 }
 
 
-module.exports = new Config();
+const config = new Config();
+
+if (process.env.DB_URL !== config.get('mongo.url')) {
+	config.set('mongo.url', process.env.DB_URL);
+
+	config.updateFile()
+		.catch(error => console.log('Update config error:', error));
+}
+
+module.exports = config;
