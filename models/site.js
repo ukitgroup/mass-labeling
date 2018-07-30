@@ -68,16 +68,12 @@ SiteSchema.statics = {
 		return this.findById(_.sample(siteIds));
 	},
 
-	async getAvailableDataSets() {
-		return this.find({
-			status: {
-				$in: ['active', 'disabled'],
-			},
-		});
-	},
-
 	async getAllDataSets() {
-		return this.find();
+		return this.aggregate([{
+			$group: {
+				_id: '$dataset',
+			},
+		}]);
 	},
 };
 

@@ -58,11 +58,9 @@
                 :id="getDataSetIndex('dataset', index)"
                 class="form-check-input"
                 type="checkbox"
-                @change="setDataSetStatus(event, dataset)"
-                :checked="dataset.status === 'active'"
+                v-model="dataset.isActive"
               >
-
-              <label :for="getDataSetIndex('dataset', index)">{{dataset.dataset}}</label>
+              <label :for="getDataSetIndex('dataset', index)">{{dataset._id}}</label>
             </div>
 
             <div class="actions-container">

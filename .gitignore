@@ -19,3 +19,5 @@ node_modules/
 /docker-compose*.yml
 /logs/
 /tmp/
+
+config/config.json

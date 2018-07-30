@@ -44,7 +44,7 @@ class Config {
 	updateConfig(newConfig) {
 		this.prepareConfig(newConfig);
 		this.config = newConfig;
-		return this.updateFile();
+		// return this.updateFile();
 	}
 
 

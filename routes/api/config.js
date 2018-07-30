@@ -3,25 +3,20 @@ const Config = require('../../config');
 
 const router = require('express').Router();
 
-const Site = require('../../models/site');
-
 
 router.post('/update', async (req, res, next) => {
 	try {
 		const { config, availableDataSets /* , cliExportDataSets */ } = req.body;
 
-		await Config.updateConfig(config);
+		Config.updateConfig(config);
 
-		availableDataSets.forEach(async (dataSet) => {
-			const storedDataSet = await Site.getById(dataSet._id);
-			storedDataSet.setStatus(dataSet.status);
-		});
+		const activeDataSets = availableDataSets
+			.filter(dataSet => dataSet.isActive)
+			.map(dataSet => dataSet._id);
 
-		// Update DB field of field set
-		// cliExportDataSets.forEach(async (dataSet) => {
-		// 	const storedDataSet = await Site.getById(dataSet._id);
-		// 	storedDataSet.setMarkedForExportStatus(dataSet.markedForExport);
-		// });
+		Config.set('sites.allowedDatasets', activeDataSets);
+
+		await Config.updateFile();
 
 		res.api.response();
 	} catch (err) {

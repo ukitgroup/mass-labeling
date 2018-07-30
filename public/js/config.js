@@ -73,10 +73,8 @@ window.app = new window.Vue({
 		},
 
 		setDataSetsStatus(state) {
-			const status = state ? 'active' : 'disabled';
-
 			this.availableDataSets.forEach((dataSet) => {
-				dataSet.status = status;
+				dataSet.isActive = state;
 			});
 		},
 
