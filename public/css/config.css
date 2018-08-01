@@ -11,12 +11,16 @@
   flex-basis: 100%;
 }
 
-.edit-instructions {
-  margin-top: 20px;
+.settings-block {
+  margin-top: 25px;
 }
 
 .CodeMirror {
   width: 1200px;
   min-height: 600px;
+  margin-top: 20px;
+}
+
+.users-form {
   margin-top: 20px;
 }

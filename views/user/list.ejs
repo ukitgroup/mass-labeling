@@ -1,4 +1,4 @@
-<h1><%= getText('users') %></h1>
+<!--<h1><%= getText('users') %></h1>-->
 <div class="form-group">
 	<a href="/user/add" type="button" class="btn btn-primary"><%= getText('user_add') %></a>
 </div>
@@ -23,7 +23,7 @@
 						<a href="/user/<%= curUser.id %>/edit" type="button" class="btn btn-warning btn-xs">
               <%= getText('edit') %>
             </a>
-						<button type="button" class="btn btn-primary btn-xs create-slider" data-id="<%= curUser.id %>">
+						<button @click.prevent="createSlider(event)" type="button" class="btn btn-primary btn-xs create-slider" data-id="<%= curUser.id %>">
               <%= getText('gen_slider') %>
             </button>
 						<a href="/slider/<%= curUser.email %>" type="button" class="btn btn-success btn-xs">
@@ -35,14 +35,3 @@
 		</tbody>
 	</table>
 </div>
-
-
-<script>
-  window.signs = {
-    slider_created: "<%= getText('slider_created') %>",
-    error: "<%= getText('error') %>",
-  };
-</script>
-
-
-<script src="<%= fromPublic('js/user/list.js') %>"></script>

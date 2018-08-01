@@ -1,12 +1,13 @@
 'use strict';
 
 
-// Texts from back-end
-const { signs } = window;
-
-
 $('.create-slider').click(function () {
 	const userId = $(this).data('id');
+
+	console.log(123)
+
+	// Texts from back-end
+	const { signs } = window;
 
 	window.Request.post(`/api/user/${userId}/create-slider`)
 		.then(() => alert(signs.slider_created))

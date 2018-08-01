@@ -118,7 +118,8 @@
   "config_categories": {
     "admin": "admin",
     "tech": "tech",
-    "assessment": "assessment"
+    "assessment": "assessment",
+    "users": "users"
   },
   "wrong_dataset_structure": "wrong_dataset_structure",
   "check_all": "check_all",

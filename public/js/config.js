@@ -2,6 +2,13 @@
 
 'use strict';
 
+
+const {
+	UsersController,
+	UserInstructionsController,
+} = window;
+
+
 const tabs = {
 	ADMIN: 'admin',
 	TECH: 'tech',
@@ -11,6 +18,11 @@ const tabs = {
 
 window.app = new window.Vue({
 	el: '.js-container',
+
+	components: {
+		'users-controller': UsersController,
+		'user-instructions-controller': UserInstructionsController,
+	},
 
 	data() {
 		return {
@@ -49,16 +61,13 @@ window.app = new window.Vue({
 				.catch(error => alert(error));
 		},
 
-		getFieldIndex(fieldSetIndex, propertyIndex) {
-			return `field-${fieldSetIndex}${propertyIndex}`;
-		},
-
 		getDataSetIndex(prefix, index) {
 			return `${prefix}-${index}`;
 		},
 
 		switchTab(tab) {
 			this.activeTab = tab;
+			window.location.hash = `#tab=${tab}`;
 		},
 
 		getTabClass(tab) {
@@ -100,13 +109,22 @@ window.app = new window.Vue({
 		},
 	},
 
+	created() {
+		const { hash } = window.location;
+
+		if (hash) {
+			this.activeTab = window.location.hash.split('=')[1];
+		} else {
+			this.activeTab = tabs.ADMIN;
+		}
+	},
+
 	mounted() {
 		this.loading = false;
 
 		const instructionsTextArea = this.$el.querySelector('#instructions');
 
-		// eslint-disable-next-line no-undef
-		this.cmInstance = CodeMirror.fromTextArea(instructionsTextArea, {
+		this.cmInstance = window.CodeMirror.fromTextArea(instructionsTextArea, {
 			lineNumbers: true,
 			mode: 'xml',
 			theme: 'mdn-like',
