@@ -165,26 +165,7 @@
 
 
       <div class="settings-block assessment-settings" v-show="activeTab === 'assessment'">
-
         <user-instructions-controller></user-instructions-controller>
-
-        <div class="edit-instructions">
-          <button @click.prevent="openCodeMirror" v-show="!editorShown" class="btn btn-success">
-            <%= getText("edit_instruction_page_html") %>
-          </button>
-
-          <button @click.prevent="closeCodeMirror" v-show="editorShown" class="btn btn-success">
-            <%= getText("close_editor") %>
-          </button>
-
-          <button @click.prevent="updateInstructions" v-show="editorShown" class="btn btn-primary">
-            <%= getText("save_changes") %>
-          </button>
-
-          <div v-show="editorShown">
-            <textarea id="instructions" v-model="instructions"></textarea>
-          </div>
-        </div>
       </div>
 
 
@@ -245,6 +226,9 @@
     "user_roles.admin",
     "user_roles.user",
     "cancel",
+    "edit_instruction_page_html",
+    "close_editor",
+    "save_changes",
   ] %>
 
   <%

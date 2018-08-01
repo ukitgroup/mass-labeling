@@ -1,22 +1,22 @@
-const User = require('../../models/user');
+// const User = require('../../models/user');
 
 
-const statuses = {
-	// active: 'Активен',
-	active: '', // value moved to lang files
-	// disabled: 'Отключен',
-	disabled: '', // value moved to lang files
-};
+// const statuses = {
+// 	// active: 'Активен',
+// 	active: '', // value moved to lang files
+// 	// disabled: 'Отключен',
+// 	disabled: '', // value moved to lang files
+// };
+//
+// const roles = {
+// 	// admin: 'Администратор',
+// 	admin: '', // value moved to lang files
+// 	// user: 'Пользователь',
+// 	user: '', // value moved to lang files
+// };
 
-const roles = {
-	// admin: 'Администратор',
-	admin: '', // value moved to lang files
-	// user: 'Пользователь',
-	user: '', // value moved to lang files
-};
 
-
-const bridges = require('../bridges');
+// const bridges = require('../bridges');
 
 const router = require('express').Router();
 

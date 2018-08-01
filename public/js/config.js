@@ -13,6 +13,7 @@ const tabs = {
 	ADMIN: 'admin',
 	TECH: 'tech',
 	ASSESSMENTS: 'assessment',
+	USERS: 'users',
 };
 
 
@@ -29,12 +30,9 @@ window.app = new window.Vue({
 			config: window.config,
 			availableDataSets: window.availableDataSets,
 			cliExportDataSets: window.cliExportDataSets,
-			instructions: window.instructions,
 			loading: false,
 			signs: window.signs,
 			activeTab: tabs.ADMIN,
-
-			editorShown: false,
 		};
 	},
 
@@ -54,7 +52,6 @@ window.app = new window.Vue({
 				data: {
 					config: this.config,
 					availableDataSets: this.availableDataSets,
-					// cliExportDataSets: this.cliExportDataSets,
 				},
 			})
 				.then(() => alert(this.signs.config_updated))
@@ -87,26 +84,6 @@ window.app = new window.Vue({
 				dataSet.markedForExport = state;
 			});
 		},
-
-		openCodeMirror() {
-			this.editorShown = true;
-		},
-
-		closeCodeMirror() {
-			this.editorShown = false;
-		},
-
-		updateInstructions() {
-			const instructionsTextArea = this.$el.querySelector('#instructions');
-
-			window.Request.post('/api/config/update-instructions', {
-				data: {
-					instructions: instructionsTextArea.value.trim(),
-				},
-			})
-				.then(() => alert(this.signs.instructions_updated))
-				.catch(error => alert(error));
-		},
 	},
 
 	created() {
@@ -121,19 +98,5 @@ window.app = new window.Vue({
 
 	mounted() {
 		this.loading = false;
-
-		const instructionsTextArea = this.$el.querySelector('#instructions');
-
-		this.cmInstance = window.CodeMirror.fromTextArea(instructionsTextArea, {
-			lineNumbers: true,
-			mode: 'xml',
-			theme: 'mdn-like',
-			lineWrapping: true,
-			autoRefresh: true,
-		});
-
-		this.cmInstance.on('change', () => {
-			this.instructions = this.cmInstance.getValue();
-		});
 	},
 });

@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle,no-alert */
+
 window.UsersController = {
 	template: `
 		<div>
