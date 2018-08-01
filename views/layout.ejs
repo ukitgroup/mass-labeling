@@ -55,5 +55,9 @@
 	<%- body %>
 </div>
 
+<script>
+  window.signs = <%- JSON.stringify(frontSigns()) %>;
+</script>
+
 
 <script src="<%= fromPublic('js/layout.js') %>"></script>

@@ -21,9 +21,7 @@
 </div>
 
 <script>
-  window.signs = {
-    auth_error: "<%= getText('auth_error') %>",
-  };
+  window.signs = <%- JSON.stringify(frontSigns()) %>;
 </script>
 
 <script src="<%= fromPublic('js/index.js') %>"></script>

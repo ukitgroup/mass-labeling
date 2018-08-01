@@ -27,9 +27,7 @@
 
 
 <script>
-  window.signs = {
-    error: "<%= getText('error') %>",
-  };
+  window.signs = <%- JSON.stringify(frontSigns()) %>;
 </script>
 
 

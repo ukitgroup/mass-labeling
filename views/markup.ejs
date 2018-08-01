@@ -104,11 +104,7 @@
 	window.markupCount = <%= count %>;
 	window.markupLimit = <%= limit %>;
 
-	window.signs = {
-	  site_approved: "<%= getText('site_approved') %>",
-    get_new_task_error: "<%= getText('get_new_task_error') %>",
-    no_mark_specified: "<%= getText('no_mark_specified') %>",
-  };
+  window.signs = <%- JSON.stringify(frontSigns()) %>;
 </script>
 <script src="<%= fromPublic('js/request.js') %>"></script>
 <script src="<%= fromPublic('js/markup.js') %>"></script>

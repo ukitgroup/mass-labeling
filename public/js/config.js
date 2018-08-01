@@ -17,7 +17,7 @@ const tabs = {
 };
 
 
-window.app = new window.Vue({
+new window.Vue({
 	el: '.js-container',
 
 	components: {

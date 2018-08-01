@@ -35,6 +35,33 @@ module.exports = (app) => {
 				.filter(locale => locale !== req.getLocale());
 		};
 
+		/**
+		 * Converts translations object of current user's locale into
+		 * single-level object which is used in front-end scripts and components
+		 */
+		res.locals.frontSigns = function () {
+			const signs = {};
+			const translations = req.getCatalog();
+
+			function iterateTranslationsObject(translationsObject, parentKey = '') {
+				Object.keys(translationsObject)
+					.forEach((key) => {
+						const value = translationsObject[key];
+
+						if (typeof value === 'object') {
+							iterateTranslationsObject(value, key);
+						} else {
+							const signKey = parentKey ? `${parentKey}.${key}` : key;
+							signs[signKey] = value;
+						}
+					});
+			}
+
+			iterateTranslationsObject(translations);
+
+			return signs;
+		};
+
 		next();
 	});
 
@@ -44,3 +71,6 @@ module.exports = (app) => {
 	app.use(expressLayouts);
 	app.set('layout', 'layout');
 };
+
+
+
