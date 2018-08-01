@@ -128,5 +128,6 @@
   "close_editor": "Закрыть редактор",
   "save_changes": "Сохранить изменения",
   "config_updated": "Настройки сохранены",
-  "instructions_updated": "Инструкции сохранены"
+  "instructions_updated": "Инструкции сохранены",
+  "cancel": "Отменить"
 }

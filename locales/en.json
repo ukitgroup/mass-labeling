@@ -128,5 +128,6 @@
   "close_editor": "close_editor",
   "save_changes": "save_changes",
   "config_updated": "config_updated",
-  "instructions_updated": "instructions_updated"
+  "instructions_updated": "instructions_updated",
+  "cancel": "cancel"
 }

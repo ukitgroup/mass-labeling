@@ -25,8 +25,8 @@ window.UsersController = {
 							'text-bold': user.role === 'admin',
 						}">
 						  <td>{{user.email}}</td>
-						  <td>{{statuses[user.status]}}</td>
-						  <td>{{roles[user.role]}}</td>
+						  <td>{{signs['user_statuses.' + user.status]}}</td>
+						  <td>{{signs['user_roles.' + user.role]}}</td>
 						  <td>
 							<a @click.prevent="editUser(user)" type="button" class="btn btn-warning btn-xs">
 							  {{signs.edit}}
@@ -51,7 +51,7 @@ window.UsersController = {
 				<h1 v-if="selectedUser._id">{{signs.user_edit}}</h1>
 				<h1 v-else>{{signs.user_add}}</h1>
 				
-				<button class="btn btn-success" @click.prevent="closeForm()">Cancel</button>
+				<button class="btn btn-success" @click.prevent="closeForm()">{{signs.cancel}}</button>
 				<button class="btn btn-primary" @click.prevent="submitForm()">{{signs.submit}}</button>
 
 				<div class="row users-form">
