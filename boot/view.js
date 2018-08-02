@@ -71,6 +71,3 @@ module.exports = (app) => {
 	app.use(expressLayouts);
 	app.set('layout', 'layout');
 };
-
-
-

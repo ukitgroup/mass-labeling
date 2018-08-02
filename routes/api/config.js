@@ -24,7 +24,7 @@ router.post('/update', async (req, res, next) => {
 
 		Config.set('sites.allowedDatasets', activeDataSets);
 
-		await Config.updateFile();
+		await Config.updateFiles();
 
 		res.api.response();
 	} catch (err) {
