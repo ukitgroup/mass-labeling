@@ -57,6 +57,19 @@
 
       <div class="settings-block assessment-settings" v-show="activeTab === 'assessment'">
         <user-instructions-controller></user-instructions-controller>
+
+        <div v-for="(fieldSet, fIndex) in assessmentSettings" v-if="fieldSet.visible !== 0">
+          <config-fieldset
+            :field-set="fieldSet"
+            :available-data-sets="availableDataSets"
+          ></config-fieldset>
+        </div>
+
+        <div class="form-group">
+          <button @click.prevent="updateConfig()" type="submit" class="btn btn-primary">
+            <%= getText('submit') %>
+          </button>
+        </div>
       </div>
 
 

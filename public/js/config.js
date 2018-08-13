@@ -45,6 +45,10 @@ new window.Vue({
 		adminSettings() {
 			return this.config.filter(fieldSet => fieldSet.tab === tabs.ADMIN);
 		},
+
+		assessmentSettings() {
+			return this.config.filter(fieldSet => fieldSet.tab === tabs.ASSESSMENTS);
+		},
 	},
 
 	methods: {
@@ -58,7 +62,7 @@ new window.Vue({
 				.then(() => alert(this.signs.config_updated))
 				.catch(error => alert(error));
 		},
-		
+
 		switchTab(tab) {
 			this.activeTab = tab;
 			window.location.hash = `#tab=${tab}`;

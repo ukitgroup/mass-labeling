@@ -105,7 +105,8 @@
     "cliImport_zip_path": "Zip archive path",
     "cliExport": "CLI export",
     "cliExport_datasets": "Datasets to export",
-    "cliExport_json_path": "JSON metadata path"
+    "cliExport_json_path": "JSON metadata path",
+    "show_randomly": "show_randomly"
   },
   "logger_levels": {
     "fatal": "fatal",

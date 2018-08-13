@@ -8,9 +8,11 @@ const router = require('express').Router();
 
 router.get('/', async (req, res, next) => {
 	try {
+		const showDataSetsRandomly = config.get('assessment.showRandomly');
+
 		res.render('markup', {
 			layout: false,
-			limit: config.get('markup.limit'),
+			limit: showDataSetsRandomly ? config.get('markup.limit') : 0,
 			count: await Task.countByUserId(req.user.id, true),
 		});
 	} catch (err) {

@@ -105,7 +105,8 @@
     "cliImport_zip_path": "Путь к ZIP-архиву",
     "cliExport": "Экспорт через CLI",
     "cliExport_datasets": "Наборы данных",
-    "cliExport_json_path": "Путь к JSON-файлу"
+    "cliExport_json_path": "Путь к JSON-файлу",
+    "show_randomly": "Показывать наборы данных случайно"
   },
   "logger_levels": {
     "fatal": "Критические ошибки",

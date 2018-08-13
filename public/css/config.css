@@ -24,3 +24,17 @@
 .users-form {
   margin-top: 20px;
 }
+
+.checkbox-block {
+  display: flex;
+}
+
+.checkbox-block label {
+  order: 2;
+}
+
+.checkbox-block input {
+  margin-top: 2px;
+  margin-right: 12px;
+}
+

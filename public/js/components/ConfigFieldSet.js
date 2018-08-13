@@ -6,7 +6,11 @@ window.ConfigFieldSet = {
 		<div>
 		  <h3>{{window.signs[fieldSet.name]}}</h3>
 		
-		  <div class="form-group" v-for="(property, pIndex) in fieldSet.properties">
+		  <div 
+		  	class="form-group form-check-label" 
+		  	:class="{'checkbox-block': property.element.type === 'checkbox'}" 
+		  	v-for="(property, pIndex) in fieldSet.properties"
+		  >
 			<label :for="property.id">
 			  {{window.signs[property.name]}}
 			</label>
@@ -25,6 +29,14 @@ window.ConfigFieldSet = {
 			  class="form-control"
 			  v-model="property.value"
 			  v-if="property.element.type === 'text'"
+			  :id="property.id"
+			>
+			
+			<input
+			  type="checkbox"
+			  class="form-check-input"
+			  v-model="property.value"
+			  v-if="property.element.type === 'checkbox'"
 			  :id="property.id"
 			>
 		

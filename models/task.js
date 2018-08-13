@@ -17,6 +17,7 @@ const TaskSchema = new mongoose.Schema({
 		max: 10,
 		required: true,
 	},
+
 	userId: {
 		type: mongoose.Schema.ObjectId,
 		required: true,
@@ -43,11 +44,16 @@ TaskSchema.statics = {
 		return this.count(filter);
 	},
 
+	// Set mark
 	async getNew({ siteId, answer, userId }) {
 		const limit = config.get('markup.limit');
+		const showRandomly = config.get('assessment.showRandomly');
+
+		console.log(1, showRandomly);
+
 		const count = await this.countByUserId(userId, true);
 
-		if (limit && count >= limit) {
+		if (limit && count >= limit && showRandomly) {
 			throw new Error('task_errors.markup_overdose');
 		}
 

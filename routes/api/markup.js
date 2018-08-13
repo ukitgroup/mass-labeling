@@ -3,6 +3,7 @@ const Task = require('../../models/task');
 
 const logger = require('../../libs/logger');
 
+const config = require('../../config');
 
 const bridges = require('../bridges');
 
@@ -11,7 +12,25 @@ const router = require('express').Router();
 
 router.post('/create', async (req, res, next) => {
 	try {
-		const site = await Site.getRandom();
+		const showRandomly = config.get('assessment.showRandomly');
+
+		let additionalFilter = {};
+
+		if (! showRandomly) {
+			const approvedByUserSiteIds = await Task.distinct('siteId', {
+				userId: {
+					$eq: req.user.id,
+				},
+			});
+
+			additionalFilter = {
+				_id: {
+					$nin: approvedByUserSiteIds,
+				},
+			};
+		}
+
+		const site = await Site.getRandom(additionalFilter);
 
 		logger.info({
 			siteId: site.id,

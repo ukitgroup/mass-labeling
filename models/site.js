@@ -59,10 +59,11 @@ SiteSchema.statics = {
 		return site;
 	},
 
-	async getRandom() {
+	async getRandom(additionalFilter = {}) {
 		const siteIds = await this.distinct('_id', {
 			...this.filter.allowedStatuses,
 			...this.filter.allowedDatasets,
+			...additionalFilter,
 		});
 
 		return this.findById(_.sample(siteIds));
