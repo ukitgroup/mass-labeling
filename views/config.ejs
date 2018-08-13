@@ -25,64 +25,10 @@
 
       <div class="settings-block admin-settings" v-show="activeTab === 'admin'">
         <div v-for="(fieldSet, fIndex) in adminSettings" v-if="fieldSet.visible !== 0">
-          <h3>{{window.signs[fieldSet.name]}}</h3>
-
-          <div class="form-group" v-for="(property, pIndex) in fieldSet.properties">
-            <label :for="property.id">
-              {{window.signs[property.name]}}
-            </label>
-
-            <input
-              min="0"
-              type="number"
-              class="form-control"
-              v-model="property.value"
-              v-if="property.element.type === 'number'"
-              :id="property.id"
-            >
-
-            <input
-              type="text"
-              class="form-control"
-              v-model="property.value"
-              v-if="property.element.type === 'text'"
-              :id="property.id"
-            >
-
-            <select
-              class="form-control"
-              v-model="property.value"
-              v-if="property.element.type === 'select'"
-              :id="property.id"
-            >
-              <option v-for="(text, value) in property.element.options" :value="value">
-                {{window.signs[text]}}
-              </option>
-            </select>
-
-
-            <div v-if="property.id === 'allowedDatasets'" class="datasets-container">
-              <div class="form-check-label dataset-item" v-for="(dataset, index) in availableDataSets">
-                <input
-                  :id="getDataSetIndex('dataset', index)"
-                  class="form-check-input"
-                  type="checkbox"
-                  v-model="dataset.isActive"
-                >
-                <label :for="getDataSetIndex('dataset', index)">{{dataset._id}}</label>
-              </div>
-
-              <div class="actions-container">
-                <button type="button" @click="setDataSetsStatus(true)" class="btn btn-success">
-                  <%= getText('check_all') %>
-                </button>
-
-                <button type="button" @click="setDataSetsStatus(false)" class="btn btn-success">
-                  <%= getText('uncheck_all') %>
-                </button>
-              </div>
-            </div>
-          </div>
+          <config-fieldset
+            :field-set="fieldSet"
+            :available-data-sets="availableDataSets"
+          ></config-fieldset>
         </div>
 
         <div class="form-group">
@@ -95,65 +41,10 @@
 
       <div class="settings-block tech-settings" v-show="activeTab === 'tech'">
         <div v-for="(fieldSet, fIndex) in techSettings" v-if="fieldSet.visible !== 0">
-          <h3>{{window.signs[fieldSet.name]}}</h3>
-
-          <div class="form-group" v-for="(property, pIndex) in fieldSet.properties">
-            <label :for="property.id">
-              {{window.signs[property.name]}}
-            </label>
-
-            <input
-              min="0"
-              type="number"
-              class="form-control"
-              v-model="property.value"
-              v-if="property.element.type === 'number'"
-              :id="property.id"
-            >
-
-            <input
-              type="text"
-              class="form-control"
-              v-model="property.value"
-              v-if="property.element.type === 'text'"
-              :id="property.id"
-            >
-
-            <select
-              class="form-control"
-              v-model="property.value"
-              v-if="property.element.type === 'select'"
-              :id="property.id"
-            >
-              <option v-for="(text, value) in property.element.options" :value="value">
-                {{window.signs[text]}}
-              </option>
-            </select>
-
-
-            <div v-if="property.id === 'datasets'" class="datasets-container">
-              <div class="form-check-label dataset-item" v-for="(dataset, index) in cliExportDataSets">
-                <input
-                  :id="getDataSetIndex('dataset2', index)"
-                  class="form-check-input"
-                  type="checkbox"
-                  v-model="dataset.markedForExport"
-                >
-
-                <label :for="getDataSetIndex('dataset2', index)">{{dataset.dataset}}</label>
-              </div>
-
-              <div class="actions-container">
-                <button type="button" @click="setDataSetsExportStatus(true)" class="btn btn-success">
-                  <%= getText('check_all') %>
-                </button>
-
-                <button type="button" @click="setDataSetsExportStatus(false)" class="btn btn-success">
-                  <%= getText('uncheck_all') %>
-                </button>
-              </div>
-            </div>
-          </div>
+          <config-fieldset
+            :field-set="fieldSet"
+            :available-data-sets="availableDataSets"
+          ></config-fieldset>
         </div>
 
         <div class="form-group">
@@ -182,7 +73,6 @@
 
   window.config = <%- JSON.stringify(config) %>;
   window.availableDataSets = <%- JSON.stringify(availableDataSets) %>;
-  window.cliExportDataSets = <%- JSON.stringify(cliExportDataSets) %>;
 
   window.instructions = <%- JSON.stringify(instructionsPageHTML) %>
 
@@ -201,6 +91,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
 
+<script src="<%= fromPublic('js/components/ConfigFieldSet.js') %>"></script>
 <script src="<%= fromPublic('js/components/UserInstructionsController.js') %>"></script>
 <script src="<%= fromPublic('js/components/UsersController.js') %>"></script>
 <script src="<%= fromPublic('js/config.js') %>"></script>

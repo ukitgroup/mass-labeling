@@ -35,6 +35,10 @@ router.get('/', async (req, res, next) => {
 			dataSet.isActive = dataSets.length > 0
 				? dataSets.indexOf(dataSet._id) >= 0
 				: true;
+
+			// dataSet.markedForExport = dataSets.length > 0
+			// 	? dataSets.indexOf(dataSet._id) >= 0
+			// 	: true;
 		});
 
 
@@ -59,7 +63,6 @@ router.get('/', async (req, res, next) => {
 			instructionsPageHTML,
 
 			availableDataSets,
-			cliExportDataSets: [],
 			config: config.getConfig(),
 		});
 	} catch (err) {

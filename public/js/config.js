@@ -6,6 +6,7 @@
 const {
 	UsersController,
 	UserInstructionsController,
+	ConfigFieldSet,
 } = window;
 
 
@@ -23,13 +24,13 @@ new window.Vue({
 	components: {
 		'users-controller': UsersController,
 		'user-instructions-controller': UserInstructionsController,
+		'config-fieldset': ConfigFieldSet,
 	},
 
 	data() {
 		return {
 			config: window.config,
 			availableDataSets: window.availableDataSets,
-			cliExportDataSets: window.cliExportDataSets,
 			loading: false,
 			signs: window.signs,
 			activeTab: tabs.ADMIN,
@@ -57,11 +58,7 @@ new window.Vue({
 				.then(() => alert(this.signs.config_updated))
 				.catch(error => alert(error));
 		},
-
-		getDataSetIndex(prefix, index) {
-			return `${prefix}-${index}`;
-		},
-
+		
 		switchTab(tab) {
 			this.activeTab = tab;
 			window.location.hash = `#tab=${tab}`;
@@ -80,7 +77,7 @@ new window.Vue({
 		},
 
 		setDataSetsExportStatus(state) {
-			this.cliExportDataSets.forEach((dataSet) => {
+			this.availableDataSets.forEach((dataSet) => {
 				dataSet.markedForExport = state;
 			});
 		},
@@ -94,6 +91,9 @@ new window.Vue({
 		} else {
 			this.activeTab = tabs.ADMIN;
 		}
+
+		this.$on('datasetsActiveState', state => this.setDataSetsStatus(state));
+		this.$on('datasetsExportState', state => this.setDataSetsExportStatus(state));
 	},
 
 	mounted() {
