@@ -48,7 +48,6 @@ router.post('/create', async (req, res, next) => {
 				limitReached: true,
 			});
 		}
-
 	} catch (err) {
 		// eslint-disable-next-line no-underscore-dangle
 		err.message = req.__(err.message);

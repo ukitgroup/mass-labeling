@@ -21,4 +21,5 @@ node_modules/
 /tmp/
 
 # Public editable files
+config/config.json
 public/instruction.html
