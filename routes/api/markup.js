@@ -32,15 +32,23 @@ router.post('/create', async (req, res, next) => {
 
 		const site = await Site.getRandom(additionalFilter);
 
-		logger.info({
-			siteId: site.id,
-			userId: req.user.id,
-		}, 'createTask');
+		// User has any task
+		if (site) {
+			logger.info({
+				siteId: site.id,
+				userId: req.user.id,
+			}, 'createTask');
 
-		res.api.response({
-			siteId: site.id,
-			siteStatus: site.status,
-		});
+			res.api.response({
+				siteId: site.id,
+				siteStatus: site.status,
+			});
+		} else {
+			res.api.response({
+				limitReached: true,
+			});
+		}
+
 	} catch (err) {
 		// eslint-disable-next-line no-underscore-dangle
 		err.message = req.__(err.message);

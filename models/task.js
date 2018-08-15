@@ -49,8 +49,6 @@ TaskSchema.statics = {
 		const limit = config.get('markup.limit');
 		const showRandomly = config.get('assessment.showRandomly');
 
-		console.log(1, showRandomly);
-
 		const count = await this.countByUserId(userId, true);
 
 		if (limit && count >= limit && showRandomly) {

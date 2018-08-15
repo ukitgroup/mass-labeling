@@ -8,7 +8,7 @@
         "id": "name",
         "name": "config_props.logger_name",
         "default": "app",
-        "value": "app3",
+        "value": "app",
         "format": "String",
         "element": {
           "type": "text"
@@ -97,12 +97,7 @@
         "id": "allowedDatasets",
         "name": "config_props.sites_datasets",
         "default": [],
-        "value": [
-          "ds6_alexa",
-          "ds5_mins",
-          "ds6_dinosaur",
-          "ds2_good"
-        ],
+        "value": [],
         "format": "DataSet",
         "element": {
           "type": "checkbox-group"
@@ -119,7 +114,7 @@
         "id": "limit",
         "name": "config_props.assessment_limit",
         "default": 0,
-        "value": 30,
+        "value": 0,
         "format": "Number",
         "element": {
           "type": "number"
@@ -183,7 +178,7 @@
         "id": "showRandomly",
         "name": "config_props.show_randomly",
         "default": true,
-        "value": false,
+        "value": true,
         "format": "Boolean",
         "element": {
           "type": "checkbox"

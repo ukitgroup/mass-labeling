@@ -87,8 +87,15 @@ class Design {
 
 		window.Request.post('/api/markup/create')
 			.then((task) => {
-				this.task = task;
-				this.show();
+				// User has no more tasks
+				if (task.limitReached) {
+					$(window).off('keyup');
+					$('#root').hide();
+					$('#overdose').show();
+				} else {
+					this.task = task;
+					this.show();
+				}
 			})
 			.catch(() => {
 				alert(signs.get_new_task_error);

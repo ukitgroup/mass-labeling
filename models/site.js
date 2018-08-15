@@ -62,7 +62,7 @@ SiteSchema.statics = {
 	async getRandom(additionalFilter = {}) {
 		const siteIds = await this.distinct('_id', {
 			...this.filter.allowedStatuses,
-			...this.filter.allowedDatasets,
+			...this.getAllowedDataSetsFilter(),
 			...additionalFilter,
 		});
 
@@ -75,6 +75,12 @@ SiteSchema.statics = {
 				_id: '$dataset',
 			},
 		}]);
+	},
+
+	getAllowedDataSetsFilter() {
+		return config.get('sites.allowedDatasets').length ? {
+			dataset: { $in: config.get('sites.allowedDatasets') },
+		} : {};
 	},
 };
 
