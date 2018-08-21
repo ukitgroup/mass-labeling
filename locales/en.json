@@ -86,7 +86,7 @@
   },
   "config_structure_error": "En_Конфиг должен быть набором строк",
   "edit_config": "edit_config",
-  "settings": "settings",
+  "settings": "Settings",
   "config_props": {
     "logger": "logger",
     "logger_name": "logger_name",
@@ -118,9 +118,9 @@
   },
   "config_categories": {
     "admin": "admin",
-    "tech": "tech",
-    "assessment": "assessment",
-    "users": "users"
+    "tech": "System",
+    "assessment": "Assessment",
+    "users": "Users"
   },
   "wrong_dataset_structure": "wrong_dataset_structure",
   "check_all": "check_all",
