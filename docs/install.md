@@ -99,3 +99,7 @@ A: The installation process with and without Docker was tested on Ubuntu 16.04 L
 Q: Can I use another version for `Node.js` or `MongoDB`?  
 A: The mentioned versions were tested. It is possible that it will work with `Node.js` v8.6+ and `MongoDB` v3.2+. But you 
 should use them on your own.
+
+Q: How to update a working copy of __Mass Labeling__?  
+A: If your working copy uses sources from master branch then it is better to make reinstall. If your working copy uses 
+sources from develop branch or other then it may be enough to recompose docker image or something similar.  
