@@ -94,13 +94,13 @@
     "data": "Данные",
     "db_url": "URL",
     "passport": "Авторизация",
-    "passport_cookie_age": "Максимальная длительность cookie пользователя (миллисекунды)",
+    "passport_cookie_age": "Время жизни cookie пользователя (миллисекунды)",
     "passport_cookie_secret": "Значение cookie",
     "sites": "Данные",
     "sites_datasets": "Наборы данных",
     "sites_screenshots_path": "Путь к директории скриншотов",
     "assessment": "Разметка",
-    "assessment_limit": "Максимальное количество разметок на пользователя (0 - неограничено)",
+    "assessment_limit": "Количество оценок/меток для асессора (0 - неограничено)",
     "cliImport": "Импорт через CLI",
     "cliImport_zip_path": "Путь к ZIP-архиву",
     "cliExport": "Экспорт через CLI",
@@ -117,9 +117,9 @@
     "trace": "Трассирующие сообщения"
   },
   "config_categories": {
-    "admin": "Настройки администратора",
-    "tech": "Технические настройки",
-    "assessment": "Оценки",
+    "admin": "Администрирование",
+    "tech": "Система",
+    "assessment": "Разметка",
     "users": "Пользователи"
   },
   "wrong_dataset_structure": "Неправильная структура наборов данных",

@@ -1,4 +1,4 @@
-http://support.ucoz.ru/screenshot5/2018-07-23_15-48-43.png# User guide
+# User guide
 
 ## Introduction
 
@@ -28,6 +28,7 @@ manage concurrent assessment tasks. The steps to start a new task are as follows
 
 1. [Provide data](provide_data) for assessment.
 1. [Manage datasets'](manage_datasets) accessibility.
+1. Change instructions for assessment.
 1. [Manage users' access](manage_users).
 
 After setting up a new task, assessors can start labeling the process and an administrator can 
@@ -45,8 +46,12 @@ An administrator can mark the datasets that are active. All images belonging to 
 list are shown to the assessors. And vice versa, images from datasets not included into this list are not shown 
 to the assessors.
 
-To manage the list of active datasets, an administrator should change the `config.sites.allowedDatasets.default`
-variable in the `config/index.js` file. The empty list means that all imported datasets are active.
+To manage the list of active datasets, an administrator should open 'Settings' page, choose 'Data and assessment' tab
+and choose datasets by checking options in 'Data/Datasets' section. 
+
+Also it is necessary to set 'Maximum labels per user' option in the same section. Screenshots would be shown randomly 
+using a uniform distribution. So, if you have a 1000 screenshots to be rated by users then you can set
+'Maximum labels per user' option to 3000 to have 3 views per user per screenshot in average.    
 
 #### Manage users
 
