@@ -19,7 +19,3 @@ node_modules/
 /docker-compose*.yml
 /logs/
 /tmp/
-
-# Public editable files
-config/config.json
-public/instruction.html

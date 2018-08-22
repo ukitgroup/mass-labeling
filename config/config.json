@@ -1,0 +1,189 @@
+[
+  {
+    "id": "logger",
+    "name": "config_props.logger",
+    "tab": "tech",
+    "properties": [
+      {
+        "id": "name",
+        "name": "config_props.logger_name",
+        "default": "app",
+        "value": "app",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      },
+      {
+        "id": "level",
+        "name": "config_props.logger_level",
+        "default": "info",
+        "value": "info",
+        "format": "String",
+        "element": {
+          "type": "select",
+          "options": {
+            "fatal": "logger_levels.fatal",
+            "error": "logger_levels.error",
+            "warn": "logger_levels.warn",
+            "info": "logger_levels.info",
+            "debug": "logger_levels.debug",
+            "trace": "logger_levels.trace"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "mongo",
+    "name": "config_props.data",
+    "tab": "tech",
+    "properties": [
+      {
+        "id": "url",
+        "name": "config_props.db_url",
+        "default": "mongodb://localhost:27017/mass-labeling",
+        "value": "mongodb://localhost:27017/mass-labeling",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      },
+      {
+        "id": "screenshotsPath",
+        "name": "config_props.sites_screenshots_path",
+        "default": "./data/screenshots",
+        "value": "./data/screenshots",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      }
+    ]
+  },
+  {
+    "id": "passport",
+    "name": "config_props.passport",
+    "tab": "tech",
+    "properties": [
+      {
+        "id": "maxAge",
+        "name": "config_props.passport_cookie_age",
+        "default": 2592000000,
+        "value": 2592000000,
+        "format": "Number",
+        "element": {
+          "type": "number"
+        }
+      },
+      {
+        "id": "secret",
+        "name": "config_props.passport_cookie_secret",
+        "default": "cs",
+        "value": "cs",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      }
+    ]
+  },
+  {
+    "id": "sites",
+    "name": "config_props.sites",
+    "tab": "admin",
+    "properties": [
+      {
+        "id": "allowedDatasets",
+        "name": "config_props.sites_datasets",
+        "default": [],
+        "value": [],
+        "format": "DataSet",
+        "element": {
+          "type": "checkbox-group"
+        }
+      }
+    ]
+  },
+  {
+    "id": "markup",
+    "name": "config_props.assessment",
+    "tab": "admin",
+    "properties": [
+      {
+        "id": "limit",
+        "name": "config_props.assessment_limit",
+        "default": 0,
+        "value": 0,
+        "format": "Number",
+        "element": {
+          "type": "number"
+        }
+      }
+    ]
+  },
+  {
+    "id": "cliImport",
+    "name": "config_props.cliImport",
+    "tab": "tech",
+    "visible": 0,
+    "properties": [
+      {
+        "id": "in",
+        "name": "config_props.cliImport_zip_path",
+        "default": "data/import/dataset.zip",
+        "value": "data/import/dataset.zip",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      }
+    ]
+  },
+  {
+    "id": "cliExport",
+    "name": "config_props.cliExport",
+    "tab": "tech",
+    "visible": 0,
+    "properties": [
+      {
+        "id": "datasets",
+        "name": "config_props.cliExport_datasets",
+        "default": [],
+        "value": [],
+        "format": "DataSet",
+        "element": {
+          "type": "checkbox-group"
+        }
+      },
+      {
+        "id": "out",
+        "name": "config_props.cliExport_json_path",
+        "default": "data/export/answers.json",
+        "value": "data/export/answers.json",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      }
+    ]
+  },
+  {
+    "id": "assessment",
+    "name": "config_props.show_randomly",
+    "tab": "assessment",
+    "visible": 1,
+    "properties": [
+      {
+        "id": "showRandomly",
+        "name": "config_props.show_randomly",
+        "default": true,
+        "value": true,
+        "format": "Boolean",
+        "element": {
+          "type": "checkbox"
+        }
+      }
+    ]
+  }
+]
