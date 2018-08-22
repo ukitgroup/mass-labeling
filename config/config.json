@@ -89,40 +89,6 @@
     ]
   },
   {
-    "id": "sites",
-    "name": "config_props.sites",
-    "tab": "admin",
-    "properties": [
-      {
-        "id": "allowedDatasets",
-        "name": "config_props.sites_datasets",
-        "default": [],
-        "value": [],
-        "format": "DataSet",
-        "element": {
-          "type": "checkbox-group"
-        }
-      }
-    ]
-  },
-  {
-    "id": "markup",
-    "name": "config_props.assessment",
-    "tab": "admin",
-    "properties": [
-      {
-        "id": "limit",
-        "name": "config_props.assessment_limit",
-        "default": 0,
-        "value": 0,
-        "format": "Number",
-        "element": {
-          "type": "number"
-        }
-      }
-    ]
-  },
-  {
     "id": "cliImport",
     "name": "config_props.cliImport",
     "tab": "tech",
@@ -170,10 +136,20 @@
   },
   {
     "id": "assessment",
-    "name": "config_props.show_randomly",
+    "name": "config_props.assessment",
     "tab": "assessment",
     "visible": 1,
     "properties": [
+      {
+        "id": "limit",
+        "name": "config_props.assessment_limit",
+        "default": 0,
+        "value": 0,
+        "format": "Number",
+        "element": {
+          "type": "number"
+        }
+      },
       {
         "id": "showRandomly",
         "name": "config_props.show_randomly",
@@ -182,6 +158,23 @@
         "format": "Boolean",
         "element": {
           "type": "checkbox"
+        }
+      }
+    ]
+  },
+  {
+    "id": "sites",
+    "name": "config_props.sites",
+    "tab": "assessment",
+    "properties": [
+      {
+        "id": "allowedDatasets",
+        "name": "config_props.sites_datasets",
+        "default": [],
+        "value": [],
+        "format": "DataSet",
+        "element": {
+          "type": "checkbox-group"
         }
       }
     ]

@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
 
 		res.render('markup', {
 			layout: false,
-			limit: showDataSetsRandomly ? config.get('markup.limit') : 0,
+			limit: showDataSetsRandomly ? config.get('assessment.limit') : 0,
 			count: await Task.countByUserId(req.user.id, true),
 		});
 	} catch (err) {

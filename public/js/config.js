@@ -11,10 +11,9 @@ const {
 
 
 const tabs = {
-	ADMIN: 'admin',
-	TECH: 'tech',
-	ASSESSMENTS: 'assessment',
 	USERS: 'users',
+	ASSESSMENTS: 'assessment',
+	TECH: 'tech',
 };
 
 
@@ -33,17 +32,13 @@ new window.Vue({
 			availableDataSets: window.availableDataSets,
 			loading: false,
 			signs: window.signs,
-			activeTab: tabs.ADMIN,
+			activeTab: tabs.USERS,
 		};
 	},
 
 	computed: {
 		techSettings() {
 			return this.config.filter(fieldSet => fieldSet.tab === tabs.TECH);
-		},
-
-		adminSettings() {
-			return this.config.filter(fieldSet => fieldSet.tab === tabs.ADMIN);
 		},
 
 		assessmentSettings() {
@@ -93,7 +88,7 @@ new window.Vue({
 		if (hash) {
 			this.activeTab = window.location.hash.split('=')[1];
 		} else {
-			this.activeTab = tabs.ADMIN;
+			this.activeTab = tabs.USERS;
 		}
 
 		this.$on('datasetsActiveState', state => this.setDataSetsStatus(state));

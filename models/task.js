@@ -46,7 +46,7 @@ TaskSchema.statics = {
 
 	// Set mark
 	async getNew({ siteId, answer, userId }) {
-		const limit = config.get('markup.limit');
+		const limit = config.get('assessment.limit');
 		const showRandomly = config.get('assessment.showRandomly');
 
 		const count = await this.countByUserId(userId, true);

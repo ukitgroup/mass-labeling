@@ -2,42 +2,21 @@
 
 <div class="row" v-show="!loading" style="display: none;">
   <div class="col-xs-12">
-
-
-    <button type="button" @click="switchTab('admin')" :class="[getTabClass('admin')]" class="btn">
-      <%= getText('config_categories.admin') %>
-    </button>
-
-    <button type="button" @click="switchTab('tech')" :class="[getTabClass('tech')]" class="btn">
-      <%= getText('config_categories.tech') %>
+    <button type="button" @click="switchTab('users')" :class="[getTabClass('users')]" class="btn">
+      <%= getText('config_categories.users') %>
     </button>
 
     <button type="button" @click="switchTab('assessment')" :class="[getTabClass('assessment')]" class="btn">
       <%= getText('config_categories.assessment') %>
     </button>
 
-    <button type="button" @click="switchTab('users')" :class="[getTabClass('users')]" class="btn">
-      <%= getText('config_categories.users') %>
+    <button type="button" @click="switchTab('tech')" :class="[getTabClass('tech')]" class="btn">
+      <%= getText('config_categories.tech') %>
     </button>
 
 
+
     <form autocomplete="off">
-
-      <div class="settings-block admin-settings" v-show="activeTab === 'admin'">
-        <div v-for="(fieldSet, fIndex) in adminSettings" v-if="fieldSet.visible !== 0">
-          <config-fieldset
-            :field-set="fieldSet"
-            :available-data-sets="availableDataSets"
-          ></config-fieldset>
-        </div>
-
-        <div class="form-group">
-          <button @click.prevent="updateConfig()" type="submit" class="btn btn-primary">
-            <%= getText('submit') %>
-          </button>
-        </div>
-      </div>
-
 
       <div class="settings-block tech-settings" v-show="activeTab === 'tech'">
         <div v-for="(fieldSet, fIndex) in techSettings" v-if="fieldSet.visible !== 0">
