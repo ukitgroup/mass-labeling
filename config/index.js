@@ -2,10 +2,11 @@
 
 const fs = require('fs');
 const path = require('path');
-const dotenv = require('dotenv');
 
-
-dotenv.config({ path: './config/app.env' });
+try {
+	const dotenv = require('dotenv');
+	dotenv.config({ path: './config/app.env' });
+} catch(error) {}
 
 
 const configFilePath = path.resolve(__dirname, '../config/config.json');
@@ -110,25 +111,33 @@ class Config {
 	 * @returns {Promise<any>}
 	 */
 	updateEnvFile() {
-		const envFilePath = path.resolve(__dirname, 'app.env');
+		try {
+			const envFilePath = path.resolve(__dirname, 'app.env');
 
-		return new Promise((resolve) => {
-			fs.readFile(envFilePath, 'utf-8', (error, content) => {
-				if (error) {
-					throw error;
-				}
-
-				content = content.replace(/(\n)?DB_URL=(.*)\n?/, `\nDB_URL=${this.get('mongo.url')}\n`);
-
-				fs.writeFile(envFilePath, content, (error) => {
+			return new Promise((resolve) => {
+				fs.readFile(envFilePath, 'utf-8', (error, content) => {
 					if (error) {
-						throw error;
+						resolve();
+						return;
 					}
 
-					resolve();
+					content = content.replace(/(\n)?DB_URL=(.*)\n?/, `\nDB_URL=${this.get('mongo.url')}\n`);
+
+					fs.writeFile(envFilePath, content, (error) => {
+						if (error) {
+							resolve();
+							return;
+						}
+
+						resolve();
+					});
 				});
 			});
-		});
+		} catch(error) {
+			return new Promise((resolve) => {
+				resolve();
+			});
+		}
 	}
 
 
