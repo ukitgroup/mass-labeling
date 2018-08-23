@@ -2,15 +2,15 @@
 
 <div class="row" v-show="!loading" style="display: none;">
   <div class="col-xs-12">
-    <button type="button" @click="switchTab('users')" :class="[getTabClass('users')]" class="btn">
+    <button type="button" @click="switchTab('users')" :class="[getTabClass('users')]" class="btn tab">
       <%= getText('config_categories.users') %>
     </button>
 
-    <button type="button" @click="switchTab('assessment')" :class="[getTabClass('assessment')]" class="btn">
+    <button type="button" @click="switchTab('assessment')" :class="[getTabClass('assessment')]" class="btn tab">
       <%= getText('config_categories.assessment') %>
     </button>
 
-    <button type="button" @click="switchTab('tech')" :class="[getTabClass('tech')]" class="btn">
+    <button type="button" @click="switchTab('tech')" :class="[getTabClass('tech')]" class="btn tab">
       <%= getText('config_categories.tech') %>
     </button>
 

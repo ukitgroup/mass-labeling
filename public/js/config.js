@@ -81,7 +81,7 @@ new window.Vue({
 		getTabClass(tab) {
 			return this.activeTab === tab
 				? 'btn-primary'
-				: 'btn-link';
+				: 'btn-default';
 		},
 
 		setDataSetsStatus(state) {

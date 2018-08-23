@@ -38,6 +38,11 @@
   margin-right: 12px;
 }
 
+.tab {
+  margin-right: 12px;
+  min-width: 130px;
+}
+
 input[type="text"],
 input[type="number"],
 select {
