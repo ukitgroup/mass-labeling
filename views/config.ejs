@@ -15,14 +15,14 @@
     </button>
 
 
-
     <form autocomplete="off">
-
       <div class="settings-block tech-settings" v-show="activeTab === 'tech'">
         <div v-for="(fieldSet, fIndex) in techSettings" v-if="fieldSet.visible !== 0">
           <config-fieldset
             :field-set="fieldSet"
             :available-data-sets="availableDataSets"
+            :show-randomly-property-value="showRandomlyPropertyValue"
+            :key="fieldSet.id"
           ></config-fieldset>
         </div>
 
@@ -41,6 +41,8 @@
           <config-fieldset
             :field-set="fieldSet"
             :available-data-sets="availableDataSets"
+            :show-randomly-property-value="showRandomlyPropertyValue"
+            :key="fieldSet.id"
           ></config-fieldset>
         </div>
 

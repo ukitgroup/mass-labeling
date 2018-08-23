@@ -38,3 +38,9 @@
   margin-right: 12px;
 }
 
+input[type="text"],
+input[type="number"],
+select {
+  max-width: 600px;
+  width: 100%;
+}

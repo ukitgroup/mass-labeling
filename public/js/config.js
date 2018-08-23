@@ -44,6 +44,21 @@ new window.Vue({
 		assessmentSettings() {
 			return this.config.filter(fieldSet => fieldSet.tab === tabs.ASSESSMENTS);
 		},
+
+		// Get 'assessment.showRandomly' property value
+		showRandomlyPropertyValue() {
+			const fieldSet = this.config
+				.filter(dataSet => dataSet.id === 'assessment')[0];
+
+			if (! fieldSet) {
+				return false;
+			}
+
+			const showRandomlyProperty = fieldSet.properties
+				.filter(property => property.id === 'showRandomly')[0];
+
+			return showRandomlyProperty ? showRandomlyProperty.value : false;
+		},
 	},
 
 	methods: {

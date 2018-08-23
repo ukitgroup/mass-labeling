@@ -130,5 +130,6 @@
   "save_changes": "save_changes",
   "config_updated": "config_updated",
   "instructions_updated": "instructions_updated",
-  "cancel": "cancel"
+  "cancel": "cancel",
+  "no_datasets": "no_datasets"
 }
