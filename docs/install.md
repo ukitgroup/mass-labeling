@@ -26,8 +26,8 @@ Take the following steps to build __Mass Labeling__ through [Docker](https://doc
     ./bin/install.sh
     ```
     The installation process will ask you to provide the following information:
-    - MongoDB location
     - Docker container name
+    - MongoDB location
     - HTTP port for __Mass Labeling__ service access
     - cookie secret to sign each user session ID
     

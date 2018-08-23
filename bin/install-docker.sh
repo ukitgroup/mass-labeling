@@ -11,6 +11,9 @@ default_port=80
 
 docker_use_mongo=false
 
+read -p "Enter container name ($default_container): " container
+container="${container:-$default_container}"
+echo ""
 
 echo "Choose MongoDB type:"
 echo "  1. Docker"
@@ -35,8 +38,6 @@ case "$db_type" in
     ;;
 esac
 
-read -p "Enter container name ($default_container): " container
-container="${container:-$default_container}"
 read -p "Enter server port ($default_port): " port
 port="${port:-$default_port}"
 read -p "Enter cookie secret: " cookie_secret

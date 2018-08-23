@@ -28,9 +28,9 @@ Input file is a `zip` archive file, which contains the following:
 * `screenshots`
     * `0123456789abcdef01234567.jpg`
     * ...
-* `out.json`
+* `description.json`
 
-`screenshots` folder contains JPEG-images which are going to be shown to the assessors. `out.json` file
+`screenshots` folder contains JPEG-images which are going to be shown to the assessors. `description.json` file
 consists of the `item` array. Each satisfies the following format:
 
 ```
