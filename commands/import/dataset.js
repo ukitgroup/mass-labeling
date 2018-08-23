@@ -28,7 +28,7 @@ module.exports = (program) => {
 		logger.info('Unzip done');
 
 
-		const sitesRaw = await fs.readJson(path.join(tmpPath, 'out.json'));
+		const sitesRaw = await fs.readJson(path.join(tmpPath, 'description.json'));
 
 		// Сохраняем сайты
 		const sites = await Promise.mapSeries(sitesRaw, async (site) => {
