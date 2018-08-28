@@ -26,7 +26,7 @@
         <%= getText('scored') %>:
 				<span id="markup-count"><%= count %></span>
 				/
-				<%= limit || '∞' %>
+				<%= limit === Infinity ? '∞' : limit %>
 			</p>
 
       <% include ./partials/lang-switcher %>

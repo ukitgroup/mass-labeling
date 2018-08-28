@@ -60,13 +60,13 @@ SiteSchema.statics = {
 	},
 
 	async getRandom(additionalFilter = {}) {
-		const siteIds = await this.distinct('_id', {
-			...this.filter.allowedStatuses,
-			...this.getAllowedDataSetsFilter(),
-			...additionalFilter,
-		});
-
+		const siteIds = await this.getActiveSiteIds(additionalFilter);
 		return this.findById(_.sample(siteIds));
+	},
+
+	async getActiveSitesCount(additionalFilter = {}) {
+		const siteIds = await this.getActiveSiteIds(additionalFilter);
+		return siteIds.length;
 	},
 
 	async getAllDataSets() {
@@ -81,6 +81,14 @@ SiteSchema.statics = {
 		return config.get('sites.allowedDatasets').length ? {
 			dataset: { $in: config.get('sites.allowedDatasets') },
 		} : {};
+	},
+
+	async getActiveSiteIds(additionalFilter = {}) {
+		return this.distinct('_id', {
+			...this.filter.allowedStatuses,
+			...this.getAllowedDataSetsFilter(),
+			...additionalFilter,
+		});
 	},
 };
 
