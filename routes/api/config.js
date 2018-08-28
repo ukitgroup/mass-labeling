@@ -12,11 +12,17 @@ const path = require('path');
 const User = require('../../models/user');
 const Task = require('../../models/task');
 
+const util = require('util');
+
+
+const writeFileAsync = util.promisify(fs.writeFile);
+
 
 router.post('/update', async (req, res, next) => {
 	try {
-		const { config, availableDataSets /* , cliExportDataSets */ } = req.body;
+		const { config, availableDataSets, instructions } = req.body;
 
+		// Update config
 		Config.updateConfig(config);
 
 		const activeDataSets = availableDataSets
@@ -27,20 +33,8 @@ router.post('/update', async (req, res, next) => {
 
 		await Config.updateFiles();
 
-		res.api.response();
-	} catch (err) {
-		// eslint-disable-next-line no-underscore-dangle
-		err.message = req.__(err.message);
-		next(err);
-	}
-});
-
-
-router.post('/update-instructions', async (req, res, next) => {
-	try {
-		const { instructions } = req.body;
-
-		fs.writeFileSync(path.resolve(__dirname, '../../public/instruction.html'), instructions);
+		// Update instruction.html
+		await writeFileAsync(path.resolve(__dirname, '../../public/instruction.html'), instructions);
 
 		res.api.response();
 	} catch (err) {

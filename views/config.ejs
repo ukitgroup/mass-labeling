@@ -35,7 +35,7 @@
 
 
       <div class="settings-block assessment-settings" v-show="activeTab === 'assessment'">
-        <user-instructions-controller></user-instructions-controller>
+        <user-instructions-controller :instructions="instructions"></user-instructions-controller>
 
         <div v-for="(fieldSet, fIndex) in assessmentSettings" v-if="fieldSet.visible !== 0">
           <config-fieldset

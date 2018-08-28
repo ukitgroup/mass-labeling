@@ -33,6 +33,7 @@ new window.Vue({
 			loading: false,
 			signs: window.signs,
 			activeTab: tabs.USERS,
+			instructions: window.instructions,
 		};
 	},
 
@@ -67,6 +68,7 @@ new window.Vue({
 				data: {
 					config: this.config,
 					availableDataSets: this.availableDataSets,
+					instructions: this.instructions,
 				},
 			})
 				.then(() => alert(this.signs.config_updated))
@@ -108,6 +110,10 @@ new window.Vue({
 
 		this.$on('datasetsActiveState', state => this.setDataSetsStatus(state));
 		this.$on('datasetsExportState', state => this.setDataSetsExportStatus(state));
+
+		this.$on('instructionsUpdate', (value) => {
+			this.instructions = value;
+		});
 	},
 
 	mounted() {

@@ -11,22 +11,19 @@ window.UserInstructionsController = {
             {{signs.close_editor}}
           </button>
 
-          <button @click.prevent="updateInstructions" v-show="editorShown" class="btn btn-primary">
-            {{signs.save_changes}}
-          </button>
-
           <div v-show="editorShown">
             <textarea id="instructions" v-model="instructions"></textarea>
           </div>
         </div>
 	`,
 
+	props: ['instructions'],
+
 	data() {
 		return {
 			editorShown: false,
 			cmInstance: null,
 			signs: window.signs,
-			instructions: window.instructions,
 		};
 	},
 
@@ -37,18 +34,6 @@ window.UserInstructionsController = {
 
 		closeCodeMirror() {
 			this.editorShown = false;
-		},
-
-		updateInstructions() {
-			const instructionsTextArea = this.$el.querySelector('#instructions');
-
-			window.Request.post('/api/config/update-instructions', {
-				data: {
-					instructions: instructionsTextArea.value.trim(),
-				},
-			})
-				.then(() => alert(this.signs.instructions_updated))
-				.catch(error => alert(error));
 		},
 	},
 
@@ -64,7 +49,7 @@ window.UserInstructionsController = {
 		});
 
 		this.cmInstance.on('change', () => {
-			this.instructions = this.cmInstance.getValue();
+			this.$parent.$emit('instructionsUpdate', this.cmInstance.getValue());
 		});
 	},
 };
