@@ -67,12 +67,12 @@ window.ConfigFieldSet = {
 					</div>
 				
 					  <div class="actions-container">
-						<button type="button" @click="setDataSetsStatus(true)" class="btn btn-success">
-						  {{window.signs.check_all}}
+						<button :title="signs.check_all" type="button" @click="setDataSetsStatus(true)" class="action-btn btn btn-success">
+						  <i class="fa fa-check" aria-hidden="true"></i>
 						</button>
 				
-						<button type="button" @click="setDataSetsStatus(false)" class="btn btn-success">
-						  {{window.signs.uncheck_all}}
+						<button :title="signs.uncheck_all" type="button" @click="setDataSetsStatus(false)" class="action-btn btn btn-success">
+						  <i class="fa fa-remove" aria-hidden="true"></i>
 						</button>
 					</div>
 				</div>	

@@ -9,6 +9,7 @@
 
 .actions-container {
   flex-basis: 100%;
+  margin: 6px 0;
 }
 
 .settings-block {
@@ -48,4 +49,8 @@ input[type="number"],
 select {
   max-width: 600px;
   width: 100%;
+}
+
+.action-btn {
+  min-width: 40px;
 }
