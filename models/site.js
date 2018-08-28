@@ -64,8 +64,8 @@ SiteSchema.statics = {
 		return this.findById(_.sample(siteIds));
 	},
 
-	async getActiveSitesCount(additionalFilter = {}) {
-		const siteIds = await this.getActiveSiteIds(additionalFilter);
+	async getActiveSitesCount() {
+		const siteIds = await this.getActiveSiteIds();
 		return siteIds.length;
 	},
 

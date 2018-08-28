@@ -17,20 +17,7 @@ router.get('/', async (req, res, next) => {
 			// If 0, user has no tasks limit, we'll display limit as ∞
 			limit = config.get('assessment.limit') || Infinity;
 		} else {
-			const approvedByUserSiteIds = await Task.distinct('siteId', {
-				userId: {
-					$eq: req.user.id,
-				},
-			});
-
-			const additionalFilter = {
-				_id: {
-					$nin: approvedByUserSiteIds,
-				},
-			};
-
-			// Display limit as is
-			limit = await Site.getActiveSitesCount(additionalFilter);
+			limit = await Site.getActiveSitesCount();
 		}
 
 		res.render('markup', {
