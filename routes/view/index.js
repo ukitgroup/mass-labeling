@@ -1,7 +1,7 @@
 const bridges = require('../bridges');
 
 const dashboard = require('./dashboard');
-const markup = require('./markup');
+const markup = require('./assessment');
 const user = require('./user');
 const stat = require('./stat');
 const broken = require('./broken');
@@ -113,7 +113,7 @@ router.use(
 
 // Разметка
 router.use(
-	'/markup',
+	'/assessment',
 	bridges.auth.user,
 	markup,
 );

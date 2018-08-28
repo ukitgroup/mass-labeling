@@ -20,7 +20,7 @@ router.get('/', async (req, res, next) => {
 			limit = await Site.getActiveSitesCount();
 		}
 
-		res.render('markup', {
+		res.render('assessment', {
 			limit,
 			layout: false,
 			count: await Task.countByUserId(req.user.id, true),
