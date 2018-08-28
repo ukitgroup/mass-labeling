@@ -1,3 +1,5 @@
+@import "lang-switcher.css";
+
 a {
 	color: #25b;
 	text-decoration: none;
@@ -10,22 +12,22 @@ a:active {
 
 
 ._sl-nav {
-	position: absolute;
+	position: fixed;
 	z-index: 1;
 	top: 0;
-	
+
 	width: 100px;
 	height: 100vh;
-	
+
 	font-size: 30px;
 	line-height: 100vh;
 	text-align: center;
 	color: #fff;
-	
+
 	background-color: rgba(0, 0, 0, .6);
-	
+
 	cursor: pointer;
-	
+
 	transition: background .3s;
 }
 
@@ -43,9 +45,12 @@ a:active {
 
 
 ._sl-root {
-	display: flex;
-	align-items: center;
 	padding: 0 100px;
+}
+
+._sl-root-content {
+  display: flex;
+  align-items: center;
 }
 
 ._sl-image {
@@ -54,21 +59,29 @@ a:active {
 	overflow: auto;
 }
 
+.container {
+  width: 100%;
+}
+
+.navbar-right {
+  margin-right: 0;
+}
+
 ._sl-image img {
 	width: 100%;
 }
 
 ._sl-info {
 	flex: 1 0;
-	
+
 	padding: 20px;
 }
 
 ._sl-info p {
 	display: flex;
-	
+
 	margin: 10px 0;
-	
+
 	font-size: 20px;
 }
 

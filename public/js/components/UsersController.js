@@ -177,7 +177,7 @@ window.UsersController = {
 					if (updatedUser) {
 						updatedUser.hasSlider = true;
 					}
-					
+
 					alert(this.signs.slider_created);
 				})
 				.catch(err => alert(err.message));
