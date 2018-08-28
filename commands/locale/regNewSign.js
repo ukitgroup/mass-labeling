@@ -6,6 +6,11 @@ const i18nConfig = require('../../locales/i18n-config');
 
 const fs = require('fs-extra');
 
+const util = require('util');
+
+
+const writeFileAsync = util.promisify(fs.writeFile);
+
 
 module.exports = (program) => {
 	program.description('Register new sign for all language files');
@@ -19,7 +24,7 @@ module.exports = (program) => {
 		const newSignKey = args.key || 'NO_NAME';
 
 		try {
-			availableLocales.forEach((locale) => {
+			await Promise.all(availableLocales.map(async (locale) => {
 				const signsStructure = newSignKey.split('.');
 
 				const filePath = `${__dirname}/../../locales/${locale}.json`;
@@ -43,9 +48,10 @@ module.exports = (program) => {
 					localeJSON[newSignKey] = newSignKey;
 				}
 
-				fs.writeFileSync(filePath, JSON.stringify(localeJSON, null, 2));
+				await writeFileAsync(filePath, JSON.stringify(localeJSON, null, 2));
+
 				console.log(`Sign with key '${newSignKey}' was added to ${locale}.json`);
-			});
+			}));
 
 			console.log();
 		} catch (error) {

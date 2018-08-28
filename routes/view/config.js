@@ -12,6 +12,11 @@ const User = require('../../models/user');
 const Slider = require('../../models/slider');
 const Task = require('../../models/task');
 
+const util = require('util');
+
+
+const readFileAsync = util.promisify(fs.readFile);
+
 
 // Values located in lang files
 const statuses = {
@@ -45,9 +50,10 @@ router.get('/', async (req, res, next) => {
 
 
 		// Assessment tab
-		const instructionsPageHTML = fs
-			.readFileSync(path.resolve(__dirname, '../../public/instruction.html'), 'utf-8')
-			.trim();
+		const instructionsPageHTML = await readFileAsync(
+			path.resolve(__dirname, '../../public/instruction.html'),
+			'utf-8',
+		);
 
 
 		// Users tab
@@ -76,7 +82,6 @@ router.get('/', async (req, res, next) => {
 			config: config.getConfig(),
 		});
 	} catch (err) {
-		// eslint-disable-next-line no-underscore-dangle
 		err.message = req.__(err.message);
 		next(err);
 	}
