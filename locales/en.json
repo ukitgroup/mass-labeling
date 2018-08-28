@@ -131,5 +131,7 @@
   "config_updated": "config_updated",
   "instructions_updated": "instructions_updated",
   "cancel": "cancel",
-  "no_datasets": "no_datasets"
+  "no_datasets": "no_datasets",
+  "slider_creation_error": "slider_creation_error",
+  "slider_opening_error": "slider_opening_error"
 }

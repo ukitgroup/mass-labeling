@@ -10,6 +10,7 @@ const fs = require('fs');
 const path = require('path');
 
 const User = require('../../models/user');
+const Task = require('../../models/task');
 
 
 router.post('/update', async (req, res, next) => {
@@ -99,6 +100,12 @@ router.post('/:userId/update-user', async (req, res, next) => {
 router.post('/:userId/create-slider', async (req, res, next) => {
 	try {
 		const { userId = 0 } = req.params;
+
+		const userAnswersCount = await Task.countByUserId(userId);
+
+		if (! userAnswersCount) {
+			throw new Error('slider_creation_error');
+		}
 
 		const storedUser = await User.findById(userId);
 

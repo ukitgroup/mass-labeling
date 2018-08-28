@@ -9,6 +9,8 @@ const config = require('../../config');
 
 const Site = require('../../models/site');
 const User = require('../../models/user');
+const Slider = require('../../models/slider');
+const Task = require('../../models/task');
 
 
 // Values located in lang files
@@ -50,9 +52,17 @@ router.get('/', async (req, res, next) => {
 
 		// Users tab
 		const users = await User.find();
-
 		const rawUsers = users.map(user => user.toObject());
-		rawUsers.forEach(user => delete user.password);
+
+		await Promise.all(rawUsers.map(async (user) => {
+			const userAnswersCount = await Task.countByUserId(user._id);
+			user.hasAnswers = userAnswersCount > 0;
+
+			const slidersOfUser = await Slider.getAllByName(user.email);
+			user.hasSlider = slidersOfUser.length > 0;
+
+			delete user.password;
+		}));
 
 
 		res.render('config', {

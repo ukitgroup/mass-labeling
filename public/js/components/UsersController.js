@@ -29,17 +29,29 @@ window.UsersController = {
 						  <td>{{signs['user_statuses.' + user.status]}}</td>
 						  <td>{{signs['user_roles.' + user.role]}}</td>
 						  <td>
-							<a @click.prevent="editUser(user)" type="button" class="btn btn-warning btn-xs">
+							<button @click.prevent="editUser(user)" type="button" class="btn btn-warning btn-xs">
 							  {{signs.edit}}
-							</a>
+							</button>
 							
-							<button @click.prevent="createSlider(user)" type="button" class="btn btn-primary btn-xs create-slider">
+							<button 
+								@click.prevent="createSlider(user)" 
+								type="button" 
+								class="btn btn-primary btn-xs create-slider"
+								:disabled="!user.hasAnswers"
+								:title="user.hasAnswers ? '' : signs.slider_creation_error"
+							>
 							  {{signs.gen_slider}}
 							</button>
 							
-							<a :href="generateOpenSliderLink(user)" type="button" class="btn btn-success btn-xs">
+							<button 
+								@click.prevent="openSlider(user)" 
+								type="button" 
+								class="btn btn-success btn-xs"
+								:disabled="!user.hasSlider"
+								:title="user.hasSlider ? '' : signs.slider_opening_error"
+							>
 							  {{signs.open_slider}}
-							</a>
+							</button>
 						  </td>
 						</tr>
 					</tbody>
@@ -119,8 +131,12 @@ window.UsersController = {
 			this.selectedUser = $.extend(true, {}, user);
 		},
 
-		generateOpenSliderLink(user) {
-			return `/slider/${user.email}`;
+		openSlider(user) {
+			if (! user.hasSlider) {
+				return;
+			}
+
+			window.location.href = `/slider/${user.email}`;
 		},
 
 		closeForm() {
@@ -150,9 +166,21 @@ window.UsersController = {
 		},
 
 		createSlider(user) {
+			if (! user.hasAnswers) {
+				return;
+			}
+
 			window.Request.post(`/api/config/${user._id}/create-slider`)
-				.then(() => alert(this.signs.slider_created))
-				.catch(err => alert(`${this.signs.error}: "${err.message}"`));
+				.then(() => {
+					const updatedUser = this.users.filter(storedUser => user._id === storedUser._id)[0];
+
+					if (updatedUser) {
+						updatedUser.hasSlider = true;
+					}
+					
+					alert(this.signs.slider_created);
+				})
+				.catch(err => alert(err.message));
 		},
 	},
 };
