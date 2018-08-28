@@ -94,7 +94,7 @@
     "data": "Данные",
     "db_url": "URL",
     "passport": "Авторизация",
-    "passport_cookie_age": "Время жизни cookie пользователя (миллисекунды)",
+    "passport_cookie_age": "Время жизни cookie пользователя (секунды)",
     "passport_cookie_secret": "Значение cookie",
     "sites": "Данные",
     "sites_datasets": "Наборы данных",

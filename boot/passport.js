@@ -16,7 +16,10 @@ module.exports = (app) => {
 
 	app.use(session({
 		secret: config.get('passport.secret'),
-		cookie: { maxAge: config.get('passport.maxAge') },
+		cookie: {
+			// seconds -> milliseconds
+			maxAge: config.get('passport.maxAge') * 1000,
+		},
 		resave: true,
 		saveUninitialized: true,
 		store: new MongoStore({ mongooseConnection: mongoose.connection }),

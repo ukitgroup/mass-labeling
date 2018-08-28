@@ -69,8 +69,8 @@
       {
         "id": "maxAge",
         "name": "config_props.passport_cookie_age",
-        "default": 2592000000,
-        "value": 2592000000,
+        "default": 2592000,
+        "value": 2592000,
         "format": "Number",
         "element": {
           "type": "number"
