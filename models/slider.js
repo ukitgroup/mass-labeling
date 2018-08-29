@@ -17,7 +17,11 @@ const SliderSchema = new mongoose.Schema({
 		required: true,
 	},
 
-	modelScore: Number,
+	modelScore: {
+		type: Number,
+		default: 0,
+	},
+
 	assessorsScore: [Number],
 });
 

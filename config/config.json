@@ -92,13 +92,23 @@
     "id": "cliImport",
     "name": "config_props.cliImport",
     "tab": "tech",
-    "visible": 0,
+    "visible": 1,
     "properties": [
       {
         "id": "in",
         "name": "config_props.cliImport_zip_path",
         "default": "data/import/dataset.zip",
         "value": "data/import/dataset.zip",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      },
+      {
+        "id": "modelScoreIn",
+        "name": "config_props.cliImport_json_path",
+        "default": "data/import/modelScore.json",
+        "value": "data/import/modelScore.json",
         "format": "String",
         "element": {
           "type": "text"

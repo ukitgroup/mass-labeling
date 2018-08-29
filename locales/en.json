@@ -106,7 +106,8 @@
     "cliExport": "CLI export",
     "cliExport_datasets": "Datasets to export",
     "cliExport_json_path": "JSON metadata path",
-    "show_randomly": "show_randomly"
+    "show_randomly": "show_randomly",
+    "cliImport_json_path": "cliImport_json_path"
   },
   "logger_levels": {
     "fatal": "fatal",
