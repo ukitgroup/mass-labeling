@@ -117,7 +117,16 @@ UserSchema.methods = {
 		});
 
 		// Собираем оценки для слайдера
-		const slider = siteIds.map((siteId) => {
+		const slider = await Promise.all(siteIds.map(async (siteId) => {
+			// Get saved slider from DB to retrieve its modelScore property value
+			const slider = await Slider.findOne({
+				name: { $eq: name },
+				siteId: { $eq: siteId },
+			});
+
+			// If slider exists, get its modelScore property value
+			const modelScore = slider ? slider.modelScore : 0;
+
 			const siteAnswers = answers
 				.filter(item => item.siteId.equals(siteId))
 				.map(item => item.answer);
@@ -129,21 +138,23 @@ UserSchema.methods = {
 
 			return {
 				siteId,
+				modelScore,
 				siteAnswers,
 				userAnswers,
 			};
-		});
+		}));
 
 
 		// Удаляем старый слайдер
 		await Slider.deleteAllByName(name);
 
-		// Сохраняем оцкенки
+		// Сохраняем оценки
 		await Slider.getAllNew({
 			name,
-			slider: slider.map(({ siteId, siteAnswers, userAnswers }) => ({
+			slider: slider.map(({ siteId, modelScore, userAnswers }) => ({
 				siteId,
-				modelScore: stats.mean(siteAnswers),
+				// Set the model score value of previous slider to the new one
+				modelScore,
 				assessorsScore: userAnswers,
 			})),
 		});

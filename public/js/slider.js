@@ -40,11 +40,19 @@ const app = new window.Vue({
 		},
 
 		error() {
+			if (this.modelScore === 0) {
+				return '-';
+			}
+
 			return Math.abs(this.modelScore - this.meanAssessorsScore);
 		},
 
 
 		modelScoreStr() {
+			if (this.modelScore === 0) {
+				return '-';
+			}
+
 			return this.modelScore.toFixed(4);
 		},
 
@@ -53,6 +61,10 @@ const app = new window.Vue({
 		},
 
 		errorStr() {
+			if (this.modelScore === 0) {
+				return '-';
+			}
+
 			return this.error.toFixed(4);
 		},
 
