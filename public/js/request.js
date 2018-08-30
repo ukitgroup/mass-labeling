@@ -1,4 +1,4 @@
-class Request {
+export default class Request {
 	constructor({
 		method,
 		url,
@@ -73,6 +73,3 @@ class Request {
 		return result;
 	}
 }
-
-
-window.Request = Request;

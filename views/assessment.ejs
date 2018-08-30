@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%= fromPublic('css/markup.css') %>">
+<link rel="stylesheet" href="<%= fromPublic('assessment.css') %>">
 
 
 <div class="navbar navbar-inverse navbar-static-top">
@@ -102,13 +102,13 @@
 </div>
 
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 <script>
 	window.markupCount = <%= count %>;
 	window.markupLimit = <%= limit %>;
 
   window.signs = <%- JSON.stringify(frontSigns()) %>;
 </script>
-<script src="<%= fromPublic('js/request.js') %>"></script>
-<script src="<%= fromPublic('js/assessment.js') %>"></script>
+<script src="<%= fromPublic('assessment.js') %>"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>

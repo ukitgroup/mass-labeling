@@ -74,8 +74,7 @@ router.get('/', async (req, res, next) => {
 			});
 
 
-
-		console.log(taskSets);
+		// console.log(taskSets);
 
 
 		// Users tab

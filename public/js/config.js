@@ -53,14 +53,14 @@ new window.Vue({
 		// showRandomlyPropertyValue() {
 		// 	const fieldSet = this.config
 		// 		.filter(dataSet => dataSet.id === 'assessment')[0];
-        //
+		//
 		// 	if (! fieldSet) {
 		// 		return false;
 		// 	}
-        //
+		//
 		// 	const showRandomlyProperty = fieldSet.properties
 		// 		.filter(property => property.id === 'showRandomly')[0];
-        //
+		//
 		// 	return showRandomlyProperty ? showRandomlyProperty.value : false;
 		// },
 	},
@@ -94,7 +94,7 @@ new window.Vue({
 		// 		dataSet.isActive = state;
 		// 	});
 		// },
-        //
+		//
 		// setDataSetsExportStatus(state) {
 		// 	this.availableDataSets.forEach((dataSet) => {
 		// 		dataSet.markedForExport = state;

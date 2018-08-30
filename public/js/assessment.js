@@ -1,6 +1,11 @@
 /* eslint-disable no-alert */
 
-'use strict';
+import $ from 'jquery';
+import Request from './request';
+
+
+window.$ = $;
+window.jQuery = $;
 
 
 // Texts from back-end
@@ -10,7 +15,7 @@ const { signs } = window;
 $('#logout').click((event) => {
 	event.preventDefault();
 
-	window.Request.post('/api/auth/logout')
+	Request.post('/api/auth/logout')
 		.then(() => {
 			window.location = '/';
 		});
@@ -87,7 +92,7 @@ class Design {
 			$('#overdose').show();
 		}
 
-		window.Request.post('/api/assessment/create')
+		Request.post('/api/assessment/create')
 			.then((task) => {
 				// User has no more tasks
 				if (task.limitReached) {
@@ -106,7 +111,7 @@ class Design {
 
 	// Сохранение выбора пользователя
 	save() {
-		window.Request.post('/api/assessment/answer', {
+		Request.post('/api/assessment/answer', {
 			data: {
 				siteId: this.task.siteId,
 				answer: this.answer,
@@ -126,7 +131,7 @@ class Design {
 			return;
 		}
 
-		window.Request.post(`/api/assessment/${this.prev.id}/undo`)
+		Request.post(`/api/assessment/${this.prev.id}/undo`)
 			.then(() => {
 				this.markupCount--;
 				this.task = this.prev;

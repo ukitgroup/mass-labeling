@@ -145,17 +145,17 @@ window.TaskSetsController = {
 			// 	dataSet.isInTaskSet = false;
 			// });
 
-			this.dataSetsList.forEach((dataSet) => {
-				// dataSet.isInTaskSet = blankTaskSet.activeDataSets.indexOf(dataSet.dataset) >= 0;
-			});
+			// this.dataSetsList.forEach((dataSet) => {
+			// 	// dataSet.isInTaskSet = blankTaskSet.activeDataSets.indexOf(dataSet.dataset) >= 0;
+			// });
 
 			this.selectedTaskSet = blankTaskSet;
 		},
 
 		editTaskSet(taskSet) {
-			this.dataSetsList.forEach((dataSet) => {
-				// dataSet.isInTaskSet = taskSet.activeDataSets.indexOf(dataSet.dataset) >= 0;
-			});
+			// this.dataSetsList.forEach((dataSet) => {
+			// 	// dataSet.isInTaskSet = taskSet.activeDataSets.indexOf(dataSet.dataset) >= 0;
+			// });
 
 			this.selectedTaskSet = $.extend({}, taskSet);
 		},
