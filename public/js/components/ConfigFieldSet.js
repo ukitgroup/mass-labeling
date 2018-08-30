@@ -22,7 +22,6 @@ window.ConfigFieldSet = {
 			  v-model="property.value"
 			  v-if="property.element.type === 'number'"
 			  :id="property.id"
-			  :disabled="isDisabled(property, fieldSet)"
 			>
 		
 			<input
@@ -50,100 +49,16 @@ window.ConfigFieldSet = {
 			  <option v-for="(text, value) in property.element.options" :value="value">
 				{{window.signs[text]}}
 			  </option>
-			</select>
-		
-		
-			<div v-if="property.id === 'allowedDatasets'">
-				<div v-if="availableDataSets.length" class="datasets-container">
-					<div class="form-check-label dataset-item" v-for="(dataset, index) in availableDataSets">
-						<input
-						  :id="getDataSetIndex('dataset', index)"
-						  class="form-check-input"
-						  type="checkbox"
-						  v-model="dataset.isActive"
-						>
-						
-						<label :for="getDataSetIndex('dataset', index)">{{dataset._id}}</label>
-					</div>
-				
-					  <div class="actions-container">
-						<button :title="signs.check_all" type="button" @click="setDataSetsStatus(true)" class="action-btn btn btn-success">
-						  <i class="fa fa-check" aria-hidden="true"></i>
-						</button>
-				
-						<button :title="signs.uncheck_all" type="button" @click="setDataSetsStatus(false)" class="action-btn btn btn-success">
-						  <i class="fa fa-remove" aria-hidden="true"></i>
-						</button>
-					</div>
-				</div>	
-				
-				<div v-else>
-					{{window.signs.no_datasets}}
-				</div>
-			</div>
-			
-			
-			<div v-if="property.id === 'datasets'">
-				<div v-if="availableDataSets.length" class="datasets-container">
-					<div class="form-check-label dataset-item" v-for="(dataset, index) in availableDataSets">
-						<input
-						  :id="getDataSetIndex('dataset2', index)"
-						  class="form-check-input"
-						  type="checkbox"
-						  v-model="dataset.markedForExport"
-						>
-		
-						<label :for="getDataSetIndex('dataset2', index)">{{dataset.dataset}}</label>
-					</div>
-		
-					<div class="actions-container">
-						<button type="button" @click="setDataSetsExportStatus(true)" class="btn btn-success">
-						  {{window.signs.check_all}}
-						</button>
-		
-						<button type="button" @click="setDataSetsExportStatus(false)" class="btn btn-success">
-						  {{window.signs.uncheck_all}}
-						</button>
-					</div>
-				</div>	
-				<div v-else>
-					{{window.signs.no_datasets}}
-				</div>
-			</div>		
+			</select>	
 		  </div>
 		</div>
 	`,
 
-	props: ['fieldSet', 'availableDataSets', 'showRandomlyPropertyValue'],
+	props: ['fieldSet'],
 
 	methods: {
 		getDataSetIndex(prefix, index) {
 			return `${prefix}-${index}`;
-		},
-
-		/**
-		 * Set 'active' status of all fieldsets (true/false)
-		 * @param state {Boolean}
-		 */
-		setDataSetsStatus(state) {
-			this.$parent.$emit('datasetsActiveState', state);
-		},
-
-		/**
-		 * Set 'marked for export' status of all fieldsets (true/false)
-		 * @param state {Boolean}
-		 */
-		setDataSetsExportStatus(state) {
-			this.$parent.$emit('datasetsExportState', state);
-		},
-
-		isDisabled(property, fieldSet) {
-			// Property 'assessment.limit' is disabled when 'assessment.showRandomly' === 0
-			if (fieldSet.id === 'assessment' && property.id === 'limit') {
-				return ! this.showRandomlyPropertyValue;
-			}
-
-			return false;
 		},
 	},
 };

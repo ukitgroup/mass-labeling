@@ -11,6 +11,7 @@ const path = require('path');
 
 const User = require('../../models/user');
 const Task = require('../../models/task');
+const TaskSet = require('../../models/taskset');
 
 const util = require('util');
 
@@ -117,5 +118,52 @@ router.post('/:userId/create-slider', async (req, res, next) => {
 	}
 });
 
+router.post('/add-taskset', async (req, res, next) => {
+	try {
+		const { taskSet } = req.body;
+
+		await TaskSet.create({
+			...taskSet,
+		});
+
+		res.api.response();
+	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
+		err.message = req.__(err.message);
+		next(err);
+	}
+});
+
+router.post('/:taskSetId/edit-taskset', async (req, res, next) => {
+	try {
+		const { taskSet } = req.body;
+		const { taskSetId = 0 } = req.params;
+
+		const storedTaskSet = await TaskSet.findById(taskSetId);
+
+		if (! storedTaskSet) {
+			throw new NotFoundError();
+		}
+
+		await storedTaskSet.update(taskSet);
+
+		res.api.response();
+	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
+		err.message = req.__(err.message);
+		next(err);
+	}
+});
+
+router.post('/:taskSetId/activate', async (req, res, next) => {
+	try {
+		// todo
+		res.api.response();
+	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
+		err.message = req.__(err.message);
+		next(err);
+	}
+});
 
 module.exports = router;

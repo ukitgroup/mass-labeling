@@ -135,5 +135,16 @@
   "no_datasets": "no_datasets",
   "slider_creation_error": "slider_creation_error",
   "slider_opening_error": "slider_opening_error",
-  "nav_back": "nav_back"
+  "nav_back": "nav_back",
+  "add_taskset": "add_taskset",
+  "assessment_limit_short": "assessment_limit_short",
+  "random_selection": "random_selection",
+  "active_taskset": "active_taskset",
+  "yes": "yes",
+  "no": "no",
+  "delete": "delete",
+  "activate": "activate",
+  "edit_taskset": "edit_taskset",
+  "datasets_for_task": "datasets_for_task",
+  "description": "description"
 }

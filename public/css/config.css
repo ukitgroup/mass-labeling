@@ -22,7 +22,7 @@
   margin-top: 20px;
 }
 
-.users-form {
+.users-form, .tasksets-form {
   margin-top: 20px;
 }
 
@@ -46,11 +46,37 @@
 
 input[type="text"],
 input[type="number"],
-select {
+select,
+textarea {
   max-width: 600px;
   width: 100%;
 }
 
-.action-btn {
-  min-width: 40px;
+.datasets-control {
+  color: #337ab7;
+  font-size: 18px;
+  margin-left: 12px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.datasets-control:last-child {
+  margin-left: 6px;
+}
+
+.edit-instructions {
+  margin: 12px 0 36px 0;
+}
+
+.tasksets-form h5 {
+  font-weight: bold;
+  width: 100%;
+}
+
+.tasksets-form .property {
+  margin-bottom: 12px;
+}
+
+.tasksets-form textarea {
+  height: 100px;
 }

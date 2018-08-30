@@ -7,6 +7,7 @@ const {
 	UsersController,
 	UserInstructionsController,
 	ConfigFieldSet,
+	TaskSetsController,
 } = window;
 
 
@@ -24,6 +25,7 @@ new window.Vue({
 		'users-controller': UsersController,
 		'user-instructions-controller': UserInstructionsController,
 		'config-fieldset': ConfigFieldSet,
+		'tasksets-controller': TaskSetsController,
 	},
 
 	data() {
@@ -34,6 +36,7 @@ new window.Vue({
 			signs: window.signs,
 			activeTab: tabs.USERS,
 			instructions: window.instructions,
+			taskSets: window.taskSets,
 		};
 	},
 
@@ -42,24 +45,24 @@ new window.Vue({
 			return this.config.filter(fieldSet => fieldSet.tab === tabs.TECH);
 		},
 
-		assessmentSettings() {
-			return this.config.filter(fieldSet => fieldSet.tab === tabs.ASSESSMENTS);
-		},
+		// assessmentSettings() {
+		// 	return this.config.filter(fieldSet => fieldSet.tab === tabs.ASSESSMENTS);
+		// },
 
 		// Get 'assessment.showRandomly' property value
-		showRandomlyPropertyValue() {
-			const fieldSet = this.config
-				.filter(dataSet => dataSet.id === 'assessment')[0];
-
-			if (! fieldSet) {
-				return false;
-			}
-
-			const showRandomlyProperty = fieldSet.properties
-				.filter(property => property.id === 'showRandomly')[0];
-
-			return showRandomlyProperty ? showRandomlyProperty.value : false;
-		},
+		// showRandomlyPropertyValue() {
+		// 	const fieldSet = this.config
+		// 		.filter(dataSet => dataSet.id === 'assessment')[0];
+        //
+		// 	if (! fieldSet) {
+		// 		return false;
+		// 	}
+        //
+		// 	const showRandomlyProperty = fieldSet.properties
+		// 		.filter(property => property.id === 'showRandomly')[0];
+        //
+		// 	return showRandomlyProperty ? showRandomlyProperty.value : false;
+		// },
 	},
 
 	methods: {
@@ -86,17 +89,17 @@ new window.Vue({
 				: 'btn-default';
 		},
 
-		setDataSetsStatus(state) {
-			this.availableDataSets.forEach((dataSet) => {
-				dataSet.isActive = state;
-			});
-		},
-
-		setDataSetsExportStatus(state) {
-			this.availableDataSets.forEach((dataSet) => {
-				dataSet.markedForExport = state;
-			});
-		},
+		// setDataSetsStatus(state) {
+		// 	this.availableDataSets.forEach((dataSet) => {
+		// 		dataSet.isActive = state;
+		// 	});
+		// },
+        //
+		// setDataSetsExportStatus(state) {
+		// 	this.availableDataSets.forEach((dataSet) => {
+		// 		dataSet.markedForExport = state;
+		// 	});
+		// },
 	},
 
 	created() {
@@ -108,8 +111,8 @@ new window.Vue({
 			this.activeTab = tabs.USERS;
 		}
 
-		this.$on('datasetsActiveState', state => this.setDataSetsStatus(state));
-		this.$on('datasetsExportState', state => this.setDataSetsExportStatus(state));
+		// this.$on('datasetsActiveState', state => this.setDataSetsStatus(state));
+		// this.$on('datasetsExportState', state => this.setDataSetsExportStatus(state));
 
 		this.$on('instructionsUpdate', (value) => {
 			this.instructions = value;

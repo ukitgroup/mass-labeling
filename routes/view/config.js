@@ -11,6 +11,7 @@ const Site = require('../../models/site');
 const User = require('../../models/user');
 const Slider = require('../../models/slider');
 const Task = require('../../models/task');
+const TaskSet = require('../../models/taskset');
 
 const util = require('util');
 
@@ -55,6 +56,27 @@ router.get('/', async (req, res, next) => {
 			'utf-8',
 		);
 
+		// await TaskSet.create({
+		// 	assessmentLimit: 0,
+		// 	activeDataSets: [],
+		// 	randomSelection: true,
+		// 	isActive: false,
+		// });
+
+		const taskSets = await TaskSet.find();
+		const rawTaskSets = taskSets
+			.map((taskSet) => {
+				const rawTaskSet = taskSet.toObject();
+
+				rawTaskSet.dataSets = availableDataSets;
+
+				return rawTaskSet;
+			});
+
+
+
+		console.log(taskSets);
+
 
 		// Users tab
 		const users = await User.find();
@@ -77,6 +99,7 @@ router.get('/', async (req, res, next) => {
 			roles,
 
 			instructionsPageHTML,
+			taskSets: rawTaskSets,
 
 			availableDataSets,
 			config: config.getConfig(),

@@ -18,12 +18,7 @@
     <form autocomplete="off">
       <div class="settings-block tech-settings" v-show="activeTab === 'tech'">
         <div v-for="(fieldSet, fIndex) in techSettings" v-if="fieldSet.visible !== 0">
-          <config-fieldset
-            :field-set="fieldSet"
-            :available-data-sets="availableDataSets"
-            :show-randomly-property-value="showRandomlyPropertyValue"
-            :key="fieldSet.id"
-          ></config-fieldset>
+          <config-fieldset :field-set="fieldSet"></config-fieldset>
         </div>
 
         <div class="form-group">
@@ -35,16 +30,12 @@
 
 
       <div class="settings-block assessment-settings" v-show="activeTab === 'assessment'">
-        <user-instructions-controller :instructions="instructions"></user-instructions-controller>
+        <tasksets-controller
+          :task-sets="taskSets"
+          :data-sets="availableDataSets"
+        ></tasksets-controller>
 
-        <div v-for="(fieldSet, fIndex) in assessmentSettings" v-if="fieldSet.visible !== 0">
-          <config-fieldset
-            :field-set="fieldSet"
-            :available-data-sets="availableDataSets"
-            :show-randomly-property-value="showRandomlyPropertyValue"
-            :key="fieldSet.id"
-          ></config-fieldset>
-        </div>
+        <user-instructions-controller :instructions="instructions"></user-instructions-controller>
 
         <div class="form-group">
           <button @click.prevent="updateConfig()" type="submit" class="btn btn-primary">
@@ -69,6 +60,9 @@
   window.availableDataSets = <%- JSON.stringify(availableDataSets) %>;
 
   window.instructions = <%- JSON.stringify(instructionsPageHTML) %>
+  window.taskSets = <%- JSON.stringify(taskSets) %>
+
+    console.log(<%- JSON.stringify(taskSets) %>)
 
   window.users = <%- JSON.stringify(users) %>
   window.roles = <%- JSON.stringify(roles) %>
@@ -85,6 +79,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
 
+<script src="<%= fromPublic('js/components/TaskSetsController.js') %>"></script>
 <script src="<%= fromPublic('js/components/ConfigFieldSet.js') %>"></script>
 <script src="<%= fromPublic('js/components/UserInstructionsController.js') %>"></script>
 <script src="<%= fromPublic('js/components/UsersController.js') %>"></script>

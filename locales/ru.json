@@ -135,5 +135,16 @@
   "no_datasets": "Нет импортированных наборов данных",
   "slider_creation_error": "Невозможно создать слайдер: у пользователя нет оценок",
   "slider_opening_error": "У пользователя нет созданных слайдеров",
-  "nav_back": "Назад"
+  "nav_back": "Назад",
+  "add_taskset": "Добавить задачу",
+  "assessment_limit_short": "Лимит оценок",
+  "random_selection": "Показывать случайно",
+  "active_taskset": "Активная задача",
+  "yes": "Да",
+  "no": "Нет",
+  "delete": "Удалить",
+  "activate": "Активировать",
+  "edit_taskset": "Редактировать задачу",
+  "datasets_for_task": "Активные наборы данных для задачи",
+  "description": "Описание"
 }
