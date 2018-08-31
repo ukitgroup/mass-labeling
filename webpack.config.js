@@ -1,16 +1,10 @@
-const path = require('path');
 const webpack = require('webpack');
+const path = require('path');
 
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-// const extractLess = new ExtractTextPlugin('[name].css');
-
-
-// function getFullPath(relPath = '') {
-// 	return path.join(__dirname, relPath);
-// }
 
 const BUILD_MODES = {
 	PRODUCTION: 'production',
@@ -19,23 +13,41 @@ const BUILD_MODES = {
 
 
 const webpackConfig = {
-	entry: {
-		assessment: path.resolve(__dirname, './public/js/assessment.js'),
-	},
+	entry: {},
 
 	cache: true,
 	mode: 'development',
+	// mode: 'production',
 	target: 'web',
+	watch: true,
+
+	optimization: {
+		splitChunks: {
+			chunks: 'all',
+			minSize: 30000,
+			maxSize: 0,
+			minChunks: 1,
+			maxAsyncRequests: 5,
+			maxInitialRequests: 3,
+			automaticNameDelimiter: '~',
+			name: 'vendor',
+			cacheGroups: {
+				vendors: {
+					test: /[\\/]node_modules[\\/]/,
+					priority: -10,
+				},
+				default: {
+					minChunks: 2,
+					priority: -20,
+					reuseExistingChunk: true,
+				},
+			},
+		},
+	},
 
 	output: {
 		path: path.resolve(__dirname, './public/bundles/'),
 		filename: '[name].js',
-	},
-
-	resolve: {
-		alias: {
-
-		},
 	},
 
 	module: {
@@ -70,37 +82,13 @@ const webpackConfig = {
 				},
 			},
 
-			// {
-			// 	test: /\.less$/,
-			// 	exclude: /node_modules/,
-			// 	loader: extractLess.extract({
-			// 		use: [{
-			// 			loader: 'css-loader',
-			// 		}, {
-			// 			loader: 'less-loader',
-			// 		}],
-			//
-			// 		fallback: 'style-loader',
-			// 	}),
-			// },
-			//
-			// {
-			// 	test: /\.css$/,
-			// 	include: [
-			// 		/node_modules\/jquery-ui/,
-			// 		/node_modules\/codemirror/,
-			// 	],
-			// 	loader: extractLess.extract({
-			// 		use: [{
-			// 			loader: 'css-loader',
-			// 			options: {
-			// 				minimize: process.env.NODE_ENV === BUILD_MODES.PRODUCTION,
-			// 			},
-			// 		}],
-			//
-			// 		fallback: 'style-loader',
-			// 	}),
-			// },
+			{
+				test: /\.css$/,
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: ['css-loader'],
+				}),
+			},
 
 			{
 				test: /\.(jpg|png|gif|svg)$/,
@@ -115,40 +103,23 @@ const webpackConfig = {
 	},
 
 	plugins: [
-		// extractLess,
+		new ExtractTextPlugin({
+			filename: 'css/[name].css',
+		}),
 
-		// new webpack.optimize.CommonsChunkPlugin({
-		// 	name: 'vendor.min',
-		// 	minChunks: Infinity,
-		// }),
+		new OptimizeCssAssetsPlugin({
+			assetNameRegExp: /\.css$/g,
+			cssProcessorOptions: { discardComments: { removeAll: true } },
+		}),
 	],
 };
 
 
-if (process.env.NODE_ENV === BUILD_MODES.PRODUCTION) {
-	webpackConfig.plugins.push(new ParallelUglifyPlugin({
-		workerCount: 4,
-		uglifyJS: {
-			mangle: true,
-			compress: {
-				drop_console: true,
-			},
-			output: {
-				comments: false,
-			},
-		},
-	}));
-
-	// webpackConfig.plugins.push(new OptimizeCssAssetsPlugin({
-	// 	assetNameRegExp: /\.css$/g,
-	// 	cssProcessorOptions: { discardComments: { removeAll: true } },
-	// }));
-}
-
-
-if (process.env.NODE_ENV === BUILD_MODES.DEVELOPMENT) {
-	webpackConfig.watch = true;
-}
+['layout', 'index', 'assessment', 'broken', 'config', 'slider']
+	.forEach((entryName) => {
+		webpackConfig.entry[entryName] = path
+			.resolve(__dirname, `./public/js/${entryName}.js`);
+	});
 
 
 module.exports = webpackConfig;

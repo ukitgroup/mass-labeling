@@ -3,10 +3,11 @@
 import $ from 'jquery';
 import Request from './request';
 
+import '../css/assessment.css';
 
+// todo: load bootstrap from NPM package
 window.$ = $;
 window.jQuery = $;
-
 
 // Texts from back-end
 const { signs } = window;
@@ -25,7 +26,7 @@ $('#logout').click((event) => {
 class Design {
 	constructor(markupCount, markupLimit) {
 		this.markupCount = markupCount;
-		this.markupLimit = markupLimit;
+		this.markupLimit = markupLimit === Infinity ? 0 : markupLimit;
 
 		$(window).on('keyup', (event) => {
 			let { keyCode } = event;

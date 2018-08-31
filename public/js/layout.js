@@ -1,10 +1,15 @@
-'use strict';
+import $ from 'jquery';
+import Request from './request';
 
+import '../css/layout.css';
+
+window.$ = $;
+window.jQuery = $;
 
 $('#logout').click((event) => {
 	event.preventDefault();
 
-	window.Request.post('/api/auth/logout')
+	Request.post('/api/auth/logout')
 		.then(() => {
 			window.location = '/';
 		});
