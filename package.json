@@ -7,7 +7,9 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
+    "bootstrap": "^3.3.7",
     "bunyan": "^1.8.12",
+    "codemirror": "^5.40.0",
     "commander": "^2.15.1",
     "connect-mongo": "^2.0.1",
     "convict": "^4.2.0",

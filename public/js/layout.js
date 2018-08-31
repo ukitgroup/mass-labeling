@@ -1,10 +1,11 @@
+/* eslint-disable import/first */
+
 import $ from 'jquery';
 import Request from './request';
 
 import '../css/layout.css';
 
-window.$ = $;
-window.jQuery = $;
+import '../../node_modules/bootstrap/dist/js/bootstrap';
 
 $('#logout').click((event) => {
 	event.preventDefault();

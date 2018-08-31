@@ -1,10 +1,10 @@
 /**
  * Component of settings fieldset (/config)
  */
-window.ConfigFieldSet = {
+export default {
 	template: `
 		<div>
-		  <h3>{{window.signs[fieldSet.name]}}</h3>
+		  <h3>{{signs[fieldSet.name]}}</h3>
 		
 		  <div 
 		  	class="form-group form-check-label" 
@@ -12,7 +12,7 @@ window.ConfigFieldSet = {
 		  	v-for="(property, pIndex) in fieldSet.properties"
 		  >
 			<label :for="property.id">
-			  {{window.signs[property.name]}}
+			  {{signs[property.name]}}
 			</label>
 		
 			<input
@@ -47,18 +47,18 @@ window.ConfigFieldSet = {
 			  :id="property.id"
 			>
 			  <option v-for="(text, value) in property.element.options" :value="value">
-				{{window.signs[text]}}
+				{{signs[text]}}
 			  </option>
 			</select>	
 		  </div>
 		</div>
 	`,
 
-	props: ['fieldSet'],
-
-	methods: {
-		getDataSetIndex(prefix, index) {
-			return `${prefix}-${index}`;
-		},
+	data() {
+		return {
+			signs: window.signs,
+		};
 	},
+
+	props: ['fieldSet'],
 };

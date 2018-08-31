@@ -1,3 +1,6 @@
+@import '../../node_modules/codemirror/lib/codemirror.css';
+@import '../../node_modules/codemirror/theme/mdn-like.css';
+
 .datasets-container {
   display: flex;
   flex-wrap: wrap;

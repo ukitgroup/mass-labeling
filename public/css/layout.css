@@ -1,5 +1,5 @@
+@import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 @import "lang-switcher.css";
-@import "config.css";
 
 .container {
 	width: 1200px !important;

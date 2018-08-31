@@ -1,16 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-
-
-const BUILD_MODES = {
-	PRODUCTION: 'production',
-	DEVELOPMENT: 'development',
-};
-
 
 const webpackConfig = {
 	entry: {},
@@ -42,6 +34,12 @@ const webpackConfig = {
 					reuseExistingChunk: true,
 				},
 			},
+		},
+	},
+
+	resolve: {
+		alias: {
+			vue$: 'vue/dist/vue.esm.js',
 		},
 	},
 
@@ -110,6 +108,11 @@ const webpackConfig = {
 		new OptimizeCssAssetsPlugin({
 			assetNameRegExp: /\.css$/g,
 			cssProcessorOptions: { discardComments: { removeAll: true } },
+		}),
+
+		new webpack.ProvidePlugin({
+			$: 'jquery',
+			jQuery: 'jquery',
 		}),
 	],
 };
