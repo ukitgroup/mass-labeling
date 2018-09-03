@@ -3,6 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const _ = require('lodash');
+
 const router = require('express').Router();
 
 const config = require('../../config');
@@ -63,12 +65,31 @@ router.get('/', async (req, res, next) => {
 		// 	isActive: false,
 		// });
 
+		// All {_id: ***}
+		// console.log(availableDataSets)
+
+		// 1. Получаем все TaskSet'ы
 		const taskSets = await TaskSet.find();
+
 		const rawTaskSets = taskSets
 			.map((taskSet) => {
 				const rawTaskSet = taskSet.toObject();
 
-				rawTaskSet.dataSets = availableDataSets;
+				const taskSetActiveDataSets = rawTaskSet.activeDataSets;
+
+				// Active
+				// console.log(taskSetActiveDataSets)
+
+				// 2. Инжектим в каждый тасксет наборы данных.
+				// В каждый набор добавляем поле молели isInTaskSet, которое означает,
+				// активирован ли датасет в текущем тасксете
+				rawTaskSet.dataSets = availableDataSets.map((dataSet) => {
+					const dataSetClone = _.clone(dataSet);
+
+					dataSetClone.isInTaskSet = taskSetActiveDataSets.indexOf(dataSetClone._id) >= 0;
+
+					return dataSetClone;
+				});
 
 				return rawTaskSet;
 			});

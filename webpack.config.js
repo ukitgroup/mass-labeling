@@ -3,7 +3,7 @@ const path = require('path');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const { VueLoaderPlugin } = require('vue-loader')
+const { VueLoaderPlugin } = require('vue-loader');
 
 
 const cssExtractor = new ExtractTextPlugin({

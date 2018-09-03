@@ -122,6 +122,14 @@ router.post('/add-taskset', async (req, res, next) => {
 	try {
 		const { taskSet } = req.body;
 
+		taskSet.activeDataSets = taskSet.dataSets
+			.filter(dataSet => dataSet.isInTaskSet)
+			.map(dataSet => dataSet._id);
+
+		// console.log(taskSet.activeDataSets);
+
+		delete taskSet.dataSets;
+
 		await TaskSet.create({
 			...taskSet,
 		});
@@ -144,6 +152,14 @@ router.post('/:taskSetId/edit-taskset', async (req, res, next) => {
 		if (! storedTaskSet) {
 			throw new NotFoundError();
 		}
+
+		taskSet.activeDataSets = taskSet.dataSets
+			.filter(dataSet => dataSet.isInTaskSet)
+			.map(dataSet => dataSet._id);
+
+		// console.log(taskSet.activeDataSets);
+
+		delete taskSet.dataSets;
 
 		await storedTaskSet.update(taskSet);
 

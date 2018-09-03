@@ -8,7 +8,7 @@ const TaskSetSchema = new mongoose.Schema({
 	},
 
 	activeDataSets: {
-		type: [Number],
+		type: [String],
 		default: [],
 	},
 
@@ -41,6 +41,7 @@ TaskSetSchema.methods = {
 		this.assessmentLimit = newProperties.assessmentLimit;
 		this.randomSelection = newProperties.randomSelection;
 		this.description = newProperties.description;
+		this.activeDataSets = newProperties.activeDataSets;
 
 		await this.save();
 	},

@@ -25,7 +25,7 @@
 						<td>{{index + 1}}</td>
 						<td>{{taskSet.assessmentLimit}}</td>
 						<td>{{booleanToReadableString(taskSet.randomSelection)}}</td>
-						<td>{{'dataset1, dataset2, dataset3'}}</td>
+						<td>{{renderActiveDataSetsColumnContent(taskSet.activeDataSets)}}</td>
 						<td>{{booleanToReadableString(taskSet.isActive)}}</td>
 						<td>{{taskSet.description || '-'}}</td>
 						<td>
@@ -42,8 +42,6 @@
 				</table>
 			</div>
 		</div>
-
-		{{selectedTaskSet && selectedTaskSet.dataSets}}
 
 		<div class="users-form-wrapper" v-if="selectedTaskSet">
 			<h1 v-if="selectedTaskSet._id">{{signs.edit_taskset}}</h1>
@@ -90,7 +88,7 @@
 							<i @click="setDataSetsStatus(false)" :title="signs.uncheck_all" class="fa fa-square-o datasets-control" aria-hidden="true"></i>
 						</h5>
 
-						<div v-if="dataSetsList.length" class="datasets-container property">
+						<div v-if="selectedTaskSet.dataSets.length" class="datasets-container property">
 							<div class="form-check-label dataset-item" v-for="(dataset, index) in selectedTaskSet.dataSets">
 								<input
 									:id="index"
@@ -126,14 +124,10 @@
 			return {
 				signs: window.signs,
 				selectedTaskSet: null,
-				dataSetsList: [],
 			};
 		},
 
 		computed: {
-			selectedDataSets() {
-				return this.dataSetsList.filter(dataSet => dataSet.isInTaskSet);
-			},
 		},
 
 		methods: {
@@ -145,22 +139,19 @@
 					activeDataSets: [],
 				};
 
-				// this.dataSetsList.forEach((dataSet) => {
-				// 	dataSet.isInTaskSet = false;
-				// });
+				blankTaskSet.dataSets = this.dataSets
+					.map((dataSet) => {
+						const dataSetClone = $.extend(true, {}, dataSet);
 
-				// this.dataSetsList.forEach((dataSet) => {
-				// 	// dataSet.isInTaskSet = blankTaskSet.activeDataSets.indexOf(dataSet.dataset) >= 0;
-				// });
+						dataSetClone.isInTaskSet = false;
+
+						return dataSetClone;
+					});
 
 				this.selectedTaskSet = blankTaskSet;
 			},
 
 			editTaskSet(taskSet) {
-				// this.dataSetsList.forEach((dataSet) => {
-				// 	// dataSet.isInTaskSet = taskSet.activeDataSets.indexOf(dataSet.dataset) >= 0;
-				// });
-
 				this.selectedTaskSet = $.extend({}, taskSet);
 			},
 
@@ -193,11 +184,43 @@
 			booleanToReadableString(boolean) {
 				return boolean ? this.signs.yes : this.signs.no;
 			},
+
+			setDataSetsStatus(state) {
+				if (! this.selectedTaskSet) {
+					return;
+				}
+
+				this.selectedTaskSet.dataSets
+					.forEach((dataSet) => {
+						dataSet.isInTaskSet = state;
+					});
+			},
+
+			renderActiveDataSetsColumnContent(activeDataSets) {
+				if (! activeDataSets.length) {
+					return '-';
+				}
+
+				const shownDataSets = activeDataSets.slice(0, 3);
+
+				let columnContent = shownDataSets.join(',');
+
+				const notShownDataSetsLength = activeDataSets.length - shownDataSets.length;
+
+				if (notShownDataSetsLength) {
+					columnContent += ` и ещё ${notShownDataSetsLength}`;
+				}
+
+				return columnContent;
+			}
 		},
 
 		created() {
+
+			// console.log(this.dataSets);
+
 			// this.taskSets = this.taskSets.push(this.taskSets[0]);
-			this.dataSetsList = [...this.dataSets];
+			// this.dataSetsList = [...this.dataSets];
 
 			// this.dataSetsList.forEach((dataSet) => {
 			// 	dataSet.isInTaskSet = false;
