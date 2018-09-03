@@ -6,10 +6,10 @@ import Request from './request';
 
 import '../css/config.css';
 
-import UsersController from './components/UsersController';
-import UserInstructionsController from './components/UserInstructionsController';
-import ConfigFieldSet from './components/ConfigFieldSet';
-import TaskSetsController from './components/TaskSetsController';
+import UsersController from './components/UsersController.vue';
+import UserInstructionsController from './components/UserInstructionsController.vue';
+import ConfigFieldSet from './components/ConfigFieldSet.vue';
+import TaskSetsController from './components/TaskSetsController.vue';
 
 
 const tabs = {
