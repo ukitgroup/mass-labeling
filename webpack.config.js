@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
