@@ -9,15 +9,13 @@ const cssExtractor = new ExtractTextPlugin({
 	filename: 'css/[name].css',
 });
 
-
 const webpackConfig = {
 	entry: {},
 
 	cache: true,
-	mode: 'development',
-	// mode: 'production',
+	mode: process.env.NODE_ENV,
+	watch: process.env.NODE_ENV === 'development',
 	target: 'web',
-	watch: true,
 
 	optimization: {
 		splitChunks: {
@@ -120,7 +118,15 @@ const webpackConfig = {
 };
 
 
-['layout', 'index', 'assessment', 'broken', 'config', 'slider']
+// Define project entries (bundle of each page)
+[
+	'layout',
+	'index',
+	'assessment',
+	'broken',
+	'config',
+	'slider',
+]
 	.forEach((entryName) => {
 		webpackConfig.entry[entryName] = path
 			.resolve(__dirname, `./public/js/${entryName}.js`);

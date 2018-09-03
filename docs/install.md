@@ -71,9 +71,14 @@ Take the following steps to build __Mass Labeling__ locally:
 
 1. Install the npm modules required using the following command:
 
-```sh
-npm i --no-save
-```
+    ```sh
+    npm i --no-save
+    ```
+
+1. Build front-end bundles using the following command:
+    ```sh
+    npm run build:front
+    ```
 
 ### Run
 
