@@ -1,6 +1,9 @@
 /* eslint-disable no-underscore-dangle,no-alert */
 
-window.TaskSetsController = {
+import $ from 'jquery';
+import Request from '../request';
+
+export default {
 	template: `
 		<div>
 		  <div v-if="!selectedTaskSet">
@@ -170,7 +173,7 @@ window.TaskSetsController = {
 
 			// Edit user request
 			if (taskSetId) {
-				window.Request.post(`/api/config/${taskSetId}/edit-taskset`, {
+				Request.post(`/api/config/${taskSetId}/edit-taskset`, {
 					data: { taskSet },
 				})
 					.then(() => window.location.reload())
@@ -178,7 +181,7 @@ window.TaskSetsController = {
 
 			// Add user request
 			} else {
-				window.Request.post('/api/config/add-taskset', {
+				Request.post('/api/config/add-taskset', {
 					data: { taskSet },
 				})
 					.then(() => window.location.reload())

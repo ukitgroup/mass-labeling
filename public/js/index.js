@@ -1,5 +1,7 @@
-'use strict';
+/* eslint-disable no-alert */
 
+import $ from 'jquery';
+import Request from './request';
 
 // Texts from back-end
 const { signs } = window;
@@ -11,7 +13,7 @@ $('#login').submit((event) => {
 	const email = $('#email').val();
 	const password = $('#password').val();
 
-	window.Request.post('/api/auth/login', {
+	Request.post('/api/auth/login', {
 		data: {
 			email,
 			password,

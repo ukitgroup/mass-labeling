@@ -1,6 +1,9 @@
 /* eslint-disable no-underscore-dangle,no-alert */
 
-window.UsersController = {
+import $ from 'jquery';
+import Request from '../request';
+
+export default {
 	template: `
 		<div>
 			<div v-if="!selectedUser">
@@ -149,7 +152,7 @@ window.UsersController = {
 
 			// Edit user request
 			if (userId) {
-				window.Request.post(`/api/config/${userId}/update-user`, {
+				Request.post(`/api/config/${userId}/update-user`, {
 					data: { user },
 				})
 					.then(() => window.location.reload())
@@ -157,7 +160,7 @@ window.UsersController = {
 
 			// Add user request
 			} else {
-				window.Request.post('/api/config/add-user', {
+				Request.post('/api/config/add-user', {
 					data: { user },
 				})
 					.then(() => window.location.reload())
@@ -170,7 +173,7 @@ window.UsersController = {
 				return;
 			}
 
-			window.Request.post(`/api/config/${user._id}/create-slider`)
+			Request.post(`/api/config/${user._id}/create-slider`)
 				.then(() => {
 					const updatedUser = this.users.filter(storedUser => user._id === storedUser._id)[0];
 

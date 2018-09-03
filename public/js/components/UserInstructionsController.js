@@ -1,6 +1,10 @@
 /* eslint-disable no-alert */
 
-window.UserInstructionsController = {
+import CodeMirror from '../../../node_modules/codemirror/lib/codemirror';
+import '../../../node_modules/codemirror/mode/xml/xml';
+import '../../../node_modules/codemirror/addon/display/autorefresh';
+
+export default {
 	template: `
 		<div class="edit-instructions">
           <button @click.prevent="openCodeMirror" v-show="!editorShown" class="btn btn-success">
@@ -40,7 +44,7 @@ window.UserInstructionsController = {
 	mounted() {
 		const instructionsTextArea = this.$el.querySelector('#instructions');
 
-		this.cmInstance = window.CodeMirror.fromTextArea(instructionsTextArea, {
+		this.cmInstance = CodeMirror.fromTextArea(instructionsTextArea, {
 			lineNumbers: true,
 			mode: 'xml',
 			theme: 'mdn-like',

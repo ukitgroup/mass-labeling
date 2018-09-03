@@ -2,14 +2,10 @@
 
 <title>Mass labeling</title>
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%= fromPublic('css/layout.css') %>">
+<link rel="stylesheet" href="<%= fromPublic('bundles/css/layout.css') %>">
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="<%= fromPublic('js/request.js') %>"></script>
-
+<script src="<%= fromPublic('bundles/vendor.js') %>"></script>
 
 <div class="navbar navbar-inverse navbar-static-top">
 	<div class="container">
@@ -51,7 +47,7 @@
 		</div>
 	</div>
 </div>
-<div class="container js-container">
+<div class="container">
 	<%- body %>
 </div>
 
@@ -59,5 +55,4 @@
   window.signs = <%- JSON.stringify(frontSigns()) %>;
 </script>
 
-
-<script src="<%= fromPublic('js/layout.js') %>"></script>
+<script src="<%= fromPublic('bundles/layout.js') %>"></script>

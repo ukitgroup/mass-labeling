@@ -1,6 +1,8 @@
+<link rel="stylesheet" href="<%= fromPublic('bundles/css/config.css') %>">
+
 <h1><%= getText('edit_config') %></h1>
 
-<div class="row" v-show="!loading" style="display: none;">
+<div class="row js-container" v-show="!loading" style="display: none;">
   <div class="col-xs-12">
     <button type="button" @click="switchTab('users')" :class="[getTabClass('users')]" class="btn tab">
       <%= getText('config_categories.users') %>
@@ -62,25 +64,9 @@
   window.instructions = <%- JSON.stringify(instructionsPageHTML) %>
   window.taskSets = <%- JSON.stringify(taskSets) %>
 
-    console.log(<%- JSON.stringify(taskSets) %>)
-
   window.users = <%- JSON.stringify(users) %>
   window.roles = <%- JSON.stringify(roles) %>
   window.statuses = <%- JSON.stringify(statuses) %>
 </script>
 
-<link rel="stylesheet" href="<%= fromPublic('css/lib/codemirror/codemirror.css') %>">
-<link rel="stylesheet" href="<%= fromPublic('css/lib/codemirror/mdn-like.css') %>">
-
-<script src="<%= fromPublic('js/lib/codemirror/codemirror.js') %>"></script>
-<script src="<%= fromPublic('js/lib/codemirror/xml.js') %>"></script>
-<script src="<%= fromPublic('js/lib/codemirror/autorefresh.js') %>"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
-
-<script src="<%= fromPublic('js/components/TaskSetsController.js') %>"></script>
-<script src="<%= fromPublic('js/components/ConfigFieldSet.js') %>"></script>
-<script src="<%= fromPublic('js/components/UserInstructionsController.js') %>"></script>
-<script src="<%= fromPublic('js/components/UsersController.js') %>"></script>
-<script src="<%= fromPublic('js/config.js') %>"></script>
+<script src="<%= fromPublic('bundles/config.js') %>"></script>

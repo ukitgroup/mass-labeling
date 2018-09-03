@@ -1,12 +1,17 @@
-'use strict';
+import $ from 'jquery';
+import Vue from 'vue';
+
+import '../css/slider.css';
 
 
-const app = new window.Vue({
+const app = new Vue({
 	el: '#app',
+
 	data: {
 		items: window.items,
 		index: 0,
 	},
+
 	computed: {
 		item() {
 			const item = this.items[this.index];
@@ -72,6 +77,7 @@ const app = new window.Vue({
 			return this.assessorsScore.join(', ');
 		},
 	},
+
 	methods: {
 		prev() {
 			this.index = ((this.index - 1) + this.items.length) % this.items.length;

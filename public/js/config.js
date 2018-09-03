@@ -1,14 +1,15 @@
 /* eslint-disable no-alert,prefer-destructuring */
 
-'use strict';
+import Vue from 'vue';
 
+import Request from './request';
 
-const {
-	UsersController,
-	UserInstructionsController,
-	ConfigFieldSet,
-	TaskSetsController,
-} = window;
+import '../css/config.css';
+
+import UsersController from './components/UsersController';
+import UserInstructionsController from './components/UserInstructionsController';
+import ConfigFieldSet from './components/ConfigFieldSet';
+import TaskSetsController from './components/TaskSetsController';
 
 
 const tabs = {
@@ -18,7 +19,7 @@ const tabs = {
 };
 
 
-new window.Vue({
+new Vue({
 	el: '.js-container',
 
 	components: {
@@ -67,7 +68,7 @@ new window.Vue({
 
 	methods: {
 		updateConfig() {
-			window.Request.post('/api/config/update', {
+			Request.post('/api/config/update', {
 				data: {
 					config: this.config,
 					availableDataSets: this.availableDataSets,

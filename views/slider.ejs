@@ -4,8 +4,7 @@
 <title>Sliders</title>
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%= fromPublic('css/slider.css') %>">
+<link rel="stylesheet" href="<%= fromPublic('bundles/css/slider.css') %>">
 
 
 <div id="app" class="_sl-app">
@@ -51,12 +50,10 @@
 </div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
-
 <script>
 	window.items = <%- JSON.stringify(items) %>;
   window.signs = <%- JSON.stringify(frontSigns()) %>;
 </script>
 
-<script src="<%= fromPublic('js/slider.js') %>"></script>
+<script src="<%= fromPublic('bundles/vendor.js') %>"></script>
+<script src="<%= fromPublic('bundles/slider.js') %>"></script>
