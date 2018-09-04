@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-const stats = require('stats-lite');
 
 const Site = require('./site');
 const Slider = require('./slider');
@@ -46,7 +45,7 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.statics = {
 	hash(str) {
-		return crypto.createHash('sha256').update(str).digest('base64');
+		return crypto.createHash('sha256').save(str).digest('base64');
 	},
 
 	async getById(id) {

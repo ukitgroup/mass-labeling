@@ -23,7 +23,7 @@ router.post('/add', async (req, res, next) => {
 	}
 });
 
-router.post('/:userId/update', bridges.user.id, async (req, res, next) => {
+router.post('/:userId/save', bridges.user.id, async (req, res, next) => {
 	try {
 		await req.curUser.setEmail(req.body.email);
 		if (req.body.pass) await req.curUser.setPassword(req.body.pass);

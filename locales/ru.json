@@ -82,7 +82,8 @@
   },
   "task_errors": {
     "markup_overdose": "Превышено количество разметок",
-    "bad_markup_request": "Некорректный запрос"
+    "bad_markup_request": "Некорректный запрос",
+    "no_active_taskset": "Не выбрана активная задача"
   },
   "config_structure_error": "Конфиг должен быть набором строк",
   "edit_config": "Редактирование настроек приложения",
@@ -146,5 +147,9 @@
   "activate": "Активировать",
   "edit_taskset": "Редактировать задачу",
   "datasets_for_task": "Активные наборы данных для задачи",
-  "description": "Описание"
+  "description": "Описание",
+  "taskset_activation_error": "Ошибка активации задачи",
+  "edit_taskset_error": "Ошибка обновления задачи",
+  "add_taskset_error": "Ошибка добавления задачи",
+  "and_more_datasets": "и ещё %s"
 }

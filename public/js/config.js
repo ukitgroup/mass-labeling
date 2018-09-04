@@ -45,30 +45,11 @@ new Vue({
 		techSettings() {
 			return this.config.filter(fieldSet => fieldSet.tab === tabs.TECH);
 		},
-
-		// assessmentSettings() {
-		// 	return this.config.filter(fieldSet => fieldSet.tab === tabs.ASSESSMENTS);
-		// },
-
-		// Get 'assessment.showRandomly' property value
-		// showRandomlyPropertyValue() {
-		// 	const fieldSet = this.config
-		// 		.filter(dataSet => dataSet.id === 'assessment')[0];
-		//
-		// 	if (! fieldSet) {
-		// 		return false;
-		// 	}
-		//
-		// 	const showRandomlyProperty = fieldSet.properties
-		// 		.filter(property => property.id === 'showRandomly')[0];
-		//
-		// 	return showRandomlyProperty ? showRandomlyProperty.value : false;
-		// },
 	},
 
 	methods: {
 		updateConfig() {
-			Request.post('/api/config/update', {
+			Request.post('/api/config/save', {
 				data: {
 					config: this.config,
 					availableDataSets: this.availableDataSets,
@@ -89,18 +70,6 @@ new Vue({
 				? 'btn-primary'
 				: 'btn-default';
 		},
-
-		// setDataSetsStatus(state) {
-		// 	this.availableDataSets.forEach((dataSet) => {
-		// 		dataSet.isActive = state;
-		// 	});
-		// },
-		//
-		// setDataSetsExportStatus(state) {
-		// 	this.availableDataSets.forEach((dataSet) => {
-		// 		dataSet.markedForExport = state;
-		// 	});
-		// },
 	},
 
 	created() {
@@ -111,9 +80,6 @@ new Vue({
 		} else {
 			this.activeTab = tabs.USERS;
 		}
-
-		// this.$on('datasetsActiveState', state => this.setDataSetsStatus(state));
-		// this.$on('datasetsExportState', state => this.setDataSetsExportStatus(state));
 
 		this.$on('instructionsUpdate', (value) => {
 			this.instructions = value;

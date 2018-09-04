@@ -82,7 +82,8 @@
   },
   "task_errors": {
     "markup_overdose": "En_Превышено количество разметок",
-    "bad_markup_request": "En_Некорректный запрос"
+    "bad_markup_request": "En_Некорректный запрос",
+    "no_active_taskset": "no_active_taskset"
   },
   "config_structure_error": "En_Конфиг должен быть набором строк",
   "edit_config": "edit_config",
@@ -146,5 +147,9 @@
   "activate": "activate",
   "edit_taskset": "edit_taskset",
   "datasets_for_task": "datasets_for_task",
-  "description": "description"
+  "description": "description",
+  "taskset_activation_error": "taskset_activation_error",
+  "edit_taskset_error": "edit_taskset_error",
+  "add_taskset_error": "add_taskset_error",
+  "and_more_datasets": "and %s more"
 }

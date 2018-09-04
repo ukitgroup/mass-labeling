@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Site = require('./site');
+const TaskSet = require('./taskset');
 
 const config = require('../config');
 
@@ -19,6 +20,11 @@ const TaskSchema = new mongoose.Schema({
 	},
 
 	userId: {
+		type: mongoose.Schema.ObjectId,
+		required: true,
+	},
+
+	taskSetId: {
 		type: mongoose.Schema.ObjectId,
 		required: true,
 	},
@@ -65,7 +71,18 @@ TaskSchema.statics = {
 			throw new Error('task_errors.bad_markup_request');
 		}
 
-		return this.create({ siteId, answer, userId });
+		const activeTaskSetId = await TaskSet.getCurrentActiveId();
+
+		if (! activeTaskSetId) {
+			throw new Error('task_errors.no_active_taskset');
+		}
+
+		return this.create({
+			siteId,
+			answer,
+			userId,
+			taskSetId: activeTaskSetId,
+		});
 	},
 
 	async getBrokenSites() {

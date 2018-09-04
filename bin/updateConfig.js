@@ -11,4 +11,4 @@ config.set('passport.secret', passportCookie);
 
 config.updateFiles()
 	.then(() => console.log('\nConfig successfully updated\n'))
-	.catch(error => console.log('Config update error', error));
+	.catch(error => console.log('Config save error', error));

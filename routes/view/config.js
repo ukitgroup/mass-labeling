@@ -45,10 +45,6 @@ router.get('/', async (req, res, next) => {
 			dataSet.isActive = dataSets.length > 0
 				? dataSets.indexOf(dataSet._id) >= 0
 				: true;
-
-			// dataSet.markedForExport = dataSets.length > 0
-			// 	? dataSets.indexOf(dataSet._id) >= 0
-			// 	: true;
 		});
 
 
@@ -58,33 +54,17 @@ router.get('/', async (req, res, next) => {
 			'utf-8',
 		);
 
-		// await TaskSet.create({
-		// 	assessmentLimit: 0,
-		// 	activeDataSets: [],
-		// 	randomSelection: true,
-		// 	isActive: false,
-		// });
-
-		// All {_id: ***}
-		// console.log(availableDataSets)
-
-		// 1. Получаем все TaskSet'ы
-		const taskSets = await TaskSet.find();
+		const taskSets = await TaskSet.getAll();
 
 		const rawTaskSets = taskSets
 			.map((taskSet) => {
 				const rawTaskSet = taskSet.toObject();
-
 				const taskSetActiveDataSets = rawTaskSet.activeDataSets;
 
-				// Active
-				// console.log(taskSetActiveDataSets)
-
-				// 2. Инжектим в каждый тасксет наборы данных.
-				// В каждый набор добавляем поле молели isInTaskSet, которое означает,
-				// активирован ли датасет в текущем тасксете
 				rawTaskSet.dataSets = availableDataSets.map((dataSet) => {
 					const dataSetClone = _.clone(dataSet);
+
+					// todo: ability to deselect
 
 					dataSetClone.isInTaskSet = taskSetActiveDataSets.indexOf(dataSetClone._id) >= 0;
 
@@ -93,9 +73,6 @@ router.get('/', async (req, res, next) => {
 
 				return rawTaskSet;
 			});
-
-
-		// console.log(taskSets);
 
 
 		// Users tab

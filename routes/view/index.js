@@ -87,7 +87,7 @@ router.get('/locale/:locale', async (req, res) => {
 			selectedLocale = i18nConfig.defaultLocale;
 		}
 
-		// If user exists in session, update his locale
+		// If user exists in session, save his locale
 		if (req.user) {
 			await req.user.setLocale(selectedLocale);
 		}

@@ -19,7 +19,7 @@ const util = require('util');
 const writeFileAsync = util.promisify(fs.writeFile);
 
 
-router.post('/update', async (req, res, next) => {
+router.post('/save', async (req, res, next) => {
 	try {
 		const { config, availableDataSets, instructions } = req.body;
 
@@ -65,7 +65,7 @@ router.post('/add-user', async (req, res, next) => {
 	}
 });
 
-router.post('/:userId/update-user', async (req, res, next) => {
+router.post('/:userId/save-user', async (req, res, next) => {
 	try {
 		const { user } = req.body;
 		const { userId = 0 } = req.params;
@@ -126,13 +126,22 @@ router.post('/add-taskset', async (req, res, next) => {
 			.filter(dataSet => dataSet.isInTaskSet)
 			.map(dataSet => dataSet._id);
 
-		// console.log(taskSet.activeDataSets);
+		const newTaskSet = {};
 
-		delete taskSet.dataSets;
+		[
+			'assessmentLimit',
+			'randomSelection',
+			'description',
+			'activeDataSets',
+		].forEach((key) => {
+			const newValue = taskSet[key];
 
-		await TaskSet.create({
-			...taskSet,
+			if (typeof newValue !== 'undefined') {
+				newTaskSet[key] = newValue;
+			}
 		});
+
+		await TaskSet.create(newTaskSet);
 
 		res.api.response();
 	} catch (err) {
@@ -142,12 +151,11 @@ router.post('/add-taskset', async (req, res, next) => {
 	}
 });
 
-router.post('/:taskSetId/edit-taskset', async (req, res, next) => {
+router.post('/edit-taskset', async (req, res, next) => {
 	try {
 		const { taskSet } = req.body;
-		const { taskSetId = 0 } = req.params;
 
-		const storedTaskSet = await TaskSet.findById(taskSetId);
+		const storedTaskSet = await TaskSet.findById(taskSet._id);
 
 		if (! storedTaskSet) {
 			throw new NotFoundError();
@@ -157,9 +165,9 @@ router.post('/:taskSetId/edit-taskset', async (req, res, next) => {
 			.filter(dataSet => dataSet.isInTaskSet)
 			.map(dataSet => dataSet._id);
 
-		// console.log(taskSet.activeDataSets);
+		// 1. datasets
 
-		delete taskSet.dataSets;
+		// 2. limit
 
 		await storedTaskSet.update(taskSet);
 
@@ -171,9 +179,24 @@ router.post('/:taskSetId/edit-taskset', async (req, res, next) => {
 	}
 });
 
-router.post('/:taskSetId/activate', async (req, res, next) => {
+router.post('/activate', async (req, res, next) => {
 	try {
-		// todo
+		const currentActiveTaskSet = await TaskSet.getCurrentActive();
+
+		if (currentActiveTaskSet) {
+			await currentActiveTaskSet.deactivate();
+		}
+
+		const { taskSet } = req.body;
+
+		const newActiveTaskSet = await TaskSet.findById(taskSet._id);
+
+		if (! newActiveTaskSet) {
+			throw new NotFoundError();
+		}
+
+		await newActiveTaskSet.activate();
+
 		res.api.response();
 	} catch (err) {
 		// eslint-disable-next-line no-underscore-dangle
