@@ -1,7 +1,6 @@
 const Task = require('../../models/task');
+const TaskSet = require('../../models/taskset');
 const Site = require('../../models/site');
-
-const config = require('../../config');
 
 
 const router = require('express').Router();
@@ -9,13 +8,15 @@ const router = require('express').Router();
 
 router.get('/', async (req, res, next) => {
 	try {
-		const showDataSetsRandomly = config.get('assessment.showRandomly');
+		const activeTaskSet = await TaskSet.getCurrentActive();
+
+		const showDataSetsRandomly = activeTaskSet.randomSelection;
 
 		let limit = 0;
 
 		if (showDataSetsRandomly) {
 			// If 0, user has no tasks limit, we'll display limit as ∞
-			limit = config.get('assessment.limit') || Infinity;
+			limit = activeTaskSet.assessmentLimit || Infinity;
 		} else {
 			limit = await Site.getActiveSitesCount();
 		}

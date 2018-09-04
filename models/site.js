@@ -3,6 +3,8 @@ const _ = require('lodash');
 
 const config = require('../config');
 
+const TaskSet = require('./taskset');
+
 
 const SiteSchema = new mongoose.Schema({
 	url: {
@@ -61,11 +63,17 @@ SiteSchema.statics = {
 
 	async getRandom(additionalFilter = {}) {
 		const siteIds = await this.getActiveSiteIds(additionalFilter);
+
+		// console.log(1, 'Get random', siteIds.length);
+
 		return this.findById(_.sample(siteIds));
 	},
 
 	async getActiveSitesCount() {
 		const siteIds = await this.getActiveSiteIds();
+
+		// console.log(1, 'Active sites count', siteIds.length);
+
 		return siteIds.length;
 	},
 
@@ -77,17 +85,20 @@ SiteSchema.statics = {
 		}]);
 	},
 
-	getAllowedDataSetsFilter() {
-		return config.get('sites.allowedDatasets').length ? {
-			dataset: { $in: config.get('sites.allowedDatasets') },
-		} : {};
-	},
-
+	/**
+	 * Get all available sites from current active task set
+	 */
 	async getActiveSiteIds(additionalFilter = {}) {
+		const activeTaskSet = await TaskSet.getCurrentActive();
+		const allowedDataSets = activeTaskSet.activeDataSets;
+
 		return this.distinct('_id', {
 			...this.filter.allowedStatuses,
-			...this.getAllowedDataSetsFilter(),
 			...additionalFilter,
+
+			dataset: {
+				$in: allowedDataSets,
+			},
 		});
 	},
 };

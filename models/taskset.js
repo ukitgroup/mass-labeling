@@ -43,12 +43,11 @@ TaskSetSchema.statics = {
 			},
 		});
 
-		return currentActive;
-	},
+		if (! currentActive) {
+			throw new Error('task_errors.no_active_taskset');
+		}
 
-	async getCurrentActiveId() {
-		const currentActive = await this.getCurrentActive();
-		return currentActive ? currentActive._id : null;
+		return currentActive;
 	},
 };
 

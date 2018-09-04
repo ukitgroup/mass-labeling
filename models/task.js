@@ -1,9 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 
 const Site = require('./site');
 const TaskSet = require('./taskset');
-
-const config = require('../config');
 
 
 const TaskSchema = new mongoose.Schema({
@@ -42,8 +41,19 @@ TaskSchema.statics = {
 	async countByUserId(userId, allowed = false) {
 		const filter = { userId };
 
+		const activeTaskSet = await TaskSet.getCurrentActive();
+
+		filter.taskSetId = {
+			$eq: activeTaskSet._id,
+		};
+
 		if (allowed) {
-			const siteIds = await Site.distinct('_id', Site.filter.allowedDatasets);
+			const siteIds = await Site.distinct('_id', {
+				dataset: {
+					$in: activeTaskSet.activeDataSets,
+				},
+			});
+
 			filter.siteId = { $in: siteIds };
 		}
 
@@ -52,8 +62,10 @@ TaskSchema.statics = {
 
 	// Set mark
 	async getNew({ siteId, answer, userId }) {
-		const limit = config.get('assessment.limit');
-		const showRandomly = config.get('assessment.showRandomly');
+		const activeTaskSet = await TaskSet.getCurrentActive();
+
+		const limit = activeTaskSet.assessmentLimit;
+		const showRandomly = activeTaskSet.randomSelection;
 
 		const count = await this.countByUserId(userId, true);
 
@@ -71,17 +83,11 @@ TaskSchema.statics = {
 			throw new Error('task_errors.bad_markup_request');
 		}
 
-		const activeTaskSetId = await TaskSet.getCurrentActiveId();
-
-		if (! activeTaskSetId) {
-			throw new Error('task_errors.no_active_taskset');
-		}
-
 		return this.create({
 			siteId,
 			answer,
 			userId,
-			taskSetId: activeTaskSetId,
+			taskSetId: activeTaskSet._id,
 		});
 	},
 

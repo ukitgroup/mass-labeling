@@ -165,6 +165,8 @@ router.post('/edit-taskset', async (req, res, next) => {
 			.filter(dataSet => dataSet.isInTaskSet)
 			.map(dataSet => dataSet._id);
 
+		// todo
+
 		// 1. datasets
 
 		// 2. limit
@@ -182,10 +184,7 @@ router.post('/edit-taskset', async (req, res, next) => {
 router.post('/activate', async (req, res, next) => {
 	try {
 		const currentActiveTaskSet = await TaskSet.getCurrentActive();
-
-		if (currentActiveTaskSet) {
-			await currentActiveTaskSet.deactivate();
-		}
+		await currentActiveTaskSet.deactivate();
 
 		const { taskSet } = req.body;
 

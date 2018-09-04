@@ -1,9 +1,9 @@
+/* eslint-disable no-underscore-dangle */
 const Site = require('../../models/site');
 const Task = require('../../models/task');
+const TaskSet = require('../../models/taskset');
 
 const logger = require('../../libs/logger');
-
-const config = require('../../config');
 
 const bridges = require('../bridges');
 
@@ -12,14 +12,21 @@ const router = require('express').Router();
 
 router.post('/create', async (req, res, next) => {
 	try {
-		const showRandomly = config.get('assessment.showRandomly');
+		const activeTaskSet = await TaskSet.getCurrentActive();
+
+		const showRandomly = activeTaskSet.randomSelection;
 
 		let additionalFilter = {};
 
+		// Если не показывать случайно, отдаем все доступные задачи пока они не закончатся
 		if (! showRandomly) {
 			const approvedByUserSiteIds = await Task.distinct('siteId', {
 				userId: {
 					$eq: req.user.id,
+				},
+
+				taskSetId: {
+					$eq: activeTaskSet._id,
 				},
 			});
 

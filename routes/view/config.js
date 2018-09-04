@@ -39,13 +39,13 @@ router.get('/', async (req, res, next) => {
 		// Config tabs
 		const availableDataSets = await Site.getAllDataSets();
 
-		const dataSets = config.get('sites.allowedDatasets');
+		// const dataSets = config.get('sites.allowedDatasets');
 
-		availableDataSets.forEach((dataSet) => {
-			dataSet.isActive = dataSets.length > 0
-				? dataSets.indexOf(dataSet._id) >= 0
-				: true;
-		});
+		// availableDataSets.forEach((dataSet) => {
+		// 	dataSet.isActive = dataSets.length > 0
+		// 		? dataSets.indexOf(dataSet._id) >= 0
+		// 		: true;
+		// });
 
 
 		// Assessment tab
