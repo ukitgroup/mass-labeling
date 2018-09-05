@@ -38,14 +38,8 @@ TaskSetSchema.statics = {
 
 	async getCurrentActive() {
 		const currentActive = await this.findOne({
-			isActive: {
-				$eq: true,
-			},
+			isActive: true,
 		});
-
-		if (! currentActive) {
-			throw new Error('task_errors.no_active_taskset');
-		}
 
 		return currentActive;
 	},

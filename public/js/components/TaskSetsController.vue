@@ -21,22 +21,30 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="(taskSet, index) in taskSets">
+          <tr v-if="taskSets.length" v-for="(taskSet, index) in taskSets" :class="{
+							'text-muted': !taskSet.isActive,
+							'text-bold': taskSet.isActive,
+					}">
             <td>{{index + 1}}</td>
             <td>{{taskSet.assessmentLimit}}</td>
             <td>{{booleanToReadableString(taskSet.randomSelection)}}</td>
-            <td>{{renderActiveDataSetsCellContent(taskSet.activeDataSets)}}</td>
-            <td>{{booleanToReadableString(taskSet.isActive)}}</td>
+            <td :title="renderDataSetsList(taskSet.activeDataSets)">
+              {{renderActiveDataSetsCellContent(taskSet.activeDataSets)}}</td>
+            <td>{{booleanToReadableString(taskSet.isActive)}}
+            </td>
             <td>{{taskSet.description || '-'}}</td>
             <td>
               <button @click.prevent="editTaskSet(taskSet)" type="button" class="btn btn-success btn-xs">
                 {{signs.edit}}
               </button>
 
-              <button @click.prevent="activateTaskSet(taskSet)" type="button" class="btn btn-primary btn-xs">
+              <button v-if="!taskSet.isActive" @click.prevent="activateTaskSet(taskSet)" type="button" class="btn btn-primary btn-xs">
                 {{signs.activate}}
               </button>
             </td>
+          </tr>
+          <tr v-if="!taskSets.length">
+            <td colspan="7" class="no-tasks-cell">{{signs.no_created_tasks}}</td>
           </tr>
           </tbody>
         </table>
@@ -98,9 +106,10 @@
                   class="form-check-input"
                   type="checkbox"
                   v-model="dataset.isInTaskSet"
+                  :disabled="!dataset.canBeChanged"
                 >
 
-                <label :for="index">{{dataset._id}}</label>
+                <label :title="dataset.canBeChanged ? '' : signs.disabled_dataset_reason" :for="index">{{dataset._id}}</label>
               </div>
             </div>
 
@@ -119,6 +128,10 @@
 
   import $ from 'jquery';
   import Request from '../request';
+
+
+  const SHOWN_DATASETS_COUNT = 2;
+
 
   export default {
     props: ['taskSets', 'dataSets'],
@@ -143,7 +156,11 @@
           .map((dataSet) => {
             const dataSetClone = $.extend(true, {}, dataSet);
 
-            dataSetClone.isInTaskSet = false;
+            // Dataset is active in current task set
+            dataSetClone.isInTaskSet = true;
+
+            // All data sets can be activated/deactivated
+            dataSetClone.canBeChanged = true;
 
             return dataSetClone;
           });
@@ -189,6 +206,7 @@
         }
 
         this.selectedTaskSet.dataSets
+          .filter(dataSet => dataSet.canBeChanged)
           .forEach((dataSet) => {
             dataSet.isInTaskSet = state;
           });
@@ -200,7 +218,7 @@
           return '-';
         }
 
-        const shownDataSets = activeDataSets.slice(0, 3);
+        const shownDataSets = activeDataSets.slice(0, SHOWN_DATASETS_COUNT);
 
         let cellContent = shownDataSets.join(', ');
 
@@ -220,6 +238,13 @@
         })
           .then(() => window.location.reload())
           .catch(() => alert(this.signs.taskset_activation_error));
+      },
+
+
+      renderDataSetsList(dataSetsList) {
+        return dataSetsList.length > SHOWN_DATASETS_COUNT + 1
+          ? dataSetsList.join(', ')
+          : '';
       },
     },
   };

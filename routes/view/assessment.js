@@ -10,6 +10,10 @@ router.get('/', async (req, res, next) => {
 	try {
 		const activeTaskSet = await TaskSet.getCurrentActive();
 
+		if (! activeTaskSet) {
+			throw new Error('no_active_tasks');
+		}
+
 		const showDataSetsRandomly = activeTaskSet.randomSelection;
 
 		// console.log(1, 'Active', activeTaskSet._id, activeTaskSet.randomSelection, activeTaskSet.assessmentLimit);

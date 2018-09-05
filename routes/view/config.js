@@ -36,19 +36,9 @@ const roles = {
 
 router.get('/', async (req, res, next) => {
 	try {
-		// Config tabs
+		// Assessment tab
 		const availableDataSets = await Site.getAllDataSets();
 
-		// const dataSets = config.get('sites.allowedDatasets');
-
-		// availableDataSets.forEach((dataSet) => {
-		// 	dataSet.isActive = dataSets.length > 0
-		// 		? dataSets.indexOf(dataSet._id) >= 0
-		// 		: true;
-		// });
-
-
-		// Assessment tab
 		const instructionsPageHTML = await readFileAsync(
 			path.resolve(__dirname, '../../public/instruction.html'),
 			'utf-8',
@@ -56,23 +46,33 @@ router.get('/', async (req, res, next) => {
 
 		const taskSets = await TaskSet.getAll();
 
-		const rawTaskSets = taskSets
-			.map((taskSet) => {
-				const rawTaskSet = taskSet.toObject();
-				const taskSetActiveDataSets = rawTaskSet.activeDataSets;
+		const rawTaskSets = taskSets.map(taskSet => taskSet.toObject());
 
-				rawTaskSet.dataSets = availableDataSets.map((dataSet) => {
-					const dataSetClone = _.clone(dataSet);
+		await Promise.all(rawTaskSets.map(async (taskSet) => {
+			const taskSetActiveDataSets = taskSet.activeDataSets;
 
-					// todo: ability to deselect
-
-					dataSetClone.isInTaskSet = taskSetActiveDataSets.indexOf(dataSetClone._id) >= 0;
-
-					return dataSetClone;
-				});
-
-				return rawTaskSet;
+			const ratedSitesIds = await Task.distinct('siteId', {
+				taskSetId: taskSet._id,
 			});
+
+			const ratedDataSetNames = await Site.distinct('dataset', {
+				_id: { $in: ratedSitesIds },
+			});
+
+			taskSet.dataSets = availableDataSets.map((dataSet) => {
+				const dataSetClone = _.clone(dataSet);
+				const dataSetName = dataSetClone._id;
+
+				// Dataset can be activated/deactivated if users have
+				// no rated sites from this dataset
+				dataSetClone.canBeChanged = ratedDataSetNames.indexOf(dataSetName) < 0;
+
+				// Is dataset active in current task set
+				dataSetClone.isInTaskSet = taskSetActiveDataSets.indexOf(dataSetName) >= 0;
+
+				return dataSetClone;
+			});
+		}));
 
 
 		// Users tab

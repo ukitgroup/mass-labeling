@@ -152,5 +152,8 @@
   "edit_taskset_error": "edit_taskset_error",
   "add_taskset_error": "add_taskset_error",
   "and_more_datasets": "and %s more",
-  "taskset_limit_error": "taskset_limit_error"
+  "taskset_limit_error": "taskset_limit_error",
+  "no_active_tasks": "no_tasks",
+  "no_created_tasks": "no_created_tasks",
+  "disabled_dataset_reason": "disabled_dataset_reason"
 }

@@ -90,6 +90,11 @@ SiteSchema.statics = {
 	 */
 	async getActiveSiteIds(additionalFilter = {}) {
 		const activeTaskSet = await TaskSet.getCurrentActive();
+
+		if (! activeTaskSet) {
+			throw new Error('no_active_tasks');
+		}
+
 		const allowedDataSets = activeTaskSet.activeDataSets;
 
 		return this.distinct('_id', {

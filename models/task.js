@@ -43,6 +43,10 @@ TaskSchema.statics = {
 
 		const activeTaskSet = await TaskSet.getCurrentActive();
 
+		if (! activeTaskSet) {
+			return 0;
+		}
+
 		// Find in current active task only
 		filter.taskSetId = {
 			$eq: activeTaskSet._id,
@@ -66,6 +70,10 @@ TaskSchema.statics = {
 	// Set mark
 	async getNew({ siteId, answer, userId }) {
 		const activeTaskSet = await TaskSet.getCurrentActive();
+
+		if (! activeTaskSet) {
+			throw new Error('no_active_tasks');
+		}
 
 		const limit = activeTaskSet.assessmentLimit;
 		const showRandomly = activeTaskSet.randomSelection;
@@ -103,24 +111,23 @@ TaskSchema.statics = {
 		});
 	},
 
-	async getMaxTasksCountOfUserInCurrentTaskSet() {
-		const activeTaskSet = await TaskSet.getCurrentActive();
+	async getMaxTasksCountOfUserInTaskSet(taskSetId) {
+		const taskSet = await TaskSet.findById(taskSetId);
+
+		if (! taskSet) {
+			return 0;
+		}
 
 		const aggregationResults = await this.aggregate([
 			{
 				$match: {
-					taskSetId: mongoose.Types.ObjectId(activeTaskSet.id),
+					taskSetId: mongoose.Types.ObjectId(taskSet.id),
 				},
 			},
 			{
 				$group: {
-					_id: {
-						_id: '$userId',
-					},
-
-					count: {
-						$sum: 1,
-					},
+					_id: { _id: '$userId' },
+					count: { $sum: 1 },
 				},
 			},
 		]);

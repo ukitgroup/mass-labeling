@@ -83,3 +83,7 @@ textarea {
 .tasksets-form textarea {
   height: 100px;
 }
+
+.no-tasks-cell {
+  text-align: center;
+}

@@ -165,12 +165,8 @@ router.post('/edit-taskset', async (req, res, next) => {
 			.filter(dataSet => dataSet.isInTaskSet)
 			.map(dataSet => dataSet._id);
 
-		// todo
-
-		// 1. datasets
-
-		// Cant set new limit less than user has max rated sites in current task set
-		const maxTasksCount = await Task.getMaxTasksCountOfUserInCurrentTaskSet();
+		// Cant set new limit less than user has max rated sites in task set
+		const maxTasksCount = await Task.getMaxTasksCountOfUserInTaskSet(taskSet._id);
 
 		if (maxTasksCount > 0 && taskSet.assessmentLimit < maxTasksCount) {
 			const error = new Error('taskset_limit_error');
@@ -197,7 +193,10 @@ router.post('/edit-taskset', async (req, res, next) => {
 router.post('/activate', async (req, res, next) => {
 	try {
 		const currentActiveTaskSet = await TaskSet.getCurrentActive();
-		await currentActiveTaskSet.deactivate();
+
+		if (currentActiveTaskSet) {
+			await currentActiveTaskSet.deactivate();
+		}
 
 		const { taskSet } = req.body;
 

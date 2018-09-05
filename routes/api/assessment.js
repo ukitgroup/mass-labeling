@@ -14,11 +14,15 @@ router.post('/create', async (req, res, next) => {
 	try {
 		const activeTaskSet = await TaskSet.getCurrentActive();
 
+		if (! activeTaskSet) {
+			throw new Error('no_active_tasks');
+		}
+
 		const showRandomly = activeTaskSet.randomSelection;
 
 		let additionalFilter = {};
 
-		// Если не показывать случайно, отдаем все доступные задачи пока они не закончатся
+		// Retrieve all tasks continuously
 		if (! showRandomly) {
 			const approvedByUserSiteIds = await Task.distinct('siteId', {
 				userId: {
