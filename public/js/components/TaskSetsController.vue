@@ -29,8 +29,10 @@
             <td>{{taskSet.assessmentLimit}}</td>
             <td>{{booleanToReadableString(taskSet.randomSelection)}}</td>
             <td :title="renderDataSetsList(taskSet.activeDataSets)">
-              {{renderActiveDataSetsCellContent(taskSet.activeDataSets)}}</td>
-            <td>{{booleanToReadableString(taskSet.isActive)}}
+              {{renderActiveDataSetsCellContent(taskSet.activeDataSets)}}
+            </td>
+            <td>
+              {{booleanToReadableString(taskSet.isActive)}}
             </td>
             <td>{{taskSet.description || '-'}}</td>
             <td>

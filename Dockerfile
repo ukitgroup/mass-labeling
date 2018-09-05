@@ -9,8 +9,9 @@ WORKDIR /usr/bin/app
 
 COPY package*.json /usr/bin/app/
 RUN npm i --no-save
-RUN npm run build:front
 
 COPY . /usr/bin/app/
+
+RUN npm run build:front
 
 CMD ["npm", "start"]
