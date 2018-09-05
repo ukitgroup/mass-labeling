@@ -151,5 +151,6 @@
   "taskset_activation_error": "taskset_activation_error",
   "edit_taskset_error": "edit_taskset_error",
   "add_taskset_error": "add_taskset_error",
-  "and_more_datasets": "and %s more"
+  "and_more_datasets": "and %s more",
+  "taskset_limit_error": "taskset_limit_error"
 }

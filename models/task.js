@@ -43,6 +43,7 @@ TaskSchema.statics = {
 
 		const activeTaskSet = await TaskSet.getCurrentActive();
 
+		// Find in current active task only
 		filter.taskSetId = {
 			$eq: activeTaskSet._id,
 		};
@@ -57,7 +58,9 @@ TaskSchema.statics = {
 			filter.siteId = { $in: siteIds };
 		}
 
-		return this.count(filter);
+		const count = await this.count(filter);
+
+		return count;
 	},
 
 	// Set mark
@@ -98,6 +101,32 @@ TaskSchema.statics = {
 			_id: { $in: siteIds },
 			status: 'active',
 		});
+	},
+
+	async getMaxTasksCountOfUserInCurrentTaskSet() {
+		const activeTaskSet = await TaskSet.getCurrentActive();
+
+		const aggregationResults = await this.aggregate([
+			{
+				$match: {
+					taskSetId: mongoose.Types.ObjectId(activeTaskSet.id),
+				},
+			},
+			{
+				$group: {
+					_id: {
+						_id: '$userId',
+					},
+
+					count: {
+						$sum: 1,
+					},
+				},
+			},
+		]);
+
+		return aggregationResults
+			.reduce((currentMax, result) => Math.max(result.count, currentMax), 0);
 	},
 };
 

@@ -169,14 +169,27 @@ router.post('/edit-taskset', async (req, res, next) => {
 
 		// 1. datasets
 
-		// 2. limit
+		// Cant set new limit less than user has max rated sites in current task set
+		const maxTasksCount = await Task.getMaxTasksCountOfUserInCurrentTaskSet();
+
+		if (maxTasksCount > 0 && taskSet.assessmentLimit < maxTasksCount) {
+			const error = new Error('taskset_limit_error');
+			error.data = maxTasksCount;
+			throw error;
+		}
 
 		await storedTaskSet.update(taskSet);
 
 		res.api.response();
 	} catch (err) {
-		// eslint-disable-next-line no-underscore-dangle
-		err.message = req.__(err.message);
+		let message = req.__(err.message);
+
+		if (err.data) {
+			message = message.replace('%s', err.data);
+		}
+
+		err.message = message;
+
 		next(err);
 	}
 });

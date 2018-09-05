@@ -5,7 +5,6 @@ import Request from './request';
 
 import '../css/assessment.css';
 
-// todo: load bootstrap from NPM package
 window.$ = $;
 window.jQuery = $;
 

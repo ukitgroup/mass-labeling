@@ -12,6 +12,8 @@ router.get('/', async (req, res, next) => {
 
 		const showDataSetsRandomly = activeTaskSet.randomSelection;
 
+		// console.log(1, 'Active', activeTaskSet._id, activeTaskSet.randomSelection, activeTaskSet.assessmentLimit);
+
 		let limit = 0;
 
 		if (showDataSetsRandomly) {

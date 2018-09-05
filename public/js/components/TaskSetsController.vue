@@ -170,15 +170,11 @@
           ? '/api/config/edit-taskset'
           : '/api/config/add-taskset';
 
-        const error = taskSetId
-          ? this.signs.edit_taskset_error
-          : this.signs.add_taskset_error;
-
         Request.post(url, {
           data: {taskSet}
         })
           .then(() => window.location.reload())
-          .catch(() => alert(error));
+          .catch(error => alert(error));
       },
 
 
