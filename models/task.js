@@ -103,7 +103,16 @@ TaskSchema.statics = {
 	},
 
 	async getBrokenSites() {
-		const siteIds = await this.distinct('siteId', { answer: 0 });
+		const activeTaskSet = await TaskSet.getCurrentActive();
+
+		if (! activeTaskSet) {
+			throw new Error('no_active_tasks');
+		}
+
+		const siteIds = await this.distinct('siteId', {
+			answer: 0,
+			taskSetId: activeTaskSet._id,
+		});
 
 		return Site.find({
 			_id: { $in: siteIds },
