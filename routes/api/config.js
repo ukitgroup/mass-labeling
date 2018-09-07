@@ -58,7 +58,7 @@ router.post('/add-user', async (req, res, next) => {
 	}
 });
 
-router.post('/:userId/save-user', async (req, res, next) => {
+router.post('/:userId/update-user', async (req, res, next) => {
 	try {
 		const { user } = req.body;
 		const { userId = 0 } = req.params;
@@ -160,8 +160,9 @@ router.post('/edit-taskset', async (req, res, next) => {
 
 		// Cant set new limit less than user has max rated sites in task set
 		const maxTasksCount = await Task.getMaxTasksCountOfUserInTaskSet(taskSet._id);
+		const newLimit = taskSet.assessmentLimit;
 
-		if (maxTasksCount > 0 && taskSet.assessmentLimit < maxTasksCount) {
+		if (newLimit > 0 && maxTasksCount > 0 && newLimit < maxTasksCount) {
 			const error = new Error('taskset_limit_error');
 			error.data = maxTasksCount;
 			throw error;
