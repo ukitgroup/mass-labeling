@@ -1,9 +1,11 @@
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 
 const Site = require('./site');
 const Slider = require('./slider');
 const Task = require('./task');
+const TaskSet = require('./taskset');
 
 const i18nConfig = require('../locales/i18n-config');
 
@@ -103,11 +105,25 @@ UserSchema.methods = {
 		const name = this.email;
 		const userId = this.id;
 
-		// Получаем id сайтов, которые размечал пользователь
-		let siteIds = await Site.distinct('_id', Site.filter.allowedDatasets);
+		const activeTaskSet = await TaskSet.getCurrentActive();
+
+		if (! activeTaskSet) {
+			throw new Error('no_active_tasks');
+		}
+
+		const { activeDataSets } = activeTaskSet;
+
+		// Get site ids, rated by user (from current task set)
+		let siteIds = await Site.distinct('_id', {
+			dataset: {
+				$in: activeDataSets,
+			},
+		});
+
 		siteIds = await Task.distinct('siteId', {
 			userId,
 			siteId: { $in: siteIds },
+			taskSetId: activeTaskSet._id,
 		});
 
 		// Получаем ответы для сайтов
