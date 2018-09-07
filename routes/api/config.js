@@ -21,17 +21,10 @@ const writeFileAsync = util.promisify(fs.writeFile);
 
 router.post('/save', async (req, res, next) => {
 	try {
-		const { config, availableDataSets, instructions } = req.body;
+		const { config, instructions } = req.body;
 
 		// Update config
 		Config.updateConfig(config);
-
-		const activeDataSets = availableDataSets
-			.filter(dataSet => dataSet.isActive)
-			.map(dataSet => dataSet._id);
-
-		Config.set('sites.allowedDatasets', activeDataSets);
-
 		await Config.updateFiles();
 
 		// Update instruction.html

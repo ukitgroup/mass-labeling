@@ -52,7 +52,6 @@ new Vue({
 			Request.post('/api/config/save', {
 				data: {
 					config: this.config,
-					availableDataSets: this.availableDataSets,
 					instructions: this.instructions,
 				},
 			})
@@ -84,6 +83,8 @@ new Vue({
 		this.$on('instructionsUpdate', (value) => {
 			this.instructions = value;
 		});
+
+		this.$on('saveConfig', () => this.updateConfig());
 	},
 
 	mounted() {

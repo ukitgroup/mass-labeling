@@ -87,3 +87,7 @@ textarea {
 .no-tasks-cell {
   text-align: center;
 }
+
+.editor-container {
+  margin-bottom: 24px;
+}

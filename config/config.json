@@ -181,27 +181,7 @@
         "id": "allowedDatasets",
         "name": "config_props.sites_datasets",
         "default": [],
-        "value": [
-          "ds6_good2",
-          "ds6_awwwards",
-          "ds6_alexa",
-          "ds7_yana-awwwards",
-          "ds5_mins",
-          "ds4_good",
-          "ds6_dinosaur",
-          "ds2_yaca",
-          "ds1_good",
-          "ds3_broken",
-          "ds1_labelme",
-          "ds1_bad",
-          "ds2_labelme",
-          "ds1_narod",
-          "ds1_ukit",
-          "ds2_ukit",
-          "ds2_narod",
-          "ds2_good",
-          "ds2_bad"
-        ],
+        "value": [],
         "format": "DataSet",
         "element": {
           "type": "checkbox-group"

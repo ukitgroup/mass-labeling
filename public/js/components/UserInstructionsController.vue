@@ -8,8 +8,14 @@
       {{signs.close_editor}}
     </button>
 
-    <div v-show="editorShown">
+    <div v-show="editorShown" class="editor-container">
       <textarea id="instructions" v-model="instructions"></textarea>
+    </div>
+
+    <div class="form-group" v-show="editorShown">
+      <button @click.prevent="emitSaveConfig()" type="submit" class="btn btn-primary">
+        {{this.signs.submit}}
+      </button>
     </div>
   </div>
 </template>
@@ -40,6 +46,10 @@
       closeCodeMirror() {
         this.editorShown = false;
       },
+
+      emitSaveConfig() {
+        this.$parent.$emit('saveConfig');
+      }
     },
 
     mounted() {
