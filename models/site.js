@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const _ = require('lodash');
 
-const config = require('../config');
-
 const TaskSet = require('./taskset');
 
 
@@ -27,11 +25,6 @@ const SiteSchema = new mongoose.Schema({
 		default: 'active',
 		required: true,
 	},
-
-	markedForExport: {
-		type: Boolean,
-		default: true,
-	},
 });
 
 SiteSchema.index({
@@ -45,12 +38,10 @@ SiteSchema.index({
 SiteSchema.statics = {
 	filter: {
 		allowedStatuses: {
-			status: { $in: ['active', 'approved'] },
+			status: {
+				$in: ['active', 'approved'],
+			},
 		},
-
-		allowedDatasets: config.get('sites.allowedDatasets').length ? {
-			dataset: { $in: config.get('sites.allowedDatasets') },
-		} : {},
 	},
 
 
@@ -63,17 +54,11 @@ SiteSchema.statics = {
 
 	async getRandom(additionalFilter = {}) {
 		const siteIds = await this.getActiveSiteIds(additionalFilter);
-
-		// console.log(1, 'Get random', siteIds.length);
-
 		return this.findById(_.sample(siteIds));
 	},
 
 	async getActiveSitesCount() {
 		const siteIds = await this.getActiveSiteIds();
-
-		// console.log(1, 'Active sites count', siteIds.length);
-
 		return siteIds.length;
 	},
 
@@ -121,11 +106,6 @@ SiteSchema.methods = {
 
 	async setStatus(newStatus) {
 		this.status = newStatus;
-		await this.save();
-	},
-
-	async setMarkedForExportStatus(newStatus) {
-		this.markedForExport = newStatus;
 		await this.save();
 	},
 };
