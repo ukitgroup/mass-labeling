@@ -6,29 +6,29 @@ const Config = require('../../config');
 
 const router = require('express').Router();
 
-const fs = require('fs');
-const path = require('path');
+// const fs = require('fs');
+// const path = require('path');
 
 const User = require('../../models/user');
 const Task = require('../../models/task');
 const TaskSet = require('../../models/taskset');
 
-const util = require('util');
+// const util = require('util');
 
 
-const writeFileAsync = util.promisify(fs.writeFile);
+// const writeFileAsync = util.promisify(fs.writeFile);
 
 
 router.post('/save', async (req, res, next) => {
 	try {
-		const { config, instructions } = req.body;
+		const { config } = req.body;
 
 		// Update config
 		Config.updateConfig(config);
 		await Config.updateFiles();
 
 		// Update instruction.html
-		await writeFileAsync(path.resolve(__dirname, '../../public/instruction.html'), instructions);
+		// await writeFileAsync(path.resolve(__dirname, '../../public/instruction.html'), instructions);
 
 		res.api.response();
 	} catch (err) {
@@ -125,6 +125,7 @@ router.post('/add-taskset', async (req, res, next) => {
 			'assessmentLimit',
 			'randomSelection',
 			'description',
+			'instruction',
 			'activeDataSets',
 		].forEach((key) => {
 			const newValue = taskSet[key];

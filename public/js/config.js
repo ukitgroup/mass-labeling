@@ -7,7 +7,6 @@ import Request from './request';
 import '../css/config.css';
 
 import UsersController from './components/UsersController.vue';
-import UserInstructionsController from './components/UserInstructionsController.vue';
 import ConfigFieldSet from './components/ConfigFieldSet.vue';
 import TaskSetsController from './components/TaskSetsController.vue';
 
@@ -24,7 +23,6 @@ new Vue({
 
 	components: {
 		'users-controller': UsersController,
-		'user-instructions-controller': UserInstructionsController,
 		'config-fieldset': ConfigFieldSet,
 		'tasksets-controller': TaskSetsController,
 	},
@@ -36,7 +34,6 @@ new Vue({
 			loading: false,
 			signs: window.signs,
 			activeTab: tabs.USERS,
-			instructions: window.instructions,
 			taskSets: window.taskSets,
 		};
 	},
@@ -52,7 +49,6 @@ new Vue({
 			Request.post('/api/config/save', {
 				data: {
 					config: this.config,
-					instructions: this.instructions,
 				},
 			})
 				.then(() => alert(this.signs.config_updated))
@@ -66,8 +62,8 @@ new Vue({
 
 		getTabClass(tab) {
 			return this.activeTab === tab
-				? 'btn-primary'
-				: 'btn-default';
+				? 'active'
+				: '';
 		},
 	},
 
@@ -79,10 +75,6 @@ new Vue({
 		} else {
 			this.activeTab = tabs.USERS;
 		}
-
-		this.$on('instructionsUpdate', (value) => {
-			this.instructions = value;
-		});
 
 		this.$on('saveConfig', () => this.updateConfig());
 	},

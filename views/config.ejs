@@ -4,17 +4,25 @@
 
 <div class="row js-container" v-show="!loading" style="display: none;">
   <div class="col-xs-12">
-    <button type="button" @click="switchTab('users')" :class="[getTabClass('users')]" class="btn tab">
-      <%= getText('config_categories.users') %>
-    </button>
+    <ul class="nav nav-tabs">
+      <li :class="[getTabClass('users')]">
+        <a @click.prevent="switchTab('users')" href="#">
+          <%= getText('config_categories.users') %>
+        </a>
+      </li>
 
-    <button type="button" @click="switchTab('assessment')" :class="[getTabClass('assessment')]" class="btn tab">
-      <%= getText('config_categories.assessment') %>
-    </button>
+      <li :class="[getTabClass('assessment')]">
+        <a @click.prevent="switchTab('assessment')" href="#">
+          <%= getText('config_categories.assessment') %>
+        </a>
+      </li>
 
-    <button type="button" @click="switchTab('tech')" :class="[getTabClass('tech')]" class="btn tab">
-      <%= getText('config_categories.tech') %>
-    </button>
+      <li :class="[getTabClass('tech')]">
+        <a @click.prevent="switchTab('tech')" href="#">
+          <%= getText('config_categories.tech') %>
+        </a>
+      </li>
+    </ul>
 
 
     <form autocomplete="off">
@@ -37,7 +45,7 @@
           :data-sets="availableDataSets"
         ></tasksets-controller>
 
-        <user-instructions-controller :instructions="instructions"></user-instructions-controller>
+        <!--<user-instructions-controller :instructions="instructions"></user-instructions-controller>-->
       </div>
 
 

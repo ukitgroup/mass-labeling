@@ -87,7 +87,6 @@
               <textarea
                 id="task-set-description"
                 class="form-check-input"
-                type="checkbox"
                 v-model="selectedTaskSet.description"
               ></textarea>
             </div>
@@ -118,6 +117,16 @@
             <div v-else>
               {{window.signs.no_datasets}}
             </div>
+
+            <div class="form-check-label property">
+              <label for="task-set-description">{{signs.tutorial}}</label>
+
+              <textarea
+                id="task-set-instruction"
+                class="form-check-input"
+                v-model="selectedTaskSet.instruction"
+              ></textarea>
+            </div>
           </div>
         </div>
       </div>
@@ -130,6 +139,10 @@
 
   import $ from 'jquery';
   import Request from '../request';
+
+  import CodeMirror from '../../../node_modules/codemirror/lib/codemirror';
+  import '../../../node_modules/codemirror/mode/xml/xml';
+  import '../../../node_modules/codemirror/addon/display/autorefresh';
 
 
   const SHOWN_DATASETS_COUNT = 2;
@@ -151,6 +164,7 @@
           assessmentLimit: 0,
           randomSelection: true,
           description: '',
+          instruction: '',
           activeDataSets: [],
         };
 
@@ -249,5 +263,33 @@
           : '';
       },
     },
+
+    watch: {
+      selectedTaskSet: {
+        handler() {
+          const vm = this;
+
+          vm.$nextTick(() => {
+            const instructionsTextArea = vm.$el.querySelector('#task-set-instruction');
+
+            if (! instructionsTextArea) {
+              return;
+            }
+
+            const cmInstance = CodeMirror.fromTextArea(instructionsTextArea, {
+              lineNumbers: true,
+              mode: 'xml',
+              theme: 'mdn-like',
+              lineWrapping: true,
+              autoRefresh: true,
+            });
+
+            cmInstance.on('change', () => {
+              vm.selectedTaskSet.instruction = cmInstance.getValue();
+            });
+          });
+        }
+      }
+    }
   };
 </script>
