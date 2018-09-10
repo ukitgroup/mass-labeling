@@ -61,9 +61,6 @@
 			<h1 v-if="selectedUser._id">{{signs.user_edit}}</h1>
 			<h1 v-else>{{signs.user_add}}</h1>
 
-			<button class="btn btn-success" @click.prevent="closeForm()">{{signs.cancel}}</button>
-			<button class="btn btn-primary" @click.prevent="submitForm()">{{signs.submit}}</button>
-
 			<div class="row users-form">
 				<div class="col-xs-6">
 					<form autocomplete="off">
@@ -99,6 +96,11 @@
 					</form>
 				</div>
 			</div>
+
+      <div class="tasksets-form-controls">
+        <button class="btn btn-success" @click.prevent="submitForm()">{{signs.submit}}</button>
+        <button class="btn btn-default" @click.prevent="closeForm()">{{signs.cancel}}</button>
+      </div>
 		</div>
 	</div>
 </template>

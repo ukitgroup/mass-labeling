@@ -132,7 +132,7 @@
         </div>
       </div>
 
-      <div class="row tasksets-form-controls">
+      <div class="tasksets-form-controls">
         <button class="btn btn-success" @click.prevent="submitForm()">{{signs.submit}}</button>
         <button class="btn btn-default" @click.prevent="closeForm()">{{signs.cancel}}</button>
       </div>
