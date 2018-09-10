@@ -10,6 +10,13 @@ const User = require('../../models/user');
 const Task = require('../../models/task');
 const TaskSet = require('../../models/taskset');
 
+const fs = require('fs');
+const path = require('path');
+const util = require('util');
+
+
+const readFileAsync = util.promisify(fs.readFile);
+
 
 router.post('/save', async (req, res, next) => {
 	try {
@@ -124,6 +131,13 @@ router.post('/add-taskset', async (req, res, next) => {
 			}
 		});
 
+		if (! newTaskSet.instruction) {
+			newTaskSet.instruction = await readFileAsync(
+				path.resolve(__dirname, '../../public/instruction.html'),
+				'utf-8',
+			);
+		}
+
 		await TaskSet.create(newTaskSet);
 
 		res.api.response();
@@ -156,6 +170,13 @@ router.post('/edit-taskset', async (req, res, next) => {
 			const error = new Error('taskset_limit_error');
 			error.data = maxTasksCount;
 			throw error;
+		}
+
+		if (! taskSet.instruction) {
+			taskSet.instruction = await readFileAsync(
+				path.resolve(__dirname, '../../public/instruction.html'),
+				'utf-8',
+			);
 		}
 
 		await storedTaskSet.update(taskSet);

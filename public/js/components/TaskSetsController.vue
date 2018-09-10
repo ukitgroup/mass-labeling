@@ -157,7 +157,7 @@
 
 
   export default {
-    props: ['taskSets', 'dataSets'],
+    props: ['taskSets', 'dataSets', 'defaultInstruction'],
 
     components: {
       'custom-checkbox': CustomCheckbox,
@@ -190,7 +190,7 @@
           assessmentLimit: 0,
           randomSelection: true,
           description: '',
-          instruction: '',
+          instruction: this.defaultInstruction,
           activeDataSets: [],
         };
 

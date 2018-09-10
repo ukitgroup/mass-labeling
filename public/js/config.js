@@ -33,6 +33,7 @@ new Vue({
 			availableDataSets: window.availableDataSets,
 			loading: false,
 			signs: window.signs,
+			defaultInstruction: window.defaultInstruction,
 			activeTab: tabs.USERS,
 			taskSets: window.taskSets,
 		};

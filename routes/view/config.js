@@ -13,6 +13,14 @@ const Task = require('../../models/task');
 const TaskSet = require('../../models/taskset');
 
 
+const fs = require('fs');
+const path = require('path');
+const util = require('util');
+
+
+const readFileAsync = util.promisify(fs.readFile);
+
+
 // Values located in lang files
 const statuses = {
 	active: '',
@@ -61,6 +69,11 @@ router.get('/', async (req, res, next) => {
 			});
 		}));
 
+		const defaultInstruction = await readFileAsync(
+			path.resolve(__dirname, '../../public/instruction.html'),
+			'utf-8',
+		);
+
 
 		// Users tab
 		const users = await User.find();
@@ -78,13 +91,14 @@ router.get('/', async (req, res, next) => {
 
 
 		res.render('config', {
-			users: rawUsers,
 			statuses,
 			roles,
+			defaultInstruction,
+			availableDataSets,
 
 			taskSets: rawTaskSets,
+			users: rawUsers,
 
-			availableDataSets,
 			config: config.getConfig(),
 		});
 	} catch (err) {
