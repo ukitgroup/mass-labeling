@@ -1,6 +1,7 @@
 <template>
   <div class="form-check-label dataset-item custom-checkbox" :class="{
     'custom-checkbox--disabled': disabled,
+    'custom-checkbox--unchecked': !state,
   }">
     <input
       :id="id"
@@ -93,5 +94,9 @@
 
   .custom-checkbox.custom-checkbox--disabled .custom-checkbox_label {
     cursor: default;
+  }
+
+  .custom-checkbox.custom-checkbox--unchecked .custom-checkbox_span {
+    background: transparent;
   }
 </style>
