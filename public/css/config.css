@@ -85,3 +85,15 @@ textarea {
 .editor-container {
   margin-bottom: 24px;
 }
+
+.tasksets-form-wrapper {
+  margin-bottom: 48px;
+}
+
+.tasksets-form-controls {
+  margin-top: 18px;
+}
+
+.tasksets-form-controls button {
+  margin-right: 12px;
+}

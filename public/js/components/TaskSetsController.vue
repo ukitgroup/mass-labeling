@@ -53,12 +53,9 @@
       </div>
     </div>
 
-    <div class="users-form-wrapper" v-if="selectedTaskSet">
+    <div class="tasksets-form-wrapper" v-if="selectedTaskSet">
       <h1 v-if="selectedTaskSet._id">{{signs.edit_taskset}}</h1>
       <h1 v-else>{{signs.add_taskset}}</h1>
-
-      <button class="btn btn-success" @click.prevent="closeForm()">{{signs.cancel}}</button>
-      <button class="btn btn-primary" @click.prevent="submitForm()">{{signs.submit}}</button>
 
       <div class="row tasksets-form">
         <div class="col-xs-6">
@@ -66,19 +63,22 @@
 
             <div class="form-group property">
               <label for="limit">{{signs['config_props.assessment_limit']}}</label>
-              <input :disabled="!selectedTaskSet.randomSelection" type="number" id="limit" class="form-control"
-                     v-model="selectedTaskSet.assessmentLimit">
+              <input
+                :disabled="!selectedTaskSet.randomSelection"
+                type="number"
+                id="limit"
+                class="form-control"
+                v-model="selectedTaskSet.assessmentLimit"
+              >
             </div>
 
             <div class="form-check-label property">
-              <input
-                id="randomSelection"
-                class="form-check-input"
-                type="checkbox"
-                v-model="selectedTaskSet.randomSelection"
-              >
-
-              <label for="randomSelection">{{signs['config_props.show_randomly']}}</label>
+              <custom-checkbox
+                :id="'randomSelection'"
+                :data="selectedTaskSet.randomSelection"
+                :label="signs['config_props.show_randomly']"
+                @onchange="selectedTaskSet.randomSelection = $event.state"
+              ></custom-checkbox>
             </div>
 
             <div class="form-check-label property">
@@ -91,27 +91,28 @@
               ></textarea>
             </div>
 
-            <h5>
-              {{this.signs.datasets_for_task}}
-
-              <i @click="setDataSetsStatus(true)" :title="signs.check_all" class="fa fa-check-square-o datasets-control"
-                 aria-hidden="true"></i>
-              <i @click="setDataSetsStatus(false)" :title="signs.uncheck_all" class="fa fa-square-o datasets-control"
-                 aria-hidden="true"></i>
-            </h5>
+            <h5>{{this.signs.datasets_for_task}}</h5>
 
             <div v-if="selectedTaskSet.dataSets.length" class="datasets-container property">
-              <div class="form-check-label dataset-item" v-for="(dataset, index) in selectedTaskSet.dataSets">
-                <input
-                  :id="index"
-                  class="form-check-input"
-                  type="checkbox"
-                  v-model="dataset.isInTaskSet"
-                  :disabled="!dataset.canBeChanged"
-                >
+              <custom-checkbox
+                :id="'toggle-all'"
+                :data="toggleAllDataSetsCheckboxState"
+                :label="toggleAllDataSetsCheckboxText"
+                @onchange="setDataSetsStatus($event)"
+              ></custom-checkbox>
+            </div>
 
-                <label :title="dataset.canBeChanged ? '' : signs.disabled_dataset_reason" :for="index">{{dataset._id}}</label>
-              </div>
+            <div v-if="selectedTaskSet.dataSets.length" class="datasets-container property">
+              <custom-checkbox
+                v-for="(dataset, index) in selectedTaskSet.dataSets"
+                :id="index"
+                :data="dataset.isInTaskSet"
+                :disabled="!dataset.canBeChanged"
+                :title="dataset.canBeChanged ? '' : signs.disabled_dataset_reason"
+                :label="dataset._id"
+                :key="dataset._id"
+                @onchange="dataset.isInTaskSet = $event.state"
+              ></custom-checkbox>
             </div>
 
             <div v-else>
@@ -130,6 +131,11 @@
           </div>
         </div>
       </div>
+
+      <div class="row tasksets-form-controls">
+        <button class="btn btn-success" @click.prevent="submitForm()">{{signs.submit}}</button>
+        <button class="btn btn-default" @click.prevent="closeForm()">{{signs.cancel}}</button>
+      </div>
     </div>
   </div>
 </template>
@@ -144,6 +150,8 @@
   import '../../../node_modules/codemirror/mode/xml/xml';
   import '../../../node_modules/codemirror/addon/display/autorefresh';
 
+  import CustomCheckbox from './CustomCheckbox.vue';
+
 
   const SHOWN_DATASETS_COUNT = 2;
 
@@ -151,11 +159,29 @@
   export default {
     props: ['taskSets', 'dataSets'],
 
+    components: {
+      'custom-checkbox': CustomCheckbox,
+    },
+
     data() {
       return {
         signs: window.signs,
         selectedTaskSet: null,
       };
+    },
+
+    computed: {
+      toggleAllDataSetsCheckboxState() {
+        return this.selectedTaskSet.dataSets
+          .filter(dataSet => dataSet.canBeChanged)
+          .every(dataSet => dataSet.isInTaskSet);
+      },
+
+      toggleAllDataSetsCheckboxText() {
+        return this.toggleAllDataSetsCheckboxState
+          ? this.signs.uncheck_all
+          : this.signs.check_all;
+      }
     },
 
     methods: {
@@ -187,6 +213,7 @@
 
       editTaskSet(taskSet) {
         this.selectedTaskSet = $.extend({}, taskSet);
+        window.a = this.selectedTaskSet
       },
 
 
@@ -216,7 +243,7 @@
       },
 
 
-      setDataSetsStatus(state) {
+      setDataSetsStatus({ state }) {
         if (!this.selectedTaskSet) {
           return;
         }
