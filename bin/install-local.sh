@@ -27,4 +27,4 @@ echo "Save $yml_path"
 echo "passport:"                >> "$yml_path"
 echo "  secret: $cookie_secret" >> "$yml_path"
 
-node ./bin/updateConfig.js "$db_url" "$cookie_secret"
+node ./config/updateConfig.js "$db_url" "$cookie_secret"

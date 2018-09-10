@@ -12,7 +12,15 @@ default_port=80
 docker_use_mongo=false
 
 read -p "Enter container name ($default_container): " container
-container="${container:-$default_container}"
+
+# If container name contains only whitespaces or is empty,
+# set default container name instead
+case $container in
+  (*[![:blank:]]*) ;;
+  ("") container=$default_container;;
+  (*) container=$default_container
+esac
+
 echo ""
 
 echo "Choose MongoDB type:"
@@ -84,4 +92,4 @@ if [ "$docker_use_mongo" = true ];
   else dbURL="$db_url";
 fi
 
-node ./bin/updateConfig.js "$dbURL" "$cookie_secret"
+node ./config/updateConfig.js "$dbURL" "$cookie_secret"

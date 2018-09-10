@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-const config = require('../config');
+const config = require('./index');
 
 const [dbURL, passportCookie] = [process.argv[2], process.argv[3]];
 
