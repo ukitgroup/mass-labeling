@@ -6,17 +6,9 @@ const Config = require('../../config');
 
 const router = require('express').Router();
 
-// const fs = require('fs');
-// const path = require('path');
-
 const User = require('../../models/user');
 const Task = require('../../models/task');
 const TaskSet = require('../../models/taskset');
-
-// const util = require('util');
-
-
-// const writeFileAsync = util.promisify(fs.writeFile);
 
 
 router.post('/save', async (req, res, next) => {
@@ -26,9 +18,6 @@ router.post('/save', async (req, res, next) => {
 		// Update config
 		Config.updateConfig(config);
 		await Config.updateFiles();
-
-		// Update instruction.html
-		// await writeFileAsync(path.resolve(__dirname, '../../public/instruction.html'), instructions);
 
 		res.api.response();
 	} catch (err) {

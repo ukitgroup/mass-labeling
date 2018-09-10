@@ -7,6 +7,7 @@ const stat = require('./stat');
 const broken = require('./broken');
 const slider = require('./slider');
 const config = require('./config');
+const instruction = require('./instruction');
 
 const router = require('express').Router();
 
@@ -151,6 +152,12 @@ router.use(
 	'/config',
 	bridges.auth.admin,
 	config,
+);
+
+// App config
+router.use(
+	'/instruction',
+	instruction,
 );
 
 

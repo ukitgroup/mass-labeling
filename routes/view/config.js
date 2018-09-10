@@ -1,8 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 
-const fs = require('fs');
-const path = require('path');
-
 const _ = require('lodash');
 
 const router = require('express').Router();
@@ -14,11 +11,6 @@ const User = require('../../models/user');
 const Slider = require('../../models/slider');
 const Task = require('../../models/task');
 const TaskSet = require('../../models/taskset');
-
-const util = require('util');
-
-
-const readFileAsync = util.promisify(fs.readFile);
 
 
 // Values located in lang files
@@ -38,11 +30,6 @@ router.get('/', async (req, res, next) => {
 	try {
 		// Assessment tab
 		const availableDataSets = await Site.getAllDataSets();
-
-		const instructionsPageHTML = await readFileAsync(
-			path.resolve(__dirname, '../../public/instruction.html'),
-			'utf-8',
-		);
 
 		const taskSets = await TaskSet.getAll();
 
@@ -95,7 +82,6 @@ router.get('/', async (req, res, next) => {
 			statuses,
 			roles,
 
-			instructionsPageHTML,
 			taskSets: rawTaskSets,
 
 			availableDataSets,
