@@ -9,10 +9,6 @@
 					</label>
 
 					<select id="tasksets-list" class="form-control" v-model="selectedTaskSetId">
-						<option :value="null" disabled>
-							{{signs.choose_taskset}}
-						</option>
-
 						<option v-for="taskSet in actionTargetUser.taskSetsOfUserWithMarks" :value="taskSet._id">
 							{{taskSet.seqNum}}: {{taskSet.description}}
 						</option>
@@ -37,10 +33,6 @@
 					</label>
 
 					<select id="tasksets-list2" class="form-control" v-model="selectedTaskSetId">
-						<option :value="null" disabled>
-							{{signs.choose_taskset}}
-						</option>
-
 						<option v-for="taskSet in actionTargetUser.taskSetsOfUserWithSliders" :value="taskSet._id">
 							{{taskSet.seqNum}}: {{taskSet.description}}
 						</option>
@@ -213,14 +205,12 @@
 				const user = this.actionTargetUser;
 				const selectedTaskSetId = this.selectedTaskSetId;
 
-				console.log(1, user, selectedTaskSetId)
-
 				if (!(user && selectedTaskSetId)) {
 					alert(this.signs.select_taskset_error);
 					return;
 				}
 
-				window.open(`/slider/${user.email}`);
+				window.open(`/slider/${user.email}/${selectedTaskSetId}`);
 			},
 
 
@@ -278,12 +268,14 @@
 
 			showGenSliderPopup(user) {
 				this.actionTargetUser = user;
+				this.selectedTaskSetId = user.taskSetsOfUserWithMarks[0]._id;
 				this.genSliderPopupIsShown = true;
 			},
 
 
 			showOpenSliderPopup(user) {
 				this.actionTargetUser = user;
+				this.selectedTaskSetId = user.taskSetsOfUserWithSliders[0]._id;
 				this.openSliderPopupIsShown = true;
 			},
 

@@ -48,6 +48,10 @@ SliderSchema.statics = {
 		return this.find({ name });
 	},
 
+	getAllByNameAndTaskSet(name, taskSetId) {
+		return this.find({ name, taskSetId });
+	},
+
 	async deleteAllByName(name) {
 		await this.remove({ name });
 	},
