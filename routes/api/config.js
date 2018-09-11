@@ -115,30 +115,14 @@ router.post('/add-taskset', async (req, res, next) => {
 			.filter(dataSet => dataSet.isInTaskSet)
 			.map(dataSet => dataSet._id);
 
-		const newTaskSet = {};
-
-		[
-			'assessmentLimit',
-			'randomSelection',
-			'description',
-			'instruction',
-			'activeDataSets',
-		].forEach((key) => {
-			const newValue = taskSet[key];
-
-			if (typeof newValue !== 'undefined') {
-				newTaskSet[key] = newValue;
-			}
-		});
-
-		if (! newTaskSet.instruction) {
-			newTaskSet.instruction = await readFileAsync(
+		if (! taskSet.instruction) {
+			taskSet.instruction = await readFileAsync(
 				path.resolve(__dirname, '../../public/instruction.html'),
 				'utf-8',
 			);
 		}
 
-		await TaskSet.create(newTaskSet);
+		await TaskSet.saveModel(taskSet);
 
 		res.api.response();
 	} catch (err) {

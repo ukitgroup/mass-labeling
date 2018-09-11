@@ -11,7 +11,7 @@
         <table class="table table-striped">
           <thead>
           <tr>
-            <th>№</th>
+            <th>Id</th>
             <th>{{signs.assessment_limit_short}}</th>
             <th>{{signs.random_selection}}</th>
             <th>{{signs['config_props.cliExport_datasets']}}</th>
@@ -25,7 +25,7 @@
 							'text-muted': !taskSet.isActive,
 							'text-bold': taskSet.isActive,
 					}">
-            <td>{{index + 1}}</td>
+            <td>{{taskSet.seqNum}}</td>
             <td>{{taskSet.assessmentLimit}}</td>
             <td>{{booleanToReadableString(taskSet.randomSelection)}}</td>
             <td :title="renderDataSetsList(taskSet.activeDataSets)">

@@ -3,6 +3,11 @@ const mongoose = require('mongoose');
 
 
 const TaskSetSchema = new mongoose.Schema({
+	seqNum: {
+		type: Number,
+		default: 0,
+	},
+
 	assessmentLimit: {
 		type: Number,
 		default: 0,
@@ -35,6 +40,15 @@ const TaskSetSchema = new mongoose.Schema({
 });
 
 
+const fieldsToSave = [
+	'assessmentLimit',
+	'randomSelection',
+	'description',
+	'activeDataSets',
+	'instruction',
+];
+
+
 TaskSetSchema.statics = {
 	async getAll() {
 		const allTaskSets = await this.find();
@@ -48,18 +62,29 @@ TaskSetSchema.statics = {
 
 		return currentActive;
 	},
+
+	async saveModel(rawModelObject) {
+		const newTaskSet = {};
+
+		fieldsToSave.forEach((key) => {
+			const newValue = rawModelObject[key];
+
+			if (typeof newValue !== 'undefined') {
+				newTaskSet[key] = newValue;
+			}
+		});
+
+		const taskSetsCount = await this.count();
+		newTaskSet.seqNum = taskSetsCount + 1;
+
+		await this.create(newTaskSet);
+	},
 };
 
 
 TaskSetSchema.methods = {
 	async update(newProperties) {
-		[
-			'assessmentLimit',
-			'randomSelection',
-			'description',
-			'activeDataSets',
-			'instruction',
-		].forEach((key) => {
+		fieldsToSave.forEach((key) => {
 			const newValue = newProperties[key];
 
 			if (typeof newValue !== 'undefined') {
