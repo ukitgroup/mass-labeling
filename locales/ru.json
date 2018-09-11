@@ -155,5 +155,8 @@
   "taskset_limit_error": "Нельзя установить ограничение, меньше, чем текущее максимальное значение оценок пользователя (текущее значение - %s)",
   "no_active_tasks": "Нет активных задач",
   "no_created_tasks": "Нет созданных задач",
-  "disabled_dataset_reason": "Нельзя изменить состояния набора данных, потому что пользователи уже оценили некоторые данные из него"
+  "disabled_dataset_reason": "Нельзя изменить состояния набора данных, потому что пользователи уже оценили некоторые данные из него",
+  "markup_page_description": "markup_page_description",
+  "anomalies_page_description": "anomalies_page_description",
+  "local_anomalies_page_description": "local_anomalies_page_description"
 }

@@ -8,3 +8,7 @@
 .text-bold {
 	font-weight: bold;
 }
+
+.page-description {
+  margin-bottom: 24px;
+}
