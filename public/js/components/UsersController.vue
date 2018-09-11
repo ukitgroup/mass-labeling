@@ -1,31 +1,60 @@
 <template>
 	<div>
+		<custom-popup v-if="actionTargetUser && genSliderPopupIsShown" :shown="genSliderPopupIsShown"
+					  @popupClosed="onPopupClose()">
+			<template slot="body">
+				<div class="form-group">
+					<label for="tasksets-list">
+						{{signs.choose_taskset}}
+					</label>
 
-    <custom-popup :shown="genSliderPopupIsShown" @popupClosed="onGenSliderPopupClose()">
-      <template slot="body">
-        <div class="form-group">
-          <label for="tasksets-list">
-            {{signs.choose_taskset}}
-          </label>
+					<select id="tasksets-list" class="form-control" v-model="selectedTaskSetId">
+						<option :value="null" disabled>
+							{{signs.choose_taskset}}
+						</option>
 
-          <select id="tasksets-list" class="form-control" v-model="selectedTaskSetId">
-            <option :value="null" disabled>
-              {{signs.choose_taskset}}
-            </option>
+						<option v-for="taskSet in actionTargetUser.taskSetsOfUserWithMarks" :value="taskSet._id">
+							{{taskSet.seqNum}}: {{taskSet.description}}
+						</option>
+					</select>
+				</div>
+			</template>
 
-            <option v-for="taskSet in localTaskSets" :value="taskSet._id">
-              {{taskSet.seqNum}} | {{taskSet.description}}
-            </option>
-          </select>
-        </div>
-      </template>
+			<template slot="footer">
+				<button type="button" class="btn btn-primary" @click="createSlider()">
+					{{signs.gen_slider}}
+				</button>
+			</template>
+		</custom-popup>
 
-      <template slot="footer">
-        <button type="button" class="btn btn-primary" @click="createSlider()">
-          {{signs.gen_slider}}
-        </button>
-      </template>
-    </custom-popup>
+
+		<custom-popup v-if="actionTargetUser && openSliderPopupIsShown" :shown="openSliderPopupIsShown"
+					  @popupClosed="onPopupClose()">
+			<template slot="body">
+				<div class="form-group">
+					<label for="tasksets-list">
+						{{signs.choose_taskset}}
+					</label>
+
+					<select id="tasksets-list2" class="form-control" v-model="selectedTaskSetId">
+						<option :value="null" disabled>
+							{{signs.choose_taskset}}
+						</option>
+
+						<option v-for="taskSet in actionTargetUser.taskSetsOfUserWithSliders" :value="taskSet._id">
+							{{taskSet.seqNum}}: {{taskSet.description}}
+						</option>
+					</select>
+				</div>
+			</template>
+
+			<template slot="footer">
+				<button type="button" class="btn btn-primary" @click="openSlider()">
+					{{signs.open_slider}}
+				</button>
+			</template>
+		</custom-popup>
+
 
 		<div v-if="!selectedUser">
 			<div class="form-group">
@@ -58,21 +87,21 @@
 							</button>
 
 							<button
-								@click.prevent="openGenSliderPopup(user)"
+								@click.prevent="showGenSliderPopup(user)"
 								type="button"
 								class="btn btn-primary btn-xs create-slider"
-								:disabled="false"
-								:title="user.hasAnswers ? '' : signs.slider_creation_error"
+								:disabled="!user.taskSetsOfUserWithMarks.length"
+								:title="user.taskSetsOfUserWithMarks.length ? '' : signs.slider_creation_error"
 							>
 								{{signs.gen_slider}}
 							</button>
 
 							<button
-								@click.prevent="openSlider(user)"
+								@click.prevent="showOpenSliderPopup(user)"
 								type="button"
 								class="btn btn-success btn-xs"
-								:disabled="false"
-								:title="user.hasSlider ? '' : signs.slider_opening_error"
+								:disabled="!user.taskSetsOfUserWithSliders.length"
+								:title="user.taskSetsOfUserWithSliders.length ? '' : signs.slider_opening_error"
 							>
 								{{signs.open_slider}}
 							</button>
@@ -124,10 +153,10 @@
 				</div>
 			</div>
 
-      <div class="tasksets-form-controls">
-        <button class="btn btn-success" @click.prevent="submitForm()">{{signs.submit}}</button>
-        <button class="btn btn-default" @click.prevent="closeForm()">{{signs.cancel}}</button>
-      </div>
+			<div class="tasksets-form-controls">
+				<button class="btn btn-success" @click.prevent="submitForm()">{{signs.submit}}</button>
+				<button class="btn btn-default" @click.prevent="closeForm()">{{signs.cancel}}</button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -150,20 +179,19 @@
 				signs: window.signs,
 
 				selectedUser: null,
-        localTaskSets: this.taskSets,
+				localTaskSets: this.taskSets,
 
-        genSliderSelectedUser: null,
-        selectedTaskSetId: null,
+				actionTargetUser: null,
+				selectedTaskSetId: null,
 
-        genSliderPopupIsShown: false,
+				genSliderPopupIsShown: false,
+				openSliderPopupIsShown: false,
 			};
 		},
 
-    components: {
-      'custom-popup': CustomPopup,
-    },
-
-    props: ['taskSets'],
+		components: {
+			'custom-popup': CustomPopup,
+		},
 
 		methods: {
 			addUser() {
@@ -175,21 +203,31 @@
 				};
 			},
 
+
 			editUser(user) {
 				this.selectedUser = $.extend(true, {}, user);
 			},
 
-			openSlider(user) {
-				if (! user.hasSlider) {
+
+			openSlider() {
+				const user = this.actionTargetUser;
+				const selectedTaskSetId = this.selectedTaskSetId;
+
+				console.log(1, user, selectedTaskSetId)
+
+				if (!(user && selectedTaskSetId)) {
+					alert(this.signs.select_taskset_error);
 					return;
 				}
 
-				window.location.href = `/slider/${user.email}`;
+				window.open(`/slider/${user.email}`);
 			},
+
 
 			closeForm() {
 				this.selectedUser = null;
 			},
+
 
 			submitForm() {
 				const user = this.selectedUser;
@@ -198,7 +236,7 @@
 				// Edit user request
 				if (userId) {
 					Request.post(`/api/config/${userId}/update-user`, {
-						data: { user },
+						data: {user},
 					})
 						.then(() => window.location.reload())
 						.catch(() => alert(this.signs.edit_user_error));
@@ -206,33 +244,30 @@
 					// Add user request
 				} else {
 					Request.post('/api/config/add-user', {
-						data: { user },
+						data: {user},
 					})
 						.then(() => window.location.reload())
 						.catch(() => alert(this.signs.add_user_error));
 				}
 			},
 
+
 			createSlider() {
-			  const user = this.genSliderSelectedUser;
-			  const selectedTaskSetId = this.selectedTaskSetId;
+				const user = this.actionTargetUser;
+				const selectedTaskSetId = this.selectedTaskSetId;
 
-			  console.log(user, selectedTaskSetId)
+				console.log(2, user, selectedTaskSetId)
 
-			  if (! (user && selectedTaskSetId)) {
-			    alert(this.signs.select_taskset_error);
-			    return;
-        }
-
-				if (! user.hasAnswers) {
-					// return;
+				if (!(user && selectedTaskSetId)) {
+					alert(this.signs.select_taskset_error);
+					return;
 				}
 
 				Request.post(`/api/config/${user._id}/create-slider`, {
-				  data: {
-            taskSetId: selectedTaskSetId,
-          }
-        })
+					data: {
+						taskSetId: selectedTaskSetId,
+					}
+				})
 					.then(() => {
 						alert(this.signs.slider_created);
 						location.reload();
@@ -240,16 +275,25 @@
 					.catch(err => alert(err.message));
 			},
 
-      openGenSliderPopup(user) {
-        this.genSliderSelectedUser = user;
-        this.genSliderPopupIsShown = true;
-      },
 
-      onGenSliderPopupClose() {
-			  this.genSliderPopupIsShown = false;
-			  this.selectedTaskSetId = null;
-			  this.genSliderSelectedUser = null;
-      }
+			showGenSliderPopup(user) {
+				this.actionTargetUser = user;
+				this.genSliderPopupIsShown = true;
+			},
+
+
+			showOpenSliderPopup(user) {
+				this.actionTargetUser = user;
+				this.openSliderPopupIsShown = true;
+			},
+
+
+			onPopupClose() {
+				this.genSliderPopupIsShown = false;
+				this.openSliderPopupIsShown = false;
+				this.selectedTaskSetId = null;
+				this.actionTargetUser = null;
+			}
 		},
 	};
 </script>

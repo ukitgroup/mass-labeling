@@ -55,6 +55,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: 2;
   }
 
   .popup-overlay {
@@ -66,6 +67,7 @@
     background: #000;
     opacity: 0.5;
     cursor: pointer;
+    z-index: 2;
   }
 
   .popup-content {
@@ -78,5 +80,6 @@
     padding: 48px;
     border-radius: 12px;
     transform: translate(-50%, -50%);
+    z-index: 2;
   }
 </style>

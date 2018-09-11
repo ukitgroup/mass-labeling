@@ -86,8 +86,6 @@ router.post('/:userId/create-slider', async (req, res, next) => {
 		const { userId = 0 } = req.params;
 		const { taskSetId = 0 } = req.body;
 
-		console.log(req.body)
-
 		const userAnswersCount = await Task.countByUserId(userId);
 
 		if (! userAnswersCount) {

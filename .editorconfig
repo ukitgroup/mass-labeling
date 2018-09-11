@@ -13,5 +13,9 @@ max_line_length = 160
 indent_style = tab
 indent_size = 4
 
+[*.vue]
+indent_style = tab
+indent_size = 4
+
 [*.md]
 indent_size = 4

@@ -80,11 +80,23 @@ router.get('/', async (req, res, next) => {
 		const rawUsers = users.map(user => user.toObject());
 
 		await Promise.all(rawUsers.map(async (user) => {
-			const userAnswersCount = await Task.countByUserId(user._id);
-			user.hasAnswers = userAnswersCount > 0;
+			// 1. Get all task sets where user has marks
+			const taskSetsOfUserWithMarksIds = await Task.distinct('taskSetId', {
+				userId: user._id,
+			});
 
-			const slidersOfUser = await Slider.getAllByName(user.email);
-			user.hasSlider = slidersOfUser.length > 0;
+			user.taskSetsOfUserWithMarks = await TaskSet.find({
+				_id: { $in: taskSetsOfUserWithMarksIds },
+			});
+
+
+			// 2. Get all task sets with sliders of user
+			const taskSetsOfUserWithSlidersIds = await Slider.distinct('taskSetId', {
+				name: user.email,
+			});
+
+			user.taskSetsOfUserWithSliders = await Promise
+				.all(taskSetsOfUserWithSlidersIds.map(async taskSetId => TaskSet.findById(taskSetId)));
 
 			delete user.password;
 		}));

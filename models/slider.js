@@ -33,8 +33,7 @@ const SliderSchema = new mongoose.Schema({
 
 SliderSchema.statics = {
 	async getAllNew({ name, slider, taskSetId }) {
-
-		console.log(name, slider, taskSetId);
+		// console.log(name, slider, taskSetId);
 
 		return this.create(slider.map(({ siteId, modelScore, assessorsScore }) => ({
 			name,
