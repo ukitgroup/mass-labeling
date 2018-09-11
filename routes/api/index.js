@@ -3,7 +3,6 @@ const bridges = require('../bridges');
 const auth = require('./auth');
 const markup = require('./assessment');
 const site = require('./site');
-const user = require('./user');
 const broken = require('./broken');
 const config = require('./config');
 
@@ -28,13 +27,6 @@ router.use(
 	'/site',
 	bridges.auth.user,
 	site,
-);
-
-// Пользователи
-router.use(
-	'/user',
-	bridges.auth.admin,
-	user,
 );
 
 // Сломанные сайты

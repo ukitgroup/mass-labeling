@@ -51,7 +51,6 @@ router.get('/abnormal(/:diff)?', async (req, res, next) => {
 
 		const usersMap = users.reduce((o, curUser) => {
 			o[curUser.id] = curUser;
-			o[curUser.id] = curUser;
 			return o;
 		}, {});
 

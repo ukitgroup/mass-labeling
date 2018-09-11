@@ -89,7 +89,7 @@ router.post('/:userId/create-slider', async (req, res, next) => {
 		const userAnswersCount = await Task.countByUserId(userId);
 
 		if (! userAnswersCount) {
-			// throw new Error('slider_creation_error');
+			throw new Error('slider_creation_error');
 		}
 
 		const storedUser = await User.findById(userId);

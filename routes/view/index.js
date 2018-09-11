@@ -2,7 +2,6 @@ const bridges = require('../bridges');
 
 const dashboard = require('./dashboard');
 const markup = require('./assessment');
-const user = require('./user');
 const stat = require('./stat');
 const broken = require('./broken');
 const slider = require('./slider');
@@ -117,13 +116,6 @@ router.use(
 	'/assessment',
 	bridges.auth.user,
 	markup,
-);
-
-// Пользователи
-router.use(
-	'/user',
-	bridges.auth.admin,
-	user,
 );
 
 // Статистика
