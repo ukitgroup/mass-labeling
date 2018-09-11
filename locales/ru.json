@@ -158,5 +158,9 @@
   "disabled_dataset_reason": "Нельзя изменить состояния набора данных, потому что пользователи уже оценили некоторые данные из него",
   "markup_page_description": "markup_page_description",
   "anomalies_page_description": "anomalies_page_description",
-  "local_anomalies_page_description": "local_anomalies_page_description"
+  "local_anomalies_page_description": "local_anomalies_page_description",
+  "slider_creation_modal_title": "Создание слайдера для задачи",
+  "choose_taskset": "Выберите задачу для слайдера",
+  "close": "Закрыть",
+  "select_taskset_error": "Выберите задачу"
 }

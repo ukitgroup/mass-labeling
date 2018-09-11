@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle,max-len */
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 
 

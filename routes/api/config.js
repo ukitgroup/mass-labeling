@@ -84,11 +84,14 @@ router.post('/:userId/update-user', async (req, res, next) => {
 router.post('/:userId/create-slider', async (req, res, next) => {
 	try {
 		const { userId = 0 } = req.params;
+		const { taskSetId = 0 } = req.body;
+
+		console.log(req.body)
 
 		const userAnswersCount = await Task.countByUserId(userId);
 
 		if (! userAnswersCount) {
-			throw new Error('slider_creation_error');
+			// throw new Error('slider_creation_error');
 		}
 
 		const storedUser = await User.findById(userId);
@@ -97,7 +100,7 @@ router.post('/:userId/create-slider', async (req, res, next) => {
 			throw new NotFoundError();
 		}
 
-		await storedUser.createSlider();
+		await storedUser.createSlider(taskSetId);
 
 		res.api.response();
 	} catch (err) {

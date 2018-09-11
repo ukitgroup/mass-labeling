@@ -213,7 +213,6 @@
 
       editTaskSet(taskSet) {
         this.selectedTaskSet = $.extend({}, taskSet);
-        window.a = this.selectedTaskSet
       },
 
 

@@ -22,17 +22,26 @@ const SliderSchema = new mongoose.Schema({
 		default: 0,
 	},
 
+	taskSetId: {
+		type: mongoose.Schema.ObjectId,
+		required: true,
+	},
+
 	assessorsScore: [Number],
 });
 
 
 SliderSchema.statics = {
-	async getAllNew({ name, slider }) {
+	async getAllNew({ name, slider, taskSetId }) {
+
+		console.log(name, slider, taskSetId);
+
 		return this.create(slider.map(({ siteId, modelScore, assessorsScore }) => ({
 			name,
 			siteId,
 			modelScore,
 			assessorsScore,
+			taskSetId: mongoose.Types.ObjectId(taskSetId),
 		})));
 	},
 

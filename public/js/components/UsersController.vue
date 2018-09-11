@@ -1,5 +1,32 @@
 <template>
 	<div>
+
+    <custom-popup :shown="genSliderPopupIsShown" @popupClosed="onGenSliderPopupClose()">
+      <template slot="body">
+        <div class="form-group">
+          <label for="tasksets-list">
+            {{signs.choose_taskset}}
+          </label>
+
+          <select id="tasksets-list" class="form-control" v-model="selectedTaskSetId">
+            <option :value="null" disabled>
+              {{signs.choose_taskset}}
+            </option>
+
+            <option v-for="taskSet in localTaskSets" :value="taskSet._id">
+              {{taskSet.seqNum}} | {{taskSet.description}}
+            </option>
+          </select>
+        </div>
+      </template>
+
+      <template slot="footer">
+        <button type="button" class="btn btn-primary" @click="createSlider()">
+          {{signs.gen_slider}}
+        </button>
+      </template>
+    </custom-popup>
+
 		<div v-if="!selectedUser">
 			<div class="form-group">
 				<button @click.prevent="addUser()" type="button" class="btn btn-primary">
@@ -31,10 +58,10 @@
 							</button>
 
 							<button
-								@click.prevent="createSlider(user)"
+								@click.prevent="openGenSliderPopup(user)"
 								type="button"
 								class="btn btn-primary btn-xs create-slider"
-								:disabled="!user.hasAnswers"
+								:disabled="false"
 								:title="user.hasAnswers ? '' : signs.slider_creation_error"
 							>
 								{{signs.gen_slider}}
@@ -44,7 +71,7 @@
 								@click.prevent="openSlider(user)"
 								type="button"
 								class="btn btn-success btn-xs"
-								:disabled="!user.hasSlider"
+								:disabled="false"
 								:title="user.hasSlider ? '' : signs.slider_opening_error"
 							>
 								{{signs.open_slider}}
@@ -112,6 +139,8 @@
 	import $ from 'jquery';
 	import Request from '../request';
 
+	import CustomPopup from './CustomPopup.vue';
+
 	export default {
 		data() {
 			return {
@@ -121,8 +150,20 @@
 				signs: window.signs,
 
 				selectedUser: null,
+        localTaskSets: this.taskSets,
+
+        genSliderSelectedUser: null,
+        selectedTaskSetId: null,
+
+        genSliderPopupIsShown: false,
 			};
 		},
+
+    components: {
+      'custom-popup': CustomPopup,
+    },
+
+    props: ['taskSets'],
 
 		methods: {
 			addUser() {
@@ -172,23 +213,43 @@
 				}
 			},
 
-			createSlider(user) {
+			createSlider() {
+			  const user = this.genSliderSelectedUser;
+			  const selectedTaskSetId = this.selectedTaskSetId;
+
+			  console.log(user, selectedTaskSetId)
+
+			  if (! (user && selectedTaskSetId)) {
+			    alert(this.signs.select_taskset_error);
+			    return;
+        }
+
 				if (! user.hasAnswers) {
-					return;
+					// return;
 				}
 
-				Request.post(`/api/config/${user._id}/create-slider`)
+				Request.post(`/api/config/${user._id}/create-slider`, {
+				  data: {
+            taskSetId: selectedTaskSetId,
+          }
+        })
 					.then(() => {
-						const updatedUser = this.users.filter(storedUser => user._id === storedUser._id)[0];
-
-						if (updatedUser) {
-							updatedUser.hasSlider = true;
-						}
-
 						alert(this.signs.slider_created);
+						location.reload();
 					})
 					.catch(err => alert(err.message));
 			},
+
+      openGenSliderPopup(user) {
+        this.genSliderSelectedUser = user;
+        this.genSliderPopupIsShown = true;
+      },
+
+      onGenSliderPopupClose() {
+			  this.genSliderPopupIsShown = false;
+			  this.selectedTaskSetId = null;
+			  this.genSliderSelectedUser = null;
+      }
 		},
 	};
 </script>

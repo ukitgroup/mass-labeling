@@ -101,7 +101,7 @@ UserSchema.methods = {
 		await this.save();
 	},
 
-	async createSlider() {
+	async createSlider(taskSetId) {
 		const name = this.email;
 		const userId = this.id;
 
@@ -161,11 +161,12 @@ UserSchema.methods = {
 
 
 		// Удаляем старый слайдер
-		await Slider.deleteAllByName(name);
+		// await Slider.deleteAllByName(name);
 
 		// Сохраняем оценки
 		await Slider.getAllNew({
 			name,
+			taskSetId,
 			slider: slider.map(({ siteId, modelScore, userAnswers }) => ({
 				siteId,
 				// Set the model score value of previous slider to the new one

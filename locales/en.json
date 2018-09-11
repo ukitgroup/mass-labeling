@@ -158,5 +158,9 @@
   "disabled_dataset_reason": "disabled_dataset_reason",
   "markup_page_description": "markup_page_description",
   "anomalies_page_description": "anomalies_page_description",
-  "local_anomalies_page_description": "local_anomalies_page_description"
+  "local_anomalies_page_description": "local_anomalies_page_description",
+  "slider_creation_modal_title": "slider_creation_modal_title",
+  "choose_taskset": "choose_taskset",
+  "close": "close",
+  "select_taskset_error": "select_taskset_error"
 }

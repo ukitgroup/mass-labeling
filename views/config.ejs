@@ -50,7 +50,9 @@
 
 
       <div class="settings-block users-settings" v-show="activeTab === 'users'">
-        <users-controller></users-controller>
+        <users-controller
+          :task-sets="taskSets"
+        ></users-controller>
       </div>
     </form>
   </div>
