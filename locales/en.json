@@ -40,7 +40,7 @@
   "abnormal_stats": "En_Статистика по аномальным оценкам",
   "local_abnormal_stats": "En_Статистика по локально-аномальным оценкам",
   "permissible_variation": "En_Допустимое отклонение",
-  "anomalies_count":  ё"En_Количество аномалий",
+  "anomalies_count":  "En_Количество аномалий",
   "scored_sites_count": "En_количество просмотров",
   "user_add": "En_Добавление пользователя",
   "user_edit": "En_Редактирование пользователя",
