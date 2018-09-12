@@ -10,6 +10,9 @@ const bridges = require('../bridges');
 const router = require('express').Router();
 
 
+/**
+ * Get new task for user
+ */
 router.post('/create', async (req, res, next) => {
 	try {
 		const activeTaskSet = await TaskSet.getCurrentActive();
@@ -22,7 +25,8 @@ router.post('/create', async (req, res, next) => {
 
 		let additionalFilter = {};
 
-		// Retrieve all tasks continuously
+		// User should rate all images from current taskset,
+		// so retrieve all tasks continuously
 		if (! showRandomly) {
 			const approvedByUserSiteIds = await Task.distinct('siteId', {
 				userId: {
@@ -40,6 +44,7 @@ router.post('/create', async (req, res, next) => {
 				},
 			};
 		}
+
 
 		const site = await Site.getRandom(additionalFilter);
 
@@ -66,6 +71,10 @@ router.post('/create', async (req, res, next) => {
 	}
 });
 
+
+/**
+ * User have rated some image
+ */
 router.post('/answer', async (req, res, next) => {
 	try {
 		const task = await Task.getNew({
@@ -89,6 +98,10 @@ router.post('/answer', async (req, res, next) => {
 	}
 });
 
+
+/**
+ * User decided to change the last answer
+ */
 router.post('/:taskId/undo', bridges.task.id, bridges.task.owner, async (req, res, next) => {
 	try {
 		await req.task.remove();

@@ -18,6 +18,9 @@ const util = require('util');
 const readFileAsync = util.promisify(fs.readFile);
 
 
+/**
+ * Save settings values
+ */
 router.post('/save', async (req, res, next) => {
 	try {
 		const { config } = req.body;
@@ -35,6 +38,9 @@ router.post('/save', async (req, res, next) => {
 });
 
 
+/**
+ * Add new user
+ */
 router.post('/add-user', async (req, res, next) => {
 	try {
 		const { user } = req.body;
@@ -54,6 +60,10 @@ router.post('/add-user', async (req, res, next) => {
 	}
 });
 
+
+/**
+ * Edit user by id
+ */
 router.post('/:userId/update-user', async (req, res, next) => {
 	try {
 		const { user } = req.body;
@@ -81,6 +91,10 @@ router.post('/:userId/update-user', async (req, res, next) => {
 	}
 });
 
+
+/**
+ * Create slider of certain taskset for user
+ */
 router.post('/:userId/create-slider', async (req, res, next) => {
 	try {
 		const { userId = 0 } = req.params;
@@ -88,6 +102,7 @@ router.post('/:userId/create-slider', async (req, res, next) => {
 
 		const userAnswersCount = await Task.countByUserId(userId);
 
+		// Cant create a slider if user has no marks yet
 		if (! userAnswersCount) {
 			throw new Error('slider_creation_error');
 		}
@@ -108,14 +123,20 @@ router.post('/:userId/create-slider', async (req, res, next) => {
 	}
 });
 
+
+/**
+ * Save new taskset
+ */
 router.post('/add-taskset', async (req, res, next) => {
 	try {
 		const { taskSet } = req.body;
 
+		// Get selected datasets and put their names into the 'activeDataSets' property
 		taskSet.activeDataSets = taskSet.dataSets
 			.filter(dataSet => dataSet.isInTaskSet)
 			.map(dataSet => dataSet._id);
 
+		// If instruction is empty, set default one instead
 		if (! taskSet.instruction) {
 			taskSet.instruction = await readFileAsync(
 				path.resolve(__dirname, '../../public/instruction.html'),
@@ -133,6 +154,10 @@ router.post('/add-taskset', async (req, res, next) => {
 	}
 });
 
+
+/**
+ * Edit taskset
+ */
 router.post('/edit-taskset', async (req, res, next) => {
 	try {
 		const { taskSet } = req.body;
@@ -143,6 +168,7 @@ router.post('/edit-taskset', async (req, res, next) => {
 			throw new NotFoundError();
 		}
 
+		// Get selected datasets and put their names into the 'activeDataSets' property
 		taskSet.activeDataSets = taskSet.dataSets
 			.filter(dataSet => dataSet.isInTaskSet)
 			.map(dataSet => dataSet._id);
@@ -157,6 +183,7 @@ router.post('/edit-taskset', async (req, res, next) => {
 			throw error;
 		}
 
+		// If instruction is empty, set default one instead
 		if (! taskSet.instruction) {
 			taskSet.instruction = await readFileAsync(
 				path.resolve(__dirname, '../../public/instruction.html'),
@@ -180,6 +207,10 @@ router.post('/edit-taskset', async (req, res, next) => {
 	}
 });
 
+
+/**
+ * Activate certain taskset
+ */
 router.post('/activate', async (req, res, next) => {
 	try {
 		const currentActiveTaskSet = await TaskSet.getCurrentActive();
