@@ -42,16 +42,18 @@ SliderSchema.statics = {
 		})));
 	},
 
-	async getAllByName(name) {
-		return this.find({ name });
-	},
-
 	getAllByNameAndTaskSet(name, taskSetId) {
-		return this.find({ name, taskSetId });
+		return this.find({
+			name,
+			taskSetId: mongoose.Types.ObjectId(taskSetId),
+		});
 	},
 
-	async deleteAllByName(name) {
-		await this.remove({ name });
+	async deleteAllByNameAndTaskSet(name, taskSetId) {
+		await this.remove({
+			name,
+			taskSetId: mongoose.Types.ObjectId(taskSetId),
+		});
 	},
 
 	async serializeAll(items) {

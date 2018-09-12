@@ -105,13 +105,13 @@ UserSchema.methods = {
 		const name = this.email;
 		const userId = this.id;
 
-		const activeTaskSet = await TaskSet.getCurrentActive();
+		const taskSet = await TaskSet.findById(taskSetId);
 
-		if (! activeTaskSet) {
-			throw new Error('no_active_tasks');
+		if (! taskSet) {
+			throw new Error('no_created_tasks');
 		}
 
-		const { activeDataSets } = activeTaskSet;
+		const { activeDataSets } = taskSet;
 
 		// Get site ids, rated by user (from current task set)
 		let siteIds = await Site.distinct('_id', {
@@ -123,7 +123,7 @@ UserSchema.methods = {
 		siteIds = await Task.distinct('siteId', {
 			userId,
 			siteId: { $in: siteIds },
-			taskSetId: activeTaskSet._id,
+			taskSetId: taskSet._id,
 		});
 
 		// Получаем ответы для сайтов
@@ -135,8 +135,9 @@ UserSchema.methods = {
 		const slider = await Promise.all(siteIds.map(async (siteId) => {
 			// Get saved slider from DB to retrieve its modelScore property value
 			const slider = await Slider.findOne({
-				name: { $eq: name },
-				siteId: { $eq: siteId },
+				name,
+				siteId,
+				taskSetId: mongoose.Types.ObjectId(taskSetId),
 			});
 
 			// If slider exists, get its modelScore property value
@@ -161,7 +162,7 @@ UserSchema.methods = {
 
 
 		// Удаляем старый слайдер
-		// await Slider.deleteAllByName(name);
+		await Slider.deleteAllByNameAndTaskSet(name, taskSetId);
 
 		// Сохраняем оценки
 		await Slider.getAllNew({

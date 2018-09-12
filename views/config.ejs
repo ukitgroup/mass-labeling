@@ -28,7 +28,7 @@
 
     <form autocomplete="off">
       <div class="settings-block tech-settings" v-show="activeTab === 'tech'">
-        <div v-for="(fieldSet, fIndex) in techSettings" v-if="fieldSet.visible !== 0">
+        <div v-for="fieldSet in techSettings" v-if="fieldSet.visible !== 0">
           <config-fieldset :field-set="fieldSet"></config-fieldset>
         </div>
 
