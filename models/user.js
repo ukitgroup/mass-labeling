@@ -113,7 +113,7 @@ UserSchema.methods = {
 
 		const { activeDataSets } = taskSet;
 
-		// Get site ids, rated by user (from current task set)
+		// Get site ids, rated by user (from task set)
 		let siteIds = await Site.distinct('_id', {
 			dataset: {
 				$in: activeDataSets,

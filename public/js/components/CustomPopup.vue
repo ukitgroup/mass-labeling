@@ -72,12 +72,12 @@
 
 	.popup-content {
 		max-width: 600px;
-		width: 600px;
+		width: 100%;
 		position: absolute;
 		top: 50%;
 		left: 50%;
 		background: white;
-		padding: 24px 48px;
+		padding: 24px 36px;
 		border-radius: 12px;
 		transform: translate(-50%, -50%);
 		z-index: 1001;
