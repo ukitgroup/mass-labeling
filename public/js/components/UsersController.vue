@@ -155,6 +155,10 @@
 
 
 <script>
+	/**
+	 * Users list component (/config#tab=users)
+	 */
+
 	/* eslint-disable no-underscore-dangle,no-alert */
 
 	import $ from 'jquery';
@@ -165,15 +169,23 @@
 	export default {
 		data() {
 			return {
+				// Created users
 				users: window.users,
+
+				// Available roles of users (user, admin etc)
 				roles: window.roles,
+
+				// Statuses of users (active, disabled)
 				statuses: window.statuses,
 				signs: window.signs,
 
+				// Which user we edit or add
 				selectedUser: null,
-				localTaskSets: this.taskSets,
 
+				// Target user when opening a 'Open/Generate slider' popup
 				actionTargetUser: null,
+
+				// Which taskset was selected in a 'Open/Generate slider' popup (its id)
 				selectedTaskSetId: null,
 
 				genSliderPopupIsShown: false,
@@ -186,6 +198,9 @@
 		},
 
 		methods: {
+			/**
+			 * Trigger new user adding
+			 */
 			addUser() {
 				this.selectedUser = {
 					email: '',
@@ -197,10 +212,15 @@
 
 
 			editUser(user) {
+				// Create a copy of user to avoid changing data of initial user's data
+				// if editing was cancelled
 				this.selectedUser = $.extend(true, {}, user);
 			},
 
 
+			/**
+			 * Open a slider of user of selected taskset (calls from popup)
+			 */
 			openSlider() {
 				const user = this.actionTargetUser;
 				const selectedTaskSetId = this.selectedTaskSetId;
@@ -219,6 +239,9 @@
 			},
 
 
+			/**
+			 * Add/Edit user requests
+			 */
 			submitForm() {
 				const user = this.selectedUser;
 				const userId = user._id;
@@ -242,11 +265,12 @@
 			},
 
 
+			/**
+			 * Create slider of user of selected taskset (calls from popup)
+			 */
 			createSlider() {
 				const user = this.actionTargetUser;
 				const selectedTaskSetId = this.selectedTaskSetId;
-
-				console.log(2, user, selectedTaskSetId)
 
 				if (!(user && selectedTaskSetId)) {
 					alert(this.signs.select_taskset_error);

@@ -18,6 +18,12 @@
 </template>
 
 <script>
+	/**
+	 * Custom popup module
+	 * You can pass content of body and footer via slots (name=body, name=footer respectively)
+	 * You can control popup's visibility by changing prop 'shown' (when 'shown' === true, popup is visible)
+	 * When the popup is closed, it calls an event 'popupClosed' which you can catch in parent component
+	 */
 	export default {
 		name: "CustomPopup",
 

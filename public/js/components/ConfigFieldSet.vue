@@ -5,7 +5,7 @@
 		<div
 			class="form-group form-check-label"
 			:class="{'checkbox-block': property.element.type === 'checkbox'}"
-			v-for="(property, pIndex) in fieldSet.properties"
+			v-for="property in fieldSet.properties"
 		>
 			<label :for="property.id">
 				{{signs[property.name]}}
@@ -53,7 +53,7 @@
 
 <script>
 	/**
-	 * Component of settings fieldset (/config)
+	 * Component that renders certain section of properties from config.json
 	 */
 	export default {
 		data() {

@@ -21,6 +21,19 @@
 </template>
 
 <script>
+	/**
+	 * Custom checkbox component
+	 *
+	 * You can pass these props:
+	 * - data - {boolean} - boolean data for checkbox
+	 * - disabled - {boolean} - is checkbox disabled or not
+	 * - label - {string} - text of label of checkbox element
+	 * - id - {string} - id of checkbox element
+	 * - title - {string} - text of title attr of label of checkbox
+	 *
+	 * When checkbox is changing its state, component triggers an 'onchange' event,
+	 * that you can catch in parent component and get actual state of checkbox.
+	 */
     export default {
       name: "CustomCheckbox",
 
