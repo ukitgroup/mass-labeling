@@ -3,7 +3,7 @@
 		<custom-popup v-if="actionTargetUser && genSliderPopupIsShown" :shown="genSliderPopupIsShown"
 					  @popupClosed="onPopupClose()">
 			<template slot="body">
-				<div class="form-group">
+				<div class="form-group" v-if="!sliderGenerated">
 					<label for="tasksets-list">
 						{{signs.choose_taskset}}
 					</label>
@@ -14,10 +14,14 @@
 						</option>
 					</select>
 				</div>
+
+				<div v-else>
+					{{signs.slider_created}}
+				</div>
 			</template>
 
 			<template slot="footer">
-				<button type="button" class="btn btn-primary" @click="createSlider()">
+				<button v-if="!sliderGenerated" type="button" class="btn btn-primary" @click="createSlider()">
 					{{signs.gen_slider}}
 				</button>
 			</template>
@@ -190,6 +194,8 @@
 
 				genSliderPopupIsShown: false,
 				openSliderPopupIsShown: false,
+
+				sliderGenerated: false,
 			};
 		},
 
@@ -283,8 +289,7 @@
 					}
 				})
 					.then(() => {
-						alert(this.signs.slider_created);
-						location.reload();
+						this.sliderGenerated = true;
 					})
 					.catch(err => alert(err.message));
 			},
@@ -305,10 +310,14 @@
 
 
 			onPopupClose() {
-				this.genSliderPopupIsShown = false;
-				this.openSliderPopupIsShown = false;
-				this.selectedTaskSetId = null;
-				this.actionTargetUser = null;
+				if (this.sliderGenerated) {
+					location.reload();
+				} else {
+					this.genSliderPopupIsShown = false;
+					this.openSliderPopupIsShown = false;
+					this.selectedTaskSetId = null;
+					this.actionTargetUser = null;
+				}
 			}
 		},
 	};
