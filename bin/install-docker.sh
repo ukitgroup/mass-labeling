@@ -93,3 +93,5 @@ if [ "$docker_use_mongo" = true ];
 fi
 
 node ./config/updateConfig.js "$dbURL" "$cookie_secret"
+
+echo "If you are using Mass Labeling for a first time, please, read the user guide in the docs folder."

@@ -59,12 +59,12 @@
   "edit": "Изменить",
   "gen_slider": "Сгенерировать слайдер",
   "open_slider": "Открыть слайдер",
-  "site": "Сайт",
+  "site": "Изображение",
   "model_score": "Оценка модели",
   "assessors_mean_score": "Средняя оценка ассессоров",
   "error": "Ошибка",
-  "assessors_scores": "Оценки ассессоров",
-  "site_approved": "Сайт одобрен разработчиками",
+  "assessors_scores": "Оценки текущего ассессора",
+  "site_approved": "Изображение одобрено администратором",
   "get_new_task_error": "Ошибка получения новой задачи",
   "no_mark_specified": "Вы не выставили отметку",
   "auth_error": "Ошибка авторизации",
@@ -86,7 +86,7 @@
     "no_active_taskset": "Не выбрана активная задача"
   },
   "config_structure_error": "Конфиг должен быть набором строк",
-  "edit_config": "Редактирование настроек приложения",
+  "edit_config": "Настройки приложения",
   "settings": "Настройки",
   "config_props": {
     "logger": "Система логирования",
@@ -101,14 +101,14 @@
     "sites_datasets": "Наборы данных",
     "sites_screenshots_path": "Путь к директории с изображениями",
     "assessment": "Разметка",
-    "assessment_limit": "Количество оценок/меток для асессора (0 - неограничено)",
+    "assessment_limit": "Количество просмотров для пользователя (0 - неограничено)",
     "cliImport": "Импорт через CLI",
-    "cliImport_zip_path": "Путь к ZIP-архиву",
+    "cliImport_zip_path": "Путь к zip-архиву с датасетами по умолчанию",
     "cliExport": "Экспорт через CLI",
     "cliExport_datasets": "Наборы данных",
     "cliExport_json_path": "Путь к JSON-файлу",
     "show_randomly": "Показывать наборы данных случайно",
-    "cliImport_json_path": "Путь к JSON файлу оценок моделей"
+    "cliImport_json_path": "Путь к JSON файлу с оценками моделей по умолчанию"
   },
   "logger_levels": {
     "fatal": "Критические ошибки",
