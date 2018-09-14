@@ -107,8 +107,8 @@
       {
         "id": "modelScoreIn",
         "name": "config_props.cliImport_json_path",
-        "default": "data/import/modelScore.json",
-        "value": "data/import/modelScore.json",
+        "default": "data/import/modelRates.json",
+        "value": "data/import/modelRates.json",
         "format": "String",
         "element": {
           "type": "text"
