@@ -1,87 +1,65 @@
 # Multilanguage support
 
-To ensure the multilanguage of the application, 'locales' folder was created, where the translation files of 
-all the texts of the corresponding languages ​​are stored. The list of currently supported languages:
-Russian, English.
+__Mass Labeling__ uses library [i18n](https://github.com/mashpie/i18n-node) for multilanguage support.
+It uses `locales` folder, where the translation files of all the texts of 
+the corresponding languages ​​are stored. The list of currently supported languages: Russian, English.
 
-Also this folder contains the language settings file:
-```javascript
-{
-	availableLocales,
-	defaultLocale: 'en',
-	cookieMaxAge: 30 * 24 * 3600 * 1000,
+### Add new language 
 
-	getLocaleReadableName(localeShortName) {
-		switch (localeShortName) {
-			case 'en': return 'English';
-			case 'ru': return 'Русский';
-			default: return localeShortName;
-		}
-	},
-}
+To create new language locale file named `<new_locale>` you can use the following command:
+```sh
+bin/cli locale:create --locale <new_locale> | npx bunyan 
 ```
+or you can copy one of the locale files presented in `locales` folder and rename it as `<new_locale>`.
 
-- availableLocales - selectable locales, determined by reading all the json files in the 'locales' directory
-- defaultLocale - default language
-- cookieMaxAge - the cookie expiration date of the selected language
-- getLocaleReadableName - utility function for getting the human-readable name of the locale
-
-
-### Create new language file of locale NEW_LOCALE (copies the file of the default language with name NEW_LOCALE).
-```console
-bin/cli locale:create --locale NEW_LOCALE | npx bunyan 
-```
-Usage (creates fr.json file in 'locales' directory):
+Usage example on how to create `fr.json` file in `locales` folder:
 ```console
 bin/cli locale:create --locale fr | npx bunyan
 ```
-__*Note*__. After adding a new language, the server should be restarted
 
-### Create new sign for all languges:
-```console
+__*Note*__. After adding a new language, the server should be restarted to apply this changes.
+
+Then you can edit a new locale file to specify elements names for the chosen language. This changes would be applied 
+after corresponding page reloading. 
+
+### Create new sign key for all languages:
+
+All locales should have the same set of sign keys. To create new sign key for all locales in the folder you can 
+use the following command:
+```sh
 bin/cli locale:new --key <sign_key> | npx bunyan
 ```
-Usage (creates sign with key 'auth_errors' in all language files):
-```console
+`<sign_key>` is the name of the new key.
+
+Usage example on how to create key 'auth_errors' in all language files:
+```sh
 bin/cli locale:new --key auth_errors | npx bunyan
 ```
-Also this command allows you to insert multi-level signs. To declare new level, use dot (.), e.g.:  auth_errors.wrong_email. 
-```console
+
+Also this command allows you to insert multi-level signs. To declare new level, use dot (.), 
+e.g.: auth_errors.wrong_email.
+
+```sh
 bin/cli locale:new --key auth_errors.wrong_email | npx bunyan
 ```
-This command will add the wrong_email sign to the auth_errors object. If such object does not exist, it will be created first
+
+Last command adds the 'wrong_email' sign for the 'wrong_email' second level key for the 'auth_errors' first level key. 
+If such object does not exist, it will be created first and it would look like the following: 
 ```javascript
 "auth_errors": {
     "wrong_email": "wrong_email"
 },
 ```
 
+After you add a new key you can edit all locale files to set the correct sign for this key.
+
 ### Check the consistency of the language files
-```console
+
+```sh
 bin/cli locale:sync | npx bunyan
 ```
-This command will compare the language file of the default language with the rest. If some sign is absent, the corresponding message will be displayed in the console. If all signs are present, the console displays "Language files are Consistent"
 
+This command will compare the language default language file with the others. If some key is absent, 
+the corresponding message will be displayed in the console. If all keys are present, 
+the console displays "Language files are Consistent".
 
-### Signs usage
-To use a sign, instead of static text in templates, you should use the command
-```javascript
-<%= getText('SIGN_ID') %>
-```
-Example:
-```html
-<button><%= getText('click_me_prompt') %></button>
-```
-If there is no sign with such id, the text will be displayed as is.
-
-### Sign creation flow
-To use new sign you should:
-1. Use following command in template
-```javascript
-<%= getText('my_sign') %>
-```
-2. Declare this sign in all language files:
-```console
-bin/cli locale:new --key my_sign | npx bunyan
-```
-3. Translate this sign in all languages 

@@ -58,8 +58,10 @@ This interface is the same as assessors labeling interface.
 
 ##### General purpose interface
 
-The functionality of the language switcher and the exit button is obvious. Clicking on _Settings_ menu item opens 
-settings interface which needs some description. 
+The functionality of the language switcher and the exit button is obvious. If you need to use other than English or 
+Russian language for interface elements, you can read [multilanguage support guide](./multilanguage). 
+
+Clicking on _Settings_ menu item opens settings interface which needs some description. 
 
 Settings are divided into three categories each of which has it's own tab in settings interface. They are 
 [Users](users_settings), [Assessment](assessment_settings) and [System](system_settings) settings.
@@ -159,7 +161,10 @@ to the assessors.
 ##### Edit instructions
 
 Administrator can provide instructions in html format to each task. Assessors can click on _Instructions_ hyperlink to 
-read them during their work. This is not mandatory but could be a useful feature.    
+read them during their work. This is not mandatory but could be a useful feature. 
+   
+Language switcher has no influence on the instructions text. So, if you need to have instructions on different 
+languages you can write all versions as the solid text.
 
 #### Manage users
 

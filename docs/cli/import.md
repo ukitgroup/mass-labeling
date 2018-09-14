@@ -44,7 +44,7 @@ in [user guide](../user_guide)).
 
 #### Arguments
 
-* `--in` - the path of the file with rates. Default: `data/import/modelRates.json`. And default could be 
+* `--in` - path to the file with rates. Default: `data/import/modelRates.json`. And default could be 
 changed on _System_ tab of _Setting_ menu.
 
 Input file is a `json` file, which contains the `item` array. Each `item` satisfies the following format:

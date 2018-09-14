@@ -40,7 +40,8 @@ right choice for you.
 
 __Mass Labeling__ has 
 - built-in slider mechanism to look throw labeled data,
-- built-in statistics to measure assessors work quality. 
+- statistics to measure assessors work quality,
+- multilanguage support. 
 
 ## Technogical stack
 
