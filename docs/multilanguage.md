@@ -59,7 +59,7 @@ After you add a new key you can edit all locale files to set the correct sign fo
 bin/cli locale:sync | npx bunyan
 ```
 
-This command will compare the language default language file with the others. If some key is absent, 
+This command will compare the default language file with the others. If some key is absent, 
 the corresponding message will be displayed in the console. If all keys are present, 
 the console displays "Language files are Consistent".
 
