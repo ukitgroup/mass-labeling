@@ -41,11 +41,11 @@ in [user guide](../user_guide)).
 
 ### Run command
 
-`bin/cli import:modelScore <arguments> | npx bunyan`
+`bin/cli import:modelRates <arguments> | npx bunyan`
 
 #### Arguments
 
-* `--in` - the path of the file with rates. Default: `data/import/modelScore.json`. And default could be 
+* `--in` - the path of the file with rates. Default: `data/import/modelRates.json`. And default could be 
 changed on _System_ tab of _Setting_ menu.
 
 Input file is a `json` file, which contains the `item` array. Each `item` satisfies the following format:
