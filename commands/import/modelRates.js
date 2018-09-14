@@ -10,7 +10,7 @@ const logger = require('../../libs/logger');
 
 
 module.exports = (program) => {
-	program.description('Import model scores of sliders');
+	program.description('Import model rates of sliders');
 
 	program.option('--in <in_path>', 'JSON path', config.get('cliImport.modelScoreIn'));
 
@@ -25,7 +25,7 @@ module.exports = (program) => {
 			throw new Error('JSON should be an array of objects');
 		}
 
-		logger.info(`import:modelScore: import model scores (${json.length} entry/-ies)`);
+		logger.info(`import:modelRates: import model scores (${json.length} entry/-ies)`);
 
 		let updatedSlidersCount = 0;
 		let skippedEntriesCount = 0;
@@ -57,6 +57,6 @@ module.exports = (program) => {
 			updatedSlidersCount += sliders.length;
 		}));
 
-		logger.info(`import:modelScore: updated ${updatedSlidersCount} sliders, skipped ${skippedEntriesCount} entries (no sites with such ID)`);
+		logger.info(`import:modelRates: updated ${updatedSlidersCount} sliders, skipped ${skippedEntriesCount} entries (no sites with such ID)`);
 	});
 };
