@@ -1,11 +1,10 @@
 # Import CLI
 
-
-## Dataset import
-
-If you use __Mass Labeling__ within docker container, don't forget to place put data inside the container. 
+If you use __Mass Labeling__ within docker container, don't forget to put data inside the container. 
 It can be done using `data` folder which is mounted to the container by default. 
 Import command should be run inside the container.
+
+## Dataset import
 
 ### Run command
 
