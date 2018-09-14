@@ -16,7 +16,7 @@ The main advantages of this project are:
 - easy to deploy,
 - easy to manage,
 - data is not distributed,
-- no need to collect results.
+- no need to manually collect results.
  
 The last two advantages are worth describing in detail. 
 
@@ -35,6 +35,12 @@ done the new problem occurs. You will need to collect all the labels and merge t
 
 So, if you wish to keep all the data and labels on your server together, then mass-labeling is the 
 right choice for you. 
+
+#### Useful features
+
+__Mass Labeling__ has 
+- built-in slider mechanism to look throw labeled data,
+- built-in statistics to measure assessors work quality. 
 
 ## Technogical stack
 
@@ -57,4 +63,3 @@ The refactoring is welcome.
 ## License
 
 [Apache License 2.0](LICENSE)
-

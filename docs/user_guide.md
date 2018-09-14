@@ -3,8 +3,7 @@
 
 ## Introduction
 
-This guide shows the possibilities of the __Mass Labeling__ tool and clarifies the usage of some features.
-Although this guide is written in English, unfortunately, the application interface has Russian texts and is not available in English yet.   
+This guide shows the possibilities of the __Mass Labeling__ tool and clarifies the usage of some features.   
 
 ## Main function
 
@@ -71,6 +70,26 @@ This settings category allows administrator to
 - add users, 
 - change their e-mail, password, status and role,
 - generate and open a slider which shows labels set by the user. 
+
+When administrators adds user he/she should enter information such as e-mail, password, status and role. The same 
+information could be changed user is added by clicking on _Change_ button in users list.
+  
+Sliders allows administrator to look through the data labeled by a certain user. To use slider administrator needs to 
+generate it by clicking on the _Generate slider_ button in the users list. System will ask which task the slider 
+should be generated for. Sliders information generated for chosen task would be saved in database and after 
+clicking on _Open slider_ button administrator can select slider for which task to use. 
+
+Sliders are not updated automatically. It means that administrator needs to generate slider again if user labeled more 
+data. 
+   
+Sliders provide the following info: labeled image, rates (classes) which assessor chosed for it, mean assessors rate,
+model rate, error. Here mean assessors rate is a calculated as mean over all rates used by all assessors, model rate 
+is a number which was uploaded into database using import procedure (see [CLI import guide](cli/import)) and it is 
+implied that it is corresponds to some ML model, error is a difference between mean assessors rate and model rate. If 
+image model rate equals to 0, both error and model rate values would be displayed as '-'. 
+
+Slider contains only images which were labeled by a chosen user. Each image can be associated with not more than 
+one model rate. So, rates re-import will update those rates.    
 
 ###### Assessment settings
 

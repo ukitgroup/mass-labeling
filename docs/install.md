@@ -12,6 +12,8 @@ There are two possible ways to install __Mass Labeling__:
 * `Docker CE` v18
 * `docker-compose` v1.20
 
+It is possible to use newer versions, but deploy was tested using mentioned versions. 
+
 ### Preparation
 
 Take the following steps to build __Mass Labeling__ through [Docker](https://docker.com/):
@@ -40,6 +42,10 @@ To run the container, use the following command:
 docker-compose up -d --build
 ```
 __*Note*__. Running container will start the __Mass Labelling__ server application.
+
+__*Warning*__. Files `config/config.json` and `docker-compose.yml` are created during installation.
+  Those files contains some options which will affect the service work. If you change some of them 
+  inside the container while working with service, they will be reset after rebuilding container.
 
 
 ## Delpoy locally
