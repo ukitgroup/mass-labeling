@@ -1,5 +1,38 @@
 [
   {
+    "id": "languageSettings",
+    "name": "config_props.languageSettings",
+    "tab": "tech",
+    "properties": [
+      {
+        "id": "languagesNames",
+        "name": "config_props.languagesNames",
+        "default": {
+          "ru": "Русский",
+          "en": "English"
+        },
+        "value": {
+          "ru": "Русский",
+          "en": "English"
+        },
+        "format": "Object",
+        "element": {
+          "type": "languagesList"
+        }
+      },
+      {
+        "id": "defaultLanguage",
+        "name": "config_props.defaultLanguage",
+        "default": "en",
+        "value": "en",
+        "format": "String",
+        "element": {
+          "type": "languagesSelect"
+        }
+      }
+    ]
+  },
+  {
     "id": "logger",
     "name": "config_props.logger",
     "tab": "tech",
@@ -92,7 +125,6 @@
     "id": "cliImport",
     "name": "config_props.cliImport",
     "tab": "tech",
-    "visible": 1,
     "properties": [
       {
         "id": "in",
@@ -112,79 +144,6 @@
         "format": "String",
         "element": {
           "type": "text"
-        }
-      }
-    ]
-  },
-  {
-    "id": "cliExport",
-    "name": "config_props.cliExport",
-    "tab": "tech",
-    "visible": 0,
-    "properties": [
-      {
-        "id": "datasets",
-        "name": "config_props.cliExport_datasets",
-        "default": [],
-        "value": [],
-        "format": "DataSet",
-        "element": {
-          "type": "checkbox-group"
-        }
-      },
-      {
-        "id": "out",
-        "name": "config_props.cliExport_json_path",
-        "default": "data/export/answers.json",
-        "value": "data/export/answers.json",
-        "format": "String",
-        "element": {
-          "type": "text"
-        }
-      }
-    ]
-  },
-  {
-    "id": "assessment",
-    "name": "config_props.assessment",
-    "tab": "assessment",
-    "visible": 1,
-    "properties": [
-      {
-        "id": "limit",
-        "name": "config_props.assessment_limit",
-        "default": 0,
-        "value": 0,
-        "format": "Number",
-        "element": {
-          "type": "number"
-        }
-      },
-      {
-        "id": "showRandomly",
-        "name": "config_props.show_randomly",
-        "default": true,
-        "value": true,
-        "format": "Boolean",
-        "element": {
-          "type": "checkbox"
-        }
-      }
-    ]
-  },
-  {
-    "id": "sites",
-    "name": "config_props.sites",
-    "tab": "assessment",
-    "properties": [
-      {
-        "id": "allowedDatasets",
-        "name": "config_props.sites_datasets",
-        "default": [],
-        "value": [],
-        "format": "DataSet",
-        "element": {
-          "type": "checkbox-group"
         }
       }
     ]

@@ -39,6 +39,24 @@
 			<select
 				class="form-control"
 				v-model="property.value"
+				v-if="property.element.type === 'languagesSelect'"
+				:id="property.id"
+			>
+				<option v-for="langValue in definedLanguages" :value="langValue">
+					{{languagesNames[langValue]}}
+				</option>
+			</select>
+
+			<div v-if="property.element.type === 'languagesList'">
+				<div class="input-group lang-name-block" v-for="langCode in definedLanguages">
+					<span class="input-group-addon">{{langCode}}</span>
+					<input v-model="languagesNames[langCode]" type="text" class="form-control">
+				</div>
+			</div>
+
+			<select
+				class="form-control"
+				v-model="property.value"
 				v-if="property.element.type === 'select'"
 				:id="property.id"
 			>
@@ -55,10 +73,46 @@
 	/**
 	 * Component that renders certain section of properties from config.json
 	 */
+
+	const { signs, definedLanguages } = window;
+
 	export default {
+		computed: {
+			languagesNames() {
+				let langNamesObject = {};
+
+				if (this.fieldSet.id === 'languageSettings') {
+					const langNamesProperty = this.fieldSet.properties
+						.filter(property => property.id === 'languagesNames')[0];
+
+					if (langNamesProperty) {
+						langNamesObject = langNamesProperty.value;
+					}
+				}
+
+				// If user added new language, language name = language code
+				this.definedLanguages.forEach((langCode) => {
+					if (! langNamesObject[langCode]) {
+						langNamesObject[langCode] = langCode;
+					}
+				});
+
+				// If user deleted some language, its value is still in config
+				// We should remove it
+				Object.keys(langNamesObject).forEach((langCode) => {
+					if (this.definedLanguages.indexOf(langCode) < 0) {
+						delete langNamesObject[langCode];
+					}
+				});
+
+				return langNamesObject;
+			},
+		},
+
 		data() {
 			return {
-				signs: window.signs,
+				signs,
+				definedLanguages,
 			};
 		},
 

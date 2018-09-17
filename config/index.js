@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
+
 // If we are installing app via docker, installed dependencies do not exist yet
 try {
 	const dotenv = require('dotenv');

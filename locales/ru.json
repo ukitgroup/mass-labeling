@@ -108,7 +108,10 @@
     "cliExport_datasets": "Наборы данных",
     "cliExport_json_path": "Путь к JSON-файлу",
     "show_randomly": "Показывать наборы данных случайно",
-    "cliImport_json_path": "Путь к JSON файлу с оценками моделей по умолчанию"
+    "cliImport_json_path": "Путь к JSON файлу с оценками моделей по умолчанию",
+    "languageSettings": "Языковые настройки",
+    "defaultLanguage": "Язык интерфейса по умолчанию",
+    "languagesNames": "Соответствия языковых названий"
   },
   "logger_levels": {
     "fatal": "Критические ошибки",

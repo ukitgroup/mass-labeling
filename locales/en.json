@@ -40,7 +40,7 @@
   "abnormal_stats": "En_Статистика по аномальным оценкам",
   "local_abnormal_stats": "En_Статистика по локально-аномальным оценкам",
   "permissible_variation": "En_Допустимое отклонение",
-  "anomalies_count":  "En_Количество аномалий",
+  "anomalies_count": "En_Количество аномалий",
   "scored_sites_count": "En_количество просмотров",
   "user_add": "En_Добавление пользователя",
   "user_edit": "En_Редактирование пользователя",
@@ -108,7 +108,10 @@
     "cliExport_datasets": "Datasets to export",
     "cliExport_json_path": "JSON metadata path",
     "show_randomly": "show_randomly",
-    "cliImport_json_path": "cliImport_json_path"
+    "cliImport_json_path": "cliImport_json_path",
+    "languageSettings": "languageSettings",
+    "defaultLanguage": "defaultLanguage",
+    "languagesNames": "languagesNames"
   },
   "logger_levels": {
     "fatal": "fatal",

@@ -7,7 +7,7 @@ const Slider = require('./slider');
 const Task = require('./task');
 const TaskSet = require('./taskset');
 
-const i18nConfig = require('../locales/i18n-config');
+const config = require('../config');
 
 
 const UserSchema = new mongoose.Schema({
@@ -40,8 +40,19 @@ const UserSchema = new mongoose.Schema({
 
 	locale: {
 		type: String,
-		default: i18nConfig.defaultLocale,
 	},
+});
+
+
+UserSchema.pre('save', function (next) {
+	const self = this;
+
+	// Dynamically get and inject current default locale to user model
+	if (! self.locale) {
+		self.locale = config.get('languageSettings.defaultLanguage') || 'en';
+	}
+
+	next();
 });
 
 

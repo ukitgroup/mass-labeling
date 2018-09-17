@@ -5,6 +5,7 @@ const _ = require('lodash');
 const router = require('express').Router();
 
 const config = require('../../config');
+const languagesConfig = require('../../locales/i18n-config');
 
 const Site = require('../../models/site');
 const User = require('../../models/user');
@@ -112,6 +113,7 @@ router.get('/', async (req, res, next) => {
 			users: rawUsers,
 
 			config: config.getConfig(),
+			definedLanguages: languagesConfig.availableLocales,
 		});
 	} catch (err) {
 		err.message = req.__(err.message);
