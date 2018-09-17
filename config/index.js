@@ -12,6 +12,7 @@ try {
 
 
 const configFilePath = path.resolve(__dirname, '../config/config.json');
+const configTemplateFilePath = path.resolve(__dirname, '../config/config-template.json');
 
 
 class Config {
@@ -22,6 +23,44 @@ class Config {
 			console.error(error);
 			this.config = {};
 		}
+
+		this.syncConfigFileWithTemplate();
+	}
+
+
+	syncConfigFileWithTemplate() {
+		const { config } = this;
+		const configTemplate = require(configTemplateFilePath);
+
+		configTemplate.forEach((fieldSet, fieldSetIndex) => {
+			const fieldSetId = fieldSet.id;
+
+			// Find this fieldset in current config
+			const configFieldSet = config.filter(configFieldSet => configFieldSet.id === fieldSetId)[0];
+
+			if (configFieldSet) {
+				// Fieldset exists in config, check its properties
+				(fieldSet.properties || []).forEach((property, propertyIndex) => {
+					const propertyId = property.id;
+
+					if (! configFieldSet.properties) {
+						configFieldSet.properties = [];
+					}
+
+					const configProperty = configFieldSet.properties
+						.filter(configProp => configProp.id === propertyId)[0];
+
+					if (! configProperty) {
+						configFieldSet.properties.splice(propertyIndex, 0, property);
+					}
+				});
+			} else {
+				// It is a new fieldset, insert it into config
+				config.splice(fieldSetIndex, 0, fieldSet);
+			}
+		});
+
+		this.updateConfigFile();
 	}
 
 
@@ -53,6 +92,7 @@ class Config {
 	updateConfig(newConfig) {
 		this.prepareConfig(newConfig);
 		this.config = newConfig;
+		this.updateConfigFile();
 	}
 
 
@@ -72,10 +112,8 @@ class Config {
 
 
 	updateFiles() {
-		return Promise.all([
-			this.updateConfigFile(),
-			this.updateEnvFile(),
-		]);
+		this.updateConfigFile();
+		this.updateEnvFile();
 	}
 
 
@@ -110,53 +148,34 @@ class Config {
 
 	/**
 	 * Updates DB_URL property in app.env
-	 * @returns {Promise<any>}
 	 */
 	updateEnvFile() {
 		// If we are installing app via docker, app.env does not exist yet
 		try {
 			const envFilePath = path.resolve(__dirname, 'app.env');
 
-			return new Promise((resolve) => {
-				fs.readFile(envFilePath, 'utf-8', (error, content) => {
-					if (error) {
-						// Skip if no file
-						resolve();
-						return;
-					}
+			const content = fs.readFileSync(envFilePath, 'utf-8');
 
-					content = content.replace(/(\n)?DB_URL=(.*)\n?/, `\nDB_URL=${this.get('mongo.url')}\n`);
+			const replacedContent = content.replace(/(\n)?DB_URL=(.*)\n?/, `\nDB_URL=${this.get('mongo.url')}\n`);
 
-					fs.writeFile(envFilePath, content, () => {
-						// Resolve anyway, even if error
-						resolve();
-					});
-				});
-			});
+			fs.writeFileSync(envFilePath, replacedContent);
 		} catch (error) {
-			return new Promise((resolve) => {
-				resolve();
-			});
+			console.error(error);
 		}
 	}
 
 
 	/**
 	 * Updates config.json file, writes new version of config JSON
-	 * @returns {Promise<any>}
 	 */
 	updateConfigFile() {
 		const { config } = this;
 
-		return new Promise((resolve, reject) => {
-			fs.writeFile(configFilePath, JSON.stringify(config, null, 2), (error) => {
-				if (error) {
-					reject();
-				} else {
-					resolve();
-				}
-			});
-		});
+		try {
+			fs.writeFileSync(configFilePath, JSON.stringify(config, null, 2));
+		} catch (error) {
+			console.error(error);
+		}
 	}
 }
 
@@ -170,8 +189,11 @@ const config = new Config();
 if (process.env.DB_URL !== config.get('mongo.url')) {
 	config.set('mongo.url', process.env.DB_URL);
 
-	config.updateConfigFile()
-		.catch(error => console.log('Update config error:', error));
+	try {
+		config.updateConfigFile();
+	} catch (error) {
+		console.error(error);
+	}
 }
 
 module.exports = config;

@@ -25,9 +25,7 @@ router.post('/save', async (req, res, next) => {
 	try {
 		const { config } = req.body;
 
-		// Update config
 		Config.updateConfig(config);
-		await Config.updateFiles();
 
 		res.api.response();
 	} catch (err) {
