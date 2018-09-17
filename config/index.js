@@ -28,6 +28,13 @@ class Config {
 	}
 
 
+	/**
+	 * Method syncs fieldsets and properties in current config with fieldsets
+	 * and properties from ./config-template.json
+	 * If some fieldset or property is missing in current config, it will be
+	 * inserted into current config to the right position. Other properties
+	 * will not be changed
+	 */
 	syncConfigFileWithTemplate() {
 		const { config } = this;
 		const configTemplate = require(configTemplateFilePath);
