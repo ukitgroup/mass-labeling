@@ -5,6 +5,16 @@
     "tab": "tech",
     "properties": [
       {
+        "id": "defaultLanguage",
+        "name": "config_props.defaultLanguage",
+        "default": "en",
+        "value": "en",
+        "format": "String",
+        "element": {
+          "type": "languagesSelect"
+        }
+      },
+      {
         "id": "languagesNames",
         "name": "config_props.languagesNames",
         "default": {
@@ -18,16 +28,6 @@
         "format": "Object",
         "element": {
           "type": "languagesList"
-        }
-      },
-      {
-        "id": "defaultLanguage",
-        "name": "config_props.defaultLanguage",
-        "default": "en",
-        "value": "en",
-        "format": "String",
-        "element": {
-          "type": "languagesSelect"
         }
       }
     ]
