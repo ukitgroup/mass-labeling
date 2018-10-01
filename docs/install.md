@@ -12,7 +12,7 @@ There are two possible ways to install __Mass Labeling__:
 * `Docker CE` v18
 * `docker-compose` v1.20
 
-It is possible to use newer versions, but deploy was tested using mentioned versions. 
+It is possible to use newer versions, but the deploy was tested using the mentioned versions. 
 
 ### Preparation
 
@@ -27,7 +27,7 @@ Take the following steps to build __Mass Labeling__ through [Docker](https://doc
     ```sh
     ./bin/install.sh
     ```
-    The installation process will ask you to provide the following information:
+    During the installation process you will be asked to provide the following information:
     - Docker container name
     - MongoDB location
     - HTTP port for __Mass Labeling__ service access
@@ -43,9 +43,9 @@ docker-compose up -d --build
 ```
 __*Note*__. Running container will start the __Mass Labelling__ server application.
 
-__*Warning*__. Files `config/config.json` and `docker-compose.yml` are created during installation.
-  Those files contains some options which will affect the service work. If you change some of them 
-  inside the container while working with service, they will be reset after rebuilding container.
+__*Warning*__. Files `config/config.json` and `docker-compose.yml` are created during the installation.
+  Those files contain some options which will affect the service work. If you change some of them 
+  inside the container while working with the service, they will be reset after rebuilding the container.
 
 
 ## Delpoy locally
@@ -64,18 +64,18 @@ Take the following steps to build __Mass Labeling__ locally:
     git clone https://github.com/ukitgroup/mass-labeling.git
     cd mass-labelling
     ```
-1. Run install the script and follow its instructions:
+1. Run the install script and follow its instructions:
     ```sh
     ./bin/install.sh
     ```
-    The installation process will ask you to provide the following information:
+    During the installation process you will be asked to provide the following information:
     - MongoDB URI
     - HTTP port for __Mass Labeling__ service access
     - cookie secret to sign each user session ID
     
     As a result, this script generates two files: `config/app.yml` and `config/app.env`. 
 
-1. Install the npm modules required using the following command:
+1. Install the required npm modules using the following command:
 
     ```sh
     npm i --no-save
@@ -94,13 +94,13 @@ To run the __Mass Labeling__ server application, use the following command:
 npm start
 ```
 
-## Post install
+## After installation
 
-After the installation, the system necessary to create the first administrator. This step is obligatory. 
+After the installation, the system will require to create the first administrator. This step is obligatory. 
 Read the [cli user guide](cli/user) on how to do it.
 
-English is a default language for the system but __Mass Labeling__ has multilanguage support. If someone wishes to
-add one more language into web-interface then read the [multilanguage](multilanguage) on how to do it. 
+English is the default language for the system but __Mass Labeling__ has multilanguage support. If you want to
+add more languages into the web interface then read the [multilanguage guide](multilanguage) on how to do it. 
 
 ## FAQ
 
@@ -112,5 +112,5 @@ A: The mentioned versions were tested. It is possible that it will work with `No
 should use them on your own.
 
 Q: How to update a working copy of __Mass Labeling__?  
-A: If your working copy uses sources from master branch then it is better to make reinstall. If your working copy uses 
-sources from develop branch or other then it may be enough to recompose docker image or something similar.  
+A: If your working copy uses sources from the master branch, then it is better to make the reinstallation. If your working copy uses 
+sources from the developer branch or other, then it may be enough to recompose the docker image or something similar.  
