@@ -1,10 +1,10 @@
 # Import CLI
 
-If you use __Mass Labeling__ within docker container, don't forget to put data inside the container. 
-It can be done using `data` folder which is mounted to the container by default. 
-Import command should be run inside the container.
+If you use __Mass Labeling__ within the docker container, don't forget to put data inside the container. 
+It can be done using the `data` folder, which is mounted to the container by default. 
+The import command should be run inside the container.
 
-## Dataset import
+## Import dataset
 
 ### Run command
 
@@ -12,17 +12,17 @@ Import command should be run inside the container.
 
 #### Arguments
 
-* `--in` - path to the zipped dataset file. Default: `data/import/dataset.zip`. And default could be 
-changed on _System_ tab of _Setting_ menu.
+* `--in` - path to the zipped dataset file. Default: `data/import/dataset.zip`. And the default could be 
+changed under the _System_ tab in the _Setting_ menu.
 
-Input file is a `zip` archive file, which contains the following:
+An input file is a zip archive file which contains the following:
 
 * `screenshots`
     * `0123456789abcdef01234567.jpg`
     * ...
 * `description.json`
 
-`screenshots` folder contains JPEG-images which are going to be shown to the assessors. `description.json` file
+`screenshots` folder contains JPEG images which are going to be shown to the assessors. `description.json` file
 consists of the `item` array. Each `item` satisfies the following format:
 
 ```
@@ -33,10 +33,10 @@ consists of the `item` array. Each `item` satisfies the following format:
 }
 ```
 
-## Rates import
+## Import rates
 
-You can import rates from outside the __Mass Labeling__ to use it in sliders (see slider description 
-in [user guide](../user_guide)).  
+You can import rates from outside (sources other than __Mass Labeling__) to use them in sliders (see the slider description 
+in the [user guide](../user_guide.md)).  
 
 ### Run command
 
@@ -44,10 +44,10 @@ in [user guide](../user_guide)).
 
 #### Arguments
 
-* `--in` - path to the file with rates. Default: `data/import/modelRates.json`. And default could be 
-changed on _System_ tab of _Setting_ menu.
+* `--in` - path to the file with rates. Default: `data/import/modelRates.json`. And the default could be 
+changed under the _System_ tab in the _Setting_ menu.
 
-Input file is a `json` file, which contains the `item` array. Each `item` satisfies the following format:
+An input file is a `json` file which contains the `item` array. Each `item` satisfies the following format:
 
 ```
 {

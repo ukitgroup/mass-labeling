@@ -9,7 +9,7 @@
 
 #### Arguments
 
-* `--dataset` - dataset name. If not specified all datasets will be exported.
+* `--dataset` - dataset name. If not specified, all datasets will be exported.
 * `--out` - file to export data. Default: `data/export/answers.json`.
 
 #### Configuration file
@@ -25,7 +25,7 @@ cli/export/answers{
 
 #### Output file description
 
-The output json-file contains the array of items. Each item satisfies the following format:
+The output json file contains the array of items. Each item satisfies the following format:
 
 ```
 item{

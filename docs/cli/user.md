@@ -9,6 +9,6 @@
 
 #### Arguments
 
-* `--email` - user's e-mail.
-* `--password` - password.
+* `--email` - user's email
+* `--password` - password
 * `--role` - role. Allowed values: `admin`, `user`.
