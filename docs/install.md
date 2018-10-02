@@ -97,10 +97,10 @@ npm start
 ## After installation
 
 After the installation, the system will require to create the first administrator. This step is obligatory. 
-Read the [cli user guide](cli/user) on how to do it.
+Read the [cli user guide](cli/user.md) on how to do it.
 
 English is the default language for the system but __Mass Labeling__ has multilanguage support. If you want to
-add more languages into the web interface then read the [multilanguage guide](multilanguage) on how to do it. 
+add more languages into the web interface then read the [multilanguage guide](multilanguage.md) on how to do it. 
 
 ## FAQ
 
@@ -112,5 +112,6 @@ A: The mentioned versions were tested. It is possible that it will work with `No
 should use them on your own.
 
 Q: How to update a working copy of __Mass Labeling__?  
-A: If your working copy uses sources from the master branch, then it is better to make the reinstallation. If your working copy uses 
-sources from the developer branch or other, then it may be enough to recompose the docker image or something similar.  
+A: If your working copy uses sources from the master branch, then it is better to make the reinstallation. If your 
+working copy uses sources from the developer branch or other, then it may be enough to recompose the docker image 
+or something similar.  

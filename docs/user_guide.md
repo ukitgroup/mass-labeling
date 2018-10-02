@@ -12,16 +12,16 @@ by a group of assessors. It also has the web interface to control the progress a
 
 ## Functions by roles 
 
-There are two roles in the __Mass Labeling__ tool — an [administrator](administrator_role) and an [assessor](assessor_role). 
+There are two roles in the __Mass Labeling__ tool — an [administrator](#administrator-role) and an [assessor](#assessor-role). 
 The main objectives of an administrator is to create labeling tasks and manage them. The main objective of an assessor 
 is to label images in the given tasks. Let's have a closer look at these roles.
 
 ### Administrator role
 
 An administrator can manage users and tasks, control the labeling progress and manipulate data. This section describes the 
-[Administrator interface](administrator_interface) and provides information on how to [create](create_the_assessment_task_workflow) 
-a new assessment task, [monitor](monitor_the_labeling_progress) the progress and 
-[obtain](obtain_results) the assessment results. Please feel free to skip sections and proceed to reading those that interest you most.
+[Administrator interface](#administrator-interface) and provides information on how to [create](#create-the-assessment-task-workflow) 
+a new assessment task, [monitor](#monitor-the-labeling-progress) the progress and 
+[obtain](#obtain-results) the assessment results. Please feel free to skip sections and proceed to reading those that interest you most.
 
 #### Administrator interface
 
@@ -58,12 +58,12 @@ This interface is the same as the assessor's labeling interface.
 ##### General interface
 
 The functionality of the language switcher and the exit button is obvious. If you need to use a language other than English or 
-Russian, please read the [multilanguage support guide](./multilanguage). 
+Russian, please read the [multilanguage support guide](multilanguage.md). 
 
 Clicking on the _Settings_ menu item opens the settings interface which needs some description. 
 
 The settings are divided into three categories, each has its own tab in the settings interface. They are 
-[Users](users_settings), [Assessment](assessment_settings) and [System](system_settings) settings.
+[Users](#users-settings), [Assessment](#assessment-settings) and [System](#system-settings) settings.
 
 ###### Users settings
 
@@ -85,7 +85,7 @@ data.
    
 Sliders provide the following info: a labeled image, rates (classes) which an assessor chosed for it, assessor's average rate,
 model rate, error. Here an assessor's average rate is calculated as an average for all rates given by all assessors, a model rates 
-is a number which was uploaded into the database using the import procedure (see the [CLI import guide](cli/import)) and it is 
+is a number which was uploaded into the database using the import procedure (see the [CLI import guide](cli/import.md)) and it is 
 implied that it corresponds to some ML model, and an error is a difference between an assessor's average rate and model rate. If 
 an image model rate equals 0, both the error and model rate values would be displayed as '-'. 
 
@@ -98,7 +98,7 @@ This settings category allows an administrator to:
 - add new assessment tasks,
 - change assessment task parameters, i.e. user views limit, random/deterministic way of showing images, datasets 
 included in the task, change the task description and assessor guide (see the 
-[Create the assessment task workflow](create_the_assessment_task_workflow)),
+[Create the assessment task workflow](#create-the-assessment-task-workflow)),
 - activate a task, i.e. set some task as current.
 
 ###### System settings
@@ -114,27 +114,27 @@ This settings category allows an administrator to:
 An administrator can manage the user's access and visibility of datasets. It makes it possible to run and manage tasks 
 one by one, yet there is no option to manage concurrent assessment tasks. The steps to start a new task are as follows:     
 
-1. [Provide data](provide_data) for assessment.
-1. Create an assessment [task](create_task). 
-1. Manage the [user's access](manage_users).
+1. [Provide data](#provide-data) for assessment.
+1. Create an assessment [task](#create-task). 
+1. Manage the [user's access](#manage-users).
 
 After setting up a new task, assessors can start the labeling process and an administrator can 
-[monitor](monitor_the_labelling_progress) their progress. 
+[monitor](#monitor-the-labelling-progress) their progress. 
 
 #### Provide data
 
 At the moment, importing datasets is possible only by using CLI. For more info, please read the corresponding section in 
-the [CLI import guide](cli/import). After the dataset was imported into the __Mass Labeling__ tool, it is registered 
+the [CLI import guide](cli/import.md). After the dataset was imported into the __Mass Labeling__ tool, it is registered 
 in the DB and can't be removed using the application. But an administrator can exclude it from the list of active 
-datasets related to the task (see the [manage datasets](manage_datasets) section).
+datasets related to the task (see the [manage datasets](#manage-datasets) section).
 
 #### Create task
 
 Creating a task involves the following:
-1. Specifying the total [number of views](number_of_views) an assessor should do.  
-1. Writing the task [description](task_description) (optional).
-1. [Managing](manage_datasets) the datasets accessibility.
-1. [Editing](edit_guide) assessment guide (optional).
+1. Specifying the total [number of views](#number-of-views) an assessor should do.  
+1. Writing the task [description](#task-description) (optional).
+1. [Managing](#manage-datasets) the datasets accessibility.
+1. [Editing](#edit-guide) assessment guide (optional).
 
 ##### Number of views
 
@@ -168,14 +168,14 @@ languages you can write all versions in one guide.
 #### Manage users
 
 It is possible to manage users using CLI. For more information on how to
-create users, please read the corresponding section in the [CLI user guide](cli/user).
+create users, please read the corresponding section in the [CLI user guide](cli/user.md).
 
 __*Note*__. CLI is the only option for creating the first administrator, 
 that's why this step is obligatory to start using the __Mass Labeling__ application. 
 
 Another way to add users into __Mass Labeling__ is to use the administrator interface in the running application. 
 Choose the _Users_ tab in the _Settings_ menu to add users and manage their access. The users setting menu is described in 
-[this](users_settings) section. 
+[this](#users-settings) section. 
 
 #### Monitor the labeling progress
 
@@ -183,12 +183,12 @@ An administrator can click the _Statistics_ menu item and select one of the thre
 _Anomalies among users_ and _Individual anomalies_. Click _Views_ to see how many labels each assessor assigned. 
 Click on _Anomalies among users_ or _Individual anomalies_ to view how many outliers were done by each assessor.
 
-After assessors have completed the labeling task, an administrator can [obtain the results](obtain_results). 
+After assessors have completed the labeling task, an administrator can [obtain the results](#obtain-results). 
 
 #### Obtain results
 
 As of now, this operation could be done only using CLI. Read the corresponding section in 
-the [CLI export guide](cli/export).
+the [CLI export guide](cli/export.md).
  
 ### Assessor role
 
@@ -196,7 +196,7 @@ Assessors can label images provided to them and monitor their own progress.
 
 #### Assessor interface
 
-The assessor interface is a subset of the [administrator interface](administrator_interface). In the upper left
+The assessor interface is a subset of the [administrator interface](#administrator-interface). In the upper left
 side of the assessor interface you can find menu items for current assessment task: 
 _Mass labeling_ aka Home, _Guide_. In the upper right side of the assessor interface you can find 
 general-purpose menu items like: a language switcher, account email and exit button.
@@ -209,7 +209,7 @@ When an assessor presses the _Get task_ button, __Mass Labeling__ will redirect 
 show images and wait for assessors to respond to them. In the upper right part of the screen you can see two additional 
 elements: the help button and progress info.
 
-To understand how to label images, read about [controls](controls) in the corresponding section. Also, an assessor can review the
+To understand how to label images, read about [controls](#controls) in the corresponding section. Also, an assessor can review the
 task instructions in the guide by clicking on the corresponding link in the upper left part of the interface.  
 
 ###### Controls
@@ -226,7 +226,7 @@ Q: How can I start the new labeling task with a different dataset?
 A: Now it is possible to select datasets which are active for the labeling process. Let's assume assessors have 
 labeled all images from the dataset `A`. An administrator can import the new dataset `B` and set only this dataset as 
 active in a new task. It means that images of the dataset `A` will not be shown to assessors. Please read the 
-corresponding section [manage datasets](manage_datasets) for more info.
+corresponding section [manage datasets](#manage-datasets) for more info.
 
 Q: Is there a way to assess images for binary classification problem?
 A: Now it is possible to give a rate to each image from 1 to 10 and it is hardcoded. So, you can use numbers 1 and 2 to 

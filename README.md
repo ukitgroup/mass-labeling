@@ -50,11 +50,11 @@ __Mass Labeling__ has
 
 ## Installation
 
-Installation is described in this [guide](docs/install)
+Installation is described in this [guide](docs/install.md)
 
 ## User guide
 
-See the [user guide](docs/user_guide) which describes the basic user and administrator operations.
+See the [user guide](docs/user_guide.md) which describes the basic user and administrator operations.
   
 ## Contribution
 

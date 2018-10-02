@@ -36,7 +36,7 @@ consists of the `item` array. Each `item` satisfies the following format:
 ## Import rates
 
 You can import rates from outside (sources other than __Mass Labeling__) to use them in sliders (see the slider description 
-in the [user guide](../user_guide)).  
+in the [user guide](../user_guide.md)).  
 
 ### Run command
 
