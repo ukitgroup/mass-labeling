@@ -93,6 +93,8 @@ if [ "$docker_use_mongo" = true ];
   else dbURL="$db_url";
 fi
 
+cp ./config/config-template.json ./config/config.json
+
 node ./config/updateConfig.js "$dbURL" "$cookie_secret"
 
 mkdir logs
