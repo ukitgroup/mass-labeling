@@ -32,9 +32,9 @@ general-purpose menu items like: a language switcher, account email, _Settings_ 
 ##### Current task interface
 
 Clicking on the _Mass labeling_ menu item redirects you to the homepage which allows an administrator to take part in the assessment 
-process and check images which were labeled as broken by assessors.
+process and view images which were labeled as broken by assessors.
 
-Clicking on the _Statistics_ menu item allows you to choose the statistics report from the list: checks count, anomalies 
+Clicking on the _Statistics_ menu item allows you to choose the statistics report from the list: views count, anomalies 
 among all users, anomalies for a single user. Descriptions of these reports could be found on the corresponding pages.
   
 Clicking on the _Instruction_ menu item opens a new browser tab with the instruction description for the current task. 
@@ -83,20 +83,20 @@ clicking on the _Open slider_ button, an administrator can open the slider for a
 Sliders are not updated automatically. It means that an administrator needs to generate a slider again if the user labeled more 
 data. 
    
-Sliders provide the following info: a labeled image, scores (classes) which an assessor chosed for it, assessor's average score,
-model score, error. Here an assessor's average score is calculated as an average for all scores given by all assessors, a model score 
+Sliders provide the following info: a labeled image, rates (classes) which an assessor chosed for it, assessor's average rate,
+model rate, error. Here an assessor's average rate is calculated as an average for all rates given by all assessors, a model rates 
 is a number which was uploaded into the database using the import procedure (see the [CLI import guide](cli/import)) and it is 
-implied that it corresponds to some ML model, and an error is a difference between an assessor's average score and model score. If 
-an image model score equals 0, both the error and model score values would be displayed as '-'. 
+implied that it corresponds to some ML model, and an error is a difference between an assessor's average rate and model rate. If 
+an image model rate equals 0, both the error and model rate values would be displayed as '-'. 
 
 A slider contains only images which were labeled by a chosen user. Each image can be associated with not more than 
-one model score. So, the re-import of the scores will update those scores.    
+one model rate. So, the re-import of the rates will update those rates.    
 
 ###### Assessment settings
 
 This settings category allows an administrator to:
 - add new assessment tasks,
-- change assessment task parameters, i.e. user checks limit, random/deterministic way of showing images, datasets 
+- change assessment task parameters, i.e. user views limit, random/deterministic way of showing images, datasets 
 included in the task, change the task description and assessor guide (see the 
 [Create the assessment task workflow](create_the_assessment_task_workflow)),
 - activate a task, i.e. set some task as current.
@@ -107,7 +107,7 @@ This settings category allows an administrator to:
 - set system logging parameters, such as logger verbosity level,
 - data locations, such as the db url and the storage folder for images,
 - authentication parameters, such as cookie expiration time, cookie salt value,
-- cli import default paths, such as the default datasets archive path and the path to the JSON file with default model scores.
+- cli import default paths, such as the default datasets archive path and the path to the JSON file with default model rates.
 
 #### Create the assessment task workflow
 
@@ -131,20 +131,20 @@ datasets related to the task (see the [manage datasets](manage_datasets) section
 #### Create task
 
 Creating a task involves the following:
-1. Specifying the total [number of checks](number_of_views) an assessor should do.  
+1. Specifying the total [number of views](number_of_views) an assessor should do.  
 1. Writing the task [description](task_description) (optional).
 1. [Managing](manage_datasets) the datasets accessibility.
 1. [Editing](edit_guide) assessment guide (optional).
 
-##### Number of checks
+##### Number of views
 
-If an administrator unselects the _show randomly_ checkbox the upper limit of checks for each user is equal to the number of images 
+If an administrator unselects the _show randomly_ checkbox the upper limit of views for each user is equal to the number of images 
 in all chosen datasets.
 
-If an administrator selects the _show randomly_ checkbox then the upper limit of checks per user could be set to any 
+If an administrator selects the _show randomly_ checkbox then the upper limit of views per user could be set to any 
 positive number or be unlimited (specify 0 for this). Let's consider an example. An administrator wants to show 1,000 images to 
 assessors. Also an administrator wants to verify their opinions by showing each image 3 times. In this case a good choice
-will be to set _show randomly_ and set the checks limit to 3,000 checks per user.
+will be to set _show randomly_ and set the views limit to 3,000 views per user.
 
 #### Task description
 
@@ -179,9 +179,9 @@ Choose the _Users_ tab in the _Settings_ menu to add users and manage their acce
 
 #### Monitor the labeling progress
 
-An administrator can click the _Statistics_ menu item and select one of the three options: _Checks_, 
-_Anomalies among users_ and _Individual anomalies_. Click _Checks_ to see how many labels each assessor assigned. 
-Click on _Anomalies among users_ or _Individual anomalies_ to check how many outliers were done by each assessor.
+An administrator can click the _Statistics_ menu item and select one of the three options: _Views_, 
+_Anomalies among users_ and _Individual anomalies_. Click _Views_ to see how many labels each assessor assigned. 
+Click on _Anomalies among users_ or _Individual anomalies_ to view how many outliers were done by each assessor.
 
 After assessors have completed the labeling task, an administrator can [obtain the results](obtain_results). 
 
@@ -229,6 +229,6 @@ active in a new task. It means that images of the dataset `A` will not be shown 
 corresponding section [manage datasets](manage_datasets) for more info.
 
 Q: Is there a way to assess images for binary classification problem?
-A: Now it is possible to give a score to each image from 1 to 10 and it is hardcoded. So, you can use numbers 1 and 2 to 
-assess your dataset between two classes, but you can't perform an assessment task for 11 classes or 11 score ranking problem.
+A: Now it is possible to give a rate to each image from 1 to 10 and it is hardcoded. So, you can use numbers 1 and 2 to 
+assess your dataset between two classes, but you can't perform an assessment task for 11 classes or 11 rate ranking problem.
 As of now, the number 10 is hardcoded but it seems easy to make it a __Mass Labeling__ system parameter. 

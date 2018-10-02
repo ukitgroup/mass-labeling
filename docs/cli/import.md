@@ -33,9 +33,9 @@ consists of the `item` array. Each `item` satisfies the following format:
 }
 ```
 
-## Import scores
+## Import rates
 
-You can import scores from outside (sources other than __Mass Labeling__) to use them in sliders (see the slider description 
+You can import rates from outside (sources other than __Mass Labeling__) to use them in sliders (see the slider description 
 in the [user guide](../user_guide)).  
 
 ### Run command
@@ -44,7 +44,7 @@ in the [user guide](../user_guide)).
 
 #### Arguments
 
-* `--in` - path to the file with scores. Default: `data/import/modelRates.json`. And the default could be 
+* `--in` - path to the file with rates. Default: `data/import/modelRates.json`. And the default could be 
 changed under the _System_ tab in the _Setting_ menu.
 
 An input file is a `json` file which contains the `item` array. Each `item` satisfies the following format:
