@@ -18,7 +18,7 @@ function createPrettyStream() {
 
 
 module.exports = bunyan.createLogger({
-	name: config.get('logger.name'),
+	name: 'app',
 	stream: process.stdout.isTTY ? createPrettyStream() : process.stdout,
 	level: config.get('logger.level'),
 	serializers: bunyan.stdSerializers,

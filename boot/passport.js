@@ -17,8 +17,8 @@ module.exports = (app) => {
 	app.use(session({
 		secret: config.get('passport.secret'),
 		cookie: {
-			// seconds -> milliseconds
-			maxAge: config.get('passport.maxAge') * 1000,
+			// days -> ms
+			maxAge: config.get('passport.maxAge') * 24 * 60 * 60 * 1000,
 		},
 		resave: true,
 		saveUninitialized: true,

@@ -19,7 +19,7 @@ try {
 module.exports = {
 	availableLocales,
 	defaultLocale: config.get('languageSettings.defaultLanguage') || 'en',
-	cookieMaxAge: config.get('passport.maxAge') * 1000, // sec -> ms
+	cookieMaxAge: config.get('passport.maxAge') * 24 * 60 * 60 * 1000, // days -> ms
 
 	getLocaleReadableName(localeShortName) {
 		const languagesNames = config.get('languageSettings.languagesNames');
