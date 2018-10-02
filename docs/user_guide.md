@@ -19,7 +19,7 @@ is to label images in the given tasks. Let's have a closer look at these roles.
 ### Administrator role
 
 An administrator can manage users and tasks, control the labeling progress and manipulate data. This section describes the 
-[Administrator interface](administrator_interface) and provides information on how to [create](create_assessment_task_workflow) 
+[Administrator interface](administrator_interface) and provides information on how to [create](create_the_assessment_task_workflow) 
 a new assessment task, [monitor](monitor_the_labeling_progress) the progress and 
 [obtain](obtain_results) the assessment results. Please feel free to skip sections and proceed to reading those that interest you most.
 
@@ -116,7 +116,7 @@ one by one, yet there is no option to manage concurrent assessment tasks. The st
 
 1. [Provide data](provide_data) for assessment.
 1. Create an assessment [task](create_task). 
-1. [Manage the user's access](manage_users).
+1. Manage the [user's access](manage_users).
 
 After setting up a new task, assessors can start the labeling process and an administrator can 
 [monitor](monitor_the_labelling_progress) their progress. 
