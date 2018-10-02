@@ -67,6 +67,7 @@ echo "Save $docker_compose_path"
                         echo "    volumes:"                                       >> "$docker_compose_path"
                         echo "    - ./config/app.yml:/usr/bin/app/config/app.yml" >> "$docker_compose_path"
                         echo "    - ./data:/usr/bin/app/data"                     >> "$docker_compose_path"
+                        echo "    - ./logs:/usr/bin/app/logs"                     >> "$docker_compose_path"
                         echo "    ports:"                                         >> "$docker_compose_path"
                         echo "    - $port:80"                                     >> "$docker_compose_path"
 "$docker_use_mongo" &&  echo "    depends_on:"                                    >> "$docker_compose_path"
@@ -93,5 +94,7 @@ if [ "$docker_use_mongo" = true ];
 fi
 
 node ./config/updateConfig.js "$dbURL" "$cookie_secret"
+
+mkdir logs
 
 echo "If you are using Mass Labeling for a first time, please, read the user guide in the docs folder."

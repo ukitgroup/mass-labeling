@@ -29,4 +29,6 @@ echo "  secret: $cookie_secret" >> "$yml_path"
 
 node ./config/updateConfig.js "$db_url" "$cookie_secret"
 
+mkdir logs
+
 echo "If you are using Mass Labeling for a first time, please, read the user guide in the docs folder."

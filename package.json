@@ -65,8 +65,8 @@
     "webpack-parallel-uglify-plugin": "^1.1.0"
   },
   "scripts": {
-    "start": "node bin/www",
-    "dev": "supervisor --watch app.js,boot,config,libs,models,routes --extensions node,js,env,yml --exec npm start",
+    "start": "NODE_ENV='production' node bin/www",
+    "dev": "NODE_ENV='development' supervisor --watch app.js,boot,config,libs,models,routes --extensions node,js,env,yml --exec node bin/www",
     "dev:log": "npm run dev | bunyan",
     "dev:front": "NODE_ENV='development' node ./node_modules/webpack/bin/webpack.js",
     "build:front": "NODE_ENV='production' node ./node_modules/webpack/bin/webpack.js --progress",

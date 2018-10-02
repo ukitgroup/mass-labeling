@@ -1,25 +1,21 @@
 const bunyan = require('bunyan');
-const { spawn } = require('child_process');
-const through = require('through');
 
 const config = require('../config');
 
 
-function createPrettyStream() {
-	const stream = through();
+const options = {};
 
-	const formatter = spawn('npx', ['bunyan'], {
-		stdio: [null, process.stdout, process.stderr],
-	});
-	stream.pipe(formatter.stdin);
-
-	return stream;
+if (process.env.NODE_ENV === 'production') {
+	options.streams = [{ path: 'logs/log.log' }];
+} else {
+	options.stream = process.stdout;
 }
 
 
 module.exports = bunyan.createLogger({
+	...options,
+
 	name: 'app',
-	stream: process.stdout.isTTY ? createPrettyStream() : process.stdout,
 	level: config.get('logger.level'),
 	serializers: bunyan.stdSerializers,
 });
