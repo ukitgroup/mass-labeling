@@ -81,7 +81,6 @@
     "site_not_found": "En_Сайт не найден"
   },
   "task_errors": {
-    "markup_overdose": "En_Превышено количество разметок",
     "bad_markup_request": "En_Некорректный запрос",
     "no_active_taskset": "no_active_taskset"
   },
@@ -92,11 +91,11 @@
     "logger": "logger",
     "logger_name": "logger_name",
     "logger_level": "logger_level",
+    "data": "Data",
     "db_url": "URL",
     "passport": "Authentication",
     "passport_cookie_age": "Cookie expiration time",
     "passport_cookie_secret": "Cookie value",
-    "sites": "Data",
     "sites_datasets": "Datasets",
     "sites_screenshots_path": "Screenshots path",
     "assessment": "Assessment",

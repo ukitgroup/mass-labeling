@@ -59,7 +59,7 @@
   },
   {
     "id": "mongo",
-    "name": "config_props.sites",
+    "name": "config_props.data",
     "tab": "tech",
     "properties": [
       {

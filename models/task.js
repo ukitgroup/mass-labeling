@@ -81,7 +81,7 @@ TaskSchema.statics = {
 		const count = await this.countByUserId(userId, true);
 
 		if (limit && count >= limit && showRandomly) {
-			throw new Error('task_errors.markup_overdose');
+			throw new Error('task_errors.limit_reached');
 		}
 
 		const site = await Site.findById(siteId);

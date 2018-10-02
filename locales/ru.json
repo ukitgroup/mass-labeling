@@ -81,7 +81,6 @@
     "site_not_found": "Сайт не найден"
   },
   "task_errors": {
-    "markup_overdose": "Превышено количество разметок",
     "bad_markup_request": "Некорректный запрос",
     "no_active_taskset": "Не выбрана активная задача"
   },
@@ -92,11 +91,11 @@
     "logger": "Система логирования",
     "logger_name": "Название системы логирования",
     "logger_level": "Уровень сообщений системы логирования",
+    "data": "Данные",
     "db_url": "URL",
     "passport": "Авторизация",
     "passport_cookie_age": "Время жизни cookie пользователя (дни)",
     "passport_cookie_secret": "Значение cookie",
-    "sites": "Данные",
     "sites_datasets": "Наборы данных",
     "sites_screenshots_path": "Путь к директории с изображениями",
     "assessment": "Разметка",
