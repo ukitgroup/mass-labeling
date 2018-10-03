@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
 
-#env_path=config/app.env
-#yml_path=config/app.yml
+# env_path=config/app.env
+# yml_path=config/app.yml
 
 default_db_url="mongodb://localhost:27017/mass-labeling"
 default_port=80
@@ -16,16 +16,16 @@ read -p "Enter cookie secret: " cookie_secret
 echo ""
 
 
-#echo "Save $env_path"
-#: > "$env_path"
-#echo "DB_URL=$db_url" >> "$env_path"
-#echo "PORT=$port" >> "$env_path"
+# echo "Save $env_path"
+# : > "$env_path"
+# echo "DB_URL=$db_url" >> "$env_path"
+# echo "PORT=$port" >> "$env_path"
 
 
-#echo "Save $yml_path"
-#: > "$yml_path"
-#echo "passport:"                >> "$yml_path"
-#echo "  secret: $cookie_secret" >> "$yml_path"
+# echo "Save $yml_path"
+# : > "$yml_path"
+# echo "passport:"                >> "$yml_path"
+# echo "  secret: $cookie_secret" >> "$yml_path"
 
 cp ./config/config-template.json ./config/config.json
 

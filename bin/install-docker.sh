@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
 
-#env_path=config/app.env
-#yml_path=config/app.yml
+# env_path=config/app.env
+# yml_path=config/app.yml
 docker_compose_path=docker-compose.yml
 
 default_container="mass-labeling"
