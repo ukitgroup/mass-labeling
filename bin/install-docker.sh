@@ -97,6 +97,6 @@ cp ./config/config-template.json ./config/config.json
 
 node ./config/updateConfig.js "$dbURL" "$cookie_secret" "$port"
 
-mkdir logs
+mkdir -p logs
 
 echo "If you are using Mass Labeling for a first time, please, read the user guide in the docs folder."

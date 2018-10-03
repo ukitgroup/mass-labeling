@@ -16,8 +16,8 @@
   "info": "Info",
   "management": "Controls",
   "keyboard_management": "Keyboard",
-  "set_score_1_9": "Give a rate from 1 to 9",
-  "set_score_10": "Give 10 — the highest rate",
+  "set_score_1_9": "Give a label from 1 to 9",
+  "set_score_10": "Give the label 10",
   "mark_as_broken": "Mark as broken",
   "save_score": "Save the label",
   "undo_last_choice": "Undo the last label",
@@ -120,7 +120,7 @@
   "config_categories": {
     "admin": "Administrator",
     "tech": "System",
-    "assessment": "Assessment",
+    "assessment": "Tasks",
     "users": "Users"
   },
   "wrong_dataset_structure": "Wrong dataset structure",
