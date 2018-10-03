@@ -46,7 +46,7 @@ case "$db_type" in
     ;;
 esac
 
-read -p "Enter server port ($default_port): " port
+read -p "Enter container port correspondent to server port 80 ($default_port): " port
 port="${port:-$default_port}"
 read -p "Enter cookie secret: " cookie_secret
 echo ""
@@ -57,7 +57,7 @@ echo "Save $docker_compose_path"
                         echo ""                                                   >> "$docker_compose_path"
                         echo "services:"                                          >> "$docker_compose_path"
                         echo "  $container:"                                      >> "$docker_compose_path"
-#                        echo "    container_name: $container"                     >> "$docker_compose_path"
+                        echo "    container_name: $container"                     >> "$docker_compose_path"
                         echo "    build: ."                                       >> "$docker_compose_path"
                         echo "    environment:"                                   >> "$docker_compose_path"
                         echo "      NODE_ENV: production"                         >> "$docker_compose_path"
@@ -72,6 +72,7 @@ echo "Save $docker_compose_path"
                         echo "    - $port:80"                                     >> "$docker_compose_path"
 "$docker_use_mongo" &&  echo "    depends_on:"                                    >> "$docker_compose_path"
 "$docker_use_mongo" &&  echo "    - mongo"                                        >> "$docker_compose_path"
+                        echo "    command: sh -c 'npm start'"                     >> "$docker_compose_path"
                         echo "    restart: always"                                >> "$docker_compose_path"
 "$docker_use_mongo" &&  echo ""                                                   >> "$docker_compose_path"
 "$docker_use_mongo" &&  echo "  mongo:"                                           >> "$docker_compose_path"
