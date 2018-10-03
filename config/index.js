@@ -4,13 +4,6 @@ const fs = require('fs');
 const path = require('path');
 
 
-// If we are installing app via docker, installed dependencies do not exist yet
-try {
-	const dotenv = require('dotenv');
-	dotenv.config({ path: './config/app.env' });
-} catch (error) {}
-
-
 const configFilePath = path.resolve(__dirname, '../config/config.json');
 const configTemplateFilePath = path.resolve(__dirname, '../config/config-template.json');
 
@@ -120,7 +113,6 @@ class Config {
 
 	updateFiles() {
 		this.updateConfigFile();
-		this.updateEnvFile();
 	}
 
 
@@ -154,25 +146,6 @@ class Config {
 
 
 	/**
-	 * Updates DB_URL property in app.env
-	 */
-	updateEnvFile() {
-		// If we are installing app via docker, app.env does not exist yet
-		try {
-			const envFilePath = path.resolve(__dirname, 'app.env');
-
-			const content = fs.readFileSync(envFilePath, 'utf-8');
-
-			const replacedContent = content.replace(/(\n)?DB_URL=(.*)\n?/, `\nDB_URL=${this.get('mongo.url')}\n`);
-
-			fs.writeFileSync(envFilePath, replacedContent);
-		} catch (error) {
-			console.error(error);
-		}
-	}
-
-
-	/**
 	 * Updates config.json file, writes new version of config JSON
 	 */
 	updateConfigFile() {
@@ -187,20 +160,5 @@ class Config {
 }
 
 
-/**
- * If DB_URL property in app.env does not match with value from config.json
- * write ENV value to .json file
- */
 const config = new Config();
-
-if (process.env.DB_URL !== config.get('mongo.url')) {
-	config.set('mongo.url', process.env.DB_URL);
-
-	try {
-		config.updateConfigFile();
-	} catch (error) {
-		console.error(error);
-	}
-}
-
 module.exports = config;

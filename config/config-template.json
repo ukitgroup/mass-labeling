@@ -1,5 +1,23 @@
 [
   {
+    "id": "boot",
+    "name": "",
+    "tab": "tech",
+    "visible": 0,
+    "properties": [
+      {
+        "id": "port",
+        "name": "",
+        "default": "80",
+        "value": "80",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      }
+    ]
+  },
+  {
     "id": "languageSettings",
     "name": "config_props.languageSettings",
     "tab": "tech",

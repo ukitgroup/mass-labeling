@@ -2,8 +2,9 @@
 
 const config = require('./index');
 
-const [dbURL, passportCookie] = [process.argv[2], process.argv[3]];
+const [dbURL, passportCookie, port] = [process.argv[2], process.argv[3], process.argv[4]];
 
+config.set('boot.port', port);
 config.set('mongo.url', dbURL);
 config.set('passport.secret', passportCookie);
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
 
-env_path=config/app.env
-yml_path=config/app.yml
+#env_path=config/app.env
+#yml_path=config/app.yml
 docker_compose_path=docker-compose.yml
 
 default_container="mass-labeling"
@@ -81,10 +81,10 @@ echo "Save $docker_compose_path"
 "$docker_use_mongo" &&  echo "    - ./data/mongo:/data/db"                        >> "$docker_compose_path"
 "$docker_use_mongo" &&  echo "    restart: always"                                >> "$docker_compose_path"
 
-echo "Save $yml_path"
-: > "$yml_path"
-echo "passport:"                >> "$yml_path"
-echo "  secret: $cookie_secret" >> "$yml_path"
+#echo "Save $yml_path"
+#: > "$yml_path"
+#echo "passport:"                >> "$yml_path"
+#echo "  secret: $cookie_secret" >> "$yml_path"
 
 dbURL=""
 
@@ -95,7 +95,7 @@ fi
 
 cp ./config/config-template.json ./config/config.json
 
-node ./config/updateConfig.js "$dbURL" "$cookie_secret"
+node ./config/updateConfig.js "$dbURL" "$cookie_secret" "$port"
 
 mkdir logs
 
