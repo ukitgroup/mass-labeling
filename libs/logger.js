@@ -6,7 +6,7 @@ const config = require('../config');
 const options = {};
 
 if (process.env.NODE_ENV === 'production') {
-	options.streams = [{ path: 'logs/log.log' }];
+	options.streams = [{ path: 'logs/mass-labeling.log' }];
 } else {
 	options.stream = process.stdout;
 }
