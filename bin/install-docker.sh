@@ -1,8 +1,6 @@
 #!/usr/bin/env sh
 
 
-# env_path=config/app.env
-# yml_path=config/app.yml
 docker_compose_path=docker-compose.yml
 
 default_container="mass-labeling"
@@ -81,11 +79,6 @@ echo "Save $docker_compose_path"
 "$docker_use_mongo" &&  echo "    volumes:"                                       >> "$docker_compose_path"
 "$docker_use_mongo" &&  echo "    - ./data/mongo:/data/db"                        >> "$docker_compose_path"
 "$docker_use_mongo" &&  echo "    restart: always"                                >> "$docker_compose_path"
-
-#echo "Save $yml_path"
-#: > "$yml_path"
-#echo "passport:"                >> "$yml_path"
-#echo "  secret: $cookie_secret" >> "$yml_path"
 
 dbURL=""
 
