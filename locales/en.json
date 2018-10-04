@@ -162,5 +162,5 @@
   "choose_taskset": "Choose task",
   "close": "Close",
   "select_taskset_error": "The task is not chosen",
-  "provide_datasets_first": "provide_datasets_first"
+  "provide_datasets_first": "Import datasets first"
 }
