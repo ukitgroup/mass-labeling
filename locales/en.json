@@ -161,5 +161,6 @@
   "slider_creation_modal_title": "Create a slider for the task",
   "choose_taskset": "Choose task",
   "close": "Close",
-  "select_taskset_error": "The task is not chosen"
+  "select_taskset_error": "The task is not chosen",
+  "provide_datasets_first": "provide_datasets_first"
 }

@@ -161,5 +161,6 @@
   "slider_creation_modal_title": "Создание слайдера для задачи",
   "choose_taskset": "Выберите задачу",
   "close": "Закрыть",
-  "select_taskset_error": "Не выбрана задача"
+  "select_taskset_error": "Не выбрана задача",
+  "provide_datasets_first": "Сперва нужно импортировать наборы данных для оценки"
 }

@@ -207,6 +207,12 @@
 			 * Trigger new taskset adding
 			 */
 			addTaskSet() {
+				// If no datasets provided, do nothing
+				if (! this.dataSets.length) {
+					alert(this.signs.provide_datasets_first);
+					return;
+				}
+
 				const blankTaskSet = {
 					assessmentLimit: 0,
 					randomSelection: true,

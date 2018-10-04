@@ -88,7 +88,8 @@ fi
 
 cp ./config/config-template.json ./config/config.json
 
-node ./config/updateConfig.js "$dbURL" "$cookie_secret" "$port"
+# Always set 80th port for docker container
+node ./config/updateConfig.js "$dbURL" "$cookie_secret" "80"
 
 mkdir -p logs
 
