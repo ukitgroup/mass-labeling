@@ -44,7 +44,7 @@ case "$db_type" in
     ;;
 esac
 
-read -p "Enter container port correspondent to server port 80 ($default_port): " port
+read -p "Enter server port for service (default=$default_port): " port
 port="${port:-$default_port}"
 read -p "Enter cookie secret: " cookie_secret
 echo ""
