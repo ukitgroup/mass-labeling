@@ -9,7 +9,7 @@ window.$ = $;
 window.jQuery = $;
 
 // Texts from back-end
-const { signs } = window;
+const { signs, activeTaskSetId } = window;
 
 
 $('#logout').click((event) => {
@@ -92,7 +92,7 @@ class Design {
 			$('#overdose').show();
 		}
 
-		Request.post('/api/assessment/create')
+		Request.post('/api/assessment/create', { data: { activeTaskSetId } })
 			.then((task) => {
 				// User has no more tasks
 				if (task.limitReached) {
@@ -104,8 +104,12 @@ class Design {
 					this.show();
 				}
 			})
-			.catch(() => {
-				alert(signs.get_new_task_error);
+			.catch((error) => {
+				if (error.message === 'active_taskset_changed') {
+					window.location.href = '/dashboard';
+				} else {
+					alert(signs.get_new_task_error);
+				}
 			});
 	}
 
@@ -113,6 +117,7 @@ class Design {
 	save() {
 		Request.post('/api/assessment/answer', {
 			data: {
+				activeTaskSetId,
 				siteId: this.task.siteId,
 				answer: this.answer,
 			},
@@ -122,6 +127,11 @@ class Design {
 				this.task.id = taskId;
 				this.prev = this.task;
 				this.next();
+			})
+			.catch((error) => {
+				if (error.message === 'active_taskset_changed') {
+					window.location.href = '/dashboard';
+				}
 			});
 	}
 
@@ -131,12 +141,17 @@ class Design {
 			return;
 		}
 
-		Request.post(`/api/assessment/${this.prev.id}/undo`)
+		Request.post(`/api/assessment/${this.prev.id}/undo`, { data: { activeTaskSetId } })
 			.then(() => {
 				this.markupCount--;
 				this.task = this.prev;
 				this.prev = null;
 				this.show();
+			})
+			.catch((error) => {
+				if (error.message === 'active_taskset_changed') {
+					window.location.href = '/dashboard';
+				}
 			});
 	}
 

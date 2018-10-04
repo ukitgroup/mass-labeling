@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const Task = require('../../models/task');
 const TaskSet = require('../../models/taskset');
 const Site = require('../../models/site');
@@ -29,6 +30,7 @@ router.get('/', async (req, res, next) => {
 			limit,
 			layout: false,
 			count: await Task.countByUserId(req.user.id, true),
+			activeTaskSetId: activeTaskSet._id,
 		});
 	} catch (err) {
 		// eslint-disable-next-line no-underscore-dangle

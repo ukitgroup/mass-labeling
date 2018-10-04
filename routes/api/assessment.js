@@ -21,6 +21,12 @@ router.post('/create', async (req, res, next) => {
 			throw new Error('no_active_tasks');
 		}
 
+		const userActiveTaskId = req.body.activeTaskSetId;
+
+		if (String(userActiveTaskId) !== String(activeTaskSet._id)) {
+			throw new Error('active_taskset_changed');
+		}
+
 		const showRandomly = activeTaskSet.randomSelection;
 
 		let additionalFilter = {};
@@ -77,6 +83,18 @@ router.post('/create', async (req, res, next) => {
  */
 router.post('/answer', async (req, res, next) => {
 	try {
+		const activeTaskSet = await TaskSet.getCurrentActive();
+
+		if (! activeTaskSet) {
+			throw new Error('no_active_tasks');
+		}
+
+		const userActiveTaskId = req.body.activeTaskSetId;
+
+		if (String(userActiveTaskId) !== String(activeTaskSet._id)) {
+			throw new Error('active_taskset_changed');
+		}
+
 		const task = await Task.getNew({
 			siteId: req.body.siteId,
 			answer: Number(req.body.answer),
@@ -104,6 +122,18 @@ router.post('/answer', async (req, res, next) => {
  */
 router.post('/:taskId/undo', bridges.task.id, bridges.task.owner, async (req, res, next) => {
 	try {
+		const activeTaskSet = await TaskSet.getCurrentActive();
+
+		if (! activeTaskSet) {
+			throw new Error('no_active_tasks');
+		}
+
+		const userActiveTaskId = req.body.activeTaskSetId;
+
+		if (String(userActiveTaskId) !== String(activeTaskSet._id)) {
+			throw new Error('active_taskset_changed');
+		}
+
 		await req.task.remove();
 
 		logger.info({

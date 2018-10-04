@@ -64,7 +64,7 @@ UserSchema.statics = {
 	async getById(id) {
 		const user = await this.findById(id);
 		if (! user) throw new Error('auth_errors.bad_user_id');
-		if (user.status !== 'active') throw new Error('auth_errors.user_disabled');
+		// if (user.status !== 'active') throw new Error('auth_errors.user_disabled');
 
 		return user;
 	},
