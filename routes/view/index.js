@@ -66,18 +66,6 @@ router.use(async (req, res, next) => {
 });
 
 
-// If user is disabled, destroy session, redirect user to login form
-router.use((req, res, next) => {
-	if (req.user && req.user.status !== 'active') {
-		req.session.destroy();
-		req.logout();
-		res.redirect('/');
-	} else {
-		next();
-	}
-});
-
-
 router.get('/', (req, res) => {
 	if (req.user) {
 		setLocale(req, res, req.user.locale);

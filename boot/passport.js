@@ -29,8 +29,23 @@ module.exports = (app) => {
 	app.use(passport.session());
 
 	app.use((req, res, next) => {
-		req.loginAsync = Promise.promisify(req.login, { context: req });
-		next();
+		// If user is disabled, redirect him to login form
+		if (req.user && req.user.status !== 'active') {
+			req.session.destroy();
+			req.logout();
+
+			if (req.method === 'POST') {
+				// If it is a POST request (API), send the 301th status
+				// to redirect user in JS
+				res.sendStatus(301);
+			} else {
+				// If GET request, redirect user on server
+				res.redirect('/');
+			}
+		} else {
+			req.loginAsync = Promise.promisify(req.login, { context: req });
+			next();
+		}
 	});
 
 
