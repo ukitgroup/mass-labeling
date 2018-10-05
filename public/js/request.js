@@ -1,4 +1,4 @@
-class Request {
+export default class Request {
 	constructor({
 		method,
 		url,
@@ -67,12 +67,16 @@ class Request {
 	static async process(...args) {
 		const response = await fetch(...args);
 
+		// Redirect user to login form if the user is disabled
+		if (response.status === 301) {
+			window.location = '/';
+			return null;
+		}
+
 		const [err, result] = await response.json();
+
 		if (err) throw new Error(err);
 
 		return result;
 	}
 }
-
-
-window.Request = Request;

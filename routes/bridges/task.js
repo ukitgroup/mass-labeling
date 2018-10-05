@@ -1,6 +1,6 @@
-const { ForbiddenError, NotFoundError } = require('../../lib/http-errors');
+const { ForbiddenError, NotFoundError } = require('../../libs/http-errors');
 
-const Task = require('../../model/task');
+const Task = require('../../models/task');
 
 
 module.exports = {
@@ -11,6 +11,8 @@ module.exports = {
 
 			next();
 		} catch (err) {
+			// eslint-disable-next-line no-underscore-dangle
+			err.message = req.__(err.message);
 			next(err);
 		}
 	},
@@ -21,6 +23,8 @@ module.exports = {
 
 			next();
 		} catch (err) {
+			// eslint-disable-next-line no-underscore-dangle
+			err.message = req.__(err.message);
 			next(err);
 		}
 	},

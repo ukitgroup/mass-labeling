@@ -1,10 +1,10 @@
 const bridges = require('../bridges');
 
 const auth = require('./auth');
-const markup = require('./markup');
+const markup = require('./assessment');
 const site = require('./site');
-const user = require('./user');
 const broken = require('./broken');
+const config = require('./config');
 
 const router = require('express').Router();
 
@@ -17,7 +17,7 @@ router.use(
 
 // Разметка
 router.use(
-	'/markup',
+	'/assessment',
 	bridges.auth.user,
 	markup,
 );
@@ -29,18 +29,18 @@ router.use(
 	site,
 );
 
-// Пользователи
-router.use(
-	'/user',
-	bridges.auth.admin,
-	user,
-);
-
 // Сломанные сайты
 router.use(
 	'/broken',
 	bridges.auth.admin,
 	broken,
+);
+
+// App config
+router.use(
+	'/config',
+	bridges.auth.admin,
+	config,
 );
 
 

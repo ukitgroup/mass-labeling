@@ -2,14 +2,10 @@
 
 <title>Mass labeling</title>
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%= fromPublic('css/layout.css') %>">
+<link rel="stylesheet" href="<%= fromPublic('bundles/css/layout.css') %>">
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="<%= fromPublic('js/request.js') %>"></script>
-
+<script src="<%= fromPublic('bundles/vendor.js') %>"></script>
 
 <div class="navbar navbar-inverse navbar-static-top">
 	<div class="container">
@@ -19,27 +15,33 @@
 
 		<ul class="nav navbar-nav">
 			<% if (user && user.role === 'admin') { %>
-				<li><a href="/user/list">Пользователи</a></li>
+				<!--<li><a href="/user/list"><%= getText('users') %></a></li>-->
 
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Статистика <span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= getText('stats') %> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/stat/markup">Разметка</a></li>
-						<li><a href="/stat/abnormal">Аномалии</a></li>
-						<li><a href="/stat/abnormal-local">Локальные аномалии</a></li>
+						<li><a href="/stat/markup"><%= getText('markup') %></a></li>
+						<li><a href="/stat/abnormal"><%= getText('anomalies') %></a></li>
+						<li><a href="/stat/abnormal-local"><%= getText('local_anomalies') %></a></li>
 					</ul>
 				</li>
 			<% } %>
 
-			<li><a href="/instruction.html" target="_blank">Инструкция</a></li>
+			<li><a href="/instruction" target="_blank"><%= getText('tutorial') %></a></li>
 		</ul>
 
 		<div class="navbar-right">
+      <% include ./partials/lang-switcher %>
+
 			<% if (user) { %>
 				<p class="navbar-text"><%= user.email %></p>
 
 				<ul class="nav navbar-nav">
-					<li><a href="#" id="logout">Выход</a></li>
+          <% if (user && user.role === 'admin') { %>
+					  <li><a href="/config"><%= getText('settings') %></a></li>
+          <% } %>
+
+					<li><a href="#" id="logout"><%= getText('logout') %></a></li>
 				</ul>
 			<% } %>
 		</div>
@@ -49,5 +51,8 @@
 	<%- body %>
 </div>
 
+<script>
+  window.signs = <%- JSON.stringify(frontSigns()) %>;
+</script>
 
-<script src="<%= fromPublic('js/layout.js') %>"></script>
+<script src="<%= fromPublic('bundles/layout.js') %>"></script>

@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%= fromPublic('css/slider.css') %>">
+
+<title>Sliders</title>
+
+
+<link rel="stylesheet" href="<%= fromPublic('bundles/css/slider.css') %>">
 
 
 <div id="app" class="_sl-app">
@@ -15,23 +18,42 @@
 
 
 	<div class="_sl-root">
-		<div class="_sl-image">
-			<img :src="screenshot">
-		</div>
-		<div class="_sl-info">
-			<p><span>Сайт:</span> <span><a :href="item.url" id="url" target="_blank">{{item.url}}</a></span></p>
-			<p><span>Оценка модели:</span> <span>{{modelScoreStr}}</span></p>
-			<p><span>Средняя оценка ассессоров:</span> <span>{{meanAssessorsScoreStr}}</span></p>
-			<p><span>Ошибка:</span> <span>{{errorStr}}</span></p>
-			<p><span>Оценки ассессоров:</span> <span>{{assessorsScoreStr}}</span></p>
-		</div>
+    <div class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="/config">
+              <%= getText('nav_back') %>
+            </a>
+          </li>
+        </ul>
+
+        <div class="navbar-right">
+          <% include ./partials/lang-switcher %>
+        </div>
+      </div>
+    </div>
+
+    <div class="_sl-root-content">
+      <div class="_sl-image">
+        <img :src="screenshot">
+      </div>
+      <div class="_sl-info">
+        <p><span><%= getText('site') %>:</span> <span><a :href="item.url" id="url" target="_blank">{{item.url}}</a></span></p>
+        <p><span><%= getText('model_score') %>:</span> <span>{{modelScoreStr}}</span></p>
+        <p><span><%= getText('assessors_mean_score') %>:</span> <span>{{meanAssessorsScoreStr}}</span></p>
+        <p><span><%= getText('error') %>:</span> <span>{{errorStr}}</span></p>
+        <p><span><%= getText('assessors_scores') %>:</span> <span>{{assessorsScoreStr}}</span></p>
+      </div>
+    </div>
 	</div>
 </div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
 <script>
 	window.items = <%- JSON.stringify(items) %>;
+  window.signs = <%- JSON.stringify(frontSigns()) %>;
 </script>
-<script src="<%= fromPublic('js/slider.js') %>"></script>
+
+<script src="<%= fromPublic('bundles/vendor.js') %>"></script>
+<script src="<%= fromPublic('bundles/slider.js') %>"></script>

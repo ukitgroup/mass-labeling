@@ -1,0 +1,159 @@
+[
+  {
+    "id": "boot",
+    "name": "",
+    "tab": "tech",
+    "visible": 0,
+    "properties": [
+      {
+        "id": "port",
+        "name": "",
+        "default": "80",
+        "value": "80",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      }
+    ]
+  },
+  {
+    "id": "languageSettings",
+    "name": "config_props.languageSettings",
+    "tab": "tech",
+    "properties": [
+      {
+        "id": "defaultLanguage",
+        "name": "config_props.defaultLanguage",
+        "default": "en",
+        "value": "en",
+        "format": "String",
+        "element": {
+          "type": "languagesSelect"
+        }
+      },
+      {
+        "id": "languagesNames",
+        "name": "config_props.languagesNames",
+        "default": {
+          "ru": "Русский",
+          "en": "English"
+        },
+        "value": {
+          "ru": "Русский",
+          "en": "English"
+        },
+        "format": "Object",
+        "element": {
+          "type": "languagesList"
+        }
+      }
+    ]
+  },
+  {
+    "id": "logger",
+    "name": "config_props.logger",
+    "tab": "tech",
+    "properties": [
+      {
+        "id": "level",
+        "name": "config_props.logger_level",
+        "default": "info",
+        "value": "info",
+        "format": "String",
+        "element": {
+          "type": "select",
+          "options": {
+            "fatal": "logger_levels.fatal",
+            "error": "logger_levels.error",
+            "warn": "logger_levels.warn",
+            "info": "logger_levels.info",
+            "debug": "logger_levels.debug",
+            "trace": "logger_levels.trace"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "mongo",
+    "name": "config_props.data",
+    "tab": "tech",
+    "properties": [
+      {
+        "id": "url",
+        "name": "config_props.db_url",
+        "default": "mongodb://localhost:27017/mass-labeling",
+        "value": "mongodb://localhost:27017/mass-labeling",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      },
+      {
+        "id": "screenshotsPath",
+        "name": "config_props.sites_screenshots_path",
+        "default": "./data/screenshots",
+        "value": "./data/screenshots",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      }
+    ]
+  },
+  {
+    "id": "passport",
+    "name": "config_props.passport",
+    "tab": "tech",
+    "properties": [
+      {
+        "id": "maxAge",
+        "name": "config_props.passport_cookie_age",
+        "default": 30,
+        "value": 30,
+        "format": "Number",
+        "element": {
+          "type": "number"
+        }
+      },
+      {
+        "id": "secret",
+        "name": "config_props.passport_cookie_secret",
+        "default": "cs",
+        "value": "cs",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      }
+    ]
+  },
+  {
+    "id": "cliImport",
+    "name": "config_props.cliImport",
+    "tab": "tech",
+    "properties": [
+      {
+        "id": "in",
+        "name": "config_props.cliImport_zip_path",
+        "default": "data/import/dataset.zip",
+        "value": "data/import/dataset.zip",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      },
+      {
+        "id": "modelScoreIn",
+        "name": "config_props.cliImport_json_path",
+        "default": "data/import/modelRates.json",
+        "value": "data/import/modelRates.json",
+        "format": "String",
+        "element": {
+          "type": "text"
+        }
+      }
+    ]
+  }
+]

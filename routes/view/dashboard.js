@@ -1,5 +1,5 @@
-const Site = require('../../model/site');
-const Task = require('../../model/task');
+const Site = require('../../models/site');
+const Task = require('../../models/task');
 
 
 const router = require('express').Router();
@@ -21,6 +21,8 @@ router.get('/', async (req, res, next) => {
 			markupCount: await Task.countByUserId(req.user.id, true),
 		});
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
+		err.message = req.__(err.message);
 		next(err);
 	}
 });

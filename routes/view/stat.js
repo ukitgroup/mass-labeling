@@ -1,6 +1,8 @@
-const Site = require('../../model/site');
-const User = require('../../model/user');
-const Task = require('../../model/task');
+/* eslint-disable no-trailing-spaces,no-underscore-dangle */
+const Site = require('../../models/site');
+const User = require('../../models/user');
+const Task = require('../../models/task');
+const TaskSet = require('../../models/taskset');
 
 
 const diffs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -19,12 +21,20 @@ router.get('/markup', async (req, res, next) => {
 
 		res.render('stat/markup', { users });
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
+		err.message = req.__(err.message);
 		next(err);
 	}
 });
 
 router.get('/abnormal(/:diff)?', async (req, res, next) => {
 	try {
+		const activeTaskSet = await TaskSet.getCurrentActive();
+
+		if (! activeTaskSet) {
+			throw new Error('no_active_tasks');
+		}
+
 		const diff = Number(req.params.diff);
 
 		if (! diff) {
@@ -33,32 +43,43 @@ router.get('/abnormal(/:diff)?', async (req, res, next) => {
 		}
 
 		const users = await User.find();
+
 		users.forEach((curUser) => {
 			curUser.id = String(curUser.id);
 			curUser.abnormalCount = 0;
 		});
+
 		const usersMap = users.reduce((o, curUser) => {
-			o[curUser.id] = curUser;
 			o[curUser.id] = curUser;
 			return o;
 		}, {});
 
 		const answers = await Task.find({
-			answer: { $ne: 0 },
+			taskSetId: activeTaskSet._id,
+			answer: {
+				$ne: 0,
+			},
 		});
+
 		answers.forEach((item) => {
 			item.siteId = String(item.siteId);
 			item.userId = String(item.userId);
 		});
+
 		const answersMap = answers.reduce((o, item) => {
 			o[item.siteId] = o[item.siteId] || [];
 			o[item.siteId].push(item);
 			return o;
 		}, {});
 
+		const allowedDataSets = activeTaskSet.activeDataSets;
+
 		const siteIds = (await Site.distinct('_id', {
 			...Site.filter.allowedStatuses,
-			...Site.filter.allowedDatasets,
+
+			dataset: {
+				$in: allowedDataSets,
+			},
 		})).map(siteId => String(siteId));
 
 		siteIds.forEach((siteId) => {
@@ -76,12 +97,20 @@ router.get('/abnormal(/:diff)?', async (req, res, next) => {
 
 		res.render('stat/abnormal', { diffs, diff, users });
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
+		err.message = req.__(err.message);
 		next(err);
 	}
 });
 
 router.get('/abnormal-local(/:diff)?', async (req, res, next) => {
 	try {
+		const activeTaskSet = await TaskSet.getCurrentActive();
+
+		if (! activeTaskSet) {
+			throw new Error('no_active_tasks');
+		}
+
 		const diff = Number(req.params.diff);
 
 		if (! diff) {
@@ -90,18 +119,24 @@ router.get('/abnormal-local(/:diff)?', async (req, res, next) => {
 		}
 
 		const users = await User.find();
+
 		users.forEach((curUser) => {
 			curUser.id = String(curUser.id);
 			curUser.abnormalCount = 0;
 		});
 
 		const answers = await Task.find({
-			answer: { $ne: 0 },
+			taskSetId: activeTaskSet._id,
+			answer: {
+				$ne: 0,
+			},
 		});
+
 		answers.forEach((item) => {
 			item.siteId = String(item.siteId);
 			item.userId = String(item.userId);
 		});
+
 		const answersMap = answers.reduce((o, item) => {
 			const id = `${item.siteId}_${item.userId}`;
 			o[id] = o[id] || [];
@@ -109,9 +144,14 @@ router.get('/abnormal-local(/:diff)?', async (req, res, next) => {
 			return o;
 		}, {});
 
+		const allowedDataSets = activeTaskSet.activeDataSets;
+
 		const siteIds = (await Site.distinct('_id', {
 			...Site.filter.allowedStatuses,
-			...Site.filter.allowedDatasets,
+
+			dataset: {
+				$in: allowedDataSets,
+			},
 		})).map(siteId => String(siteId));
 
 		siteIds.forEach((siteId) => {
@@ -131,6 +171,8 @@ router.get('/abnormal-local(/:diff)?', async (req, res, next) => {
 
 		res.render('stat/abnormal-local', { diffs, diff, users });
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
+		err.message = req.__(err.message);
 		next(err);
 	}
 });

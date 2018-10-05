@@ -1,9 +1,17 @@
-FROM node:9.10.0-alpine
+FROM node:10.1.0-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	build-essential \
+	python
 
 RUN mkdir -p /usr/bin/app
-COPY . /usr/bin/app/
 WORKDIR /usr/bin/app
 
+COPY package*.json /usr/bin/app/
 RUN npm i --no-save
 
-CMD ["sh", "-c", "npm start >> log/app.log 2>&1"]
+COPY . /usr/bin/app/
+
+RUN npm run build:front
+
+CMD ["npm", "start"]

@@ -1,9 +1,14 @@
-<h1>Статистика по разметке</h1>
+<h1><%= getText('markup_stats') %></h1>
+
+<p class="text-muted page-description">
+  <%= getText('markup_page_description') %>
+</p>
+
 <table class="table table-striped">
 	<thead>
 		<tr>
 			<th>E-mail</th>
-			<th>Оценка сайтов (одиночная)</th>
+			<th><%= getText('scored_sites_count') %></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -15,3 +20,8 @@
 		<% }) %>
 	</tbody>
 </table>
+
+
+<script>
+  window.signs = <%- JSON.stringify(frontSigns()) %>;
+</script>

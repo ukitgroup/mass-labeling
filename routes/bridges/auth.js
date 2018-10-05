@@ -1,4 +1,4 @@
-const { ForbiddenError } = require('../../lib/http-errors');
+const { ForbiddenError } = require('../../libs/http-errors');
 
 
 module.exports = {
@@ -8,6 +8,8 @@ module.exports = {
 
 			next();
 		} catch (err) {
+			// eslint-disable-next-line no-underscore-dangle
+			err.message = req.__(err.message);
 			next(err);
 		}
 	},
@@ -18,6 +20,8 @@ module.exports = {
 
 			next();
 		} catch (err) {
+			// eslint-disable-next-line no-underscore-dangle
+			err.message = req.__(err.message);
 			next(err);
 		}
 	},

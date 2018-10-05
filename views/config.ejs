@@ -1,0 +1,75 @@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="<%= fromPublic('bundles/css/config.css') %>">
+
+<h1><%= getText('edit_config') %></h1>
+
+<div class="row js-container" v-show="!loading" style="display: none;">
+  <div class="col-xs-12">
+    <ul class="nav nav-tabs">
+      <li :class="[getTabClass('users')]">
+        <a @click.prevent="switchTab('users')" href="#">
+          <%= getText('config_categories.users') %>
+        </a>
+      </li>
+
+      <li :class="[getTabClass('assessment')]">
+        <a @click.prevent="switchTab('assessment')" href="#">
+          <%= getText('config_categories.assessment') %>
+        </a>
+      </li>
+
+      <li :class="[getTabClass('tech')]">
+        <a @click.prevent="switchTab('tech')" href="#">
+          <%= getText('config_categories.tech') %>
+        </a>
+      </li>
+    </ul>
+
+
+    <form autocomplete="off">
+      <div class="settings-block tech-settings" v-show="activeTab === 'tech'">
+        <div v-for="fieldSet in techSettings" v-if="fieldSet.visible !== 0">
+          <config-fieldset :field-set="fieldSet"></config-fieldset>
+        </div>
+
+        <div class="form-group">
+          <button @click.prevent="updateConfig()" type="submit" class="btn btn-primary">
+            <%= getText('submit') %>
+          </button>
+        </div>
+      </div>
+
+
+      <div class="settings-block assessment-settings" v-show="activeTab === 'assessment'">
+        <tasksets-controller
+          :task-sets="taskSets"
+          :data-sets="availableDataSets"
+          :default-instruction="defaultInstruction"
+        ></tasksets-controller>
+      </div>
+
+
+      <div class="settings-block users-settings" v-show="activeTab === 'users'">
+        <users-controller></users-controller>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script>
+  window.signs = <%- JSON.stringify(frontSigns()) %>;
+
+  window.config = <%- JSON.stringify(config) %>;
+  window.definedLanguages = <%- JSON.stringify(definedLanguages) %>;
+  window.availableDataSets = <%- JSON.stringify(availableDataSets) %>;
+
+  window.taskSets = <%- JSON.stringify(taskSets) %>
+  window.defaultInstruction = <%- JSON.stringify(defaultInstruction) %>
+
+  window.users = <%- JSON.stringify(users) %>
+  window.roles = <%- JSON.stringify(roles) %>
+  window.statuses = <%- JSON.stringify(statuses) %>
+</script>
+
+<script src="<%= fromPublic('bundles/config.js') %>"></script>

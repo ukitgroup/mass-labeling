@@ -1,7 +1,18 @@
+@import "../../node_modules/bootstrap/dist/css/bootstrap.css";
+@import "lang-switcher.css";
+
 .container {
 	width: 1200px !important;
 }
 
 .text-bold {
 	font-weight: bold;
+}
+
+.page-description {
+  margin-bottom: 24px;
+}
+
+.primary-cell {
+  width: 100%;
 }

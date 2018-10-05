@@ -16,12 +16,9 @@ node_modules/
 # JetBrains IDE
 .idea/
 
-# Docker Compose
-docker-compose*.yml
-
 # Project rules
-/conf/app.env
-/conf/app.js
+/config/app.*
 /data/
-/log/
+/docker-compose*.yml
+/logs/
 /tmp/

@@ -1,0 +1,108 @@
+@import '../../node_modules/codemirror/lib/codemirror.css';
+@import '../../node_modules/codemirror/theme/mdn-like.css';
+
+.datasets-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dataset-item {
+  flex-basis: 50%;
+}
+
+.actions-container {
+  flex-basis: 100%;
+  margin: 6px 0;
+}
+
+.settings-block {
+  margin-top: 25px;
+}
+
+.CodeMirror {
+  width: 1200px;
+  min-height: 600px;
+}
+
+.users-form, .tasksets-form {
+  margin-top: 20px;
+}
+
+.checkbox-block {
+  display: flex;
+}
+
+.checkbox-block label {
+  order: 2;
+}
+
+.checkbox-block input {
+  margin-top: 2px;
+  margin-right: 12px;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea,
+.lang-name-block {
+  max-width: 600px;
+  width: 100%;
+}
+
+.lang-name-block {
+  margin-bottom: 12px;
+}
+
+.lang-name-block .input-group-addon {
+  width: 50px;
+}
+
+.datasets-control {
+  color: #337ab7;
+  font-size: 18px;
+  margin-left: 12px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.datasets-control:last-child {
+  margin-left: 6px;
+}
+
+.edit-instructions {
+  margin: 12px 0 36px 0;
+}
+
+.tasksets-form h5 {
+  font-weight: bold;
+  width: 100%;
+}
+
+.tasksets-form .property {
+  margin-bottom: 12px;
+}
+
+.tasksets-form textarea {
+  height: 100px;
+}
+
+.no-tasks-cell {
+  text-align: center;
+}
+
+.editor-container {
+  margin-bottom: 24px;
+}
+
+.tasksets-form-wrapper {
+  margin-bottom: 48px;
+}
+
+.tasksets-form-controls {
+  margin-top: 18px;
+}
+
+.tasksets-form-controls button {
+  margin-right: 12px;
+}

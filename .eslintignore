@@ -3,7 +3,11 @@ node_modules/
 
 # Project rules
 /bin/www
-/conf/app.js
+/config/app.*
 /data/
-/log/
+/logs/
 /tmp/
+
+public/js/lib/
+public/css/lib/
+public/bundles/

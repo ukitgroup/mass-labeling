@@ -4,12 +4,6 @@
 	"plugins": [
 		"json"
 	],
-	"parserOptions": {
-		"ecmaVersion": 2017,
-		"sourceType": "script",
-		"allowImportExportEverywhere": false,
-		"codeFrame": false
-	},
 	"rules": {
 		"brace-style": [
 			"error",
@@ -44,22 +38,6 @@
 		"no-plusplus": "off",
 		"no-shadow": "off",
 		"no-tabs": "off",
-		"prefer-destructuring": [
-			"error",
-			{
-				"AssignmentExpression": {
-					"array": true,
-					"object": false
-				},
-				"VariableDeclarator": {
-					"array": true,
-					"object": true
-				}
-			},
-			{
-				"enforceForRenamedProperties": false
-			}
-		],
 		"space-unary-ops": [
 			"error",
 			{

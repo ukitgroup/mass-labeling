@@ -1,29 +1,34 @@
 <% if (user.role === 'admin') { %>
-	<h1>Сломанные сайты</h1>
+	<h1><%= getText('broken_sites') %></h1>
+
 	<div class="row">
 		<div class="col-xs-6">
 			<table class="table">
 				<tr>
-					<td>Не проверенные</td>
+					<td class="primary-cell"><%= getText('unchecked') %></td>
 					<td><%= brokenCount %></td>
 				</tr>
 			</table>
 		</div>
 	</div>
-	<a href="/broken" class="btn btn-primary">Перейти к проверке</a>
+	<a href="/broken" class="btn btn-primary"><%= getText('check_sites') %></a>
 	<br><br>
 <% } %>
 
-<h1>Оценка сайтов</h1>
+<h1><%= getText('scored_sites_title') %></h1>
 <div class="row">
 	<div class="col-xs-6">
 		<table class="table">
 			<tr>
-				<td>Оценено</td>
+				<td class="primary-cell"><%= getText('scored') %></td>
 				<td><%= markupCount %></td>
 			</tr>
 		</table>
 	</div>
 </div>
-<a href="/markup" class="btn btn-primary">Получить новую задачу</a>
+<a href="/assessment" class="btn btn-primary"><%= getText('get_new_task') %></a>
 <br><br>
+
+<script>
+  window.signs = <%- JSON.stringify(frontSigns()) %>;
+</script>

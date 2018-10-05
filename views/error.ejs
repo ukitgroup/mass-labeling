@@ -8,11 +8,16 @@
 
 <div class="container">
 	<div class="jumbotron" style="margin-top: 20px;">
-		<h1>Произошла ошибка</h1>
-		<p>Ошибка не была обработана, возможно вы зашли не туда.</p>
-		<p>Код: <%= status %></p>
-		<p>Сообщение: <%= error %></p>
-		<p>Попробуйте следующие варианты:</p>
-		<p><a class="btn btn-primary btn-lg" href="/">Перейти на главную</a></p>
+		<h1><%= getText('error_occurred') %></h1>
+		<p><%= getText('unprocessed_error') %></p>
+		<p><%= getText('code') %>: <%= status %></p>
+		<p><%= getText('message') %>: <%= error %></p>
+		<p><%= getText('try_variants') %>:</p>
+		<p><a class="btn btn-primary btn-lg" href="/"><%= getText('go_to_main') %></a></p>
 	</div>
 </div>
+
+
+<script>
+  window.signs = <%- JSON.stringify(frontSigns()) %>;
+</script>

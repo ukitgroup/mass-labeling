@@ -1,0 +1,12 @@
+<ul class="nav navbar-nav">
+  <% localesAbleToSwitch().forEach(locale => { %>
+    <li>
+      <a href="<%= `/locale/${locale}` %>">
+        <div class="country-flag <%= `country-flag_${locale}-flag` %>"></div>
+        <span>
+          <%= getLocaleReadableName(locale); %>
+        </span>
+      </a>
+    </li>
+  <% }) %>
+</ul>

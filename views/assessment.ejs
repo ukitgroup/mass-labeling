@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<title>Mass labeling</title>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="<%= fromPublic('bundles/css/assessment.css') %>">
+
+<script src="<%= fromPublic('bundles/vendor.js') %>"></script>
+
+<div class="navbar navbar-inverse navbar-static-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a href="/" class="navbar-brand">Mass labeling</a>
+		</div>
+
+    <ul class="nav navbar-nav">
+      <li><a href="/instruction" target="_blank"><%= getText('tutorial') %></a></li>
+    </ul>
+
+		<div class="navbar-right">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="#" class="btn-help" data-toggle="modal" data-target="#help">
+						<i class="fa fa-question-circle"></i>
+					</a>
+				</li>
+			</ul>
+
+			<p class="navbar-text" title="<%= getText('scored_limit') %>">
+        <%= getText('scored') %>:
+				<span id="markup-count"><%= count %></span>
+				/
+				<%= limit === Infinity ? '∞' : limit %>
+			</p>
+
+      <% include ./partials/lang-switcher %>
+
+			<p class="navbar-text"><%= user.email %></p>
+
+			<ul class="nav navbar-nav">
+        <% if (user && user.role === 'admin') { %>
+          <li><a href="/config"><%= getText('settings') %></a></li>
+        <% } %>
+
+				<li><a href="#" id="logout"><%= getText('logout') %></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="navbar navbar-inverse navbar-static-top">
+	<div class="container-fluid">
+		<p id="answer" class="answer navbar-text"></p>
+	</div>
+</div>
+
+<div id="root" class="root">
+	<img id="image">
+</div>
+
+<div id="help" class="modal fade">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title"><%= getText('info') %></h4>
+			</div>
+			<div class="modal-body">
+				<h4><%= getText('management') %></h4>
+				<p><%= getText('keyboard_management') %>:</p>
+				<table class="table">
+					<tr>
+						<td>1-9</td>
+						<td><%= getText('set_score_1_9') %></td>
+					</tr>
+					<tr>
+						<td>0</td>
+						<td><%= getText('set_score_10') %></td>
+					</tr>
+					<tr>
+						<td>X</td>
+						<td><%= getText('mark_as_broken') %></td>
+					</tr>
+					<tr>
+						<td>Enter</td>
+						<td><%= getText('save_score') %></td>
+					</tr>
+					<tr>
+						<td>Backspace</td>
+						<td><%= getText('undo_last_choice') %></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="overdose" class="overdose container">
+	<div class="jumbotron">
+		<h1><%= getText('limit_reached') %></h1>
+	</div>
+</div>
+
+<script>
+	window.markupCount = <%= count %>;
+	window.markupLimit = <%= limit %>;
+	window.activeTaskSetId = "<%= activeTaskSetId %>";
+
+  window.signs = <%- JSON.stringify(frontSigns()) %>;
+</script>
+
+<script src="<%= fromPublic('bundles/assessment.js') %>"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>

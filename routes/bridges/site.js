@@ -1,6 +1,6 @@
-const { NotFoundError } = require('../../lib/http-errors');
+const { NotFoundError } = require('../../libs/http-errors');
 
-const Site = require('../../model/site');
+const Site = require('../../models/site');
 
 
 module.exports = {
@@ -11,6 +11,8 @@ module.exports = {
 
 			next();
 		} catch (err) {
+			// eslint-disable-next-line no-underscore-dangle
+			err.message = req.__(err.message);
 			next(err);
 		}
 	},

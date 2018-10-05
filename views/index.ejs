@@ -1,7 +1,7 @@
 <div class="jumbotron">
 	<h1>Mass labeling</h1>
 
-	<p>Для работы необходима авторизация</p>
+	<p><%= getText('auth_required') %></p>
 
 	<div class="row">
 		<div class="col-xs-4">
@@ -11,14 +11,17 @@
 					<input type="email" id="email" class="form-control">
 				</div>
 				<div class="form-group form-group-lg">
-					<label for="password">Пароль</label>
+					<label for="password"><%= getText('password') %></label>
 					<input type="password" id="password" class="form-control">
 				</div>
-				<button class="btn btn-primary btn-lg">Войти</button>
+				<button class="btn btn-primary btn-lg"><%= getText('sign_in') %></button>
 			</form>
 		</div>
 	</div>
 </div>
 
+<script>
+  window.signs = <%- JSON.stringify(frontSigns()) %>;
+</script>
 
-<script src="<%= fromPublic('js/index.js') %>"></script>
+<script src="<%= fromPublic('bundles/index.js') %>"></script>

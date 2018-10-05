@@ -1,4 +1,10 @@
-'use strict';
+/* eslint-disable no-alert */
+
+import $ from 'jquery';
+import Request from './request';
+
+// Texts from back-end
+const { signs } = window;
 
 
 $('#login').submit((event) => {
@@ -7,7 +13,7 @@ $('#login').submit((event) => {
 	const email = $('#email').val();
 	const password = $('#password').val();
 
-	window.Request.post('/api/auth/login', {
+	Request.post('/api/auth/login', {
 		data: {
 			email,
 			password,
@@ -17,6 +23,6 @@ $('#login').submit((event) => {
 			window.location = '/';
 		})
 		.catch((err) => {
-			alert(`Ошибка авторизации: "${err.message}"`);
+			alert(`${signs.auth_error}: "${err.message}"`);
 		});
 });

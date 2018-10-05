@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
-require('../boot/dotenv')();
 require('../boot/mongo')();
 
 
 const program = require('commander');
 
-const logger = require('../lib/logger');
+const logger = require('../libs/logger');
 
 
 program.Command.prototype.requireOption = function (name) {

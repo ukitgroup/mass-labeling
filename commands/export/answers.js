@@ -2,19 +2,19 @@ const fs = require('fs-extra');
 const path = require('path');
 const _ = require('lodash');
 
-const Site = require('../../model/site');
-const Task = require('../../model/task');
-const User = require('../../model/user');
+const Site = require('../../models/site');
+const Task = require('../../models/task');
+const User = require('../../models/user');
 
-const logger = require('../../lib/logger');
-const conf = require('../../conf');
+const logger = require('../../libs/logger');
+const config = require('../../config');
 
 
 module.exports = (program) => {
 	program.description('Export answers');
 
-	program.option('--dataset <dataset>', 'Dataset name for export. For multiple use conf:cli/export/answers/datasets (default: all datasets)');
-	program.option('--out <out_path>', 'JSON path', conf.cli.export.answers.out);
+	program.option('--dataset <dataset>', 'Dataset name for export. For multiple use config:cli/export/answers/datasets (default: all datasets)');
+	program.option('--out <out_path>', 'JSON path', config.get('cliExport.out'));
 
 	// eslint-disable-next-line prefer-arrow-callback
 	program.asyncAction(async function (args) {
@@ -32,8 +32,17 @@ module.exports = (program) => {
 		const sitesFilter = {
 			...Site.filter.allowedStatuses,
 		};
-		if (conf.cli.export.answers.datasets) sitesFilter.dataset = { $in: conf.cli.export.answers.datasets };
-		if (args.dataset) sitesFilter.dataset = args.dataset;
+
+		if (config.get('cliExport.datasets').length) {
+			sitesFilter.dataset = {
+				$in: config.get('cliExport.datasets'),
+			};
+		}
+
+		if (args.dataset) {
+			sitesFilter.dataset = args.dataset;
+		}
+
 		const sites = await Site.find(sitesFilter);
 
 		logger.info('Sites done');
@@ -43,7 +52,8 @@ module.exports = (program) => {
 		const tasks = await Task.find({
 			siteId: { $in: sites.map(site => site.id) },
 			answer: { $ne: 0 },
-		});
+		}).lean();
+		const tasksMap = _.groupBy(tasks, 'siteId');
 
 		logger.info('Tasks done');
 
@@ -52,7 +62,7 @@ module.exports = (program) => {
 		const answers = sites.map(site => ({
 			url: site.url,
 			dataset: site.dataset,
-			answers: tasks.filter(task => task.siteId.equals(site.id)).map(task => ({
+			answers: (tasksMap[site.id] || []).map(task => ({
 				answer: task.answer,
 				user: usersMap[task.userId].email,
 			})),

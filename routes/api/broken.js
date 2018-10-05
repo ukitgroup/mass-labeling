@@ -9,6 +9,8 @@ router.post('/:siteId/approve', bridges.site.id, async (req, res, next) => {
 
 		res.api.response();
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
+		err.message = req.__(err.message);
 		next(err);
 	}
 });
@@ -19,6 +21,8 @@ router.post('/:siteId/disable', bridges.site.id, async (req, res, next) => {
 
 		res.api.response();
 	} catch (err) {
+		// eslint-disable-next-line no-underscore-dangle
+		err.message = req.__(err.message);
 		next(err);
 	}
 });
